@@ -8,6 +8,7 @@ const fs = require('fs');
 const { execSync } = require('child_process');
 const crypto = require('crypto');
 const path = require('path');
+const calculateFileHash = require('./utils/checkFileHash');
 const { warn, deleteDir, copyDir, log, deleteFile, cacheExpired, error } = require('./config');
 
 const stdio = [process.stdin, process.stdout, process.stderr];
@@ -76,7 +77,7 @@ async function downloadServer() {
   if (!fs.existsSync(`cache/${version}`)) fs.mkdirSync(`cache/${version}`);
 
   if (fs.existsSync(`cache/${version}/server.jar`)) {
-    const hash = calculateHash(`cache/${version}/server.jar`);
+    const hash = calculateFileHash(`cache/${version}/server.jar`);
     if (hash !== meta.downloads.server.sha1) {
       warn(`Server jar sha1 hash does not match!\nFile Hash: ${hash}\nMeta: ${meta.downloads.server.sha1}`);
       warn('Deleting cache and re-installing...');
@@ -88,7 +89,7 @@ async function downloadServer() {
   }
 
   if (fs.existsSync(`cache/${version}/mappings.txt`)) {
-    const hash = calculateHash(`cache/${version}/mappings.txt`);
+    const hash = calculateFileHash(`cache/${version}/mappings.txt`);
     if (hash !== meta.downloads.server_mappings.sha1) {
       warn(`Server mappings sha1 hash does not match!\nFile Hash: ${hash}\nMeta: ${meta.downloads.server_mappings.sha1}`);
       warn('Deleting cache and re-installing...');
@@ -109,8 +110,4 @@ async function downloadServer() {
 
 async function remapServer(version) {
   execSync(`java -jar ./libs/specialsource.jar -i ./cache/${version}/server-${version}.jar -m ./cache/${version}/mappings.txt -o server.jar`, { stdio });
-}
-
-function calculateHash(file, type) {
-  return crypto.createHash('sha1').update(fs.readFileSync(file)).digest("hex");
 }
