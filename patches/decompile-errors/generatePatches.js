@@ -1,5 +1,5 @@
 /**
- * Copyright (c) Ouja and contributers
+ * Copyright (c) Ouja and contributors
  * LGPL-3.0-or-later
  */
 
