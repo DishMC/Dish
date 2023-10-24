@@ -7,6 +7,8 @@ const { warn, deleteDir, copyDir, log, deleteFile, cacheExpired, error } = requi
 
 const stdio = [process.stdin, process.stdout, process.stderr];
 
+const DECOMPILE_VERSION = "1.20.2" ?? args[0];
+
 let MINECRAFT_VERSION = "UNKNOWN";
 
 (async function () {
@@ -53,7 +55,8 @@ async function downloadServer() {
     fs.writeFileSync('cache/manifest.json', JSON.stringify(manifest));
   }
 
-  const index = manifest.versions.findIndex(a => a.id == '23w42a');
+  const index = manifest.versions.findIndex(a => a.id == DECOMPILE_VERSION);
+  if (index == -1) index = 0;
   const version = manifest.versions[index].id;
   MINECRAFT_VERSION = version;
   warn(`Found Minecraft version '${version}' with the release type '${manifest.versions[index].type}'`);
