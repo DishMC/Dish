@@ -1,0 +1,22 @@
+diff --git a/minecraft/world/level/BlockGetter.java b/minecraft/world/level/BlockGetter.java
+index 5b1b5fe..0bd3b66 100644
+--- a/minecraft/world/level/BlockGetter.java
++++ b/minecraft/world/level/BlockGetter.java
+@@ -26,7 +26,7 @@ public interface BlockGetter extends LevelHeightAccessor {
+     default <T extends BlockEntity> Optional<T> getBlockEntity(BlockPos blockpos, BlockEntityType<T> blockentitytype) {
+         BlockEntity blockentity = this.getBlockEntity(blockpos);
+ 
+-        return blockentity != null && blockentity.getType() == blockentitytype ? Optional.of(blockentity) : Optional.empty();
++        return blockentity != null && blockentity.getType() == blockentitytype ? Optional.of((T) blockentity) : Optional.empty();
+     }
+ 
+     BlockState getBlockState(BlockPos blockpos);
+@@ -144,7 +144,7 @@ public interface BlockGetter extends LevelHeightAccessor {
+                 double d13 = d10 * (i1 > 0 ? 1.0D - Mth.frac(d4) : Mth.frac(d4));
+                 double d14 = d11 * (j1 > 0 ? 1.0D - Mth.frac(d5) : Mth.frac(d5));
+ 
+-                Object object;
++                T object;
+ 
+                 do {
+                     if (d12 > 1.0D && d13 > 1.0D && d14 > 1.0D) {

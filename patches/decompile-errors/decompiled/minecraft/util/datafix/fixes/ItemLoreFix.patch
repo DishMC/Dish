@@ -1,0 +1,30 @@
+diff --git a/minecraft/util/datafix/fixes/ItemLoreFix.java b/minecraft/util/datafix/fixes/ItemLoreFix.java
+index fc654e0..ab63e90 100644
+--- a/minecraft/util/datafix/fixes/ItemLoreFix.java
++++ b/minecraft/util/datafix/fixes/ItemLoreFix.java
+@@ -28,10 +28,10 @@ public class ItemLoreFix extends DataFix {
+                 return typed1.update(DSL.remainderFinder(), (dynamic) -> {
+                     return dynamic.update("display", (dynamic1) -> {
+                         return dynamic1.update("Lore", (dynamic2) -> {
+-                            DataResult dataresult = dynamic2.asStreamOpt().map(ItemLoreFix::fixLoreList);
++                            DataResult<Stream> dataresult = dynamic2.asStreamOpt().map(ItemLoreFix::fixLoreList);
+ 
+                             Objects.requireNonNull(dynamic2);
+-                            return (Dynamic) DataFixUtils.orElse(dataresult.map(dynamic2::createList).result(), dynamic2);
++                            return DataFixUtils.orElse(dataresult.map(dynamic2::createList).result(), dynamic2);
+                         });
+                     });
+                 });
+@@ -41,10 +41,10 @@ public class ItemLoreFix extends DataFix {
+ 
+     private static <T> Stream<Dynamic<T>> fixLoreList(Stream<Dynamic<T>> stream) {
+         return stream.map((dynamic) -> {
+-            DataResult dataresult = dynamic.asString().map(ItemLoreFix::fixLoreEntry);
++            DataResult<String> dataresult = dynamic.asString().map(ItemLoreFix::fixLoreEntry);
+ 
+             Objects.requireNonNull(dynamic);
+-            return (Dynamic) DataFixUtils.orElse(dataresult.map(dynamic::createString).result(), dynamic);
++            return DataFixUtils.orElse(dataresult.map(dynamic::createString).result(), dynamic);
+         });
+     }
+ 

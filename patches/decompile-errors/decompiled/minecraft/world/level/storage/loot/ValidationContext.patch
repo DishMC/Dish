@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/storage/loot/ValidationContext.java b/minecraft/world/level/storage/loot/ValidationContext.java
+index d4422dc..aa030d5 100644
+--- a/minecraft/world/level/storage/loot/ValidationContext.java
++++ b/minecraft/world/level/storage/loot/ValidationContext.java
+@@ -54,7 +54,7 @@ public class ValidationContext {
+     }
+ 
+     public ValidationContext enterElement(String s, LootDataId<?> lootdataid) {
+-        ImmutableSet<LootDataId<?>> immutableset = ImmutableSet.builder().addAll(this.visitedElements).add(lootdataid).build();
++        ImmutableSet<LootDataId<?>> immutableset = ImmutableSet.<LootDataId<?>>builder().addAll(this.visitedElements).add(lootdataid).build();
+ 
+         return new ValidationContext(this.problems, () -> {
+             String s1 = this.getContext();

@@ -1,0 +1,13 @@
+diff --git a/minecraft/advancements/AdvancementProgress.java b/minecraft/advancements/AdvancementProgress.java
+index 03b7cd6..ae36208 100644
+--- a/minecraft/advancements/AdvancementProgress.java
++++ b/minecraft/advancements/AdvancementProgress.java
+@@ -209,7 +209,7 @@ public class AdvancementProgress implements Comparable<AdvancementProgress> {
+ 
+     @Nullable
+     public Instant getFirstProgressDate() {
+-        return (Instant) this.criteria.values().stream().map(CriterionProgress::getObtained).filter(Objects::nonNull).min(Comparator.naturalOrder()).orElse((Object) null);
++        return (Instant) this.criteria.values().stream().map(CriterionProgress::getObtained).filter(Objects::nonNull).min(Comparator.naturalOrder()).orElse(null);
+     }
+ 
+     public int compareTo(AdvancementProgress advancementprogress) {

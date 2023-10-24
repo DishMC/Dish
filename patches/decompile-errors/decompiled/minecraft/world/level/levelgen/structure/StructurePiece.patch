@@ -1,0 +1,53 @@
+diff --git a/minecraft/world/level/levelgen/structure/StructurePiece.java b/minecraft/world/level/levelgen/structure/StructurePiece.java
+index 4ae5462..41a6642 100644
+--- a/minecraft/world/level/levelgen/structure/StructurePiece.java
++++ b/minecraft/world/level/levelgen/structure/StructurePiece.java
+@@ -14,6 +14,7 @@ import net.minecraft.core.Direction;
+ import net.minecraft.core.registries.BuiltInRegistries;
+ import net.minecraft.nbt.CompoundTag;
+ import net.minecraft.nbt.NbtOps;
++import net.minecraft.nbt.Tag;
+ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.util.RandomSource;
+ import net.minecraft.world.level.BlockGetter;
+@@ -50,7 +51,7 @@ public abstract class StructurePiece {
+     private Rotation rotation;
+     protected int genDepth;
+     private final StructurePieceType type;
+-    private static final Set<Block> SHAPE_CHECK_BLOCKS = ImmutableSet.builder().add(Blocks.NETHER_BRICK_FENCE).add(Blocks.TORCH).add(Blocks.WALL_TORCH).add(Blocks.OAK_FENCE).add(Blocks.SPRUCE_FENCE).add(Blocks.DARK_OAK_FENCE).add(Blocks.ACACIA_FENCE).add(Blocks.BIRCH_FENCE).add(Blocks.JUNGLE_FENCE).add(Blocks.LADDER).add(Blocks.IRON_BARS).build();
++    private static final Set<Block> SHAPE_CHECK_BLOCKS = ImmutableSet.<Block>builder().add(Blocks.NETHER_BRICK_FENCE).add(Blocks.TORCH).add(Blocks.WALL_TORCH).add(Blocks.OAK_FENCE).add(Blocks.SPRUCE_FENCE).add(Blocks.DARK_OAK_FENCE).add(Blocks.ACACIA_FENCE).add(Blocks.BIRCH_FENCE).add(Blocks.JUNGLE_FENCE).add(Blocks.LADDER).add(Blocks.IRON_BARS).build();
+ 
+     protected StructurePiece(StructurePieceType structurepiecetype, int i, BoundingBox boundingbox) {
+         this.type = structurepiecetype;
+@@ -59,12 +60,7 @@ public abstract class StructurePiece {
+     }
+ 
+     public StructurePiece(StructurePieceType structurepiecetype, CompoundTag compoundtag) {
+-        int i = compoundtag.getInt("GD");
+-        DataResult dataresult = BoundingBox.CODEC.parse(NbtOps.INSTANCE, compoundtag.get("BB"));
+-        Logger logger = StructurePiece.LOGGER;
+-
+-        Objects.requireNonNull(logger);
+-        this(structurepiecetype, i, (BoundingBox) dataresult.resultOrPartial(logger::error).orElseThrow(() -> {
++        this(structurepiecetype, compoundtag.getInt("GD"), BoundingBox.CODEC.parse(NbtOps.INSTANCE, compoundtag.get("BB")).resultOrPartial(StructurePiece.LOGGER::error).orElseThrow(() -> {
+             return new IllegalArgumentException("Invalid boundingbox");
+         }));
+         int j = compoundtag.getInt("O");
+@@ -84,7 +80,7 @@ public abstract class StructurePiece {
+         CompoundTag compoundtag = new CompoundTag();
+ 
+         compoundtag.putString("id", BuiltInRegistries.STRUCTURE_PIECE.getKey(this.getType()).toString());
+-        DataResult dataresult = BoundingBox.CODEC.encodeStart(NbtOps.INSTANCE, this.boundingBox);
++        DataResult<Tag> dataresult = BoundingBox.CODEC.encodeStart(NbtOps.INSTANCE, this.boundingBox);
+         Logger logger = StructurePiece.LOGGER;
+ 
+         Objects.requireNonNull(logger);
+@@ -432,7 +428,7 @@ public abstract class StructurePiece {
+     }
+ 
+     public static BoundingBox createBoundingBox(Stream<StructurePiece> stream) {
+-        Stream stream1 = stream.map(StructurePiece::getBoundingBox);
++        Stream<BoundingBox> stream1 = stream.map(StructurePiece::getBoundingBox);
+ 
+         Objects.requireNonNull(stream1);
+         return (BoundingBox) BoundingBox.encapsulatingBoxes(stream1::iterator).orElseThrow(() -> {

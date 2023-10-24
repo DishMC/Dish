@@ -1,0 +1,14 @@
+diff --git a/minecraft/world/entity/ai/behavior/LookAndFollowTradingPlayerSink.java b/minecraft/world/entity/ai/behavior/LookAndFollowTradingPlayerSink.java
+index a6376b6..01e3ace 100644
+--- a/minecraft/world/entity/ai/behavior/LookAndFollowTradingPlayerSink.java
++++ b/minecraft/world/entity/ai/behavior/LookAndFollowTradingPlayerSink.java
+@@ -52,7 +52,7 @@ public class LookAndFollowTradingPlayerSink extends Behavior<Villager> {
+     private void followPlayer(Villager villager) {
+         Brain<?> brain = villager.getBrain();
+ 
+-        brain.setMemory(MemoryModuleType.WALK_TARGET, (Object) (new WalkTarget(new EntityTracker(villager.getTradingPlayer(), false), this.speedModifier, 2)));
+-        brain.setMemory(MemoryModuleType.LOOK_TARGET, (Object) (new EntityTracker(villager.getTradingPlayer(), true)));
++        brain.setMemory(MemoryModuleType.WALK_TARGET, (new WalkTarget(new EntityTracker(villager.getTradingPlayer(), false), this.speedModifier, 2)));
++        brain.setMemory(MemoryModuleType.LOOK_TARGET, (new EntityTracker(villager.getTradingPlayer(), true)));
+     }
+ }

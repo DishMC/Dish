@@ -1,0 +1,13 @@
+diff --git a/minecraft/advancements/critereon/EntityPredicate.java b/minecraft/advancements/critereon/EntityPredicate.java
+index 01c5683..452e21b 100644
+--- a/minecraft/advancements/critereon/EntityPredicate.java
++++ b/minecraft/advancements/critereon/EntityPredicate.java
+@@ -53,7 +53,7 @@ public record EntityPredicate(Optional<EntityTypePredicate> entityType, Optional
+             List<ContextAwarePredicate> list = new ArrayList(jsonarray.size());
+ 
+             for (int i = 0; i < jsonarray.size(); ++i) {
+-                Optional optional = fromElement(s + "[" + i + "]", deserializationcontext, jsonarray.get(i));
++                Optional<ContextAwarePredicate> optional = fromElement(s + "[" + i + "]", deserializationcontext, jsonarray.get(i));
+ 
+                 Objects.requireNonNull(list);
+                 optional.ifPresent(list::add);

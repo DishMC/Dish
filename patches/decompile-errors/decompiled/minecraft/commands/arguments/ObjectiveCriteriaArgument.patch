@@ -1,0 +1,13 @@
+diff --git a/minecraft/commands/arguments/ObjectiveCriteriaArgument.java b/minecraft/commands/arguments/ObjectiveCriteriaArgument.java
+index 9c5a175..099eb1f 100644
+--- a/minecraft/commands/arguments/ObjectiveCriteriaArgument.java
++++ b/minecraft/commands/arguments/ObjectiveCriteriaArgument.java
+@@ -73,7 +73,7 @@ public class ObjectiveCriteriaArgument implements ArgumentType<ObjectiveCriteria
+     }
+ 
+     public <T> String getName(StatType<T> stattype, Object object) {
+-        return Stat.buildName(stattype, object);
++        return Stat.buildName(stattype, (T) object);
+     }
+ 
+     public Collection<String> getExamples() {

@@ -1,0 +1,31 @@
+diff --git a/minecraft/commands/SharedSuggestionProvider.java b/minecraft/commands/SharedSuggestionProvider.java
+index d3d819e..22e00c4 100644
+--- a/minecraft/commands/SharedSuggestionProvider.java
++++ b/minecraft/commands/SharedSuggestionProvider.java
+@@ -80,7 +80,7 @@ public interface SharedSuggestionProvider {
+         Iterator iterator = iterable.iterator();
+ 
+         while (iterator.hasNext()) {
+-            T t0 = iterator.next();
++            T t0 = (T) iterator.next();
+             ResourceLocation resourcelocation = (ResourceLocation) function.apply(t0);
+ 
+             if (flag) {
+@@ -258,7 +258,7 @@ public interface SharedSuggestionProvider {
+ 
+     static CompletableFuture<Suggestions> suggest(Stream<String> stream, SuggestionsBuilder suggestionsbuilder) {
+         String s = suggestionsbuilder.getRemaining().toLowerCase(Locale.ROOT);
+-        Stream stream1 = stream.filter((s1) -> {
++        Stream<String> stream1 = stream.filter((s1) -> {
+             return matchesSubStr(s, s1.toLowerCase(Locale.ROOT));
+         });
+ 
+@@ -288,7 +288,7 @@ public interface SharedSuggestionProvider {
+         Iterator iterator = iterable.iterator();
+ 
+         while (iterator.hasNext()) {
+-            T t0 = iterator.next();
++            T t0 = (T) iterator.next();
+             String s1 = (String) function.apply(t0);
+ 
+             if (matchesSubStr(s, s1.toLowerCase(Locale.ROOT))) {

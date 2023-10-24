@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/sensing/NearestBedSensor.java b/minecraft/world/entity/ai/sensing/NearestBedSensor.java
+index 9b104f7..5aa7cc3 100644
+--- a/minecraft/world/entity/ai/sensing/NearestBedSensor.java
++++ b/minecraft/world/entity/ai/sensing/NearestBedSensor.java
+@@ -64,7 +64,7 @@ public class NearestBedSensor extends Sensor<Mob> {
+                 Optional<Holder<PoiType>> optional = poimanager.getType(blockpos);
+ 
+                 if (optional.isPresent()) {
+-                    mob.getBrain().setMemory(MemoryModuleType.NEAREST_BED, (Object) blockpos);
++                    mob.getBrain().setMemory(MemoryModuleType.NEAREST_BED, blockpos);
+                 }
+             } else if (this.triedCount < 5) {
+                 this.batchCache.long2LongEntrySet().removeIf((entry) -> {

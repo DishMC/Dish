@@ -1,0 +1,48 @@
+diff --git a/minecraft/world/level/storage/PrimaryLevelData.java b/minecraft/world/level/storage/PrimaryLevelData.java
+index b435fb5..0e75b38 100644
+--- a/minecraft/world/level/storage/PrimaryLevelData.java
++++ b/minecraft/world/level/storage/PrimaryLevelData.java
+@@ -9,6 +9,7 @@ import com.mojang.serialization.Dynamic;
+ import com.mojang.serialization.DynamicOps;
+ import com.mojang.serialization.Lifecycle;
+ import java.util.HashSet;
++import java.util.List;
+ import java.util.Objects;
+ import java.util.Set;
+ import java.util.UUID;
+@@ -144,7 +145,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
+         WorldBorder.Settings worldborder_settings = WorldBorder.Settings.read(dynamic, WorldBorder.DEFAULT_SETTINGS);
+         int k2 = dynamic.get("WanderingTraderSpawnDelay").asInt(0);
+         int l2 = dynamic.get("WanderingTraderSpawnChance").asInt(0);
+-        UUID uuid = (UUID) dynamic.get("WanderingTraderId").read(UUIDUtil.CODEC).result().orElse((Object) null);
++        UUID uuid = (UUID) dynamic.get("WanderingTraderId").read(UUIDUtil.CODEC).result().orElse(null);
+         Set set = (Set) dynamic.get("ServerBrands").asStream().flatMap((dynamic1) -> {
+             return dynamic1.asString().result().stream();
+         }).collect(Collectors.toCollection(Sets::newLinkedHashSet));
+@@ -153,7 +154,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
+         }).collect(Collectors.toSet());
+         TimerQueue timerqueue = new TimerQueue<>(TimerCallbacks.SERVER_CALLBACKS, dynamic.get("ScheduledEvents").asStream());
+         CompoundTag compoundtag1 = (CompoundTag) dynamic.get("CustomBossEvents").orElseEmptyMap().getValue();
+-        DataResult dataresult = dynamic.get("DragonFight").read(EndDragonFight.Data.CODEC);
++        DataResult<EndDragonFight.Data> dataresult = dynamic.get("DragonFight").read(EndDragonFight.Data.CODEC);
+         Logger logger = PrimaryLevelData.LOGGER;
+ 
+         Objects.requireNonNull(logger);
+@@ -189,7 +190,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
+         compoundtag.put("Version", compoundtag2);
+         NbtUtils.addCurrentDataVersion(compoundtag);
+         DynamicOps<Tag> dynamicops = RegistryOps.create(NbtOps.INSTANCE, (HolderLookup.Provider) registryaccess);
+-        DataResult dataresult = WorldGenSettings.encode(dynamicops, this.worldOptions, registryaccess);
++        DataResult<Tag> dataresult = WorldGenSettings.encode(dynamicops, this.worldOptions, registryaccess);
+         Logger logger = PrimaryLevelData.LOGGER;
+ 
+         Objects.requireNonNull(logger);
+@@ -245,7 +246,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
+ 
+     private static ListTag stringCollectionToTag(Set<String> set) {
+         ListTag listtag = new ListTag();
+-        Stream stream = set.stream().map(StringTag::valueOf);
++        Stream<Tag> stream = set.stream().map(StringTag::valueOf);
+ 
+         Objects.requireNonNull(listtag);
+         stream.forEach(listtag::add);

@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/CollisionGetter.java b/minecraft/world/level/CollisionGetter.java
+index 0b74d1d..5ea5088 100644
+--- a/minecraft/world/level/CollisionGetter.java
++++ b/minecraft/world/level/CollisionGetter.java
+@@ -103,7 +103,7 @@ public interface CollisionGetter extends BlockGetter {
+     }
+ 
+     @Nullable
+-    private default VoxelShape borderCollision(Entity entity, AABB aabb) {
++    private VoxelShape borderCollision(Entity entity, AABB aabb) {
+         WorldBorder worldborder = this.getWorldBorder();
+ 
+         return worldborder.isInsideCloseToBorder(entity, aabb) ? worldborder.getCollisionShape() : null;
