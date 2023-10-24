@@ -7,7 +7,7 @@ const { warn, deleteDir, copyDir, log, deleteFile, cacheExpired, error } = requi
 
 const stdio = [process.stdin, process.stdout, process.stderr];
 
-const DECOMPILE_VERSION = "1.20.2" ?? args[0];
+const DECOMPILE_VERSION = args[0] ?? "1.20.2";
 
 let MINECRAFT_VERSION = "UNKNOWN";
 
