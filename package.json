@@ -1,0 +1,14 @@
+{
+  "name": "dish-config",
+  "version": "0.0.1",
+  "description": "",
+  "main": "init.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "LGPL-3.0-or-later",
+  "dependencies": {
+    "@types/node": "^20.4.2",
+    "@types/npm": "^7.19.0"
+  }
+}
