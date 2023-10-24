@@ -7,8 +7,9 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const { error, log, warn } = require('../../config');
+const { error, log, warn, checkMinecraftVersion } = require('../../config');
 
+const args = process.argv.slice(2);
 const baseDir = __dirname;
 
 const rejected = [];
@@ -32,7 +33,11 @@ function readDir(dir) {
 (async function () {
   // check if git repo is initialized, if not, it will not apply patches. 
   if (!fs.existsSync('decompiled/.git')) return error('Git repo is not initialized. Run git init inside decompiled');
-  readDir('patches/decompile-errors/decompiled/minecraft');
-  readDir('patches/decompile-errors/decompiled/mojang');
+  // args[0] should be {releaseType}/{version}
+  // releaseType is release or snapshot
+  if (!args[0] || !args[0].includes('/')) return error('Missing releaseType and version!');
+  if (!checkMinecraftVersion(args[0])) return error(`Using invalid Minecraft version '${args[0]}'`);
+  readDir(`patches/decompile-errors/${args[0]}/minecraft`);
+  readDir(`patches/decompile-errors/${args[0]}/mojang`);
   if (rejected.length > 0) fs.writeFileSync('rejected_patches.rej', rejected.join('\n'));
 })();

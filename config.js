@@ -77,8 +77,16 @@ function cacheExpired(pathToFile, MAX_CACHE_TIME_DAYS = 1) {
   return stat.birthtime.setDate(stat.birthtime.getDate() + 1) < Date.now();
 }
 
+/**
+ * @param {String} version The minecraft version. release/{version}, snapshot/{version} or pre/{version}-pre{number}
+ * @returns {Boolean} true if matches
+ */
+function checkMinecraftVersion(version) {
+  return /(^release\/([0-9]\.[1-3][0-9]\.[0-9]))$|(^snapshot\/([1-3][0-9]w[0-9][0-9][a-z])$)|(^pre\/([0-9]\.[1-3][0-9]\.[0-9]\-pre[0-9])$)/g.test(version);
+}
+
 module.exports = {
   log, debug, warn, error,
   deleteDir, deleteFile, copyDir,
-  cacheExpired
+  cacheExpired, checkMinecraftVersion
 };

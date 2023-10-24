@@ -9,16 +9,17 @@ const { execSync } = require('child_process');
 const crypto = require('crypto');
 const path = require('path');
 const calculateFileHash = require('./utils/checkFileHash');
-const { warn, deleteDir, copyDir, log, deleteFile, cacheExpired, error } = require('./config');
+const { warn, deleteDir, copyDir, log, deleteFile, cacheExpired, error, checkMinecraftVersion } = require('./config');
 
 const stdio = [process.stdin, process.stdout, process.stderr];
 
-const DECOMPILE_VERSION = args[0] ?? "1.20.2";
+const DECOMPILE_VERSION = args[0] ?? "release/1.20.2";
 
 let MINECRAFT_VERSION = "UNKNOWN";
 
 (async function () {
   try {
+    if (!checkMinecraftVersion(DECOMPILE_VERSION)) return error(`Using invalid Minecraft version '${DECOMPILE_VERSION}'`);
     console.time('Download server');
     const meta = await downloadServer();
     console.timeEnd('Download server');
@@ -44,6 +45,10 @@ let MINECRAFT_VERSION = "UNKNOWN";
     log('Cleaning up compiled sources');
     deleteDir('compiled');
     deleteFile('server.jar');
+    warn('Initializing git repo, this may take a while...');
+    execSync('cd decompiled && git init'); // Need to initialize a git repository so that applying patches will work.
+    warn('Starting to apply patches');
+    execSync(`node patches/decompile-errors/applyPatches.js ${DECOMPILE_VERSION}`, { stdio });
   } catch (e) {
     console.error(e);
     return process.exit(1);
@@ -61,7 +66,7 @@ async function downloadServer() {
     fs.writeFileSync('cache/manifest.json', JSON.stringify(manifest));
   }
 
-  const index = manifest.versions.findIndex(a => a.id == DECOMPILE_VERSION);
+  let index = manifest.versions.findIndex(a => a.id == DECOMPILE_VERSION.split('/')[1]);
   if (index == -1) index = 0;
   const version = manifest.versions[index].id;
   MINECRAFT_VERSION = version;

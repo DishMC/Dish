@@ -1,0 +1,8 @@
+# DishConfig's TODO
+
+- Put patches into it's own version. Maybe a git branch, or file directory. snapshots/{version} release/{version}.
+- Need to make this automatically generate a workspace, so that way, I can easily fix patches
+  - When doing this, I want it to grab the correct versions for it's dependencies.
+  - I want to also grab the assets and data dirs
+- Implement a way to clean cache.
+- Update generatePatches.js to support versioning
