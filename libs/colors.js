@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) Ouja and contributers
+ * LGPL-3.0-or-later
+ */
+
 const colors = {
   reset: "\x1b[0m",
   bright: "\x1b[1m",
