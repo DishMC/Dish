@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) Ouja and contributers
+ * LGPL-3.0-or-later
+ */
+
 const args = process.argv.slice(2);
 const fs = require('fs');
 const { execSync } = require('child_process');
