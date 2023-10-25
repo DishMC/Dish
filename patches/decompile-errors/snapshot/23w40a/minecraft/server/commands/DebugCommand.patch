@@ -1,5 +1,5 @@
 diff --git a/minecraft/server/commands/DebugCommand.java b/minecraft/server/commands/DebugCommand.java
-index f54d0eb..4ce272a 100644
+index 3def5ca..f058ce0 100644
 --- a/minecraft/server/commands/DebugCommand.java
 +++ b/minecraft/server/commands/DebugCommand.java
 @@ -130,14 +130,14 @@ public class DebugCommand {
@@ -10,8 +10,8 @@ index f54d0eb..4ce272a 100644
 +        int finalI = i;
          if (collection.size() == 1) {
              commandsourcestack.sendSuccess(() -> {
--                return Component.translatable("commands.debug.function.success.single", i, ((CommandFunction) collection.iterator().next()).getId(), s);
-+                return Component.translatable("commands.debug.function.success.single", finalI, ((CommandFunction) collection.iterator().next()).getId(), s);
+-                return Component.translatable("commands.debug.function.success.single", i, Component.translationArg(((CommandFunction) collection.iterator().next()).getId()), s);
++                return Component.translatable("commands.debug.function.success.single", finalI, Component.translationArg(((CommandFunction) collection.iterator().next()).getId()), s);
              }, true);
          } else {
              commandsourcestack.sendSuccess(() -> {

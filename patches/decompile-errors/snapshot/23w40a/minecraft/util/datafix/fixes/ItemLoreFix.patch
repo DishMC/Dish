@@ -1,5 +1,5 @@
 diff --git a/minecraft/util/datafix/fixes/ItemLoreFix.java b/minecraft/util/datafix/fixes/ItemLoreFix.java
-index fc654e0..ab63e90 100644
+index c52f095..6bfbbbf 100644
 --- a/minecraft/util/datafix/fixes/ItemLoreFix.java
 +++ b/minecraft/util/datafix/fixes/ItemLoreFix.java
 @@ -28,10 +28,10 @@ public class ItemLoreFix extends DataFix {
@@ -15,16 +15,3 @@ index fc654e0..ab63e90 100644
                          });
                      });
                  });
-@@ -41,10 +41,10 @@ public class ItemLoreFix extends DataFix {
- 
-     private static <T> Stream<Dynamic<T>> fixLoreList(Stream<Dynamic<T>> stream) {
-         return stream.map((dynamic) -> {
--            DataResult dataresult = dynamic.asString().map(ItemLoreFix::fixLoreEntry);
-+            DataResult<String> dataresult = dynamic.asString().map(ItemLoreFix::fixLoreEntry);
- 
-             Objects.requireNonNull(dynamic);
--            return (Dynamic) DataFixUtils.orElse(dataresult.map(dynamic::createString).result(), dynamic);
-+            return DataFixUtils.orElse(dataresult.map(dynamic::createString).result(), dynamic);
-         });
-     }
- 

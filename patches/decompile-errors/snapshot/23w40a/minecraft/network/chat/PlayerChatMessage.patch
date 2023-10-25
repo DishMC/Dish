@@ -1,9 +1,9 @@
 diff --git a/minecraft/network/chat/PlayerChatMessage.java b/minecraft/network/chat/PlayerChatMessage.java
-index 64ff406..dadb565 100644
+index 3c7a971..e346edc 100644
 --- a/minecraft/network/chat/PlayerChatMessage.java
 +++ b/minecraft/network/chat/PlayerChatMessage.java
-@@ -23,7 +23,7 @@ public record PlayerChatMessage(SignedMessageLink link, @Nullable MessageSignatu
-         }), SignedMessageBody.MAP_CODEC.forGetter(PlayerChatMessage::signedBody), ExtraCodecs.COMPONENT.optionalFieldOf("unsigned_content").forGetter((playerchatmessage) -> {
+@@ -22,7 +22,7 @@ public record PlayerChatMessage(SignedMessageLink link, @Nullable MessageSignatu
+         }), SignedMessageBody.MAP_CODEC.forGetter(PlayerChatMessage::signedBody), ComponentSerialization.CODEC.optionalFieldOf("unsigned_content").forGetter((playerchatmessage) -> {
              return Optional.ofNullable(playerchatmessage.unsignedContent);
          }), FilterMask.CODEC.optionalFieldOf("filter_mask", FilterMask.PASS_THROUGH).forGetter(PlayerChatMessage::filterMask)).apply(instance, (signedmessagelink, optional, signedmessagebody, optional1, filtermask) -> {
 -            return new PlayerChatMessage(signedmessagelink, (MessageSignature) optional.orElse((Object) null), signedmessagebody, (Component) optional1.orElse((Object) null), filtermask);

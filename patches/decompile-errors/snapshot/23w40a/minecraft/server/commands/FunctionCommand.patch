@@ -1,5 +1,5 @@
 diff --git a/minecraft/server/commands/FunctionCommand.java b/minecraft/server/commands/FunctionCommand.java
-index 745d3be..40fc45c 100644
+index 3bab7de..c5c8ab8 100644
 --- a/minecraft/server/commands/FunctionCommand.java
 +++ b/minecraft/server/commands/FunctionCommand.java
 @@ -97,14 +97,15 @@ public class FunctionCommand {
@@ -10,13 +10,13 @@ index 745d3be..40fc45c 100644
              if (collection.size() == 1) {
                  if (flag) {
                      commandsourcestack.sendSuccess(() -> {
--                        return Component.translatable("commands.function.success.single.result", i, ((CommandFunction) collection.iterator().next()).getId());
-+                        return Component.translatable("commands.function.success.single.result", finalI, ((CommandFunction) collection.iterator().next()).getId());
+-                        return Component.translatable("commands.function.success.single.result", i, Component.translationArg(((CommandFunction) collection.iterator().next()).getId()));
++                        return Component.translatable("commands.function.success.single.result", finalI, Component.translationArg(((CommandFunction) collection.iterator().next()).getId()));
                      }, true);
                  } else {
                      commandsourcestack.sendSuccess(() -> {
--                        return Component.translatable("commands.function.success.single", i, ((CommandFunction) collection.iterator().next()).getId());
-+                        return Component.translatable("commands.function.success.single", finalI, ((CommandFunction) collection.iterator().next()).getId());
+-                        return Component.translatable("commands.function.success.single", i, Component.translationArg(((CommandFunction) collection.iterator().next()).getId()));
++                        return Component.translatable("commands.function.success.single", finalI, Component.translationArg(((CommandFunction) collection.iterator().next()).getId()));
                      }, true);
                  }
              } else if (flag) {

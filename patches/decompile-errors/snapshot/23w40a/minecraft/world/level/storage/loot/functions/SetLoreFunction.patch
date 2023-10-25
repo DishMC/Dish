@@ -1,23 +1,15 @@
 diff --git a/minecraft/world/level/storage/loot/functions/SetLoreFunction.java b/minecraft/world/level/storage/loot/functions/SetLoreFunction.java
-index 85a0f85..3dd20c6 100644
+index 880f533..8bcadb8 100644
 --- a/minecraft/world/level/storage/loot/functions/SetLoreFunction.java
 +++ b/minecraft/world/level/storage/loot/functions/SetLoreFunction.java
-@@ -13,6 +13,7 @@ import javax.annotation.Nullable;
- import net.minecraft.nbt.CompoundTag;
- import net.minecraft.nbt.ListTag;
- import net.minecraft.nbt.StringTag;
-+import net.minecraft.nbt.Tag;
- import net.minecraft.network.chat.Component;
- import net.minecraft.util.ExtraCodecs;
- import net.minecraft.world.item.ItemStack;
-@@ -63,8 +64,8 @@ public class SetLoreFunction extends LootItemConditionalFunction {
+@@ -64,8 +64,8 @@ public class SetLoreFunction extends LootItemConditionalFunction {
                  listtag.clear();
              }
  
 -            UnaryOperator<Component> unaryoperator = SetNameFunction.createResolver(lootcontext, (LootContext.EntityTarget) this.resolutionContext.orElse((Object) null));
 -            Stream stream = this.lore.stream().map(unaryoperator).map(Component.Serializer::toJson).map(StringTag::valueOf);
 +            UnaryOperator<Component> unaryoperator = SetNameFunction.createResolver(lootcontext, (LootContext.EntityTarget) this.resolutionContext.orElse(null));
-+            Stream<Tag> stream = this.lore.stream().map(unaryoperator).map(Component.Serializer::toJson).map(StringTag::valueOf);
++            Stream<StringTag> stream = this.lore.stream().map(unaryoperator).map(Component.Serializer::toJson).map(StringTag::valueOf);
  
              Objects.requireNonNull(listtag);
              stream.forEach(listtag::add);
