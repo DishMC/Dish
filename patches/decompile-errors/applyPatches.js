@@ -7,7 +7,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const { error, log, warn, checkMinecraftVersion } = require('../../config');
+const { error, log, warn, checkMinecraftVersion, copyDir } = require('../../config');
 
 const args = process.argv.slice(2);
 const baseDir = __dirname;
@@ -42,6 +42,13 @@ function readDir(dir) {
   // releaseType is release or snapshot
   if (!args[0] || !args[0].includes('/')) return error('Missing releaseType and version!');
   if (!checkMinecraftVersion(args[0])) return error(`Using invalid Minecraft version '${args[0]}'`);
+  if (!fs.existsSync(`patches/decompile-errors/${args[0]}`)) {
+    if ((!args[1] || !args[1].includes('/')) || !fs.existsSync(`patches/decompile-errors/${args[1]}`)) return error(`Missing patches for version '${args[0]}'`);
+    // create new directory
+    fs.mkdirSync(`patches/decompile-errors/${args[0]}`, { recursive: true });
+    // copy old version to new version
+    copyDir(`patches/decompile-errors/${args[1]}`, `patches/decompile-errors/${args[0]}`);
+  }
   readDir(`patches/decompile-errors/${args[0]}/minecraft`);
   readDir(`patches/decompile-errors/${args[0]}/mojang`);
   if (rejected.length > 0) fs.writeFileSync('rejected_patches.rej', rejected.join('\n'));

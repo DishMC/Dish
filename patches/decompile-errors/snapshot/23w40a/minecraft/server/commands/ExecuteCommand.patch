@@ -1,0 +1,22 @@
+diff --git a/minecraft/server/commands/ExecuteCommand.java b/minecraft/server/commands/ExecuteCommand.java
+index 72d4cc3..99cb075 100644
+--- a/minecraft/server/commands/ExecuteCommand.java
++++ b/minecraft/server/commands/ExecuteCommand.java
+@@ -545,7 +545,7 @@ public class ExecuteCommand {
+             CommandSourceStack commandsourcestack = (CommandSourceStack) commandcontext.getSource();
+             Entity entity = commandsourcestack.getEntity();
+ 
+-            return (Collection) (entity == null ? List.of() : (Collection) ((Optional) function.apply(entity)).filter((entity1) -> {
++            return (entity == null ? List.of() : (function.apply(entity)).filter((entity1) -> {
+                 return !entity1.isRemoved();
+             }).map((entity1) -> {
+                 return List.of(commandsourcestack.withEntity(entity1));
+@@ -561,7 +561,7 @@ public class ExecuteCommand {
+             if (entity == null) {
+                 return List.of();
+             } else {
+-                Stream stream = ((Stream) function.apply(entity)).filter((entity1) -> {
++                Stream<Entity> stream = (function.apply(entity)).filter((entity1) -> {
+                     return !entity1.isRemoved();
+                 });
+ 

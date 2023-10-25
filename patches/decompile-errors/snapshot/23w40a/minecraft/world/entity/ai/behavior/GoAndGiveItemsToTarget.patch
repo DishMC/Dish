@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/behavior/GoAndGiveItemsToTarget.java b/minecraft/world/entity/ai/behavior/GoAndGiveItemsToTarget.java
+index 8d7ae9f..2c3ac56 100644
+--- a/minecraft/world/entity/ai/behavior/GoAndGiveItemsToTarget.java
++++ b/minecraft/world/entity/ai/behavior/GoAndGiveItemsToTarget.java
+@@ -48,7 +48,7 @@ public class GoAndGiveItemsToTarget<E extends LivingEntity & InventoryCarrier> e
+ 
+     @Override
+     protected void start(ServerLevel serverlevel, E e0, long i) {
+-        ((Optional) this.targetPositionGetter.apply(e0)).ifPresent((positiontracker) -> {
++        (this.targetPositionGetter.apply(e0)).ifPresent((positiontracker) -> {
+             BehaviorUtils.setWalkAndLookTargetMemories(e0, positiontracker, this.speedModifier, 3);
+         });
+     }

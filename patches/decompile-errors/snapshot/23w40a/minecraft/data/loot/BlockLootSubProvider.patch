@@ -1,0 +1,55 @@
+diff --git a/minecraft/data/loot/BlockLootSubProvider.java b/minecraft/data/loot/BlockLootSubProvider.java
+index 56ff0ed..0b600c5 100644
+--- a/minecraft/data/loot/BlockLootSubProvider.java
++++ b/minecraft/data/loot/BlockLootSubProvider.java
+@@ -147,7 +147,7 @@ public abstract class BlockLootSubProvider implements LootTableSubProvider {
+     }
+ 
+     protected LootTable.Builder createSlabItemTable(Block block) {
+-        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) this.applyExplosionDecay(block, LootItem.lootTableItem(block).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, (Comparable) SlabType.DOUBLE)))))));
++        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(this.applyExplosionDecay(block, LootItem.lootTableItem(block).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SlabBlock.TYPE, SlabType.DOUBLE)))))));
+     }
+ 
+     protected <T extends Comparable<T> & StringRepresentable> LootTable.Builder createSinglePropConditionTable(Block block, Property<T> property, T t0) {
+@@ -203,7 +203,7 @@ public abstract class BlockLootSubProvider implements LootTableSubProvider {
+     }
+ 
+     public LootTable.Builder createStemDrops(Block block, Item item) {
+-        return LootTable.lootTable().withPool((LootPool.Builder) this.applyExplosionDecay(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) LootItem.lootTableItem(item).apply((Iterable) StemBlock.AGE.getPossibleValues(), (integer) -> {
++        return LootTable.lootTable().withPool((LootPool.Builder) this.applyExplosionDecay(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) LootItem.lootTableItem(item).apply(StemBlock.AGE.getPossibleValues(), (integer) -> {
+             return SetItemCountFunction.setCount(BinomialDistributionGenerator.binomial(3, (float) (integer + 1) / 15.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(StemBlock.AGE, integer)));
+         }))));
+     }
+@@ -218,7 +218,7 @@ public abstract class BlockLootSubProvider implements LootTableSubProvider {
+ 
+     protected LootTable.Builder createMultifaceBlockDrops(Block block, LootItemCondition.Builder lootitemcondition_builder) {
+         return LootTable.lootTable().withPool(LootPool.lootPool().add((LootPoolEntryContainer.Builder) this.applyExplosionDecay(block, ((LootPoolSingletonContainer.Builder) ((LootPoolSingletonContainer.Builder) LootItem.lootTableItem(block).when(lootitemcondition_builder)).apply((Object[]) Direction.values(), (direction) -> {
+-            return SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MultifaceBlock.getFaceProperty(direction), true)));
++            return SetItemCountFunction.setCount(ConstantValue.exactly(1.0F), true).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MultifaceBlock.getFaceProperty((Direction) direction), true)));
+         })).apply(SetItemCountFunction.setCount(ConstantValue.exactly(-1.0F), true)))));
+     }
+ 
+@@ -243,19 +243,19 @@ public abstract class BlockLootSubProvider implements LootTableSubProvider {
+     }
+ 
+     protected LootTable.Builder createDoublePlantWithSeedDrops(Block block, Block block1) {
+-        LootPoolEntryContainer.Builder<?> lootpoolentrycontainer_builder = ((LootPoolSingletonContainer.Builder) LootItem.lootTableItem(block1).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))).when(BlockLootSubProvider.HAS_SHEARS)).otherwise(((LootPoolSingletonContainer.Builder) this.applyExplosionCondition(block, LootItem.lootTableItem(Items.WHEAT_SEEDS))).when(LootItemRandomChanceCondition.randomChance(0.125F)));
++        LootPoolEntryContainer.Builder<?> lootpoolentrycontainer_builder = (LootItem.lootTableItem(block1).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))).when(BlockLootSubProvider.HAS_SHEARS)).otherwise(((LootPoolSingletonContainer.Builder) this.applyExplosionCondition(block, LootItem.lootTableItem(Items.WHEAT_SEEDS))).when(LootItemRandomChanceCondition.randomChance(0.125F)));
+ 
+-        return LootTable.lootTable().withPool(LootPool.lootPool().add(lootpoolentrycontainer_builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, (Comparable) DoubleBlockHalf.LOWER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, (Comparable) DoubleBlockHalf.UPPER))), new BlockPos(0, 1, 0)))).withPool(LootPool.lootPool().add(lootpoolentrycontainer_builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, (Comparable) DoubleBlockHalf.UPPER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, (Comparable) DoubleBlockHalf.LOWER))), new BlockPos(0, -1, 0))));
++        return LootTable.lootTable().withPool(LootPool.lootPool().add(lootpoolentrycontainer_builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))), new BlockPos(0, 1, 0)))).withPool(LootPool.lootPool().add(lootpoolentrycontainer_builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))), new BlockPos(0, -1, 0))));
+     }
+ 
+     protected LootTable.Builder createCandleDrops(Block block) {
+-        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) this.applyExplosionDecay(block, LootItem.lootTableItem(block).apply((Iterable) List.of(2, 3, 4), (integer) -> {
++        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) this.applyExplosionDecay(block, LootItem.lootTableItem(block).apply(List.of(2, 3, 4), (integer) -> {
+             return SetItemCountFunction.setCount(ConstantValue.exactly((float) integer)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CandleBlock.CANDLES, integer)));
+         }))));
+     }
+ 
+     protected LootTable.Builder createPetalsDrops(Block block) {
+-        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) this.applyExplosionDecay(block, LootItem.lootTableItem(block).apply((Iterable) IntStream.rangeClosed(1, 4).boxed().toList(), (integer) -> {
++        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) this.applyExplosionDecay(block, LootItem.lootTableItem(block).apply(IntStream.rangeClosed(1, 4).boxed().toList(), (integer) -> {
+             return SetItemCountFunction.setCount(ConstantValue.exactly((float) integer)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PinkPetalsBlock.AMOUNT, integer)));
+         }))));
+     }

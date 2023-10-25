@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/entity/EntityTypeTest.java b/minecraft/world/level/entity/EntityTypeTest.java
+index 2c7621e..e7a4cf4 100644
+--- a/minecraft/world/level/entity/EntityTypeTest.java
++++ b/minecraft/world/level/entity/EntityTypeTest.java
+@@ -9,7 +9,7 @@ public interface EntityTypeTest<B, T extends B> {
+             @Nullable
+             @Override
+             public T tryCast(B b0) {
+-                return oclass.isInstance(b0) ? b0 : null;
++                return oclass.isInstance(b0) ? (T) b0 : null;
+             }
+ 
+             @Override

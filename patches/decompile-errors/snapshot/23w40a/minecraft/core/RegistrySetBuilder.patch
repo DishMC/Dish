@@ -1,0 +1,40 @@
+diff --git a/minecraft/core/RegistrySetBuilder.java b/minecraft/core/RegistrySetBuilder.java
+index 2e99c22..0b7730f 100644
+--- a/minecraft/core/RegistrySetBuilder.java
++++ b/minecraft/core/RegistrySetBuilder.java
+@@ -85,7 +85,7 @@ public class RegistrySetBuilder {
+         Stream<HolderLookup.RegistryLookup<?>> stream = registryaccess.registries().map((registryaccess_registryentry) -> {
+             return registryaccess_registryentry.value().asLookup();
+         });
+-        Stream stream1 = map.values().stream().map(RegistrySetBuilder.RegistryContents::buildAsLookup);
++        Stream<HolderLookup.RegistryLookup<?>> stream1 = map.values().stream().map(RegistrySetBuilder.RegistryContents::buildAsLookup);
+ 
+         Objects.requireNonNull(registrysetbuilder_buildstate);
+         HolderLookup.Provider holderlookup_provider1 = HolderLookup.Provider.create(Stream.concat(stream, stream1.peek(registrysetbuilder_buildstate::addOwner)));
+@@ -114,7 +114,7 @@ public class RegistrySetBuilder {
+                     RegistrySetBuilder.RegisteredValue<T> registrysetbuilder_registeredvalue = (RegistrySetBuilder.RegisteredValue) entry.getValue();
+                     Holder.Reference<T> holder_reference = (Holder.Reference) registrysetbuilder_buildstate.lookup.holders.remove(resourcekey);
+ 
+-                    map.put(resourcekey, new RegistrySetBuilder.ValueAndHolder<>(registrysetbuilder_registeredvalue, Optional.ofNullable(holder_reference)));
++                    map.put((ResourceKey<T>) resourcekey, new RegistrySetBuilder.ValueAndHolder<>(registrysetbuilder_registeredvalue, Optional.ofNullable(holder_reference)));
+                     iterator.remove();
+                 }
+             }
+@@ -208,7 +208,7 @@ public class RegistrySetBuilder {
+                 ResourceKey<Object> resourcekey = (ResourceKey) entry.getKey();
+                 Holder.Reference<Object> holder_reference = (Holder.Reference) entry.getValue();
+ 
+-                ((Optional) map.computeIfAbsent(resourcekey.registry(), (resourcelocation) -> {
++                (map.computeIfAbsent(resourcekey.registry(), (resourcelocation) -> {
+                     return holderlookup_provider.lookup(ResourceKey.createRegistryKey(resourcelocation));
+                 })).flatMap((holderlookup) -> {
+                     return holderlookup.get(resourcekey);
+@@ -300,7 +300,7 @@ public class RegistrySetBuilder {
+         }
+ 
+         <T> Holder.Reference<T> getOrCreate(ResourceKey<T> resourcekey) {
+-            return (Holder.Reference) this.holders.computeIfAbsent(resourcekey, (resourcekey1) -> {
++            return (Holder.Reference) this.holders.computeIfAbsent((ResourceKey<Object>) resourcekey, (resourcekey1) -> {
+                 return Holder.Reference.createStandAlone(this.owner, resourcekey1);
+             });
+         }

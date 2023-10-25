@@ -1,0 +1,22 @@
+diff --git a/minecraft/util/datafix/fixes/BlockEntitySignDoubleSidedEditableTextFix.java b/minecraft/util/datafix/fixes/BlockEntitySignDoubleSidedEditableTextFix.java
+index ab846c0..12d78cc 100644
+--- a/minecraft/util/datafix/fixes/BlockEntitySignDoubleSidedEditableTextFix.java
++++ b/minecraft/util/datafix/fixes/BlockEntitySignDoubleSidedEditableTextFix.java
+@@ -28,7 +28,7 @@ public class BlockEntitySignDoubleSidedEditableTextFix extends NamedEntityFix {
+     private static <T> Dynamic<T> fixFrontTextTag(Dynamic<T> dynamic) {
+         Dynamic<T> dynamic1 = dynamic.createString(BlockEntitySignDoubleSidedEditableTextFix.EMPTY_COMPONENT);
+         List<Dynamic<T>> list = getLines(dynamic, "Text").map((optional) -> {
+-            return (Dynamic) optional.orElse(dynamic1);
++            return optional.orElse(dynamic1);
+         }).toList();
+         Dynamic<T> dynamic2 = dynamic.emptyMap().set("messages", dynamic.createList(list.stream())).set("color", (Dynamic) dynamic.get("Color").result().orElse(dynamic.createString("black"))).set("has_glowing_text", (Dynamic) dynamic.get("GlowingText").result().orElse(dynamic.createBoolean(false))).set("_filtered_correct", dynamic.createBoolean(true));
+         List<Optional<Dynamic<T>>> list1 = getLines(dynamic, "FilteredText").toList();
+@@ -37,7 +37,7 @@ public class BlockEntitySignDoubleSidedEditableTextFix extends NamedEntityFix {
+             dynamic2 = dynamic2.set("filtered_messages", dynamic.createList(Streams.mapWithIndex(list1.stream(), (optional, i) -> {
+                 Dynamic<T> dynamic3 = (Dynamic) list.get((int) i);
+ 
+-                return (Dynamic) optional.orElse(dynamic3);
++                return optional.orElse(dynamic3);
+             })));
+         }
+ 

@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/players/GameProfileCache.java b/minecraft/server/players/GameProfileCache.java
+index 1741c63..4c7ae87 100644
+--- a/minecraft/server/players/GameProfileCache.java
++++ b/minecraft/server/players/GameProfileCache.java
+@@ -81,7 +81,7 @@ public class GameProfileCache {
+             }
+ 
+             public void onProfileLookupFailed(String s1, Exception exception) {
+-                atomicreference.set((Object) null);
++                atomicreference.set(null);
+             }
+         };
+ 

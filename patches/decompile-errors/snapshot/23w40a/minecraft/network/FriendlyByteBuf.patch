@@ -1,0 +1,58 @@
+diff --git a/minecraft/network/FriendlyByteBuf.java b/minecraft/network/FriendlyByteBuf.java
+index 5d5fb51..fbd2a11 100644
+--- a/minecraft/network/FriendlyByteBuf.java
++++ b/minecraft/network/FriendlyByteBuf.java
+@@ -204,7 +204,7 @@ public class FriendlyByteBuf extends ByteBuf {
+ 
+     public <T, C extends Collection<T>> C readCollection(IntFunction<C> intfunction, FriendlyByteBuf.Reader<T> friendlybytebuf_reader) {
+         int i = this.readVarInt();
+-        C c0 = (Collection) intfunction.apply(i);
++        C c0 = intfunction.apply(i);
+ 
+         for (int j = 0; j < i; ++j) {
+             c0.add(friendlybytebuf_reader.apply(this));
+@@ -215,7 +215,7 @@ public class FriendlyByteBuf extends ByteBuf {
+ 
+     public <T> void writeCollection(Collection<T> collection, FriendlyByteBuf.Writer<T> friendlybytebuf_writer) {
+         this.writeVarInt(collection.size());
+-        Iterator iterator = collection.iterator();
++        Iterator<T> iterator = collection.iterator();
+ 
+         while (iterator.hasNext()) {
+             T t0 = iterator.next();
+@@ -247,7 +247,7 @@ public class FriendlyByteBuf extends ByteBuf {
+ 
+     public <K, V, M extends Map<K, V>> M readMap(IntFunction<M> intfunction, FriendlyByteBuf.Reader<K> friendlybytebuf_reader, FriendlyByteBuf.Reader<V> friendlybytebuf_reader1) {
+         int i = this.readVarInt();
+-        M m0 = (Map) intfunction.apply(i);
++        M m0 = intfunction.apply(i);
+ 
+         for (int j = 0; j < i; ++j) {
+             K k0 = friendlybytebuf_reader.apply(this);
+@@ -281,7 +281,7 @@ public class FriendlyByteBuf extends ByteBuf {
+     }
+ 
+     public <E extends Enum<E>> void writeEnumSet(EnumSet<E> enumset, Class<E> oclass) {
+-        E[] ae = (Enum[]) oclass.getEnumConstants();
++        E[] ae = oclass.getEnumConstants();
+         BitSet bitset = new BitSet(ae.length);
+ 
+         for (int i = 0; i < ae.length; ++i) {
+@@ -292,7 +292,7 @@ public class FriendlyByteBuf extends ByteBuf {
+     }
+ 
+     public <E extends Enum<E>> EnumSet<E> readEnumSet(Class<E> oclass) {
+-        E[] ae = (Enum[]) oclass.getEnumConstants();
++        E[] ae = oclass.getEnumConstants();
+         BitSet bitset = this.readFixedBitSet(ae.length);
+         EnumSet<E> enumset = EnumSet.noneOf(oclass);
+ 
+@@ -530,7 +530,7 @@ public class FriendlyByteBuf extends ByteBuf {
+     }
+ 
+     public <T extends Enum<T>> T readEnum(Class<T> oclass) {
+-        return ((Enum[]) oclass.getEnumConstants())[this.readVarInt()];
++        return (oclass.getEnumConstants())[this.readVarInt()];
+     }
+ 
+     public FriendlyByteBuf writeEnum(Enum<?> oenum) {

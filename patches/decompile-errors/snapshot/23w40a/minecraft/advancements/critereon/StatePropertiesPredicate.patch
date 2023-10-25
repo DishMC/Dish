@@ -1,0 +1,30 @@
+diff --git a/minecraft/advancements/critereon/StatePropertiesPredicate.java b/minecraft/advancements/critereon/StatePropertiesPredicate.java
+index d259b8c..a0f857e 100644
+--- a/minecraft/advancements/critereon/StatePropertiesPredicate.java
++++ b/minecraft/advancements/critereon/StatePropertiesPredicate.java
+@@ -175,14 +175,14 @@ public record StatePropertiesPredicate(List<StatePropertiesPredicate.PropertyMat
+ 
+             if (this.minValue.isPresent()) {
+                 optional = property.getValue((String) this.minValue.get());
+-                if (optional.isEmpty() || t0.compareTo((Comparable) optional.get()) < 0) {
++                if (optional.isEmpty() || t0.compareTo((T) optional.get()) < 0) {
+                     return false;
+                 }
+             }
+ 
+             if (this.maxValue.isPresent()) {
+                 optional = property.getValue((String) this.maxValue.get());
+-                if (optional.isEmpty() || t0.compareTo((Comparable) optional.get()) > 0) {
++                if (optional.isEmpty() || t0.compareTo((T) optional.get()) > 0) {
+                     return false;
+                 }
+             }
+@@ -200,7 +200,7 @@ public record StatePropertiesPredicate(List<StatePropertiesPredicate.PropertyMat
+             T t0 = stateholder.getValue(property);
+             Optional<T> optional = property.getValue(this.value);
+ 
+-            return optional.isPresent() && t0.compareTo((Comparable) optional.get()) == 0;
++            return optional.isPresent() && t0.compareTo(optional.get()) == 0;
+         }
+     }
+ }

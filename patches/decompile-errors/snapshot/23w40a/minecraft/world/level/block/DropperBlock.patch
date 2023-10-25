@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/DropperBlock.java b/minecraft/world/level/block/DropperBlock.java
+index 40d318f..6576eed 100644
+--- a/minecraft/world/level/block/DropperBlock.java
++++ b/minecraft/world/level/block/DropperBlock.java
+@@ -39,7 +39,7 @@ public class DropperBlock extends DispenserBlock {
+ 
+     @Override
+     protected void dispenseFrom(ServerLevel serverlevel, BlockState blockstate, BlockPos blockpos) {
+-        DispenserBlockEntity dispenserblockentity = (DispenserBlockEntity) serverlevel.getBlockEntity(blockpos, BlockEntityType.DROPPER).orElse((Object) null);
++        DispenserBlockEntity dispenserblockentity = (DispenserBlockEntity) serverlevel.getBlockEntity(blockpos, BlockEntityType.DROPPER).orElse(null);
+ 
+         if (dispenserblockentity == null) {
+             DropperBlock.LOGGER.warn("Ignoring dispensing attempt for Dropper without matching block entity at {}", blockpos);

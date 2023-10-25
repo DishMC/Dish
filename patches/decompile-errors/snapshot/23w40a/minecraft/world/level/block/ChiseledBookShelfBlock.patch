@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/ChiseledBookShelfBlock.java b/minecraft/world/level/block/ChiseledBookShelfBlock.java
+index 88954f7..8ba8228 100644
+--- a/minecraft/world/level/block/ChiseledBookShelfBlock.java
++++ b/minecraft/world/level/block/ChiseledBookShelfBlock.java
+@@ -189,7 +189,7 @@ public class ChiseledBookShelfBlock extends BaseEntityBlock {
+ 
+         Objects.requireNonNull(statedefinition_builder);
+         list.forEach((property) -> {
+-            statedefinition_builder.add(property);
++            statedefinition_builder.add((Property<?>) property);
+         });
+     }
+ 

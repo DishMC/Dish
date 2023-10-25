@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/blockpredicates/BlockPredicateType.java b/minecraft/world/level/levelgen/blockpredicates/BlockPredicateType.java
+index 01ffbff..9491d29 100644
+--- a/minecraft/world/level/levelgen/blockpredicates/BlockPredicateType.java
++++ b/minecraft/world/level/levelgen/blockpredicates/BlockPredicateType.java
+@@ -22,7 +22,7 @@ public interface BlockPredicateType<P extends BlockPredicate> {
+     Codec<P> codec();
+ 
+     private static <P extends BlockPredicate> BlockPredicateType<P> register(String s, Codec<P> codec) {
+-        return (BlockPredicateType) Registry.register(BuiltInRegistries.BLOCK_PREDICATE_TYPE, s, () -> {
++        return Registry.register(BuiltInRegistries.BLOCK_PREDICATE_TYPE, s, () -> {
+             return codec;
+         });
+     }

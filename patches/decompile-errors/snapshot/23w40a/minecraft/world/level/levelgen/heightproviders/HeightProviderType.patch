@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/heightproviders/HeightProviderType.java b/minecraft/world/level/levelgen/heightproviders/HeightProviderType.java
+index a681a33..34f8e25 100644
+--- a/minecraft/world/level/levelgen/heightproviders/HeightProviderType.java
++++ b/minecraft/world/level/levelgen/heightproviders/HeightProviderType.java
+@@ -16,7 +16,7 @@ public interface HeightProviderType<P extends HeightProvider> {
+     Codec<P> codec();
+ 
+     private static <P extends HeightProvider> HeightProviderType<P> register(String s, Codec<P> codec) {
+-        return (HeightProviderType) Registry.register(BuiltInRegistries.HEIGHT_PROVIDER_TYPE, s, () -> {
++        return Registry.register(BuiltInRegistries.HEIGHT_PROVIDER_TYPE, s, () -> {
+             return codec;
+         });
+     }

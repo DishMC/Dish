@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/storage/loot/functions/SetNameFunction.java b/minecraft/world/level/storage/loot/functions/SetNameFunction.java
+index ac13408..fe03f7e 100644
+--- a/minecraft/world/level/storage/loot/functions/SetNameFunction.java
++++ b/minecraft/world/level/storage/loot/functions/SetNameFunction.java
+@@ -77,7 +77,7 @@ public class SetNameFunction extends LootItemConditionalFunction {
+     @Override
+     public ItemStack run(ItemStack itemstack, LootContext lootcontext) {
+         this.name.ifPresent((component) -> {
+-            itemstack.setHoverName((Component) createResolver(lootcontext, (LootContext.EntityTarget) this.resolutionContext.orElse((Object) null)).apply(component));
++            itemstack.setHoverName((Component) createResolver(lootcontext, (LootContext.EntityTarget) this.resolutionContext.orElse(null)).apply(component));
+         });
+         return itemstack;
+     }
