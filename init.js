@@ -36,8 +36,8 @@ let MINECRAFT_VERSION = "UNKNOWN";
     warn('Moving assets and data folders to cache');
     fs.cpSync('assets', `cache/${MINECRAFT_VERSION}/assets`, { recursive: true });
     fs.cpSync('data', `cache/${MINECRAFT_VERSION}/data`, { recursive: true });
-    fs.rmSync('assets', { force: true });
-    fs.rmSync('data', { force: true });
+    deleteDir('assets');
+    deleteDir('data');
     warn('Copying net and com directories, this may take a while...');
     fs.mkdirSync('compiled/net', { recursive: true });
     fs.mkdirSync('compiled/com', { recursive: true });
@@ -54,6 +54,9 @@ let MINECRAFT_VERSION = "UNKNOWN";
     execSync('cd decompiled && git init'); // Need to initialize a git repository so that applying patches will work.
     warn('Starting to apply patches');
     execSync(`node patches/decompile-errors/applyPatches.js ${DECOMPILE_VERSION}`, { stdio });
+    warn('Adding files to git repo, this may take a while...');
+    execSync('cd decompiled && git add .', { stdio });
+    execSync('cd decompiled && git commit -m "Initial Commit"', { stdio });
     execSync(`node create-workspace.js ${DECOMPILE_VERSION}`, { stdio }); // automatically create a workspace
   } catch (e) {
     console.error(e);

@@ -22,13 +22,18 @@ function readDir(dir) {
       execSync(`cd ${path.join(baseDir, '../../decompiled')} && git apply ${f}`, { stdio: [process.stdin, process.stdout, process.stderr] });
       log(`Applied ${f.replace('.patch', '')}`);
     } catch (e) {
-      rejected.push(f);
+      rejected.push(`${dir}/${f}`);
       error(`There was an error trying to apply a patch for '~/${f}'`);
       warn(e);
     }
     fs.rmSync(`${path.join(baseDir, '../../decompiled')}/${f}`);
   });
 }
+
+/**
+ * This will read the patch directory for the provided Minecraft version, then copy the patch file into the decompiled directory, apply it, then delete it.
+ * It is slow. Need to find a better way.
+ */
 
 (async function () {
   // check if git repo is initialized, if not, it will not apply patches. 
