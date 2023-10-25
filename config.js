@@ -8,6 +8,8 @@ const fs = require('fs');
 
 const colors = require('./libs/colors');
 
+const DEFAULT_MINECRAFT_VERSION = "release/1.20.2";
+
 function log(msg) {
   console.log(`[Info]${colors.reset} ${msg}`);
 }
@@ -88,5 +90,6 @@ function checkMinecraftVersion(version) {
 module.exports = {
   log, debug, warn, error,
   deleteDir, deleteFile, copyDir,
-  cacheExpired, checkMinecraftVersion
+  cacheExpired, checkMinecraftVersion,
+  DEFAULT_MINECRAFT_VERSION
 };

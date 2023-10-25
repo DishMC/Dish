@@ -9,11 +9,11 @@ const { execSync } = require('child_process');
 const crypto = require('crypto');
 const path = require('path');
 const calculateFileHash = require('./utils/checkFileHash');
-const { warn, deleteDir, copyDir, log, deleteFile, cacheExpired, error, checkMinecraftVersion } = require('./config');
+const { warn, deleteDir, copyDir, log, deleteFile, cacheExpired, error, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION } = require('./config');
 
 const stdio = [process.stdin, process.stdout, process.stderr];
 
-const DECOMPILE_VERSION = args[0] ?? "release/1.20.2";
+const DECOMPILE_VERSION = args[0] ?? DEFAULT_MINECRAFT_VERSION;
 
 let MINECRAFT_VERSION = "UNKNOWN";
 
@@ -32,7 +32,12 @@ let MINECRAFT_VERSION = "UNKNOWN";
     fs.mkdirSync('compiled');
     fs.mkdirSync('decompiled');
     warn('Extracting server.jar, this may take a while...');
-    execSync(`jar xf server.jar net com`, { stdio });
+    execSync(`jar xf server.jar net com assets data`, { stdio });
+    warn('Moving assets and data folders to cache');
+    fs.cpSync('assets', `cache/${MINECRAFT_VERSION}/assets`, { recursive: true });
+    fs.cpSync('data', `cache/${MINECRAFT_VERSION}/data`, { recursive: true });
+    fs.rmSync('assets', { force: true });
+    fs.rmSync('data', { force: true });
     warn('Copying net and com directories, this may take a while...');
     fs.mkdirSync('compiled/net', { recursive: true });
     fs.mkdirSync('compiled/com', { recursive: true });
@@ -49,6 +54,7 @@ let MINECRAFT_VERSION = "UNKNOWN";
     execSync('cd decompiled && git init'); // Need to initialize a git repository so that applying patches will work.
     warn('Starting to apply patches');
     execSync(`node patches/decompile-errors/applyPatches.js ${DECOMPILE_VERSION}`, { stdio });
+    execSync(`node create-workspace.js ${DECOMPILE_VERSION}`, { stdio }); // automatically create a workspace
   } catch (e) {
     console.error(e);
     return process.exit(1);
