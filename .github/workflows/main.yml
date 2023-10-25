@@ -1,0 +1,36 @@
+name: Test DishConfig
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  check_license:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.JS ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2.4.2
+    - run: npm ci
+    - name: "Set git config"
+      run: |
+        git config --global user.email "60985521+KaiAF@users.noreply.github.com"
+        git config --global user.name "iris"
+    - name: Run Init
+      run: node init.js
