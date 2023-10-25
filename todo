@@ -1,7 +1,6 @@
 # DishConfig's TODO
 
 - Implement a way to clean cache.
-- Update generatePatches.js to support versioning
 - Update the way that patches are applied and generated.
   - I want to create the workspace, then move the files into the src/main/java directory. Then, apply the patch there.
   - With this, I also want to generate the patches from that directory. Will skip the step of keeping the decompiled directory when it truly isn't needed anymore.
