@@ -47,6 +47,6 @@ function parseLibraries(libraries) {
   copyDir(`cache/${MC_VER}/assets`, `workspaces/${MC_VER}/src/main/resources/assets`);
   copyDir(`cache/${MC_VER}/data`, `workspaces/${MC_VER}/src/main/resources/data`);
   if (process.platform !== 'win32') execSync(`cd workspaces/${MC_VER} && chmod +x gradlew`, { stdio }); // for linux, you will need to make gradlew executable
-  execSync(`cd workspaces/${MC_VER} && gradlew build`, { stdio }); // build to make sure it works. Will error if there are decompile errors
+  execSync(`cd workspaces/${MC_VER} && ./gradlew build`, { stdio }); // build to make sure it works. Will error if there are decompile errors
   process.exit(0);
 })();
