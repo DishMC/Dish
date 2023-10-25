@@ -58,13 +58,14 @@ function deleteFile(path, options) {
  * @returns {execSync} execSync
  */
 function copyDir(dir1, dir2, options) {
-  const isWindows = process.platform === 'win32';
-  if (isWindows) return execSync(`xcopy ${dir1.replace(/\//g, '\\')} ${dir2.replace(/\//g, '\\')} /s /e /h`, options);
-  // What is this?
-  // dir2 = dir2.split('/');
-  // dir2 = dir2.slice(0, dir2.length - 1);
-  // dir2 = dir2.join('/');
-  return execSync(`cp -r ${dir1} ${dir2}`, options);
+  return fs.cpSync(dir1, dir2, { ...options, recursive: true });
+  // const isWindows = process.platform === 'win32';
+  // if (isWindows) return execSync(`xcopy ${dir1.replace(/\//g, '\\')} ${dir2.replace(/\//g, '\\')} /s /e /h`, options);
+  // // What is this?
+  // // dir2 = dir2.split('/');
+  // // dir2 = dir2.slice(0, dir2.length - 1);
+  // // dir2 = dir2.join('/');
+  // return execSync(`cp -r ${dir1} ${dir2}`, options);
 }
 
 /**

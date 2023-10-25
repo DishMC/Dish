@@ -50,6 +50,6 @@ function readDir(dir) {
     copyDir(`patches/decompile-errors/${args[1]}`, `patches/decompile-errors/${args[0]}`);
   }
   readDir(`patches/decompile-errors/${args[0]}/minecraft`);
-  readDir(`patches/decompile-errors/${args[0]}/mojang`);
+  if (fs.existsSync(`patches/decompile-errors/${args[0]}/mojang`)) readDir(`patches/decompile-errors/${args[0]}/mojang`);
   if (rejected.length > 0) fs.writeFileSync('rejected_patches.rej', rejected.join('\n'));
 })();
