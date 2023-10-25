@@ -14,12 +14,14 @@ const { warn, deleteDir, copyDir, log, deleteFile, cacheExpired, error, checkMin
 const stdio = [process.stdin, process.stdout, process.stderr];
 
 const DECOMPILE_VERSION = args[0] ?? DEFAULT_MINECRAFT_VERSION;
+const OLD_VERSION = args[1] ?? null;
 
 let MINECRAFT_VERSION = "UNKNOWN";
 
 (async function () {
   try {
     if (!checkMinecraftVersion(DECOMPILE_VERSION)) return error(`Using invalid Minecraft version '${DECOMPILE_VERSION}'`);
+    if (OLD_VERSION && !checkMinecraftVersion(OLD_VERSION)) return error(`Using invalid Minecraft version '${OLD_VERSION}'`);
     console.time('Download server');
     const meta = await downloadServer();
     console.timeEnd('Download server');
@@ -53,7 +55,7 @@ let MINECRAFT_VERSION = "UNKNOWN";
     warn('Initializing git repo, this may take a while...');
     execSync('cd decompiled && git init'); // Need to initialize a git repository so that applying patches will work.
     warn('Starting to apply patches');
-    execSync(`node patches/decompile-errors/applyPatches.js ${DECOMPILE_VERSION}`, { stdio });
+    execSync(`node patches/decompile-errors/applyPatches.js ${DECOMPILE_VERSION}${OLD_VERSION ? ' ' + OLD_VERSION : ''}`, { stdio });
     warn('Adding files to git repo, this may take a while...');
     execSync('cd decompiled && git add .', { stdio });
     execSync('cd decompiled && git commit -m "Initial Commit"', { stdio });
