@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) Ouja and contributors
+ * LGPL-3.0-or-later
+ */
+
 const fs = require('fs');
 const { execSync } = require('child_process');
 
