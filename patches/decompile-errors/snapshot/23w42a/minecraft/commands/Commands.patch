@@ -1,13 +1,13 @@
 diff --git a/minecraft/commands/Commands.java b/minecraft/commands/Commands.java
-index 69b4173..3e00705 100644
+index 2b82036..3e00705 100644
 --- a/minecraft/commands/Commands.java
 +++ b/minecraft/commands/Commands.java
-@@ -375,7 +375,7 @@ public class Commands {
-             CommandNode<CommandSourceStack> commandnode2 = (CommandNode) iterator.next();
+@@ -351,7 +351,7 @@ public class Commands {
  
-             if (commandnode2.canUse(commandsourcestack)) {
--                ArgumentBuilder<SharedSuggestionProvider, ?> argumentbuilder = commandnode2.createBuilder();
-+                ArgumentBuilder<SharedSuggestionProvider, ?> argumentbuilder = (ArgumentBuilder)commandnode2.createBuilder();
- 
-                 argumentbuilder.requires((sharedsuggestionprovider) -> {
-                     return true;
+                 executioncontext1.close();
+             } finally {
+-                Commands.CURRENT_EXECUTION_CONTEXT.set((Object) null);
++                Commands.CURRENT_EXECUTION_CONTEXT.set(null);
+             }
+         } else {
+             consumer.accept(executioncontext);
