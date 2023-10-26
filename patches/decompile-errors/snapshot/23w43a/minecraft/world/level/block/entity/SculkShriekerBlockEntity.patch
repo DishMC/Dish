@@ -1,0 +1,30 @@
+diff --git a/minecraft/world/level/block/entity/SculkShriekerBlockEntity.java b/minecraft/world/level/block/entity/SculkShriekerBlockEntity.java
+index e5dd019..3b99827 100644
+--- a/minecraft/world/level/block/entity/SculkShriekerBlockEntity.java
++++ b/minecraft/world/level/block/entity/SculkShriekerBlockEntity.java
+@@ -12,6 +12,7 @@ import net.minecraft.Util;
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.nbt.CompoundTag;
+ import net.minecraft.nbt.NbtOps;
++import net.minecraft.nbt.Tag;
+ import net.minecraft.server.level.ServerLevel;
+ import net.minecraft.server.level.ServerPlayer;
+ import net.minecraft.sounds.SoundEvent;
+@@ -85,7 +86,7 @@ public class SculkShriekerBlockEntity extends BlockEntity implements GameEventLi
+         }
+ 
+         if (compoundtag.contains("listener", 10)) {
+-            DataResult dataresult = VibrationSystem.Data.CODEC.parse(new Dynamic(NbtOps.INSTANCE, compoundtag.getCompound("listener")));
++            DataResult<Data> dataresult = VibrationSystem.Data.CODEC.parse(new Dynamic<>(NbtOps.INSTANCE, compoundtag.getCompound("listener")));
+             Logger logger = SculkShriekerBlockEntity.LOGGER;
+ 
+             Objects.requireNonNull(logger);
+@@ -100,7 +101,7 @@ public class SculkShriekerBlockEntity extends BlockEntity implements GameEventLi
+     protected void saveAdditional(CompoundTag compoundtag) {
+         super.saveAdditional(compoundtag);
+         compoundtag.putInt("warning_level", this.warningLevel);
+-        DataResult dataresult = VibrationSystem.Data.CODEC.encodeStart(NbtOps.INSTANCE, this.vibrationData);
++        DataResult<Tag> dataresult = VibrationSystem.Data.CODEC.encodeStart(NbtOps.INSTANCE, this.vibrationData);
+         Logger logger = SculkShriekerBlockEntity.LOGGER;
+ 
+         Objects.requireNonNull(logger);

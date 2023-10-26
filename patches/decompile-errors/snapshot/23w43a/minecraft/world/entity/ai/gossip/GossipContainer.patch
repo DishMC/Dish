@@ -1,0 +1,21 @@
+diff --git a/minecraft/world/entity/ai/gossip/GossipContainer.java b/minecraft/world/entity/ai/gossip/GossipContainer.java
+index 4cc1ab8..1cc1ca2 100644
+--- a/minecraft/world/entity/ai/gossip/GossipContainer.java
++++ b/minecraft/world/entity/ai/gossip/GossipContainer.java
+@@ -179,14 +179,14 @@ public class GossipContainer {
+         });
+ 
+         Objects.requireNonNull(dynamicops);
+-        return optional.orElseGet(dynamicops::emptyList);
++        return (T) optional.orElseGet(dynamicops::emptyList);
+     }
+ 
+     public void update(Dynamic<?> dynamic) {
+         GossipContainer.GossipEntry.LIST_CODEC.decode(dynamic).resultOrPartial((s) -> {
+             GossipContainer.LOGGER.warn("Failed to deserialize gossips: {}", s);
+         }).stream().flatMap((pair) -> {
+-            return ((List) pair.getFirst()).stream();
++            return (pair.getFirst()).stream();
+         }).forEach((gossipcontainer_gossipentry) -> {
+             this.getOrCreate(gossipcontainer_gossipentry.target).entries.put(gossipcontainer_gossipentry.type, gossipcontainer_gossipentry.value);
+         });

@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/packs/repository/Pack.java b/minecraft/server/packs/repository/Pack.java
+index 36afce3..969f107 100644
+--- a/minecraft/server/packs/repository/Pack.java
++++ b/minecraft/server/packs/repository/Pack.java
+@@ -97,7 +97,7 @@ public class Pack {
+                     packresources.close();
+                 }
+ 
+-                return featureflagsmetadatasection;
++                return null;
+             }
+ 
+             if (packresources != null) {

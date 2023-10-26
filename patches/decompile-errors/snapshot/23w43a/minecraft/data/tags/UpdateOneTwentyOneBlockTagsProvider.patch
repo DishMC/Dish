@@ -1,0 +1,14 @@
+diff --git a/minecraft/data/tags/UpdateOneTwentyOneBlockTagsProvider.java b/minecraft/data/tags/UpdateOneTwentyOneBlockTagsProvider.java
+index d6732f3..faa1995 100644
+--- a/minecraft/data/tags/UpdateOneTwentyOneBlockTagsProvider.java
++++ b/minecraft/data/tags/UpdateOneTwentyOneBlockTagsProvider.java
+@@ -18,7 +18,7 @@ public class UpdateOneTwentyOneBlockTagsProvider extends IntrinsicHolderTagsProv
+ 
+     @Override
+     protected void addTags(HolderLookup.Provider holderlookup_provider) {
+-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add((Object) Blocks.CRAFTER);
+-        this.tag(BlockTags.NEEDS_STONE_TOOL).add((Object) Blocks.CRAFTER);
++        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(Blocks.CRAFTER);
++        this.tag(BlockTags.NEEDS_STONE_TOOL).add(Blocks.CRAFTER);
+     }
+ }

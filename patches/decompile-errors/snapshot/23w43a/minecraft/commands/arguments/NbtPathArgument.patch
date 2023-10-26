@@ -1,0 +1,13 @@
+diff --git a/minecraft/commands/arguments/NbtPathArgument.java b/minecraft/commands/arguments/NbtPathArgument.java
+index 20f1de7..362a4d5 100644
+--- a/minecraft/commands/arguments/NbtPathArgument.java
++++ b/minecraft/commands/arguments/NbtPathArgument.java
+@@ -475,7 +475,7 @@ public class NbtPathArgument implements ArgumentType<NbtPathArgument.NbtPath> {
+         public void getTag(Tag tag, List<Tag> list) {
+             if (tag instanceof ListTag) {
+                 ListTag listtag = (ListTag) tag;
+-                Stream stream = listtag.stream().filter(this.predicate);
++                Stream<Tag> stream = listtag.stream().filter(this.predicate);
+ 
+                 Objects.requireNonNull(list);
+                 stream.forEach(list::add);

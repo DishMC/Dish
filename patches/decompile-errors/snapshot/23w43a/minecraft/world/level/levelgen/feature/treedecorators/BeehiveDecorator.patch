@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/feature/treedecorators/BeehiveDecorator.java b/minecraft/world/level/levelgen/feature/treedecorators/BeehiveDecorator.java
+index febfd5e..6e59f91 100644
+--- a/minecraft/world/level/levelgen/feature/treedecorators/BeehiveDecorator.java
++++ b/minecraft/world/level/levelgen/feature/treedecorators/BeehiveDecorator.java
+@@ -51,7 +51,7 @@ public class BeehiveDecorator extends TreeDecorator {
+             List<BlockPos> list2 = (List) list1.stream().filter((blockpos) -> {
+                 return blockpos.getY() == i;
+             }).flatMap((blockpos) -> {
+-                Stream stream = Stream.of(BeehiveDecorator.SPAWN_DIRECTIONS);
++                Stream<Direction> stream = Stream.of(BeehiveDecorator.SPAWN_DIRECTIONS);
+ 
+                 Objects.requireNonNull(blockpos);
+                 return stream.map(blockpos::relative);

@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/ServerFunctionLibrary.java b/minecraft/server/ServerFunctionLibrary.java
+index 010c8ce..aa38853 100644
+--- a/minecraft/server/ServerFunctionLibrary.java
++++ b/minecraft/server/ServerFunctionLibrary.java
+@@ -96,7 +96,7 @@ public class ServerFunctionLibrary implements PreparableReloadListener {
+                 return map1;
+             });
+         });
+-        CompletableFuture completablefuture2 = completablefuture.thenCombine(completablefuture1, Pair::of);
++        CompletableFuture<Pair<Map<ResourceLocation, List<TagLoader.EntryWithSource>>, Map<ResourceLocation, CompletableFuture<CommandFunction<CommandSourceStack>>>>> completablefuture2 = completablefuture.thenCombine(completablefuture1, Pair::of);
+ 
+         Objects.requireNonNull(preparablereloadlistener_preparationbarrier);
+         return completablefuture2.thenCompose(preparablereloadlistener_preparationbarrier::wait).thenAcceptAsync((pair) -> {
