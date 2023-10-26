@@ -6,27 +6,46 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 
-const { error, log, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION } = require('../../config');
+const { error, log, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION, warn } = require('../../config');
+const calculateFileHash = require('../../utils/checkFileHash');
 
 const args = process.argv.slice(2);
 const baseDir = __dirname;
 
 const DECOMPILE_VERSION = args[0];
+const SMART_GENERATE = args[1] ?? true; // Smart generation is where it checks the file hash of the files. This is much more faster
 
 function readDir(dir) {
   fs.readdirSync(dir).forEach(f => {
     try {
       if (fs.statSync(`${dir}/${f}`).isDirectory()) return readDir(`${dir}/${f}`);
       const PATCH_DIR = `${baseDir}/${dir}`.replace('/decompiled/', `/${DECOMPILE_VERSION}/`);
-      if (!fs.existsSync(PATCH_DIR)) fs.mkdirSync(PATCH_DIR, { recursive: true });
-      execSync(`cd ./${dir} && git diff -u --minimal --output="${baseDir}/${f.replace('.java', '.patch')}" ${f}`, { stdio: [] });
-      if (fs.readFileSync(`${baseDir}/${f.replace('.java', '.patch')}`).toString().length > 2) {
-        log(`Generated patch for '~/${f}'`);
-        fs.cpSync(`${baseDir}/${f.replace('.java', '.patch')}`, `${PATCH_DIR}/${f.replace('.java', '.patch')}`);
+      const WORKSPACE_DIR = `${baseDir}/${dir}`.replace('\\patches\\decompile-errors/decompiled/', `\\workspaces/${DECOMPILE_VERSION.split('/')[1]}\\src\\main\\java\\${dir.includes('minecraft') ? 'net\\' : 'com\\'}`);
+      if (SMART_GENERATE) {
+        if (fs.existsSync(WORKSPACE_DIR + '/' + f)) {
+          const WORKSPACE_HASH = calculateFileHash(`${WORKSPACE_DIR}/${f}`); // The file hash of the file inside the workspaces directory
+          const DECOMPILED_HASH = calculateFileHash(`${dir}/${f}`); // The file hash of the file inside of the decompiled directory
+          if (WORKSPACE_HASH !== DECOMPILED_HASH) {
+            if (!fs.existsSync(PATCH_DIR)) fs.mkdirSync(PATCH_DIR, { recursive: true });
+            fs.cpSync(`${WORKSPACE_DIR}/${f}`, `${dir}/${f}`);
+            execSync(`cd ./${dir} && git diff -u --minimal --output="${baseDir}/${f.replace('.java', '.patch')}" ${f}`, { stdio: [] });
+            log(`Generated patch for '~/${f}'`);
+            fs.cpSync(`${baseDir}/${f.replace('.java', '.patch')}`, `${PATCH_DIR}/${f.replace('.java', '.patch')}`);
+            fs.rmSync(`${baseDir}/${f.replace('.java', '.patch')}`, { recursive: true });
+          }
+        }
       } else {
-        log(`'~/${f}' is the same. Ignoring`);
+        // I am keeping this included because it may be useful for when I need to create all patches from scratch again? Not sure. I just think I may need it.
+        if (!fs.existsSync(PATCH_DIR)) fs.mkdirSync(PATCH_DIR, { recursive: true });
+        execSync(`cd ./${dir} && git diff -u --minimal --output="${baseDir}/${f.replace('.java', '.patch')}" ${f}`, { stdio: [] });
+        if (fs.readFileSync(`${baseDir}/${f.replace('.java', '.patch')}`).toString().length > 2) {
+          log(`Generated patch for '~/${f}'`);
+          fs.cpSync(`${baseDir}/${f.replace('.java', '.patch')}`, `${PATCH_DIR}/${f.replace('.java', '.patch')}`);
+        } else {
+          log(`'~/${f}' is the same. Ignoring`);
+        }
+        fs.rmSync(`${baseDir}/${f.replace('.java', '.patch')}`, { recursive: true });
       }
-      fs.rmSync(`${baseDir}/${f.replace('.java', '.patch')}`, { recursive: true });
     } catch (e) {
       error(`There was an error trying to generate a patch for '~/${f}'`);
       error(e);
