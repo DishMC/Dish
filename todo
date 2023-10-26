@@ -6,4 +6,5 @@
   - With this, I also want to generate the patches from that directory. Will skip the step of keeping the decompiled directory when it truly isn't needed anymore.
 - Add a README.md file to document how this works
 - Add a CONTRIBUTING.md file so contributors will know what to do
-- Move all the decompile code into it's own package, so that I can use this on other stuff.
+- Move all the decompile code into it's own package, so that I can use this on other stuff
+- Add tests (maybe JUnit?) to workspaces
