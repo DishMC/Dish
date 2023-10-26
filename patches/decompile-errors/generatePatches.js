@@ -27,12 +27,16 @@ function readDir(dir) {
           const DECOMPILED_HASH = calculateFileHash(`${dir}/${f}`); // The file hash of the file inside of the decompiled directory
           if (WORKSPACE_HASH !== DECOMPILED_HASH) {
             if (!fs.existsSync(PATCH_DIR)) fs.mkdirSync(PATCH_DIR, { recursive: true });
-            fs.cpSync(`${WORKSPACE_DIR}/${f}`, `${dir}/${f}`);
+            fs.cpSync(`${WORKSPACE_DIR}/${f}`, `${dir}/${f}`, { recursive: true });
             execSync(`cd ./${dir} && git diff -u --minimal --output="${baseDir}/${f.replace('.java', '.patch')}" ${f}`, { stdio: [] });
-            log(`Generated patch for '~/${f}'`);
-            fs.cpSync(`${baseDir}/${f.replace('.java', '.patch')}`, `${PATCH_DIR}/${f.replace('.java', '.patch')}`);
+            if (fs.readFileSync(`${baseDir}/${f.replace('.java', '.patch')}`).toString().length > 2) {
+              fs.cpSync(`${baseDir}/${f.replace('.java', '.patch')}`, `${PATCH_DIR}/${f.replace('.java', '.patch')}`);
+              log(`Generated patch for '~/${f}'`);
+            }
             fs.rmSync(`${baseDir}/${f.replace('.java', '.patch')}`, { recursive: true });
           }
+        } else {
+          error(`Can't find ${WORKSPACE_DIR}/${f}`);
         }
       } else {
         // I am keeping this included because it may be useful for when I need to create all patches from scratch again? Not sure. I just think I may need it.
