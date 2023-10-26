@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/biome/MultiNoiseBiomeSourceParameterList.java b/minecraft/world/level/biome/MultiNoiseBiomeSourceParameterList.java
+index 0d5b3ef..99dcd03 100644
+--- a/minecraft/world/level/biome/MultiNoiseBiomeSourceParameterList.java
++++ b/minecraft/world/level/biome/MultiNoiseBiomeSourceParameterList.java
+@@ -72,7 +72,7 @@ public class MultiNoiseBiomeSourceParameterList {
+             return multinoisebiomesourceparameterlist_preset;
+         }));
+         public static final Codec<MultiNoiseBiomeSourceParameterList.Preset> CODEC = ResourceLocation.CODEC.flatXmap((resourcelocation) -> {
+-            return (DataResult) Optional.ofNullable((MultiNoiseBiomeSourceParameterList.Preset) MultiNoiseBiomeSourceParameterList.Preset.BY_NAME.get(resourcelocation)).map(DataResult::success).orElseGet(() -> {
++            return Optional.ofNullable((MultiNoiseBiomeSourceParameterList.Preset) MultiNoiseBiomeSourceParameterList.Preset.BY_NAME.get(resourcelocation)).map(DataResult::success).orElseGet(() -> {
+                 return DataResult.error(() -> {
+                     return "Unknown preset: " + resourcelocation;
+                 });

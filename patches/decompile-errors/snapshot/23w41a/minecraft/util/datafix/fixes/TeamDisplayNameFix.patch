@@ -1,0 +1,19 @@
+diff --git a/minecraft/util/datafix/fixes/TeamDisplayNameFix.java b/minecraft/util/datafix/fixes/TeamDisplayNameFix.java
+index f80416e..800d8b4 100644
+--- a/minecraft/util/datafix/fixes/TeamDisplayNameFix.java
++++ b/minecraft/util/datafix/fixes/TeamDisplayNameFix.java
+@@ -28,12 +28,12 @@ public class TeamDisplayNameFix extends DataFix {
+                 return (pair) -> {
+                     return pair.mapSecond((dynamic) -> {
+                         return dynamic.update("DisplayName", (dynamic1) -> {
+-                            DataResult dataresult = dynamic1.asString().map((s) -> {
++                            DataResult<String> dataresult = dynamic1.asString().map((s) -> {
+                                 return Component.Serializer.toJson(Component.literal(s));
+                             });
+ 
+                             Objects.requireNonNull(dynamic);
+-                            return (Dynamic) DataFixUtils.orElse(dataresult.map(dynamic::createString).result(), dynamic1);
++                            return DataFixUtils.orElse(dataresult.map(dynamic::createString).result(), dynamic1);
+                         });
+                     });
+                 };

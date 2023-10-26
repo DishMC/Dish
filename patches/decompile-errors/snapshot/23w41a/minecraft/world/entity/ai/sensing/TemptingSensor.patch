@@ -1,0 +1,30 @@
+diff --git a/minecraft/world/entity/ai/sensing/TemptingSensor.java b/minecraft/world/entity/ai/sensing/TemptingSensor.java
+index 711d582..a66b9f1 100644
+--- a/minecraft/world/entity/ai/sensing/TemptingSensor.java
++++ b/minecraft/world/entity/ai/sensing/TemptingSensor.java
+@@ -8,6 +8,7 @@ import java.util.Set;
+ import java.util.stream.Collectors;
+ import java.util.stream.Stream;
+ import net.minecraft.server.level.ServerLevel;
++import net.minecraft.server.level.ServerPlayer;
+ import net.minecraft.world.entity.Entity;
+ import net.minecraft.world.entity.EntitySelector;
+ import net.minecraft.world.entity.PathfinderMob;
+@@ -30,7 +31,7 @@ public class TemptingSensor extends Sensor<PathfinderMob> {
+ 
+     protected void doTick(ServerLevel serverlevel, PathfinderMob pathfindermob) {
+         Brain<?> brain = pathfindermob.getBrain();
+-        Stream stream = serverlevel.players().stream().filter(EntitySelector.NO_SPECTATORS).filter((serverplayer) -> {
++        Stream<ServerPlayer> stream = serverlevel.players().stream().filter(EntitySelector.NO_SPECTATORS).filter((serverplayer) -> {
+             return TemptingSensor.TEMPT_TARGETING.test(pathfindermob, serverplayer);
+         }).filter((serverplayer) -> {
+             return pathfindermob.closerThan(serverplayer, 10.0D);
+@@ -44,7 +45,7 @@ public class TemptingSensor extends Sensor<PathfinderMob> {
+         if (!list.isEmpty()) {
+             Player player = (Player) list.get(0);
+ 
+-            brain.setMemory(MemoryModuleType.TEMPTING_PLAYER, (Object) player);
++            brain.setMemory(MemoryModuleType.TEMPTING_PLAYER, player);
+         } else {
+             brain.eraseMemory(MemoryModuleType.TEMPTING_PLAYER);
+         }

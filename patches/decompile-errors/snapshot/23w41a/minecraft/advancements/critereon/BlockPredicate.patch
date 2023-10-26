@@ -1,0 +1,13 @@
+diff --git a/minecraft/advancements/critereon/BlockPredicate.java b/minecraft/advancements/critereon/BlockPredicate.java
+index 7bc8b47..c06b4f7 100644
+--- a/minecraft/advancements/critereon/BlockPredicate.java
++++ b/minecraft/advancements/critereon/BlockPredicate.java
+@@ -66,7 +66,7 @@ public record BlockPredicate(Optional<TagKey<Block>> tag, Optional<HolderSet<Blo
+         }
+ 
+         public BlockPredicate.Builder of(Block... ablock) {
+-            this.blocks = Optional.of(HolderSet.direct(Block::builtInRegistryHolder, (Object[]) ablock));
++            this.blocks = Optional.of(HolderSet.direct(Block::builtInRegistryHolder, ablock));
+             return this;
+         }
+ 
