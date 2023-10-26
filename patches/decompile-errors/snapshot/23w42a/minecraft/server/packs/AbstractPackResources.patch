@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/packs/AbstractPackResources.java b/minecraft/server/packs/AbstractPackResources.java
+index 6142d15..1718883 100644
+--- a/minecraft/server/packs/AbstractPackResources.java
++++ b/minecraft/server/packs/AbstractPackResources.java
+@@ -35,7 +35,7 @@ public abstract class AbstractPackResources implements PackResources {
+         } else {
+             InputStream inputstream = (InputStream) iosupplier.get();
+ 
+-            Object object;
++            T object;
+ 
+             try {
+                 object = getMetadataFromStream(metadatasectionserializer, inputstream);

@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/monster/piglin/AbstractPiglin.java b/minecraft/world/entity/monster/piglin/AbstractPiglin.java
+index abcb784..543804c 100644
+--- a/minecraft/world/entity/monster/piglin/AbstractPiglin.java
++++ b/minecraft/world/entity/monster/piglin/AbstractPiglin.java
+@@ -132,7 +132,7 @@ public abstract class AbstractPiglin extends Monster {
+     @Nullable
+     @Override
+     public LivingEntity getTarget() {
+-        return (LivingEntity) this.brain.getMemory(MemoryModuleType.ATTACK_TARGET).orElse((Object) null);
++        return (LivingEntity) this.brain.getMemory(MemoryModuleType.ATTACK_TARGET).orElse(null);
+     }
+ 
+     protected boolean isHoldingMeleeWeapon() {

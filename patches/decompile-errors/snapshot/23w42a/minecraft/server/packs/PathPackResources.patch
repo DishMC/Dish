@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/packs/PathPackResources.java b/minecraft/server/packs/PathPackResources.java
+index 4a3ec01..f7b5072 100644
+--- a/minecraft/server/packs/PathPackResources.java
++++ b/minecraft/server/packs/PathPackResources.java
+@@ -89,7 +89,7 @@ public class PathPackResources extends AbstractPackResources {
+         Path path1 = FileUtil.resolvePath(path, list);
+ 
+         try {
+-            Stream stream = Files.find(path1, Integer.MAX_VALUE, (path2, basicfileattributes) -> {
++            Stream<Path> stream = Files.find(path1, Integer.MAX_VALUE, (path2, basicfileattributes) -> {
+                 return basicfileattributes.isRegularFile();
+             }, new FileVisitOption[0]);
+ 

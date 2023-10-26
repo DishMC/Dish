@@ -1,0 +1,22 @@
+diff --git a/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplateManager.java b/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplateManager.java
+index a44119d..358fb42 100644
+--- a/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplateManager.java
++++ b/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplateManager.java
+@@ -136,7 +136,7 @@ public class StructureTemplateManager {
+     }
+ 
+     private Stream<ResourceLocation> listResources() {
+-        Stream stream = StructureTemplateManager.LISTER.listMatchingResources(this.resourceManager).keySet().stream();
++        Stream<ResourceLocation> stream = StructureTemplateManager.LISTER.listMatchingResources(this.resourceManager).keySet().stream();
+         FileToIdConverter filetoidconverter = StructureTemplateManager.LISTER;
+ 
+         Objects.requireNonNull(filetoidconverter);
+@@ -192,7 +192,7 @@ public class StructureTemplateManager {
+             return Stream.empty();
+         } else {
+             int i = s1.length();
+-            Function function = (s2) -> {
++            Function<String, String> function = (s2) -> {
+                 return s2.substring(0, s2.length() - i);
+             };
+ 

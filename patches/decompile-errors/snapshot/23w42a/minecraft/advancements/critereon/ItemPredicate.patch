@@ -1,0 +1,13 @@
+diff --git a/minecraft/advancements/critereon/ItemPredicate.java b/minecraft/advancements/critereon/ItemPredicate.java
+index fd09de8..e9c0edc 100644
+--- a/minecraft/advancements/critereon/ItemPredicate.java
++++ b/minecraft/advancements/critereon/ItemPredicate.java
+@@ -124,7 +124,7 @@ public record ItemPredicate(Optional<TagKey<Item>> tag, Optional<HolderSet<Item>
+         public ItemPredicate.Builder of(ItemLike... aitemlike) {
+             this.items = Optional.of(HolderSet.direct((itemlike) -> {
+                 return itemlike.asItem().builtInRegistryHolder();
+-            }, (Object[]) aitemlike));
++            }, aitemlike));
+             return this;
+         }
+ 

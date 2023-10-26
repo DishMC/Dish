@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/datafix/fixes/BlockRenameFixWithJigsaw.java b/minecraft/util/datafix/fixes/BlockRenameFixWithJigsaw.java
+index d3273a7..a3c63d6 100644
+--- a/minecraft/util/datafix/fixes/BlockRenameFixWithJigsaw.java
++++ b/minecraft/util/datafix/fixes/BlockRenameFixWithJigsaw.java
+@@ -30,7 +30,7 @@ public abstract class BlockRenameFixWithJigsaw extends BlockRenameFix {
+             return typed.updateTyped(opticfinder, this.getOutputSchema().getChoiceType(typereference, "minecraft:jigsaw"), (typed1) -> {
+                 return typed1.update(DSL.remainderFinder(), (dynamic) -> {
+                     return dynamic.update("final_state", (dynamic1) -> {
+-                        Optional optional = dynamic1.asString().result().map((s1) -> {
++                        Optional<String> optional = dynamic1.asString().result().map((s1) -> {
+                             int i = s1.indexOf(91);
+                             int j = s1.indexOf(123);
+                             int k = s1.length();

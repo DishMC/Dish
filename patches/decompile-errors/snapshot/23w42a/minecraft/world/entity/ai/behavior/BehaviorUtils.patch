@@ -1,0 +1,24 @@
+diff --git a/minecraft/world/entity/ai/behavior/BehaviorUtils.java b/minecraft/world/entity/ai/behavior/BehaviorUtils.java
+index 28284e2..7be77be 100644
+--- a/minecraft/world/entity/ai/behavior/BehaviorUtils.java
++++ b/minecraft/world/entity/ai/behavior/BehaviorUtils.java
+@@ -60,7 +60,7 @@ public class BehaviorUtils {
+     }
+ 
+     public static void lookAtEntity(LivingEntity livingentity, LivingEntity livingentity1) {
+-        livingentity.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, (Object) (new EntityTracker(livingentity1, true)));
++        livingentity.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, (new EntityTracker(livingentity1, true)));
+     }
+ 
+     private static void setWalkAndLookTargetMemoriesToEachOther(LivingEntity livingentity, LivingEntity livingentity1, float f) {
+@@ -81,8 +81,8 @@ public class BehaviorUtils {
+     public static void setWalkAndLookTargetMemories(LivingEntity livingentity, PositionTracker positiontracker, float f, int i) {
+         WalkTarget walktarget = new WalkTarget(positiontracker, f, i);
+ 
+-        livingentity.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, (Object) positiontracker);
+-        livingentity.getBrain().setMemory(MemoryModuleType.WALK_TARGET, (Object) walktarget);
++        livingentity.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, positiontracker);
++        livingentity.getBrain().setMemory(MemoryModuleType.WALK_TARGET, walktarget);
+     }
+ 
+     public static void throwItem(LivingEntity livingentity, ItemStack itemstack, Vec3 vec3) {

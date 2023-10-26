@@ -1,0 +1,22 @@
+diff --git a/minecraft/server/players/PlayerList.java b/minecraft/server/players/PlayerList.java
+index c017887..130d283 100644
+--- a/minecraft/server/players/PlayerList.java
++++ b/minecraft/server/players/PlayerList.java
+@@ -163,7 +163,7 @@ public abstract class PlayerList {
+         ResourceKey resourcekey;
+ 
+         if (compoundtag != null) {
+-            DataResult dataresult = DimensionType.parseLegacy(new Dynamic(NbtOps.INSTANCE, compoundtag.get("Dimension")));
++            DataResult<ResourceKey<Level>> dataresult = DimensionType.parseLegacy(new Dynamic<>(NbtOps.INSTANCE, compoundtag.get("Dimension")));
+             Logger logger = PlayerList.LOGGER;
+ 
+             Objects.requireNonNull(logger);
+@@ -666,7 +666,7 @@ public abstract class PlayerList {
+     }
+ 
+     public void deop(GameProfile gameprofile) {
+-        this.ops.remove((Object) gameprofile);
++        this.ops.remove(gameprofile);
+         ServerPlayer serverplayer = this.getPlayer(gameprofile.getId());
+ 
+         if (serverplayer != null) {

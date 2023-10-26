@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/item/armortrim/ArmorTrim.java b/minecraft/world/item/armortrim/ArmorTrim.java
+index 5c975b6..d64307e 100644
+--- a/minecraft/world/item/armortrim/ArmorTrim.java
++++ b/minecraft/world/item/armortrim/ArmorTrim.java
+@@ -112,7 +112,7 @@ public class ArmorTrim {
+                     ArmorTrim.LOGGER.warn(s);
+                 }
+ 
+-            }).orElse((Object) null);
++            }).orElse(null);
+ 
+             return Optional.ofNullable(armortrim);
+         } else {

@@ -1,0 +1,153 @@
+diff --git a/minecraft/util/ExtraCodecs.java b/minecraft/util/ExtraCodecs.java
+index e2e7a9f..150b76d 100644
+--- a/minecraft/util/ExtraCodecs.java
++++ b/minecraft/util/ExtraCodecs.java
+@@ -184,7 +184,7 @@ public class ExtraCodecs {
+         return instance.group(Codec.STRING.fieldOf("name").forGetter(Property::name), Codec.STRING.fieldOf("value").forGetter(Property::value), Codec.STRING.optionalFieldOf("signature").forGetter((property) -> {
+             return Optional.ofNullable(property.signature());
+         })).apply(instance, (s, s1, optional) -> {
+-            return new Property(s, s1, (String) optional.orElse((Object) null));
++            return new Property(s, s1, (String) optional.orElse(null));
+         });
+     });
+     @VisibleForTesting
+@@ -227,7 +227,7 @@ public class ExtraCodecs {
+             return gameprofile;
+         });
+     });
+-    public static final Codec<String> NON_EMPTY_STRING = validate((Codec) Codec.STRING, (s) -> {
++    public static final Codec<String> NON_EMPTY_STRING = validate(Codec.STRING, (s) -> {
+         return s.isEmpty() ? DataResult.error(() -> {
+             return "Expected non-empty string";
+         }) : DataResult.success(s);
+@@ -239,7 +239,7 @@ public class ExtraCodecs {
+             return "Expected one codepoint, got: " + s;
+         }) : DataResult.success(aint[0]);
+     }, Character::toString);
+-    public static Codec<String> RESOURCE_PATH_CODEC = validate((Codec) Codec.STRING, (s) -> {
++    public static Codec<String> RESOURCE_PATH_CODEC = validate(Codec.STRING, (s) -> {
+         return !ResourceLocation.isValidPath(s) ? DataResult.error(() -> {
+             return "Invalid string to use as a resource path element: " + s;
+         }) : DataResult.success(s);
+@@ -277,23 +277,23 @@ public class ExtraCodecs {
+                 P p0 = list1.get(0);
+                 P p1 = list1.get(1);
+ 
+-                return (DataResult) bifunction.apply(p0, p1);
++                return bifunction.apply(p0, p1);
+             });
+         }, (object) -> {
+             return ImmutableList.of(function.apply(object), function1.apply(object));
+         });
+-        Codec<I> codec2 = RecordCodecBuilder.create((instance) -> {
++        Codec<I> codec2 = RecordCodecBuilder.<Pair<P, P>>create((instance) -> {
+             return instance.group(codec.fieldOf(s).forGetter(Pair::getFirst), codec.fieldOf(s1).forGetter(Pair::getSecond)).apply(instance, Pair::of);
+         }).comapFlatMap((pair) -> {
+-            return (DataResult) bifunction.apply(pair.getFirst(), pair.getSecond());
++            return bifunction.apply(pair.getFirst(), pair.getSecond());
+         }, (object) -> {
+             return Pair.of(function.apply(object), function1.apply(object));
+         });
+         Codec<I> codec3 = withAlternative(codec1, codec2);
+ 
+         return Codec.either(codec, codec3).comapFlatMap((either) -> {
+-            return (DataResult) either.map((object) -> {
+-                return (DataResult) bifunction.apply(object, object);
++            return either.map((object) -> {
++                return bifunction.apply(object, object);
+             }, DataResult::success);
+         }, (object) -> {
+             P p0 = function.apply(object);
+@@ -328,7 +328,7 @@ public class ExtraCodecs {
+ 
+     public static <E> Codec<E> idResolverCodec(ToIntFunction<E> tointfunction, IntFunction<E> intfunction, int i) {
+         return Codec.INT.flatXmap((integer) -> {
+-            return (DataResult) Optional.ofNullable(intfunction.apply(integer)).map(DataResult::success).orElseGet(() -> {
++            return Optional.ofNullable(intfunction.apply(integer)).map(DataResult::success).orElseGet(() -> {
+                 return DataResult.error(() -> {
+                     return "Unknown element id: " + integer;
+                 });
+@@ -344,13 +344,13 @@ public class ExtraCodecs {
+ 
+     public static <E> Codec<E> stringResolverCodec(Function<E, String> function, Function<String, E> function1) {
+         return Codec.STRING.flatXmap((s) -> {
+-            return (DataResult) Optional.ofNullable(function1.apply(s)).map(DataResult::success).orElseGet(() -> {
++            return Optional.ofNullable(function1.apply(s)).map(DataResult::success).orElseGet(() -> {
+                 return DataResult.error(() -> {
+                     return "Unknown element name:" + s;
+                 });
+             });
+         }, (object) -> {
+-            return (DataResult) Optional.ofNullable((String) function.apply(object)).map(DataResult::success).orElseGet(() -> {
++            return Optional.ofNullable((String) function.apply(object)).map(DataResult::success).orElseGet(() -> {
+                 return DataResult.error(() -> {
+                     return "Element with unknown name: " + object;
+                 });
+@@ -377,7 +377,7 @@ public class ExtraCodecs {
+     public static <E> Codec<E> overrideLifecycle(Codec<E> codec, final Function<E, Lifecycle> function, final Function<E, Lifecycle> function1) {
+         return codec.mapResult(new ResultFunction<E>() {
+             public <T> DataResult<Pair<E, T>> apply(DynamicOps<T> dynamicops, T t0, DataResult<Pair<E, T>> dataresult) {
+-                return (DataResult) dataresult.result().map((pair) -> {
++                return dataresult.result().map((pair) -> {
+                     return dataresult.setLifecycle((Lifecycle) function.apply(pair.getFirst()));
+                 }).orElse(dataresult);
+             }
+@@ -415,7 +415,7 @@ public class ExtraCodecs {
+     }
+ 
+     private static Codec<Integer> intRangeWithMessage(int i, int j, Function<Integer, String> function) {
+-        return validate((Codec) Codec.INT, (integer) -> {
++        return validate(Codec.INT, (integer) -> {
+             return integer.compareTo(i) >= 0 && integer.compareTo(j) <= 0 ? DataResult.success(integer) : DataResult.error(() -> {
+                 return (String) function.apply(integer);
+             });
+@@ -429,7 +429,7 @@ public class ExtraCodecs {
+     }
+ 
+     private static Codec<Float> floatRangeMinExclusiveWithMessage(float f, float f1, Function<Float, String> function) {
+-        return validate((Codec) Codec.FLOAT, (ofloat) -> {
++        return validate(Codec.FLOAT, (ofloat) -> {
+             return ofloat.compareTo(f) > 0 && ofloat.compareTo(f1) <= 0 ? DataResult.success(ofloat) : DataResult.error(() -> {
+                 return (String) function.apply(ofloat);
+             });
+@@ -475,9 +475,9 @@ public class ExtraCodecs {
+     }
+ 
+     public static <E> MapCodec<E> retrieveContext(final Function<DynamicOps<?>, DataResult<E>> function) {
+-        class 1ContextRetrievalCodec extends MapCodec<E> {
++        class ContextRetrievalCodec extends MapCodec<E> {
+ 
+-            _ContextRetrievalCodec/* $FF was: 1ContextRetrievalCodec*/() {
++            ContextRetrievalCodec/* $FF was: 1ContextRetrievalCodec*/() {
+ }
+ 
+             public <T> RecordBuilder<T> encode(E e0, DynamicOps<T> dynamicops, RecordBuilder<T> recordbuilder) {
+@@ -498,7 +498,7 @@ public class ExtraCodecs {
+         }
+ 
+ 
+-        return new 1ContextRetrievalCodec();
++        return new ContextRetrievalCodec();
+     }
+ 
+     public static <E, L extends Collection<E>, T> Function<L, DataResult<L>> ensureHomogenous(Function<E, T> function) {
+@@ -539,8 +539,8 @@ public class ExtraCodecs {
+     }
+ 
+     public static Codec<TemporalAccessor> temporalCodec(DateTimeFormatter datetimeformatter) {
+-        PrimitiveCodec primitivecodec = Codec.STRING;
+-        Function function = (s) -> {
++        PrimitiveCodec<String> primitivecodec = Codec.STRING;
++        Function<String, DataResult<TemporalAccessor>> function = (s) -> {
+             try {
+                 return DataResult.success(datetimeformatter.parse(s));
+             } catch (Exception exception) {
+@@ -558,7 +558,7 @@ public class ExtraCodecs {
+     }
+ 
+     public static Codec<String> sizeLimitedString(int i, int j) {
+-        return validate((Codec) Codec.STRING, (s) -> {
++        return validate(Codec.STRING, (s) -> {
+             int k = s.length();
+ 
+             return k < i ? DataResult.error(() -> {

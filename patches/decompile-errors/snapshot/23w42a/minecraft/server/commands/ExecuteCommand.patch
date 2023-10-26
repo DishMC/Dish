@@ -1,0 +1,22 @@
+diff --git a/minecraft/server/commands/ExecuteCommand.java b/minecraft/server/commands/ExecuteCommand.java
+index 51aacba..41249e5 100644
+--- a/minecraft/server/commands/ExecuteCommand.java
++++ b/minecraft/server/commands/ExecuteCommand.java
+@@ -670,7 +670,7 @@ public class ExecuteCommand {
+         Iterator iterator = list.iterator();
+ 
+         while (iterator.hasNext()) {
+-            T t0 = (ExecutionCommandSource) iterator.next();
++            T t0 = (T) iterator.next();
+             Collection<CommandFunction<T>> collection = (Collection) executecommand_commandgetter.get(commandcontext.copyFor(t0));
+             int i = collection.size();
+ 
+@@ -698,7 +698,7 @@ public class ExecuteCommand {
+     }
+ 
+     private static <T extends ExecutionCommandSource<T>> T prepareCallback(Function<T, T> function, IntPredicate intpredicate, List<T> list, T t0, boolean flag) {
+-        T t1 = ((ExecutionCommandSource) function.apply(t0)).clearCallbacks();
++        T t1 = (function.apply(t0)).clearCallbacks();
+ 
+         if (flag) {
+             return t1.withReturnValueConsumer((i) -> {
