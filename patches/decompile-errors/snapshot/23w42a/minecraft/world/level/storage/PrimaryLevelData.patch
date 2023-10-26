@@ -1,25 +1,26 @@
 diff --git a/minecraft/world/level/storage/PrimaryLevelData.java b/minecraft/world/level/storage/PrimaryLevelData.java
-index b435fb5..0e75b38 100644
+index e90649f..f2e629c 100644
 --- a/minecraft/world/level/storage/PrimaryLevelData.java
 +++ b/minecraft/world/level/storage/PrimaryLevelData.java
-@@ -9,6 +9,7 @@ import com.mojang.serialization.Dynamic;
- import com.mojang.serialization.DynamicOps;
- import com.mojang.serialization.Lifecycle;
- import java.util.HashSet;
-+import java.util.List;
- import java.util.Objects;
- import java.util.Set;
- import java.util.UUID;
-@@ -144,7 +145,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
+@@ -120,7 +120,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
+ 
+     public static <T> PrimaryLevelData parse(Dynamic<T> dynamic, LevelSettings levelsettings, PrimaryLevelData.SpecialWorldProperty primaryleveldata_specialworldproperty, WorldOptions worldoptions, Lifecycle lifecycle) {
+         long i = dynamic.get("Time").asLong(0L);
+-        CompoundTag compoundtag = (CompoundTag) CompoundTag.CODEC.parse(dynamic.get("Player").orElseEmptyMap()).result().orElse((Object) null);
++        CompoundTag compoundtag = (CompoundTag) CompoundTag.CODEC.parse(dynamic.get("Player").orElseEmptyMap()).result().orElse(null);
+         boolean flag = dynamic.get("WasModded").asBoolean(false);
+         int j = dynamic.get("SpawnX").asInt(0);
+         int k = dynamic.get("SpawnY").asInt(0);
+@@ -138,7 +138,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
          WorldBorder.Settings worldborder_settings = WorldBorder.Settings.read(dynamic, WorldBorder.DEFAULT_SETTINGS);
-         int k2 = dynamic.get("WanderingTraderSpawnDelay").asInt(0);
-         int l2 = dynamic.get("WanderingTraderSpawnChance").asInt(0);
+         int j2 = dynamic.get("WanderingTraderSpawnDelay").asInt(0);
+         int k2 = dynamic.get("WanderingTraderSpawnChance").asInt(0);
 -        UUID uuid = (UUID) dynamic.get("WanderingTraderId").read(UUIDUtil.CODEC).result().orElse((Object) null);
 +        UUID uuid = (UUID) dynamic.get("WanderingTraderId").read(UUIDUtil.CODEC).result().orElse(null);
          Set set = (Set) dynamic.get("ServerBrands").asStream().flatMap((dynamic1) -> {
              return dynamic1.asString().result().stream();
          }).collect(Collectors.toCollection(Sets::newLinkedHashSet));
-@@ -153,7 +154,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
+@@ -147,7 +147,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
          }).collect(Collectors.toSet());
          TimerQueue timerqueue = new TimerQueue<>(TimerCallbacks.SERVER_CALLBACKS, dynamic.get("ScheduledEvents").asStream());
          CompoundTag compoundtag1 = (CompoundTag) dynamic.get("CustomBossEvents").orElseEmptyMap().getValue();
@@ -28,7 +29,7 @@ index b435fb5..0e75b38 100644
          Logger logger = PrimaryLevelData.LOGGER;
  
          Objects.requireNonNull(logger);
-@@ -189,7 +190,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
+@@ -182,7 +182,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
          compoundtag.put("Version", compoundtag2);
          NbtUtils.addCurrentDataVersion(compoundtag);
          DynamicOps<Tag> dynamicops = RegistryOps.create(NbtOps.INSTANCE, (HolderLookup.Provider) registryaccess);
@@ -37,12 +38,12 @@ index b435fb5..0e75b38 100644
          Logger logger = PrimaryLevelData.LOGGER;
  
          Objects.requireNonNull(logger);
-@@ -245,7 +246,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
+@@ -238,7 +238,7 @@ public class PrimaryLevelData implements ServerLevelData, WorldData {
  
      private static ListTag stringCollectionToTag(Set<String> set) {
          ListTag listtag = new ListTag();
 -        Stream stream = set.stream().map(StringTag::valueOf);
-+        Stream<Tag> stream = set.stream().map(StringTag::valueOf);
++        Stream<StringTag> stream = set.stream().map(StringTag::valueOf);
  
          Objects.requireNonNull(listtag);
          stream.forEach(listtag::add);

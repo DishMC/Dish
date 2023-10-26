@@ -1,8 +1,8 @@
 diff --git a/minecraft/data/models/BlockModelGenerators.java b/minecraft/data/models/BlockModelGenerators.java
-index 6f1738d..e05bbb9 100644
+index 469833a..a7a8371 100644
 --- a/minecraft/data/models/BlockModelGenerators.java
 +++ b/minecraft/data/models/BlockModelGenerators.java
-@@ -80,7 +80,7 @@ public class BlockModelGenerators {
+@@ -81,7 +81,7 @@ public class BlockModelGenerators {
      final List<Block> nonOrientableTrapdoor;
      final Map<Block, BlockModelGenerators.BlockStateGeneratorSupplier> fullBlockModelCustomGenerators;
      final Map<Block, TexturedModel> texturedModels;
@@ -11,7 +11,7 @@ index 6f1738d..e05bbb9 100644
      public static final List<Pair<BooleanProperty, Function<ResourceLocation, Variant>>> MULTIFACE_GENERATOR = List.of(Pair.of(BlockStateProperties.NORTH, (resourcelocation) -> {
          return Variant.variant().with(VariantProperties.MODEL, resourcelocation);
      }), Pair.of(BlockStateProperties.EAST, (resourcelocation) -> {
-@@ -116,8 +116,8 @@ public class BlockModelGenerators {
+@@ -117,8 +117,8 @@ public class BlockModelGenerators {
  
      public BlockModelGenerators(Consumer<BlockStateGenerator> consumer, BiConsumer<ResourceLocation, Supplier<JsonElement>> biconsumer, Consumer<Item> consumer1) {
          this.nonOrientableTrapdoor = ImmutableList.of(Blocks.OAK_TRAPDOOR, Blocks.DARK_OAK_TRAPDOOR, Blocks.IRON_TRAPDOOR);
@@ -22,7 +22,7 @@ index 6f1738d..e05bbb9 100644
              texturemapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(Blocks.CUT_SANDSTONE));
          })).put(Blocks.CUT_RED_SANDSTONE, TexturedModel.COLUMN.get(Blocks.RED_SANDSTONE).updateTextures((texturemapping) -> {
              texturemapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(Blocks.CUT_RED_SANDSTONE));
-@@ -497,16 +497,16 @@ public class BlockModelGenerators {
+@@ -498,16 +498,16 @@ public class BlockModelGenerators {
  
              switch (doubleblockhalf) {
                  case UPPER:
@@ -42,7 +42,7 @@ index 6f1738d..e05bbb9 100644
          });
  
          this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(propertydispatch));
-@@ -723,7 +723,7 @@ public class BlockModelGenerators {
+@@ -724,7 +724,7 @@ public class BlockModelGenerators {
          return PropertyDispatch.property(property).generate((comparable) -> {
              boolean flag = comparable.compareTo(t0) >= 0;
  
@@ -51,7 +51,7 @@ index 6f1738d..e05bbb9 100644
          });
      }
  
-@@ -1062,17 +1062,17 @@ public class BlockModelGenerators {
+@@ -1074,17 +1074,17 @@ public class BlockModelGenerators {
          List<ResourceLocation> list2 = this.createTopFireModels(Blocks.FIRE);
  
          this.blockStateOutput.accept(MultiPartGenerator.multiPart(Blocks.FIRE).with(condition_terminalcondition, wrapModels(list, (variant) -> {
@@ -75,7 +75,7 @@ index 6f1738d..e05bbb9 100644
          })));
      }
  
-@@ -1081,15 +1081,15 @@ public class BlockModelGenerators {
+@@ -1093,15 +1093,15 @@ public class BlockModelGenerators {
          List<ResourceLocation> list1 = this.createSideFireModels(Blocks.SOUL_FIRE);
  
          this.blockStateOutput.accept(MultiPartGenerator.multiPart(Blocks.SOUL_FIRE).with(wrapModels(list, (variant) -> {
@@ -96,7 +96,7 @@ index 6f1738d..e05bbb9 100644
          })));
      }
  
-@@ -1133,23 +1133,23 @@ public class BlockModelGenerators {
+@@ -1145,23 +1145,23 @@ public class BlockModelGenerators {
          TextureMapping texturemapping = (new TextureMapping()).put(TextureSlot.BOTTOM, resourcelocation).copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE).put(TextureSlot.TOP, TextureMapping.getBlockTexture(Blocks.GRASS_BLOCK, "_top")).put(TextureSlot.SIDE, TextureMapping.getBlockTexture(Blocks.GRASS_BLOCK, "_snow"));
          Variant variant = Variant.variant().with(VariantProperties.MODEL, ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(Blocks.GRASS_BLOCK, "_snow", texturemapping, this.modelOutput));
  
@@ -124,7 +124,7 @@ index 6f1738d..e05bbb9 100644
      }
  
      private void createCocoa() {
-@@ -1385,7 +1385,7 @@ public class BlockModelGenerators {
+@@ -1397,7 +1397,7 @@ public class BlockModelGenerators {
                  resourcelocation1 = resourcelocation;
              }
  
@@ -133,7 +133,7 @@ index 6f1738d..e05bbb9 100644
          })));
          this.delegateItemModel(Blocks.SNOW, ModelLocationUtils.getModelLocation(Blocks.SNOW, "_height2"));
          this.blockStateOutput.accept(createSimpleBlock(Blocks.SNOW_BLOCK, resourcelocation));
-@@ -1424,7 +1424,7 @@ public class BlockModelGenerators {
+@@ -1436,7 +1436,7 @@ public class BlockModelGenerators {
              Block block = Blocks.TRIPWIRE_HOOK;
              String s = obool ? "_attached" : "";
  
@@ -142,7 +142,7 @@ index 6f1738d..e05bbb9 100644
          })).with(createHorizontalFacingDispatch()));
      }
  
-@@ -1539,8 +1539,8 @@ public class BlockModelGenerators {
+@@ -1551,8 +1551,8 @@ public class BlockModelGenerators {
          Map.of(Direction.NORTH, VariantProperties.Rotation.R0, Direction.EAST, VariantProperties.Rotation.R90, Direction.SOUTH, VariantProperties.Rotation.R180, Direction.WEST, VariantProperties.Rotation.R270).forEach((direction, variantproperties_rotation) -> {
              Condition.TerminalCondition condition_terminalcondition = Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, direction);
  
@@ -153,10 +153,10 @@ index 6f1738d..e05bbb9 100644
          });
          this.blockStateOutput.accept(multipartgenerator);
          this.delegateItemModel(block, ModelLocationUtils.getModelLocation(block, "_inventory"));
-@@ -1549,8 +1549,8 @@ public class BlockModelGenerators {
+@@ -1564,8 +1564,8 @@ public class BlockModelGenerators {
+             BooleanProperty booleanproperty = (BooleanProperty) pair.getFirst();
+             ModelTemplate modeltemplate = (ModelTemplate) pair.getSecond();
  
-     private void addSlotStateAndRotationVariants(MultiPartGenerator multipartgenerator, Condition.TerminalCondition condition_terminalcondition, VariantProperties.Rotation variantproperties_rotation) {
-         Map.of(BlockStateProperties.CHISELED_BOOKSHELF_SLOT_0_OCCUPIED, ModelTemplates.CHISELED_BOOKSHELF_SLOT_TOP_LEFT, BlockStateProperties.CHISELED_BOOKSHELF_SLOT_1_OCCUPIED, ModelTemplates.CHISELED_BOOKSHELF_SLOT_TOP_MID, BlockStateProperties.CHISELED_BOOKSHELF_SLOT_2_OCCUPIED, ModelTemplates.CHISELED_BOOKSHELF_SLOT_TOP_RIGHT, BlockStateProperties.CHISELED_BOOKSHELF_SLOT_3_OCCUPIED, ModelTemplates.CHISELED_BOOKSHELF_SLOT_BOTTOM_LEFT, BlockStateProperties.CHISELED_BOOKSHELF_SLOT_4_OCCUPIED, ModelTemplates.CHISELED_BOOKSHELF_SLOT_BOTTOM_MID, BlockStateProperties.CHISELED_BOOKSHELF_SLOT_5_OCCUPIED, ModelTemplates.CHISELED_BOOKSHELF_SLOT_BOTTOM_RIGHT).forEach((booleanproperty, modeltemplate) -> {
 -            this.addBookSlotModel(multipartgenerator, condition_terminalcondition, variantproperties_rotation1, booleanproperty, modeltemplate, true);
 -            this.addBookSlotModel(multipartgenerator, condition_terminalcondition, variantproperties_rotation2, booleanproperty, modeltemplate, false);
 +            this.addBookSlotModel(multipartgenerator, condition_terminalcondition, variantproperties_rotation, booleanproperty, modeltemplate, true);
@@ -164,7 +164,7 @@ index 6f1738d..e05bbb9 100644
          });
      }
  
-@@ -1562,7 +1562,7 @@ public class BlockModelGenerators {
+@@ -1577,7 +1577,7 @@ public class BlockModelGenerators {
              return modeltemplate.createWithSuffix(Blocks.CHISELED_BOOKSHELF, s, texturemapping, this.modelOutput);
          });
  
@@ -173,7 +173,7 @@ index 6f1738d..e05bbb9 100644
      }
  
      private void createMagmaBlock() {
-@@ -1628,29 +1628,29 @@ public class BlockModelGenerators {
+@@ -1643,29 +1643,29 @@ public class BlockModelGenerators {
      private Variant applyRotation(FrontAndTop frontandtop, Variant variant) {
          switch (frontandtop) {
              case DOWN_NORTH:
