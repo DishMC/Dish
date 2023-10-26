@@ -11,7 +11,7 @@ const { error, log, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION } = require
 const args = process.argv.slice(2);
 const baseDir = __dirname;
 
-const DECOMPILE_VERSION = args[0] ?? DEFAULT_MINECRAFT_VERSION;
+const DECOMPILE_VERSION = args[0];
 
 function readDir(dir) {
   fs.readdirSync(dir).forEach(f => {
