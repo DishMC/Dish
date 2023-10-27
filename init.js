@@ -84,7 +84,7 @@ async function downloadServer() {
   MINECRAFT_VERSION = version;
   warn(`Found Minecraft version '${version}' with the release type '${manifest.versions[index].type}'`);
   let meta;
-  if (fs.existsSync(`cache/${version}.json`)) {
+  if (fs.existsSync(`cache/${version}.json`) && !cacheExpired(`cache/${version}.json`)) {
     meta = JSON.parse(fs.readFileSync(`cache/${version}.json`).toString());
   } else {
     meta = await (await fetch(manifest.versions[index].url)).json();
