@@ -4,4 +4,4 @@ node_modules
 test*
 *.rej
 workspaces
-dish/workspace
+dish/workspace*
