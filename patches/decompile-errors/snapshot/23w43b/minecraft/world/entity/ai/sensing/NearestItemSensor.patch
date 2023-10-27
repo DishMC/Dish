@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/sensing/NearestItemSensor.java b/minecraft/world/entity/ai/sensing/NearestItemSensor.java
+index 4ffccc5..37388cf 100644
+--- a/minecraft/world/entity/ai/sensing/NearestItemSensor.java
++++ b/minecraft/world/entity/ai/sensing/NearestItemSensor.java
+@@ -34,7 +34,7 @@ public class NearestItemSensor extends Sensor<Mob> {
+ 
+         Objects.requireNonNull(mob);
+         list.sort(Comparator.comparingDouble(mob::distanceToSqr));
+-        Stream stream = list.stream().filter((itementity) -> {
++        Stream<ItemEntity> stream = list.stream().filter((itementity) -> {
+             return mob.wantsToPickUp(itementity.getItem());
+         }).filter((itementity) -> {
+             return itementity.closerThan(mob, 32.0D);

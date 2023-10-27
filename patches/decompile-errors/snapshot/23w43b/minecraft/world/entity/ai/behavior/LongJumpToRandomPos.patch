@@ -1,0 +1,40 @@
+diff --git a/minecraft/world/entity/ai/behavior/LongJumpToRandomPos.java b/minecraft/world/entity/ai/behavior/LongJumpToRandomPos.java
+index 64747a2..9ac4cf5 100644
+--- a/minecraft/world/entity/ai/behavior/LongJumpToRandomPos.java
++++ b/minecraft/world/entity/ai/behavior/LongJumpToRandomPos.java
+@@ -80,7 +80,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
+         boolean flag = mob.onGround() && !mob.isInWater() && !mob.isInLava() && !serverlevel.getBlockState(mob.blockPosition()).is(Blocks.HONEY_BLOCK);
+ 
+         if (!flag) {
+-            mob.getBrain().setMemory(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, (Object) (this.timeBetweenLongJumps.sample(serverlevel.random) / 2));
++            mob.getBrain().setMemory(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, (this.timeBetweenLongJumps.sample(serverlevel.random) / 2));
+         }
+ 
+         return flag;
+@@ -90,7 +90,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
+         boolean flag = this.initialPosition.isPresent() && ((Vec3) this.initialPosition.get()).equals(mob.position()) && this.findJumpTries > 0 && !mob.isInWaterOrBubble() && (this.chosenJump != null || !this.jumpCandidates.isEmpty());
+ 
+         if (!flag && mob.getBrain().getMemory(MemoryModuleType.LONG_JUMP_MID_JUMP).isEmpty()) {
+-            mob.getBrain().setMemory(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, (Object) (this.timeBetweenLongJumps.sample(serverlevel.random) / 2));
++            mob.getBrain().setMemory(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, (this.timeBetweenLongJumps.sample(serverlevel.random) / 2));
+             mob.getBrain().eraseMemory(MemoryModuleType.LOOK_TARGET);
+         }
+ 
+@@ -122,7 +122,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
+                 double d1 = d0 + (double) e0.getJumpBoostPower();
+ 
+                 e0.setDeltaMovement(this.chosenJump.scale(d1 / d0));
+-                e0.getBrain().setMemory(MemoryModuleType.LONG_JUMP_MID_JUMP, (Object) true);
++                e0.getBrain().setMemory(MemoryModuleType.LONG_JUMP_MID_JUMP, true);
+                 serverlevel.playSound((Player) null, (Entity) e0, (SoundEvent) this.getJumpSound.apply(e0), SoundSource.NEUTRAL, 1.0F, 1.0F);
+             }
+         } else {
+@@ -155,7 +155,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
+                     continue;
+                 }
+ 
+-                e0.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, (Object) (new BlockPosTracker(blockpos)));
++                e0.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, (new BlockPosTracker(blockpos)));
+                 PathNavigation pathnavigation = e0.getNavigation();
+                 Path path = pathnavigation.createPath(blockpos, 0, 8);
+ 

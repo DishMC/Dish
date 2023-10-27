@@ -1,0 +1,31 @@
+diff --git a/minecraft/world/level/block/PointedDripstoneBlock.java b/minecraft/world/level/block/PointedDripstoneBlock.java
+index d809caf..937dd6c 100644
+--- a/minecraft/world/level/block/PointedDripstoneBlock.java
++++ b/minecraft/world/level/block/PointedDripstoneBlock.java
+@@ -434,7 +434,7 @@ public class PointedDripstoneBlock extends Block implements Fallable, SimpleWate
+ 
+             return (BlockPos) findBlockVertical(levelaccessor, blockpos, direction.getAxisDirection(), bipredicate, (blockstate1) -> {
+                 return isTip(blockstate1, flag);
+-            }, i).orElse((Object) null);
++            }, i).orElse(null);
+         }
+     }
+ 
+@@ -550,7 +550,7 @@ public class PointedDripstoneBlock extends Block implements Fallable, SimpleWate
+             return canDripThrough(level, blockpos1, blockstate);
+         };
+ 
+-        return (BlockPos) findBlockVertical(level, blockpos, Direction.DOWN.getAxisDirection(), bipredicate, predicate, 11).orElse((Object) null);
++        return (BlockPos) findBlockVertical(level, blockpos, Direction.DOWN.getAxisDirection(), bipredicate, predicate, 11).orElse( null);
+     }
+ 
+     @Nullable
+@@ -559,7 +559,7 @@ public class PointedDripstoneBlock extends Block implements Fallable, SimpleWate
+             return canDripThrough(level, blockpos1, blockstate);
+         };
+ 
+-        return (BlockPos) findBlockVertical(level, blockpos, Direction.UP.getAxisDirection(), bipredicate, PointedDripstoneBlock::canDrip, 11).orElse((Object) null);
++        return (BlockPos) findBlockVertical(level, blockpos, Direction.UP.getAxisDirection(), bipredicate, PointedDripstoneBlock::canDrip, 11).orElse(null);
+     }
+ 
+     public static Fluid getCauldronFillFluidType(ServerLevel serverlevel, BlockPos blockpos) {

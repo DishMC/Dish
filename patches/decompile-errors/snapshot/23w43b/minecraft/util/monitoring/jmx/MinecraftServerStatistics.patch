@@ -1,0 +1,15 @@
+diff --git a/minecraft/util/monitoring/jmx/MinecraftServerStatistics.java b/minecraft/util/monitoring/jmx/MinecraftServerStatistics.java
+index 2bcd259..c6b0282 100644
+--- a/minecraft/util/monitoring/jmx/MinecraftServerStatistics.java
++++ b/minecraft/util/monitoring/jmx/MinecraftServerStatistics.java
+@@ -73,8 +73,8 @@ public final class MinecraftServerStatistics implements DynamicMBean {
+     public void setAttribute(Attribute attribute) {}
+ 
+     public AttributeList getAttributes(String[] astring) {
+-        Stream stream = Arrays.stream(astring);
+-        Map map = this.attributeDescriptionByName;
++        Stream<String> stream = Arrays.stream(astring);
++        Map<String, MinecraftServerStatistics.AttributeDescription> map = this.attributeDescriptionByName;
+ 
+         Objects.requireNonNull(this.attributeDescriptionByName);
+         List<Attribute> list = (List) stream.map(map::get).filter(Objects::nonNull).map((minecraftserverstatistics_attributedescription) -> {

@@ -1,0 +1,37 @@
+diff --git a/minecraft/server/commands/ScoreboardCommand.java b/minecraft/server/commands/ScoreboardCommand.java
+index 941b1c1..4d7d3d2 100644
+--- a/minecraft/server/commands/ScoreboardCommand.java
++++ b/minecraft/server/commands/ScoreboardCommand.java
+@@ -175,8 +175,9 @@ public class ScoreboardCommand {
+         }
+ 
+         if (collection.size() == 1) {
++            int finalI = i;
+             commandsourcestack.sendSuccess(() -> {
+-                return Component.translatable("commands.scoreboard.players.operation.success.single", objective.getFormattedDisplayName(), collection.iterator().next(), i);
++                return Component.translatable("commands.scoreboard.players.operation.success.single", objective.getFormattedDisplayName(), collection.iterator().next(), finalI);
+             }, true);
+         } else {
+             commandsourcestack.sendSuccess(() -> {
+@@ -307,8 +308,9 @@ public class ScoreboardCommand {
+         }
+ 
+         if (collection.size() == 1) {
++            int finalJ = j;
+             commandsourcestack.sendSuccess(() -> {
+-                return Component.translatable("commands.scoreboard.players.add.success.single", i, objective.getFormattedDisplayName(), collection.iterator().next(), j);
++                return Component.translatable("commands.scoreboard.players.add.success.single", i, objective.getFormattedDisplayName(), collection.iterator().next(), finalJ);
+             }, true);
+         } else {
+             commandsourcestack.sendSuccess(() -> {
+@@ -333,8 +335,9 @@ public class ScoreboardCommand {
+         }
+ 
+         if (collection.size() == 1) {
++            int finalJ = j;
+             commandsourcestack.sendSuccess(() -> {
+-                return Component.translatable("commands.scoreboard.players.remove.success.single", i, objective.getFormattedDisplayName(), collection.iterator().next(), j);
++                return Component.translatable("commands.scoreboard.players.remove.success.single", i, objective.getFormattedDisplayName(), collection.iterator().next(), finalJ);
+             }, true);
+         } else {
+             commandsourcestack.sendSuccess(() -> {

@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/structure/pools/SinglePoolElement.java b/minecraft/world/level/levelgen/structure/pools/SinglePoolElement.java
+index b7bc748..e253821 100644
+--- a/minecraft/world/level/levelgen/structure/pools/SinglePoolElement.java
++++ b/minecraft/world/level/levelgen/structure/pools/SinglePoolElement.java
+@@ -121,7 +121,7 @@ public class SinglePoolElement extends StructurePoolElement {
+ 
+     @VisibleForTesting
+     static void sortBySelectionPriority(List<StructureTemplate.StructureBlockInfo> list) {
+-        list.sort(Comparator.comparingInt((structuretemplate_structureblockinfo) -> {
++        list.sort(Comparator.<StructureTemplate.StructureBlockInfo>comparingInt((structuretemplate_structureblockinfo) -> {
+             return (Integer) Optionull.mapOrDefault(structuretemplate_structureblockinfo.nbt(), (compoundtag) -> {
+                 return compoundtag.getInt("selection_priority");
+             }, 0);

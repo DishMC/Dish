@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/ButtonBlock.java b/minecraft/world/level/block/ButtonBlock.java
+index 06fd028..cbb8c6f 100644
+--- a/minecraft/world/level/block/ButtonBlock.java
++++ b/minecraft/world/level/block/ButtonBlock.java
+@@ -183,7 +183,7 @@ public class ButtonBlock extends FaceAttachedHorizontalDirectionalBlock {
+     }
+ 
+     protected void checkPressed(BlockState blockstate, Level level, BlockPos blockpos) {
+-        AbstractArrow abstractarrow = this.type.canButtonBeActivatedByArrows() ? (AbstractArrow) level.getEntitiesOfClass(AbstractArrow.class, blockstate.getShape(level, blockpos).bounds().move(blockpos)).stream().findFirst().orElse((Object) null) : null;
++        AbstractArrow abstractarrow = this.type.canButtonBeActivatedByArrows() ? (AbstractArrow) level.getEntitiesOfClass(AbstractArrow.class, blockstate.getShape(level, blockpos).bounds().move(blockpos)).stream().findFirst().orElse(null) : null;
+         boolean flag = abstractarrow != null;
+         boolean flag1 = (Boolean) blockstate.getValue(ButtonBlock.POWERED);
+ 

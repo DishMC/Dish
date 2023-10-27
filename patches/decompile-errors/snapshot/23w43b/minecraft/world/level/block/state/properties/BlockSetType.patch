@@ -1,0 +1,17 @@
+diff --git a/minecraft/world/level/block/state/properties/BlockSetType.java b/minecraft/world/level/block/state/properties/BlockSetType.java
+index 742bb35..7420044 100644
+--- a/minecraft/world/level/block/state/properties/BlockSetType.java
++++ b/minecraft/world/level/block/state/properties/BlockSetType.java
+@@ -46,11 +46,7 @@ public record BlockSetType(String name, boolean canOpenByHand, boolean canButton
+     }
+ 
+     static {
+-        Function function = BlockSetType::name;
+-        Map map = BlockSetType.TYPES;
+-
+-        Objects.requireNonNull(map);
+-        CODEC = ExtraCodecs.stringResolverCodec(function, map::get);
++        CODEC = ExtraCodecs.stringResolverCodec(BlockSetType::name, BlockSetType.TYPES::get);
+         IRON = register(new BlockSetType("iron", false, false, BlockSetType.PressurePlateSensitivity.EVERYTHING, SoundType.METAL, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
+         COPPER = register(new BlockSetType("copper", true, false, BlockSetType.PressurePlateSensitivity.EVERYTHING, SoundType.METAL, SoundEvents.COPPER_DOOR_CLOSE, SoundEvents.COPPER_DOOR_OPEN, SoundEvents.COPPER_TRAPDOOR_CLOSE, SoundEvents.COPPER_TRAPDOOR_OPEN, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
+         GOLD = register(new BlockSetType("gold", false, false, BlockSetType.PressurePlateSensitivity.EVERYTHING, SoundType.METAL, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
