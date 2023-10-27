@@ -35,3 +35,5 @@ jobs:
         git config --global user.name "iris"
     - name: Run Init
       run: node init.js
+    - name: Create dish workspace & patch
+      run: node ./dish/index.js
