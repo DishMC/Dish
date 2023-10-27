@@ -8,3 +8,4 @@
 - Add a CONTRIBUTING.md file so contributors will know what to do
 - Move all the decompile code into it's own package, so that I can use this on other stuff
 - Add tests (maybe JUnit?) to workspaces
+- Make a dish/compile.js file to compile and bundle the dish server jar
