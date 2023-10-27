@@ -46,6 +46,6 @@ function readDir(dir) {
   warn('Creating hashes, this may take a while...');
   readDir('dish/workspace/src/main/java');
   warn('Attempting to apply patches');
-  execSync('node patches/applyPatches ' + DECOMPILE_VERSION, { stdio });
+  execSync(`node patches/applyPatches ${DECOMPILE_VERSION}${args[1] ? ' ' + args[1] : ''}`, { stdio });
   process.exit(0);
 })();
