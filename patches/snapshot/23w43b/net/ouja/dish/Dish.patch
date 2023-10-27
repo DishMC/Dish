@@ -1,0 +1,97 @@
+diff --git a/src/main/java/net/ouja/dish/Dish.java b/src/main/java/net/ouja/dish/Dish.java
+new file mode 100644
+index 0000000..e50b353
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/Dish.java
+@@ -0,0 +1,91 @@
++package net.ouja.dish;
++
++import com.mojang.logging.LogUtils;
++import net.minecraft.server.dedicated.DedicatedServer;
++import net.ouja.api.DishAPI;
++import net.ouja.api.Player;
++import net.ouja.api.Server;
++import net.ouja.api.commands.Command;
++import net.ouja.api.commands.CommandListener;
++import net.ouja.api.dedicated.ServerProperties;
++import net.ouja.api.event.EventHandler;
++import net.ouja.api.event.EventListener;
++import net.ouja.dish.commands.RegisteredCommands;
++import net.ouja.dish.entity.DishPlayer;
++import net.ouja.dish.plugins.PluginManager;
++import net.ouja.dish.plugins.RegisteredEvents;
++import org.jetbrains.annotations.NotNull;
++import org.slf4j.Logger;
++
++import java.io.File;
++import java.io.IOException;
++import java.lang.reflect.Method;
++import java.util.ArrayList;
++
++public class Dish implements Server {
++    private final DedicatedServer server;
++    private final String dishVersion = "0.0.0";
++    public static final Logger logger = LogUtils.getLogger();
++
++    public Dish(DedicatedServer server) {
++        this.server = server;
++        DishAPI.setServer(this);
++        logger.info(String.format("Launching Dish server with the version %s (API Version: %s)", dishVersion, DishAPI.getApiVersion()));
++    }
++
++    public void initializePlugins() {
++        try {
++            new PluginManager(new File("plugins"));
++        } catch (IOException e) {
++            e.printStackTrace(); // todo make an error handler
++        }
++    }
++
++    @Override
++    public @NotNull String getVersion() {
++        return this.server.getServerVersion();
++    }
++
++    @Override
++    public @NotNull ServerProperties getProperties() {
++        return new DishProperties(this.server.getProperties());
++    }
++
++    @Override
++    public @NotNull String getDishVersion() {
++        return this.dishVersion;
++    }
++
++    @Override
++    public @NotNull ArrayList<Player> getOnlinePlayers() {
++        return null;
++    }
++
++    @Override
++    public void registerEvent(EventListener eventListener, Class<?> aClass) {
++        for (Method method : eventListener.getClass().getMethods()) {
++            if (method.isAnnotationPresent(EventHandler.class)) {
++                new RegisteredEvents(method, aClass);
++            }
++        }
++    }
++
++    @Override
++    public void registerCommand(Command command) {
++        for (Method method : command.getClass().getMethods()) {
++            if (method.isAnnotationPresent(CommandListener.class)) {
++                CommandListener commandListener = method.getAnnotation(CommandListener.class);
++                if (commandListener != null && commandListener.name() != "") {
++                    new RegisteredCommands(commandListener.name(), method, command.getClass());
++                }
++            }
++        }
++    }
++
++    @Override
++    public void broadcast(String message) {
++        for (Player player : DishPlayer.CACHED_PLAYERS.values()) {
++            player.sendMessage(message);
++        }
++    }
++}

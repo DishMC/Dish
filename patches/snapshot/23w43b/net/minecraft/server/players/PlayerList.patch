@@ -1,0 +1,37 @@
+diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
+index 97fd12c..0e8e936 100644
+--- a/src/main/java/net/minecraft/server/players/PlayerList.java
++++ b/src/main/java/net/minecraft/server/players/PlayerList.java
+@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
+ import java.time.Instant;
+ import java.util.Collection;
+ import java.util.EnumSet;
++import java.util.EventListener;
+ import java.util.Iterator;
+ import java.util.List;
+ import java.util.Map;
+@@ -213,7 +214,15 @@ public abstract class PlayerList {
+             mutablecomponent = Component.translatable("multiplayer.player.joined.renamed", serverplayer.getDisplayName(), s);
+         }
+ 
+-        this.broadcastSystemMessage(mutablecomponent.withStyle(ChatFormatting.YELLOW), false);
++        // dish start -- add event listener for players joining
++        net.ouja.api.event.player.PlayerJoinEvent event = new net.ouja.api.event.player.PlayerJoinEvent(new net.ouja.dish.entity.DishPlayer(serverplayer), mutablecomponent.getString());
++        net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++        if (event.getJoinMessage() != null) {
++            mutablecomponent = Component.literal(event.getJoinMessage()); // todo: allow component support
++        }
++        mutablecomponent = mutablecomponent.withStyle(ChatFormatting.YELLOW);
++        // dish end
++//        this.broadcastSystemMessage(mutablecomponent, false); // dish -- called later
+         servergamepacketlistenerimpl.teleport(serverplayer.getX(), serverplayer.getY(), serverplayer.getZ(), serverplayer.getYRot(), serverplayer.getXRot());
+         ServerStatus serverstatus = this.server.getStatus();
+ 
+@@ -224,6 +233,7 @@ public abstract class PlayerList {
+         serverplayer.connection.send(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(this.players));
+         this.players.add(serverplayer);
+         this.playersByUUID.put(serverplayer.getUUID(), serverplayer);
++        this.broadcastSystemMessage(mutablecomponent, false); // dish -- remove ".withStyle()" and move this here so that when players join, they can see their own join message.
+         this.broadcastAll(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(serverplayer)));
+         this.sendLevelInfo(serverplayer, serverlevel1);
+         serverlevel1.addNewPlayer(serverplayer);
