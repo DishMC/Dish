@@ -20,6 +20,14 @@ function readDir(dir) {
   });
 }
 
+function parseLibraries(libraries) {
+  libraries = libraries.split('\n');
+  libraries = libraries.map(l => l.split('	')[1]);
+  libraries = libraries.filter(l => l !== undefined);
+  libraries = libraries.map(l => `implementation '${l}'`);
+  return libraries;
+}
+
 (async function () {
   if (!fs.existsSync('init.js')) return error('Run this file in the parent directory');
   log(`Creating workspace for version '${DECOMPILE_VERSION}'`);
@@ -46,7 +54,9 @@ function readDir(dir) {
   fs.cpSync(`workspaces/${DECOMPILE_VERSION.split('/')[1]}`, 'dish/workspace', { recursive: true });
   fs.writeFileSync('dish/workspace/.gitignore', 'build\n*gradle\nsrc/main/resources\n');
   fs.rmSync('dish/workspace/build.gradle');
-  fs.cpSync('libs/static/build.gradle.dish.txt', 'dish/workspace/build.gradle');
+  const DEPENDENCIES = parseLibraries(fs.readFileSync(`cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`).toString()).join('\n\t');
+  const GRADLE = (fs.readFileSync('libs/static/build.gradle.dish.txt').toString()).replace('{VERSION}', DECOMPILE_VERSION.split('/')[1] + '-R0-SNAPSHOT').replace('{DEPENDENCIES}', DEPENDENCIES);
+  fs.writeFileSync(`dish/workspace/build.gradle`, GRADLE);
   log('Copied workspace');
   warn('Initilizing git repo, this may take a while...');
   execSync('cd dish/workspace && git init');

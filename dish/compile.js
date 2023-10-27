@@ -81,7 +81,7 @@ function readLibraries(version) {
   let libraries_list = '';
   if (!fs.existsSync(`cache/${version}.json`)) return error('Could not find dependencies json file!');
   const version_meta = JSON.parse(fs.readFileSync(`cache/${version}.json`).toString());
-  // const dish_meta = JSON.parse(fs.readFileSync('dish.json').toString());  
+  const dish_meta = JSON.parse(fs.readFileSync(`dish/libraries/${version}.json`).toString());
   /**
    * Minecraft Libraries
    */
@@ -93,16 +93,22 @@ function readLibraries(version) {
     fs.mkdirSync(`Dish-Bundler/libs/libraries/${pathNoFile}`, { recursive: true });
     fs.cpSync(`cache/${version}/META-INF/libraries/${pathNoFile}`, `Dish-Bundler/libs/libraries/${pathNoFile}`, { recursive: true });
   });
-  // /**
-  //  * Dish libraries
-  //  */
-  // dish_meta.libraries.forEach(function (l) {
-  //   const artifact = l.downloads;
-  //   libraries_list = libraries_list + (libraries_list.length > 0 ? '\n' : '') + generateHash(`cache/${version}/${artifact.path}`) + '	' + l.name + '	' + artifact.path;
-  //   const pathNoFile = artifact.path.split('/').slice(0, artifact.path.split('/').length - 1).join('/');
-  //   fs.mkdirSync(`bundler/libs/libraries/${pathNoFile}`, { recursive: true });
-  //   copyDir(`cache/${version}/${artifact.path}`, `bundler/libs/libraries/${pathNoFile}`);
-  // });
+  /**
+   * Dish libraries
+   */
+  dish_meta.libraries.forEach(function (l) {
+    const artifact = l.downloads;
+    const pathNoFile = artifact.path.split('/').slice(0, artifact.path.split('/').length - 1).join('/');
+    if (!fs.existsSync(`cache/${version}/META-INF/libraries/${artifact.path}`)) {
+      warn(`${l.name} isn't installed. Downloading...`);
+      fs.mkdirSync(`cache/${version}/META-INF/libraries/${pathNoFile}`, { recursive: true });
+      execSync(`curl -o cache/${version}/META-INF/libraries/${artifact.path} ${artifact.url}`, { stdio });
+      log(`Downloaded ${l.name}`);
+    }
+    libraries_list = libraries_list + (libraries_list.length > 0 ? '\n' : '') + generateHash(`cache/${version}/META-INF/libraries/${artifact.path}`) + '	' + l.name + '	' + artifact.path;
+    fs.mkdirSync(`Dish-Bundler/libs/libraries/${pathNoFile}`, { recursive: true });
+    fs.cpSync(`cache/${version}/META-INF/libraries/${pathNoFile}`, `Dish-Bundler/libs/libraries/${pathNoFile}`, { recursive: true });
+  });
   fs.writeFileSync('Dish-Bundler/libs/META-INF/libraries.list', libraries_list);
   log('Created libraries.list');
 }

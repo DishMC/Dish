@@ -1,0 +1,18 @@
+{
+  "libraries": [
+    {
+      "downloads": {
+        "url": "https://repo1.maven.org/maven2/org/yaml/snakeyaml/2.0/snakeyaml-2.0.jar",
+        "path": "org/yaml/snakeyaml/2.0/snakeyaml-2.0.jar"
+      },
+      "name": "org.yaml:snakeyaml:2.0"
+    },
+    {
+      "downloads": {
+        "url": "https://maven.ouja.net/net/ouja/api/23w43b-R0-SNAPSHOT/api-23w43b-R0-20231027.224233-1.jar",
+        "path": "net/ouja/api/23w43b/23w43b-R0.jar"
+      },
+      "name": "net.ouja:api:23w43b-R0"
+    }
+  ]
+}
