@@ -45,6 +45,8 @@ function readDir(dir) {
   warn('Copying workspace, this may take a while...');
   fs.cpSync(`workspaces/${DECOMPILE_VERSION.split('/')[1]}`, 'dish/workspace', { recursive: true });
   fs.writeFileSync('dish/workspace/.gitignore', 'build\n*gradle\nsrc/main/resources\n');
+  fs.rmSync('dish/workspace/build.gradle');
+  fs.cpSync('libs/static/build.gradle.dish.txt', 'dish/workspace/build.gradle');
   log('Copied workspace');
   warn('Initilizing git repo, this may take a while...');
   execSync('cd dish/workspace && git init');

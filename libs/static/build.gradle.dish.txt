@@ -1,0 +1,48 @@
+plugins {
+  id 'java'
+}
+
+group 'net.minecraft'
+version '{VERSION}'
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  maven {
+    name = 'Mojang'
+    url = 'https://libraries.minecraft.net'
+  }
+  maven { url = 'https://maven.ouja.net' }
+}
+
+configurations {
+  shade
+  compile.extendsFrom shade
+}
+
+dependencies {
+  {DEPENDENCIES}
+  // Dish dependencies
+  implementation group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '5.0.4'
+  implementation group: 'org.yaml', name: 'snakeyaml', version: '1.33'
+  implementation 'net.ouja:api:' + version
+  // regular dependencies
+  implementation 'org.jetbrains:annotations:24.0.0'
+  testImplementation platform('org.junit:junit-bom:5.9.1')
+  testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+  useJUnitPlatform()
+}
+
+tasks.register('runserver', JavaExec) {
+  mkdir 'runserver'
+  group = "Dish"
+  description = "Runs server"
+  standardInput = System.in
+  classpath sourceSets.main.runtimeClasspath
+  args '--nogui', ''
+  main 'net.minecraft.server.Main'
+  workingDir 'runserver'
+}
