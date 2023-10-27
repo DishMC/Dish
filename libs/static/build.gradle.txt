@@ -37,6 +37,7 @@ tasks.register('runserver', JavaExec) {
   description = "Runs server"
   standardInput = System.in
   classpath sourceSets.main.runtimeClasspath
+  args '--nogui', ''
   main 'net.minecraft.server.Main'
   workingDir 'runserver'
 }
