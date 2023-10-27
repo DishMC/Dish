@@ -1,0 +1,3 @@
+[submodule "Dish-Bundler"]
+	path = Dish-Bundler
+	url = https://github.com/DishMC/Dish-Bundler.git
