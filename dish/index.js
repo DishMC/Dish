@@ -22,6 +22,7 @@ function readDir(dir) {
 
 (async function () {
   if (!fs.existsSync('init.js')) return error('Run this file in the parent directory');
+  log(`Creating workspace for version '${DECOMPILE_VERSION}'`);
   if (!fs.existsSync(`workspaces/${DECOMPILE_VERSION.split('/')[1]}`)) {
     // If workspace does not exist, try to create it.
     // If it fails, error out
@@ -54,5 +55,10 @@ function readDir(dir) {
   readDir('dish/workspace/src/main/java');
   warn('Attempting to apply patches');
   execSync(`node patches/applyPatches ${DECOMPILE_VERSION}${args[1] ? ' ' + args[1] : ''}`, { stdio });
+  log('Getting version.json');
+  execSync(`cd cache/${DECOMPILE_VERSION.split('/')[1]} && jar xf server-${DECOMPILE_VERSION.split('/')[1]}.jar version.json`, { stdio });
+  const VERSION = JSON.parse(fs.readFileSync(`cache/${DECOMPILE_VERSION.split('/')[1]}/version.json`).toString());
+  VERSION.build_time = new Date();
+  fs.writeFileSync('dish/workspace/src/main/resources/version.json', JSON.stringify(VERSION, null, 2.5));
   process.exit(0);
 })();
