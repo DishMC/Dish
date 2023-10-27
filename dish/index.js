@@ -33,7 +33,14 @@ function readDir(dir) {
     }
   }
 
-  if (fs.existsSync('dish/workspace')) return error('Dish workspace already exists.');
+  if (fs.existsSync('dish/workspace')) {
+    console.time('Moved directories');
+    warn('Dish workspace already exists. Moving it, this may take a while...');
+    fs.cpSync('dish/workspace', `dish/workspace-old-${Date.now()}`, { recursive: true });
+    warn('Deleting old directory');
+    fs.rmSync('dish/workspace', { recursive: true });
+    console.timeEnd('Moved directories');
+  }
   warn('Copying workspace, this may take a while...');
   fs.cpSync(`workspaces/${DECOMPILE_VERSION.split('/')[1]}`, 'dish/workspace', { recursive: true });
   fs.writeFileSync('dish/workspace/.gitignore', 'build\n*gradle\nsrc/main/resources\n');
