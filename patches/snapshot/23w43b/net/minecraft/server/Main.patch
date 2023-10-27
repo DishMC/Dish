@@ -1,0 +1,17 @@
+diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
+index e8a5576..6202247 100644
+--- a/src/main/java/net/minecraft/server/Main.java
++++ b/src/main/java/net/minecraft/server/Main.java
+@@ -125,6 +125,12 @@ public class Main {
+                 return;
+             }
+ 
++            // dish -- create a plugins directory
++            if (!new File("plugins").exists()) {
++                Files.createDirectories(Path.of("plugins"));
++            }
++            // dish end
++
+             File file = new File((String) optionset.valueOf(optionspec8));
+             Services services = Services.create(new YggdrasilAuthenticationService(Proxy.NO_PROXY), file);
+             String s = (String) Optional.ofNullable((String) optionset.valueOf(optionspec9)).orElse(dedicatedserversettings.getProperties().levelName);
