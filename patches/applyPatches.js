@@ -31,6 +31,14 @@ function readDir(dir) {
   });
 }
 
+function moveDir(dir) {
+  fs.readdirSync(dir).forEach(f => {
+    if (fs.statSync(`${dir}/${f}`).isDirectory()) return moveDir(`${dir}/${f}`);
+    fs.cpSync(`${dir}/${f}`, `${PATH}/src/main/java/net/ouja/${dir.replace(`patches/${args[0]}/net/ouja`, '')}/${f}`);
+    log(`Moved ${f}`);
+  });
+}
+
 (async function () {
   // check if git repo is initialized, if not, it will not apply patches. 
   if (!fs.existsSync(`${PATH}/.git`)) return error('Git repo is not initialized. Run git init inside ' + PATH);
@@ -45,6 +53,7 @@ function readDir(dir) {
     // copy old version to new version
     copyDir(`patches/${args[1]}`, `patches/${args[0]}`);
   }
-  readDir(`patches/${args[0]}`);
+  readDir(`patches/${args[0]}/net/minecraft`);
+  moveDir(`patches/${args[0]}/net/ouja`);
   if (rejected.length > 0) fs.writeFileSync('rejected_dish_patches.rej', rejected.join('\n'));
 })();

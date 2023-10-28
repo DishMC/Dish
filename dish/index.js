@@ -15,8 +15,9 @@ const DECOMPILE_VERSION = args[0] ?? DEFAULT_MINECRAFT_VERSION;
 function readDir(dir) {
   fs.readdirSync(dir).forEach(f => {
     if (fs.statSync(dir + '/' + f).isDirectory()) return readDir(dir + '/' + f);
-    if (!fs.existsSync('dish/workspace/tmp/' + dir)) fs.mkdirSync('dish/workspace/tmp/' + dir, { recursive: true });
-    fs.writeFileSync(`dish/workspace/tmp/${dir}/${f}.hash`, calculateFileHash(dir + '/' + f));
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.cpSync(`${dir}/${f}`, `${dir.replace('workspace/src/main', 'workspace/tmp/src/main')}/${f}`);
+    fs.writeFileSync(`${dir.replace('workspace/src/main', 'workspace/tmp/src/main')}/${f}.hash`, calculateFileHash(dir + '/' + f));
   });
 }
 
@@ -52,7 +53,7 @@ function parseLibraries(libraries) {
   }
   warn('Copying workspace, this may take a while...');
   fs.cpSync(`workspaces/${DECOMPILE_VERSION.split('/')[1]}`, 'dish/workspace', { recursive: true });
-  fs.writeFileSync('dish/workspace/.gitignore', 'build\n*gradle\nsrc/main/resources\n');
+  fs.writeFileSync('dish/workspace/.gitignore', 'build\n*gradle\nsrc/main/resources\n.idea\ntmp\n');
   fs.rmSync('dish/workspace/build.gradle');
   const versionJson = JSON.parse(fs.readFileSync(`dish/libraries/${DECOMPILE_VERSION.split('/')[1]}.json`).toString());
   const DEPENDENCIES = parseLibraries(fs.readFileSync(`cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`).toString()).join('\n\t');
@@ -68,6 +69,8 @@ function parseLibraries(libraries) {
   readDir('dish/workspace/src/main/java');
   warn('Attempting to apply patches');
   execSync(`node patches/applyPatches ${DECOMPILE_VERSION}${args[1] ? ' ' + args[1] : ''}`, { stdio });
+  execSync('cd dish/workspace && git add .', { stdio });
+  execSync('cd dish/workspace && git commit -m "applied patches"', { stdio });
   log('Getting version.json');
   execSync(`cd cache/${DECOMPILE_VERSION.split('/')[1]} && jar xf server-${DECOMPILE_VERSION.split('/')[1]}.jar version.json`, { stdio });
   const VERSION = JSON.parse(fs.readFileSync(`cache/${DECOMPILE_VERSION.split('/')[1]}/version.json`).toString());
