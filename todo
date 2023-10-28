@@ -9,3 +9,4 @@
 - Move all the decompile code into it's own package, so that I can use this on other stuff
 - Add tests (maybe JUnit?) to workspaces
 - Make a dish/compile.js file to compile and bundle the dish server jar
+- Make patches/decompile-errors/generatePatches work like patches/generatePatches. If I need to fix another error inside the file, it will just overwrite it.

@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/level/levelgen/structure/pools/SinglePoolElement.java b/minecraft/world/level/levelgen/structure/pools/SinglePoolElement.java
-index 1e9780c..e63d442 100644
+index dcf028a..e63d442 100644
 --- a/minecraft/world/level/levelgen/structure/pools/SinglePoolElement.java
 +++ b/minecraft/world/level/levelgen/structure/pools/SinglePoolElement.java
 @@ -33,6 +33,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -19,7 +19,16 @@ index 1e9780c..e63d442 100644
  
          Objects.requireNonNull(structuretemplatemanager);
          return (StructureTemplate) either.map(structuretemplatemanager::getOrCreate, Function.identity());
-@@ -169,11 +170,11 @@ public class SinglePoolElement extends StructurePoolElement {
+@@ -122,7 +122,7 @@ public class SinglePoolElement extends StructurePoolElement {
+ 
+     @VisibleForTesting
+     static void sortBySelectionPriority(List<StructureTemplate.StructureBlockInfo> list) {
+-        list.sort(Comparator.comparingInt((structuretemplate_structureblockinfo) -> {
++        list.sort(Comparator.<StructureTemplate.StructureBlockInfo>comparingInt((structuretemplate_structureblockinfo) -> {
+             return (Integer) Optionull.mapOrDefault(structuretemplate_structureblockinfo.nbt(), (compoundtag) -> {
+                 return compoundtag.getInt("selection_priority");
+             }, 0);
+@@ -170,11 +170,11 @@ public class SinglePoolElement extends StructurePoolElement {
              structureplacesettings.addProcessor(JigsawReplacementProcessor.INSTANCE);
          }
  
