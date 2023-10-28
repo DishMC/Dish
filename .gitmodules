@@ -1,3 +1,6 @@
 [submodule "Dish-Bundler"]
 	path = Dish-Bundler
 	url = https://github.com/DishMC/Dish-Bundler.git
+[submodule "Dish-API"]
+	path = Dish-API
+	url = https://github.com/DishMC/Dish-API.git

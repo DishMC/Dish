@@ -1,0 +1,30 @@
+diff --git a/src/main/java/net/ouja/dish/entity/neutral/DishIronGolem.java b/src/main/java/net/ouja/dish/entity/neutral/DishIronGolem.java
+new file mode 100644
+index 0000000..0fabe34
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/neutral/DishIronGolem.java
+@@ -0,0 +1,24 @@
++package net.ouja.dish.entity.neutral;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.animal.IronGolem;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishIronGolem extends DishEntity implements net.ouja.api.entity.neutral.IronGolem {
++    private IronGolem ironGolem;
++
++    public DishIronGolem(Entity entity) {
++        super(entity);
++        this.ironGolem = (IronGolem)entity;
++    }
++
++    @Override
++    public boolean isPlayerCreated() {
++        return this.ironGolem.isPlayerCreated();
++    }
++
++    @Override
++    public Crack getCrackiness() {
++        return Crack.valueOf(this.ironGolem.getCrackiness().name());
++    }
++}

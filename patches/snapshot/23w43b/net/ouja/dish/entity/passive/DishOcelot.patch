@@ -1,0 +1,20 @@
+diff --git a/src/main/java/net/ouja/dish/entity/passive/DishOcelot.java b/src/main/java/net/ouja/dish/entity/passive/DishOcelot.java
+new file mode 100644
+index 0000000..e8cb598
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/passive/DishOcelot.java
+@@ -0,0 +1,14 @@
++package net.ouja.dish.entity.passive;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.animal.Ocelot;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishOcelot extends DishEntity implements net.ouja.api.entity.passive.Ocelot {
++    private Ocelot ocelot;
++
++    public DishOcelot(Entity entity) {
++        super(entity);
++        this.ocelot = (Ocelot)entity;
++    }
++}

@@ -1,0 +1,35 @@
+diff --git a/src/main/java/net/ouja/dish/entity/monster/DishCreeper.java b/src/main/java/net/ouja/dish/entity/monster/DishCreeper.java
+new file mode 100644
+index 0000000..1faa24a
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/monster/DishCreeper.java
+@@ -0,0 +1,29 @@
++package net.ouja.dish.entity.monster;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.monster.Creeper;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishCreeper extends DishEntity implements net.ouja.api.entity.monster.Creeper {
++    private Creeper creeper;
++
++    public DishCreeper(Entity entity) {
++        super(entity);
++        this.creeper = (Creeper)entity;
++    }
++
++    @Override
++    public boolean isCharged() {
++        return this.creeper.isPowered();
++    }
++
++    @Override
++    public boolean isIgnited() {
++        return this.creeper.isIgnited();
++    }
++
++    @Override
++    public void ignite() {
++        this.creeper.ignite();
++    }
++}

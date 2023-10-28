@@ -1,0 +1,30 @@
+diff --git a/src/main/java/net/ouja/dish/entity/passive/DishAxolotl.java b/src/main/java/net/ouja/dish/entity/passive/DishAxolotl.java
+new file mode 100644
+index 0000000..c4c006f
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/passive/DishAxolotl.java
+@@ -0,0 +1,24 @@
++package net.ouja.dish.entity.passive;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.animal.axolotl.Axolotl;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishAxolotl extends DishEntity implements net.ouja.api.entity.passive.Axolotl {
++    private Axolotl axolotl;
++
++    public DishAxolotl(Entity entity) {
++        super(entity);
++        this.axolotl = (Axolotl)entity;
++    }
++
++    @Override
++    public String getVariant() {
++        return this.axolotl.getVariant().getName();
++    }
++
++    @Override
++    public boolean isFromBucket() {
++        return this.axolotl.fromBucket();
++    }
++}

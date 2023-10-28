@@ -1,0 +1,20 @@
+diff --git a/src/main/java/net/ouja/dish/entity/neutral/DishCaveSpider.java b/src/main/java/net/ouja/dish/entity/neutral/DishCaveSpider.java
+new file mode 100644
+index 0000000..fcf4f28
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/neutral/DishCaveSpider.java
+@@ -0,0 +1,14 @@
++package net.ouja.dish.entity.neutral;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.monster.CaveSpider;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishCaveSpider extends DishEntity implements net.ouja.api.entity.neutral.CaveSpider {
++    private CaveSpider caveSpider;
++
++    public DishCaveSpider(Entity entity) {
++        super(entity);
++        this.caveSpider = (CaveSpider)entity;
++    }
++}

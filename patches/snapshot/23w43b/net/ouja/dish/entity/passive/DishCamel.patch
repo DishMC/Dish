@@ -1,0 +1,45 @@
+diff --git a/src/main/java/net/ouja/dish/entity/passive/DishCamel.java b/src/main/java/net/ouja/dish/entity/passive/DishCamel.java
+new file mode 100644
+index 0000000..ce41f32
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/passive/DishCamel.java
+@@ -0,0 +1,39 @@
++package net.ouja.dish.entity.passive;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.animal.camel.Camel;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishCamel extends DishEntity implements net.ouja.api.entity.passive.Camel {
++    private Camel camel;
++
++    public DishCamel(Entity entity) {
++        super(entity);
++        this.camel = (Camel)entity;
++    }
++
++    @Override
++    public boolean isSitting() {
++        return this.camel.isCamelSitting();
++    }
++
++    @Override
++    public boolean isDashing() {
++        return this.camel.isDashing();
++    }
++
++    @Override
++    public void setDashing(boolean b) {
++        this.camel.setDashing(b);
++    }
++
++    @Override
++    public void sitDown() {
++        this.camel.sitDown();
++    }
++
++    @Override
++    public void standUp() {
++        this.camel.standUp();
++    }
++}

@@ -32,6 +32,11 @@ const stdio = [process.stdin, process.stdout, process.stderr];
     deleteDir('Dish-Bundler/build');
     log('Deleted build directory');
   }
+  if (fs.existsSync('Dish-Bundler/libs')) {
+    warn('Deleting libraries inside Dish-Bundler');
+    deleteDir('Dish-Bundler/libs');
+    log('Deleted libraries');
+  }
   console.time('Building Jar');
   // Linux wants the gradlew file to be executable, and to run it with ./ in the beginning. Windows does not do this.
   if (process.platform !== 'win32') {
@@ -107,7 +112,7 @@ function readLibraries(version) {
     }
     libraries_list = libraries_list + (libraries_list.length > 0 ? '\n' : '') + generateHash(`cache/${version}/META-INF/libraries/${artifact.path}`) + '	' + l.name + '	' + artifact.path;
     fs.mkdirSync(`Dish-Bundler/libs/libraries/${pathNoFile}`, { recursive: true });
-    fs.cpSync(`cache/${version}/META-INF/libraries/${pathNoFile}`, `Dish-Bundler/libs/libraries/${pathNoFile}`, { recursive: true });
+    fs.copyFileSync(`cache/${version}/META-INF/libraries/${artifact.path}`, `Dish-Bundler/libs/libraries/${artifact.path}`);
   });
   fs.writeFileSync('Dish-Bundler/libs/META-INF/libraries.list', libraries_list);
   log('Created libraries.list');

@@ -1,0 +1,35 @@
+diff --git a/src/main/java/net/ouja/dish/entity/neutral/DishWolf.java b/src/main/java/net/ouja/dish/entity/neutral/DishWolf.java
+new file mode 100644
+index 0000000..96ae6c1
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/neutral/DishWolf.java
+@@ -0,0 +1,29 @@
++package net.ouja.dish.entity.neutral;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.animal.Wolf;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishWolf extends DishEntity implements net.ouja.api.entity.neutral.Wolf {
++    private Wolf wolf;
++
++    public DishWolf(Entity entity) {
++        super(entity);
++        this.wolf = (Wolf)entity;
++    }
++
++    @Override
++    public boolean isWet() {
++        return this.wolf.isWet();
++    }
++
++    @Override
++    public float getTailAngle() {
++        return this.wolf.getTailAngle();
++    }
++
++    @Override
++    public boolean isInterested() {
++        return this.wolf.isInterested();
++    }
++}

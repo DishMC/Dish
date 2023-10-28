@@ -1,0 +1,25 @@
+diff --git a/src/main/java/net/ouja/dish/entity/monster/DishEvoker.java b/src/main/java/net/ouja/dish/entity/monster/DishEvoker.java
+new file mode 100644
+index 0000000..f6fd7e2
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/monster/DishEvoker.java
+@@ -0,0 +1,19 @@
++package net.ouja.dish.entity.monster;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.monster.Evoker;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishEvoker extends DishEntity implements net.ouja.api.entity.monster.Evoker {
++    private Evoker evoker;
++
++    public DishEvoker(Entity entity) {
++        super(entity);
++        this.evoker = (Evoker)entity;
++    }
++
++    @Override
++    public boolean isCastingSpell() {
++        return this.evoker.isCastingSpell();
++    }
++}

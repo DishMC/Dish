@@ -9,10 +9,10 @@
     },
     {
       "downloads": {
-        "url": "https://maven.ouja.net/net/ouja/api/23w43b-R0-SNAPSHOT/api-23w43b-R0-20231027.224233-1.jar",
-        "path": "net/ouja/api/23w43b/23w43b-R0.jar"
+        "url": "https://maven.ouja.net/net/ouja/api/23w43b-R1-SNAPSHOT/api-23w43b-R1-20231028.052927-1.jar",
+        "path": "net/ouja/api/23w43b/23w43b-R1-SNAPSHOT.jar"
       },
-      "name": "net.ouja:api:23w43b-R0"
+      "name": "net.ouja:api:23w43b-R1-SNAPSHOT"
     }
   ]
 }

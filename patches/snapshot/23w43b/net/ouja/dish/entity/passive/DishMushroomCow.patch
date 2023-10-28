@@ -1,0 +1,28 @@
+diff --git a/src/main/java/net/ouja/dish/entity/passive/DishMushroomCow.java b/src/main/java/net/ouja/dish/entity/passive/DishMushroomCow.java
+new file mode 100644
+index 0000000..54e1bf7
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/passive/DishMushroomCow.java
+@@ -0,0 +1,22 @@
++package net.ouja.dish.entity.passive;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.animal.MushroomCow;
++import net.ouja.api.entity.passive.MooshroomCow;
++import net.ouja.api.entity.passive.MooshroomCowTypes;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishMushroomCow extends DishEntity implements MooshroomCow {
++    private MushroomCow mushroomCow;
++
++    public DishMushroomCow(Entity entity) {
++        super(entity);
++        this.mushroomCow = (MushroomCow)entity;
++        this.mushroomCow.getVariant();
++    }
++
++    @Override
++    public MooshroomCowTypes getVariant() {
++        return MooshroomCowTypes.valueOf(this.mushroomCow.getVariant().name());
++    }
++}

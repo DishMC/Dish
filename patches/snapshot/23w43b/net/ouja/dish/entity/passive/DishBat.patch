@@ -1,0 +1,30 @@
+diff --git a/src/main/java/net/ouja/dish/entity/passive/DishBat.java b/src/main/java/net/ouja/dish/entity/passive/DishBat.java
+new file mode 100644
+index 0000000..08cd688
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/passive/DishBat.java
+@@ -0,0 +1,24 @@
++package net.ouja.dish.entity.passive;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.ambient.Bat;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishBat extends DishEntity implements net.ouja.api.entity.passive.Bat {
++    private Bat bat;
++
++    public DishBat(Entity entity) {
++        super(entity);
++        this.bat = (Bat)entity;
++    }
++
++    @Override
++    public boolean isResting() {
++        return this.bat.isResting();
++    }
++
++    @Override
++    public void setResting(boolean b) {
++        this.bat.setResting(b);
++    }
++}

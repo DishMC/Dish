@@ -1,0 +1,20 @@
+diff --git a/src/main/java/net/ouja/dish/entity/neutral/DishTraderLlama.java b/src/main/java/net/ouja/dish/entity/neutral/DishTraderLlama.java
+new file mode 100644
+index 0000000..33f4c0a
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/neutral/DishTraderLlama.java
+@@ -0,0 +1,14 @@
++package net.ouja.dish.entity.neutral;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.animal.horse.TraderLlama;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishTraderLlama extends DishEntity implements net.ouja.api.entity.neutral.TraderLlama {
++    private TraderLlama traderLlama;
++
++    public DishTraderLlama(Entity entity) {
++        super(entity);
++        this.traderLlama = (TraderLlama)entity;
++    }
++}

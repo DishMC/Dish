@@ -1,0 +1,25 @@
+diff --git a/src/main/java/net/ouja/dish/entity/passive/DishTropicalFish.java b/src/main/java/net/ouja/dish/entity/passive/DishTropicalFish.java
+new file mode 100644
+index 0000000..a7e92af
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/passive/DishTropicalFish.java
+@@ -0,0 +1,19 @@
++package net.ouja.dish.entity.passive;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.animal.TropicalFish;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishTropicalFish extends DishEntity implements net.ouja.api.entity.passive.TropicalFish {
++    private TropicalFish tropicalFish;
++
++    public DishTropicalFish(Entity entity) {
++        super(entity);
++        this.tropicalFish = (TropicalFish)entity;
++    }
++
++    @Override
++    public net.ouja.api.entity.passive.TropicalFish.Variants getVariant() {
++        return net.ouja.api.entity.passive.TropicalFish.Variants.valueOf(this.tropicalFish.getVariant().name());
++    }
++}

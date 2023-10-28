@@ -1,0 +1,25 @@
+diff --git a/src/main/java/net/ouja/dish/entity/monster/DishShulker.java b/src/main/java/net/ouja/dish/entity/monster/DishShulker.java
+new file mode 100644
+index 0000000..667b361
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/monster/DishShulker.java
+@@ -0,0 +1,19 @@
++package net.ouja.dish.entity.monster;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.monster.Shulker;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishShulker extends DishEntity implements net.ouja.api.entity.monster.Shulker {
++    private Shulker shulker;
++
++    public DishShulker(Entity entity) {
++        super(entity);
++        this.shulker = (Shulker)entity;
++    }
++
++    @Override
++    public boolean isClosed() {
++        return this.shulker.isClosed();
++    }
++}

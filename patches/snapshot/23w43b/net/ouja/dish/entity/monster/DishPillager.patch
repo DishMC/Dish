@@ -1,0 +1,25 @@
+diff --git a/src/main/java/net/ouja/dish/entity/monster/DishPillager.java b/src/main/java/net/ouja/dish/entity/monster/DishPillager.java
+new file mode 100644
+index 0000000..593598f
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/monster/DishPillager.java
+@@ -0,0 +1,19 @@
++package net.ouja.dish.entity.monster;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.monster.Pillager;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishPillager extends DishEntity implements net.ouja.api.entity.monster.Pillager {
++    private Pillager pillager;
++
++    public DishPillager(Entity entity) {
++        super(entity);
++        this.pillager = (Pillager)entity;
++    }
++
++    @Override
++    public boolean isChargingCrossbow() {
++        return this.pillager.isChargingCrossbow();
++    }
++}

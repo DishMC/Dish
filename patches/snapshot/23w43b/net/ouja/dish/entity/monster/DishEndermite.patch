@@ -1,0 +1,20 @@
+diff --git a/src/main/java/net/ouja/dish/entity/monster/DishEndermite.java b/src/main/java/net/ouja/dish/entity/monster/DishEndermite.java
+new file mode 100644
+index 0000000..4876d11
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/monster/DishEndermite.java
+@@ -0,0 +1,14 @@
++package net.ouja.dish.entity.monster;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.monster.Endermite;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishEndermite extends DishEntity implements net.ouja.api.entity.monster.Endermite {
++    private Endermite endermite;
++
++    public DishEndermite(Entity entity) {
++        super(entity);
++        this.endermite = (Endermite)entity;
++    }
++}

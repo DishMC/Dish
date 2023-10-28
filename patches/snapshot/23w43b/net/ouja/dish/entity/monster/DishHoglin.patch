@@ -1,0 +1,35 @@
+diff --git a/src/main/java/net/ouja/dish/entity/monster/DishHoglin.java b/src/main/java/net/ouja/dish/entity/monster/DishHoglin.java
+new file mode 100644
+index 0000000..e65075d
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/monster/DishHoglin.java
+@@ -0,0 +1,29 @@
++package net.ouja.dish.entity.monster;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.monster.hoglin.Hoglin;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishHoglin extends DishEntity implements net.ouja.api.entity.monster.Hoglin {
++    private Hoglin hoglin;
++
++    public DishHoglin(Entity entity) {
++        super(entity);
++        this.hoglin = (Hoglin)entity;
++    }
++
++    @Override
++    public void setImmuneToZombification(boolean b) {
++        this.hoglin.setImmuneToZombification(b);
++    }
++
++    @Override
++    public boolean isImmuneToZombification() {
++        return this.hoglin.isImmuneToZombification();
++    }
++
++    @Override
++    public boolean isConverting() {
++        return this.hoglin.isConverting();
++    }
++}

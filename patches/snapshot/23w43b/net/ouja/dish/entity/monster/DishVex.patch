@@ -1,0 +1,28 @@
+diff --git a/src/main/java/net/ouja/dish/entity/monster/DishVex.java b/src/main/java/net/ouja/dish/entity/monster/DishVex.java
+new file mode 100644
+index 0000000..7278381
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/monster/DishVex.java
+@@ -0,0 +1,22 @@
++package net.ouja.dish.entity.monster;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.monster.Vex;
++import net.ouja.dish.entity.DishEntity;
++import org.jetbrains.annotations.Nullable;
++
++public class DishVex extends DishEntity implements net.ouja.api.entity.monster.Vex {
++    private Vex vex;
++
++    public DishVex(Entity entity) {
++        super(entity);
++        this.vex = (Vex)entity;
++    }
++
++    @Override
++    @Nullable
++    public net.ouja.api.Entity getOwner() {
++        if (this.vex.getOwner() == null) return null;
++        return new DishEntity(this.vex.getOwner());
++    }
++}

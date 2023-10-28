@@ -1,0 +1,20 @@
+diff --git a/src/main/java/net/ouja/dish/entity/passive/DishCod.java b/src/main/java/net/ouja/dish/entity/passive/DishCod.java
+new file mode 100644
+index 0000000..ca3ac1a
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/passive/DishCod.java
+@@ -0,0 +1,14 @@
++package net.ouja.dish.entity.passive;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.animal.Cod;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishCod extends DishEntity implements net.ouja.api.entity.passive.Cod {
++    private Cod cod;
++
++    public DishCod(Entity entity) {
++        super(entity);
++        this.cod = (Cod)entity;
++    }
++}

@@ -1,0 +1,25 @@
+diff --git a/src/main/java/net/ouja/dish/entity/passive/DishSheep.java b/src/main/java/net/ouja/dish/entity/passive/DishSheep.java
+new file mode 100644
+index 0000000..44dc838
+--- /dev/null
++++ b/src/main/java/net/ouja/dish/entity/passive/DishSheep.java
+@@ -0,0 +1,19 @@
++package net.ouja.dish.entity.passive;
++
++import net.minecraft.world.entity.Entity;
++import net.minecraft.world.entity.animal.Sheep;
++import net.ouja.dish.entity.DishEntity;
++
++public class DishSheep extends DishEntity implements net.ouja.api.entity.passive.Sheep {
++    private Sheep sheep;
++
++    public DishSheep(Entity entity) {
++        super(entity);
++        this.sheep = (Sheep)entity;
++    }
++
++    @Override
++    public boolean isSheared() {
++        return this.sheep.isSheared();
++    }
++}
