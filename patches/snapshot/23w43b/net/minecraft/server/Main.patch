@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index e8a5576..6202247 100644
+index e8a5576..e21f361 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
-@@ -125,6 +125,12 @@ public class Main {
+@@ -120,6 +120,12 @@ public class Main {
                  return;
              }
  
@@ -12,6 +12,6 @@ index e8a5576..6202247 100644
 +            }
 +            // dish end
 +
-             File file = new File((String) optionset.valueOf(optionspec8));
-             Services services = Services.create(new YggdrasilAuthenticationService(Proxy.NO_PROXY), file);
-             String s = (String) Optional.ofNullable((String) optionset.valueOf(optionspec9)).orElse(dedicatedserversettings.getProperties().levelName);
+             if (!eula.hasAgreedToEULA()) {
+                 Main.LOGGER.info("You need to agree to the EULA in order to run the server. Go to eula.txt for more info.");
+                 return;
