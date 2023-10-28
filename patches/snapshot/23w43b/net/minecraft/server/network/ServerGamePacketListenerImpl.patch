@@ -1,19 +1,18 @@
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 3617df2..fb0f507 100644
+index 3617df2..079f101 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -1245,9 +1245,18 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1245,9 +1245,17 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
      }
  
      private void removePlayerFromWorld() {
 +        // ouja start
 +        MutableComponent component = Component.translatable("multiplayer.player.left", this.player.getDisplayName());
-+        net.ouja.api.event.player.PlayerQuitEvent event = new net.ouja.api.event.player.PlayerQuitEvent(new net.ouja.dish.entity.DishPlayer(this.player), component.getString());
++        net.ouja.api.event.player.PlayerQuitEvent event = new net.ouja.api.event.player.PlayerQuitEvent(new net.ouja.dish.entity.DishPlayer(this.player), net.ouja.dish.network.chat.DishComponent.fromComponent(component));
 +        net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
 +        if (event.getQuitMessage() != null) {
-+            component = Component.literal(event.getQuitMessage());
++            component = net.ouja.dish.network.chat.DishComponent.toComponent(event.getQuitMessage());
 +        }
-+        component = component.withStyle(ChatFormatting.YELLOW);
 +        // ouja end
          this.chatMessageChain.close();
          this.server.invalidateStatus();
