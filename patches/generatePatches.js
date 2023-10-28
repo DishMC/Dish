@@ -27,6 +27,9 @@ function readDir(dir) {
 
     if (NEW_HASH !== OLD_HASH) {
       try {
+        // compare between vanilla file and updated file.
+        // Before I did it by commit, but I was running into issues where if I commited the change, it would just overwrite the patch. (What it's meant to do)
+        // So, compare between files, not commits.
         execSync(`git diff --no-index -u --minimal --output=${baseDir}/${f.replace('.java', '.patch')} ${path.join(__dirname, '../' + TMP_DIR)}\\${f} ${dir}/${f}`, { stdio: [] });
       } catch (e) {
         // warn(e); // used for debug purposes. git diff --no-index will always return an error for some reason
@@ -38,7 +41,6 @@ function readDir(dir) {
         patchFile = patchFile.replace(AREGEX, `a/${dir.replace('dish/workspace/', '')}/${f}`);
         patchFile = patchFile.replace(BREGEX, `b/${dir.replace('dish/workspace/', '')}/${f}`);
         fs.writeFileSync(`${PATCH_DIR}/${f.replace('.java', '.patch')}`, patchFile);
-        // fs.cpSync(`${baseDir}/${f.replace('.java', '.patch')}`, `${PATCH_DIR}/${f.replace('.java', '.patch')}`);
         log(`Generated patch for '~/${f}'`);
       }
       fs.rmSync(`${baseDir}/${f.replace('.java', '.patch')}`, { recursive: true });
