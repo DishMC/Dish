@@ -37,12 +37,19 @@ const stdio = [process.stdin, process.stdout, process.stderr];
     deleteDir('Dish-Bundler/libs');
     log('Deleted libraries');
   }
+  if (fs.existsSync('dish/workspace/build')) {
+    warn('Deleting build directory');
+    deleteDir('dish/workspace/build');
+    log('Deleted build directory');
+  }
   console.time('Building Jar');
   // Linux wants the gradlew file to be executable, and to run it with ./ in the beginning. Windows does not do this.
   if (process.platform !== 'win32') {
     execSync(`cd dish/workspace && chmod +x gradlew`, { stdio }); // for linux, you will need to make gradlew executable
+    execSync(`cd dish/workspace && ./gradlew tasks generateVer`, { stdio });
     execSync(`cd dish/workspace && ./gradlew build`, { stdio }); // build to make sure it works. Will error if there are decompile errors
   } else {
+    execSync(`cd dish/workspace && gradlew tasks generateVer`, { stdio });
     execSync(`cd dish/workspace && gradlew build`, { stdio }); // build to make sure it works. Will error if there are decompile errors
   }
   console.timeEnd('Building Jar');
