@@ -54,8 +54,9 @@ function parseLibraries(libraries) {
   fs.cpSync(`workspaces/${DECOMPILE_VERSION.split('/')[1]}`, 'dish/workspace', { recursive: true });
   fs.writeFileSync('dish/workspace/.gitignore', 'build\n*gradle\nsrc/main/resources\n');
   fs.rmSync('dish/workspace/build.gradle');
+  const versionJson = JSON.parse(fs.readFileSync(`dish/libraries/${DECOMPILE_VERSION.split('/')[1]}.json`).toString());
   const DEPENDENCIES = parseLibraries(fs.readFileSync(`cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`).toString()).join('\n\t');
-  const GRADLE = (fs.readFileSync('libs/static/build.gradle.dish.txt').toString()).replace('{VERSION}', DECOMPILE_VERSION.split('/')[1] + '-R0-SNAPSHOT').replace('{DEPENDENCIES}', DEPENDENCIES);
+  const GRADLE = (fs.readFileSync('libs/static/build.gradle.dish.txt').toString()).replace('{VERSION}', versionJson.version).replace('{DEPENDENCIES}', DEPENDENCIES);
   fs.writeFileSync(`dish/workspace/build.gradle`, GRADLE);
   log('Copied workspace');
   warn('Initilizing git repo, this may take a while...');
