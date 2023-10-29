@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 3617df2..079f101 100644
+index 3617df2..b0be654 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -1245,9 +1245,17 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
@@ -21,3 +21,16 @@ index 3617df2..079f101 100644
          this.player.disconnect();
          this.server.getPlayerList().remove(this.player);
          this.player.getTextFilter().leave();
+@@ -1299,7 +1307,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+ 
+                     this.chatMessageChain.append(completablefuture, (filteredtext) -> {
+                         PlayerChatMessage playerchatmessage1 = playerchatmessage.withUnsignedContent(component).filter(filteredtext.mask());
+-
++                        // dish
++                        net.ouja.api.event.player.PlayerChatEvent event = new net.ouja.api.event.player.PlayerChatEvent(new net.ouja.dish.entity.DishPlayer(this.player), net.ouja.dish.network.chat.DishComponent.fromComponent(playerchatmessage1.decoratedContent()));
++                        net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++                        if (event.isCancelled()) return;
++                        // dish end
+                         this.broadcastChatMessage(playerchatmessage1);
+                     });
+                 });
