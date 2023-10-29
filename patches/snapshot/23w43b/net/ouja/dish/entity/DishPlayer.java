@@ -1,6 +1,7 @@
 package net.ouja.dish.entity;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.ouja.api.Player;
 import net.ouja.api.world.Level;
 import net.ouja.dish.network.chat.DishComponent;
