@@ -2,15 +2,18 @@ package net.ouja.dish;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.server.players.UserBanListEntry;
 import net.ouja.api.DishAPI;
 import net.ouja.api.Player;
 import net.ouja.api.Server;
+import net.ouja.api.auth.GameProfile;
 import net.ouja.api.commands.Command;
 import net.ouja.api.commands.CommandListener;
 import net.ouja.api.dedicated.ServerProperties;
 import net.ouja.api.event.EventHandler;
 import net.ouja.api.event.EventListener;
 import net.ouja.api.network.chat.Component;
+import net.ouja.api.server.players.BanEntry;
 import net.ouja.dish.commands.RegisteredCommands;
 import net.ouja.dish.entity.DishPlayer;
 import net.ouja.dish.plugins.PluginManager;
@@ -120,5 +123,17 @@ public class Dish implements Server {
         for (Player player : DishPlayer.CACHED_PLAYERS.values()) {
             player.sendMessage(component);
         }
+    }
+
+    @Override
+    public boolean isPlayerBanned(GameProfile profile) {
+        return this.server.getPlayerList().getBans().isBanned(new com.mojang.authlib.GameProfile(profile.getPlayerUUID(), profile.getPlayerName()));
+    }
+
+    @Override
+    public BanEntry getBanEntry(GameProfile profile) {
+        UserBanListEntry entry = this.server.getPlayerList().getBans().get(new com.mojang.authlib.GameProfile(profile.getPlayerUUID(), profile.getPlayerName()));
+        if (entry == null) return null;
+        return new BanEntry(entry.getCreated(), entry.getSource(), entry.getExpires(), entry.getReason());
     }
 }
