@@ -40,6 +40,7 @@ function readDir(dir) {
         let patchFile = fs.readFileSync(`${baseDir}/${f.replace('.java', '.patch')}`).toString();
         patchFile = patchFile.replace(AREGEX, `a/${dir.replace('dish/workspace/', '')}/${f}`);
         patchFile = patchFile.replace(BREGEX, `b/${dir.replace('dish/workspace/', '')}/${f}`);
+        if (!fs.existsSync(PATCH_DIR)) fs.mkdirSync(PATCH_DIR, { recursive: true });
         fs.writeFileSync(`${PATCH_DIR}/${f.replace('.java', '.patch')}`, patchFile);
         log(`Generated patch for '~/${f}'`);
       }

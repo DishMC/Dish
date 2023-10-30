@@ -6,6 +6,10 @@ plugins {
 group 'net.minecraft'
 version '{VERSION}'
 
+ext {
+  api_version = version + '-{API_VERSION}'
+}
+
 repositories {
   mavenLocal()
   mavenCentral()
@@ -26,7 +30,7 @@ dependencies {
   // Dish dependencies
   implementation group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '5.0.4'
   implementation group: 'org.yaml', name: 'snakeyaml', version: '1.33'
-  implementation 'net.ouja:api:' + version
+  implementation 'net.ouja:api:' + api_version
   // regular dependencies
   implementation 'org.jetbrains:annotations:24.0.0'
   testImplementation platform('org.junit:junit-bom:5.9.1')
@@ -61,9 +65,9 @@ def getVersionMetadata() {
 		def head = grgit.head()
 		def id = head.abbreviatedId
 
-		return "${id}"
+		return "${version}-${id}"
 	}
 
 	// No tracking information could be found about the build
-	return "unknown"
+	return "${version}-unknown"
 }

@@ -33,25 +33,26 @@ import java.util.List;
 
 public class Dish implements Server {
     private final DedicatedServer server;
-    private String dishVersion = "UNKNOWN";
+    private final String dishVersion = getBuild();
     public static final Logger logger = LogUtils.getLogger();
 
     public Dish(DedicatedServer server) {
         this.server = server;
         DishAPI.setServer(this);
-        getBuild();
         logger.info(String.format("Launching Dish server with the version %s (API Version: %s)", dishVersion, DishAPI.getApiVersion()));
     }
 
-    public void getBuild() {
+    public String getBuild() {
         try {
             InputStream in = Dish.class.getResourceAsStream("/build.txt");
-            if (in == null) return;
+            if (in == null) return "UNKNOWN";
 
-            dishVersion = readLines(in)[0];
+            return readLines(in)[0];
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return "UNKNOWN";
     }
 
     public static String[] readLines(InputStream is) throws IOException {

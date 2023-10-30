@@ -1,5 +1,6 @@
 {
-  "version": "23w43b-R2-SNAPSHOT",
+  "version": "23w43b",
+  "api_version": "R3-SNAPSHOT",
   "libraries": [
     {
       "downloads": {
@@ -10,10 +11,10 @@
     },
     {
       "downloads": {
-        "url": "https://maven.ouja.net/net/ouja/api/23w43b-R2-SNAPSHOT/api-23w43b-R2-20231028.195620-1.jar",
-        "path": "net/ouja/api/23w43b/23w43b-R2-SNAPSHOT.jar"
+        "url": "https://maven.ouja.net/net/ouja/api/23w43b-R3-SNAPSHOT/api-23w43b-R3-20231030.185631-1.jar",
+        "path": "net/ouja/api/23w43b/23w43b-R3-SNAPSHOT.jar"
       },
-      "name": "net.ouja:api:23w43b-R2-SNAPSHOT"
+      "name": "net.ouja:api:23w43b-R3-SNAPSHOT"
     }
   ]
 }
