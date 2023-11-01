@@ -4,4 +4,3 @@
 - Add a README.md file to document how this works
 - Add a CONTRIBUTING.md file so contributors will know what to do
 - Add tests (maybe JUnit?) to workspaces
-- Make patches/decompile-errors/generatePatches work like patches/generatePatches. If I need to fix another error inside the file, it will just overwrite it.

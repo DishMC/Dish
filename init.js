@@ -53,6 +53,12 @@ let MINECRAFT_VERSION = "UNKNOWN";
     log('Cleaning up compiled sources');
     deleteDir('compiled');
     deleteFile('server.jar');
+    if (fs.existsSync('cache/to_apply')) {
+      warn('deleting old to_apply dir');
+      fs.rmSync('cache/to_apply', { recursive: true });
+    }
+    warn('Copying decompiled files');
+    fs.cpSync('decompiled', 'cache/to_apply', { recursive: true });
     warn('Initializing git repo, this may take a while...');
     execSync('cd decompiled && git init'); // Need to initialize a git repository so that applying patches will work.
     warn('Starting to apply patches');
@@ -61,6 +67,8 @@ let MINECRAFT_VERSION = "UNKNOWN";
     execSync('cd decompiled && git add .', { stdio });
     execSync('cd decompiled && git commit -m "Initial Commit"', { stdio });
     execSync(`node create-workspace.js ${DECOMPILE_VERSION}`, { stdio }); // automatically create a workspace
+    // delete decompiled source as it's taking space
+    fs.rmSync('decompiled', { recursive: true });
   } catch (e) {
     console.error(e);
     return process.exit(1);
