@@ -1,0 +1,17 @@
+diff --git a/minecraft/util/profiling/jfr/stats/TimedStatSummary.java b/minecraft/util/profiling/jfr/stats/TimedStatSummary.java
+index 9f0b3ff..5d71f7d 100644
+--- a/minecraft/util/profiling/jfr/stats/TimedStatSummary.java
++++ b/minecraft/util/profiling/jfr/stats/TimedStatSummary.java
+@@ -15,9 +15,9 @@ public record TimedStatSummary<T extends TimedStat> (T fastest, T slowest, @Null
+         } else {
+             List<T> list1 = list.stream().sorted(Comparator.comparing(TimedStat::duration)).toList();
+             Duration duration = (Duration) list1.stream().map(TimedStat::duration).reduce(Duration::plus).orElse(Duration.ZERO);
+-            T t0 = (TimedStat) list1.get(0);
+-            T t1 = (TimedStat) list1.get(list1.size() - 1);
+-            T t2 = list1.size() > 1 ? (TimedStat) list1.get(list1.size() - 2) : null;
++            T t0 = list1.get(0);
++            T t1 = list1.get(list1.size() - 1);
++            T t2 = list1.size() > 1 ? list1.get(list1.size() - 2) : null;
+             int i = list1.size();
+             Map<Integer, Double> map = Percentiles.evaluate(list1.stream().mapToLong((timedstat) -> {
+                 return timedstat.duration().toNanos();

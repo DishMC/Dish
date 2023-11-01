@@ -1,0 +1,22 @@
+diff --git a/minecraft/world/level/storage/loot/functions/FunctionUserBuilder.java b/minecraft/world/level/storage/loot/functions/FunctionUserBuilder.java
+index 943b3b1..c594477 100644
+--- a/minecraft/world/level/storage/loot/functions/FunctionUserBuilder.java
++++ b/minecraft/world/level/storage/loot/functions/FunctionUserBuilder.java
+@@ -13,7 +13,7 @@ public interface FunctionUserBuilder<T extends FunctionUserBuilder<T>> {
+ 
+         Object object;
+ 
+-        for (Iterator iterator = iterable.iterator(); iterator.hasNext(); t0 = t0.apply((LootItemFunction.Builder) function.apply(object))) {
++        for (Iterator iterator = iterable.iterator(); iterator.hasNext(); t0 = t0.apply((LootItemFunction.Builder) function.apply((E) object))) {
+             object = iterator.next();
+         }
+ 
+@@ -21,7 +21,7 @@ public interface FunctionUserBuilder<T extends FunctionUserBuilder<T>> {
+     }
+ 
+     default <E> T apply(E[] ae, Function<E, LootItemFunction.Builder> function) {
+-        return this.apply((Iterable) Arrays.asList(ae), function);
++        return this.apply(Arrays.asList(ae), function);
+     }
+ 
+     T unwrap();

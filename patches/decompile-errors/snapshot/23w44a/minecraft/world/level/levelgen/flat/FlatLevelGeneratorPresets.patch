@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/flat/FlatLevelGeneratorPresets.java b/minecraft/world/level/levelgen/flat/FlatLevelGeneratorPresets.java
+index 82f039c..9e8fc46 100644
+--- a/minecraft/world/level/levelgen/flat/FlatLevelGeneratorPresets.java
++++ b/minecraft/world/level/levelgen/flat/FlatLevelGeneratorPresets.java
+@@ -56,7 +56,7 @@ public class FlatLevelGeneratorPresets {
+             HolderGetter<StructureSet> holdergetter = this.context.lookup(Registries.STRUCTURE_SET);
+             HolderGetter<PlacedFeature> holdergetter1 = this.context.lookup(Registries.PLACED_FEATURE);
+             HolderGetter<Biome> holdergetter2 = this.context.lookup(Registries.BIOME);
+-            Stream stream = set.stream();
++            Stream<ResourceKey<StructureSet>> stream = set.stream();
+ 
+             Objects.requireNonNull(holdergetter);
+             HolderSet.Direct<StructureSet> holderset_direct = HolderSet.direct((List) stream.map(holdergetter::getOrThrow).collect(Collectors.toList()));

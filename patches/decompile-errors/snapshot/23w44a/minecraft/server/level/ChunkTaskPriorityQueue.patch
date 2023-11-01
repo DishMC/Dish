@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/level/ChunkTaskPriorityQueue.java b/minecraft/server/level/ChunkTaskPriorityQueue.java
+index f827b7c..40d8a8c 100644
+--- a/minecraft/server/level/ChunkTaskPriorityQueue.java
++++ b/minecraft/server/level/ChunkTaskPriorityQueue.java
+@@ -108,7 +108,7 @@ public class ChunkTaskPriorityQueue<T> {
+             Long2ObjectLinkedOpenHashMap<List<Optional<T>>> long2objectlinkedopenhashmap = (Long2ObjectLinkedOpenHashMap) this.taskQueue.get(i);
+             long j = long2objectlinkedopenhashmap.firstLongKey();
+ 
+-            List list;
++            List<Optional<T>> list;
+ 
+             for (list = (List) long2objectlinkedopenhashmap.removeFirst(); this.hasWork() && ((Long2ObjectLinkedOpenHashMap) this.taskQueue.get(this.firstQueue)).isEmpty(); ++this.firstQueue) {
+                 ;

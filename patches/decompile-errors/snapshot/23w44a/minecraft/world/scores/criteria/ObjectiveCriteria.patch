@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/scores/criteria/ObjectiveCriteria.java b/minecraft/world/scores/criteria/ObjectiveCriteria.java
+index e98ffd3..498d25f 100644
+--- a/minecraft/world/scores/criteria/ObjectiveCriteria.java
++++ b/minecraft/world/scores/criteria/ObjectiveCriteria.java
+@@ -74,7 +74,7 @@ public class ObjectiveCriteria {
+     }
+ 
+     private static <T> Optional<ObjectiveCriteria> getStat(StatType<T> stattype, ResourceLocation resourcelocation) {
+-        Optional optional = stattype.getRegistry().getOptional(resourcelocation);
++        Optional<T> optional = stattype.getRegistry().getOptional(resourcelocation);
+ 
+         Objects.requireNonNull(stattype);
+         return optional.map(stattype::get);

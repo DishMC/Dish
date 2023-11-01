@@ -1,0 +1,13 @@
+diff --git a/minecraft/data/recipes/SmithingTransformRecipeBuilder.java b/minecraft/data/recipes/SmithingTransformRecipeBuilder.java
+index f874c53..85b3b0b 100644
+--- a/minecraft/data/recipes/SmithingTransformRecipeBuilder.java
++++ b/minecraft/data/recipes/SmithingTransformRecipeBuilder.java
+@@ -51,7 +51,7 @@ public class SmithingTransformRecipeBuilder {
+     public void save(RecipeOutput recipeoutput, ResourceLocation resourcelocation) {
+         this.ensureValid(resourcelocation);
+         Advancement.Builder advancement_builder = recipeoutput.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourcelocation)).rewards(AdvancementRewards.Builder.recipe(resourcelocation)).requirements(AdvancementRequirements.Strategy.OR);
+-        Map map = this.criteria;
++        Map<String, Criterion<?>> map = this.criteria;
+ 
+         Objects.requireNonNull(advancement_builder);
+         map.forEach(advancement_builder::addCriterion);

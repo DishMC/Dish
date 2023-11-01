@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/structure/StructureCheck.java b/minecraft/world/level/levelgen/structure/StructureCheck.java
+index 3ff6891..6b42421 100644
+--- a/minecraft/world/level/levelgen/structure/StructureCheck.java
++++ b/minecraft/world/level/levelgen/structure/StructureCheck.java
+@@ -238,7 +238,7 @@ public class StructureCheck {
+                 object2intmap = new Object2IntOpenHashMap();
+             }
+ 
+-            ((Object2IntMap) object2intmap).computeInt(structure, (structure1, integer) -> {
++            (object2intmap).computeInt(structure, (structure1, integer) -> {
+                 return integer == null ? 1 : integer + 1;
+             });
+             return (Object2IntMap) object2intmap;

@@ -1,0 +1,22 @@
+diff --git a/minecraft/commands/arguments/ResourceOrTagArgument.java b/minecraft/commands/arguments/ResourceOrTagArgument.java
+index c90c5ac..5926ae7 100644
+--- a/minecraft/commands/arguments/ResourceOrTagArgument.java
++++ b/minecraft/commands/arguments/ResourceOrTagArgument.java
+@@ -122,7 +122,7 @@ public class ResourceOrTagArgument<T> implements ArgumentType<ResourceOrTagArgum
+ 
+         @Override
+         public <E> Optional<ResourceOrTagArgument.Result<E>> cast(ResourceKey<? extends Registry<E>> resourcekey) {
+-            return this.tag.key().isFor(resourcekey) ? Optional.of(this) : Optional.empty();
++            return this.tag.key().isFor(resourcekey) ? Optional.of((Result<E>) this) : Optional.empty();
+         }
+ 
+         public boolean test(Holder<T> holder) {
+@@ -144,7 +144,7 @@ public class ResourceOrTagArgument<T> implements ArgumentType<ResourceOrTagArgum
+ 
+         @Override
+         public <E> Optional<ResourceOrTagArgument.Result<E>> cast(ResourceKey<? extends Registry<E>> resourcekey) {
+-            return this.value.key().isFor(resourcekey) ? Optional.of(this) : Optional.empty();
++            return this.value.key().isFor(resourcekey) ? Optional.of((Result<E>) this) : Optional.empty();
+         }
+ 
+         public boolean test(Holder<T> holder) {

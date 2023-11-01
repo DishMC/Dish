@@ -1,0 +1,22 @@
+diff --git a/minecraft/network/chat/HoverEvent.java b/minecraft/network/chat/HoverEvent.java
+index b47f2f1..85083f2 100644
+--- a/minecraft/network/chat/HoverEvent.java
++++ b/minecraft/network/chat/HoverEvent.java
+@@ -115,7 +115,7 @@ public class HoverEvent {
+         }
+ 
+         T cast(Object object) {
+-            return object;
++            return (T) object;
+         }
+ 
+         public String toString() {
+@@ -192,7 +192,7 @@ public class HoverEvent {
+         public ItemStack getItemStack() {
+             if (this.itemStack == null) {
+                 this.itemStack = new ItemStack(this.item, this.count);
+-                Optional optional = this.tag;
++                Optional<CompoundTag> optional = this.tag;
+                 ItemStack itemstack = this.itemStack;
+ 
+                 Objects.requireNonNull(this.itemStack);

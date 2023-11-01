@@ -1,0 +1,30 @@
+diff --git a/minecraft/world/effect/MobEffectInstance.java b/minecraft/world/effect/MobEffectInstance.java
+index eb9efcb..75edcae 100644
+--- a/minecraft/world/effect/MobEffectInstance.java
++++ b/minecraft/world/effect/MobEffectInstance.java
+@@ -13,6 +13,7 @@ import javax.annotation.Nullable;
+ import net.minecraft.core.registries.BuiltInRegistries;
+ import net.minecraft.nbt.CompoundTag;
+ import net.minecraft.nbt.NbtOps;
++import net.minecraft.nbt.Tag;
+ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.util.ExtraCodecs;
+ import net.minecraft.util.Mth;
+@@ -291,7 +292,7 @@ public class MobEffectInstance implements Comparable<MobEffectInstance> {
+         }
+ 
+         this.factorData.ifPresent((mobeffectinstance_factordata) -> {
+-            DataResult dataresult = MobEffectInstance.FactorData.CODEC.encodeStart(NbtOps.INSTANCE, mobeffectinstance_factordata);
++            DataResult<Tag> dataresult = MobEffectInstance.FactorData.CODEC.encodeStart(NbtOps.INSTANCE, mobeffectinstance_factordata);
+             Logger logger = MobEffectInstance.LOGGER;
+ 
+             Objects.requireNonNull(logger);
+@@ -334,7 +335,7 @@ public class MobEffectInstance implements Comparable<MobEffectInstance> {
+         Optional optional;
+ 
+         if (compoundtag.contains("factor_calculation_data", 10)) {
+-            DataResult dataresult = MobEffectInstance.FactorData.CODEC.parse(new Dynamic(NbtOps.INSTANCE, compoundtag.getCompound("factor_calculation_data")));
++            DataResult<FactorData> dataresult = MobEffectInstance.FactorData.CODEC.parse(new Dynamic<>(NbtOps.INSTANCE, compoundtag.getCompound("factor_calculation_data")));
+             Logger logger = MobEffectInstance.LOGGER;
+ 
+             Objects.requireNonNull(logger);

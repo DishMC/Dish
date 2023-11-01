@@ -1,0 +1,22 @@
+diff --git a/minecraft/data/advancements/packs/VanillaAdventureAdvancements.java b/minecraft/data/advancements/packs/VanillaAdventureAdvancements.java
+index ad371e4..6b7771a 100644
+--- a/minecraft/data/advancements/packs/VanillaAdventureAdvancements.java
++++ b/minecraft/data/advancements/packs/VanillaAdventureAdvancements.java
+@@ -143,7 +143,7 @@ public class VanillaAdventureAdvancements implements AdvancementSubProvider {
+ 
+     private static Criterion<ItemUsedOnLocationTrigger.TriggerInstance> placedBlockReadByComparator(Block block) {
+         LootItemCondition.Builder[] alootitemcondition_builder = (LootItemCondition.Builder[]) ComparatorBlock.FACING.getPossibleValues().stream().map((direction) -> {
+-            StatePropertiesPredicate.Builder statepropertiespredicate_builder = StatePropertiesPredicate.Builder.properties().hasProperty(ComparatorBlock.FACING, (Comparable) direction);
++            StatePropertiesPredicate.Builder statepropertiespredicate_builder = StatePropertiesPredicate.Builder.properties().hasProperty(ComparatorBlock.FACING, direction);
+             BlockPredicate.Builder blockpredicate_builder = BlockPredicate.Builder.block().of(Blocks.COMPARATOR).setProperties(statepropertiespredicate_builder);
+ 
+             return LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(blockpredicate_builder), new BlockPos(direction.getOpposite().getNormal()));
+@@ -156,7 +156,7 @@ public class VanillaAdventureAdvancements implements AdvancementSubProvider {
+ 
+     private static Criterion<ItemUsedOnLocationTrigger.TriggerInstance> placedComparatorReadingBlock(Block block) {
+         LootItemCondition.Builder[] alootitemcondition_builder = (LootItemCondition.Builder[]) ComparatorBlock.FACING.getPossibleValues().stream().map((direction) -> {
+-            StatePropertiesPredicate.Builder statepropertiespredicate_builder = StatePropertiesPredicate.Builder.properties().hasProperty(ComparatorBlock.FACING, (Comparable) direction);
++            StatePropertiesPredicate.Builder statepropertiespredicate_builder = StatePropertiesPredicate.Builder.properties().hasProperty(ComparatorBlock.FACING, direction);
+             LootItemBlockStatePropertyCondition.Builder lootitemblockstatepropertycondition_builder = (new LootItemBlockStatePropertyCondition.Builder(Blocks.COMPARATOR)).setProperties(statepropertiespredicate_builder);
+             LootItemCondition.Builder lootitemcondition_builder = LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block)), new BlockPos(direction.getNormal()));
+ 

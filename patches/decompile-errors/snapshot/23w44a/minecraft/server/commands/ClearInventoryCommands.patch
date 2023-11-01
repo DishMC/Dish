@@ -1,0 +1,33 @@
+diff --git a/minecraft/server/commands/ClearInventoryCommands.java b/minecraft/server/commands/ClearInventoryCommands.java
+index 94b0a00..44b8c71 100644
+--- a/minecraft/server/commands/ClearInventoryCommands.java
++++ b/minecraft/server/commands/ClearInventoryCommands.java
+@@ -67,23 +67,24 @@ public class ClearInventoryCommands {
+                 throw ClearInventoryCommands.ERROR_MULTIPLE.create(collection.size());
+             }
+         } else {
++            int finalJ = j;
+             if (i == 0) {
+                 if (collection.size() == 1) {
+                     commandsourcestack.sendSuccess(() -> {
+-                        return Component.translatable("commands.clear.test.single", j, ((ServerPlayer) collection.iterator().next()).getDisplayName());
++                        return Component.translatable("commands.clear.test.single", finalJ, ((ServerPlayer) collection.iterator().next()).getDisplayName());
+                     }, true);
+                 } else {
+                     commandsourcestack.sendSuccess(() -> {
+-                        return Component.translatable("commands.clear.test.multiple", j, collection.size());
++                        return Component.translatable("commands.clear.test.multiple", finalJ, collection.size());
+                     }, true);
+                 }
+             } else if (collection.size() == 1) {
+                 commandsourcestack.sendSuccess(() -> {
+-                    return Component.translatable("commands.clear.success.single", j, ((ServerPlayer) collection.iterator().next()).getDisplayName());
++                    return Component.translatable("commands.clear.success.single", finalJ, ((ServerPlayer) collection.iterator().next()).getDisplayName());
+                 }, true);
+             } else {
+                 commandsourcestack.sendSuccess(() -> {
+-                    return Component.translatable("commands.clear.success.multiple", j, collection.size());
++                    return Component.translatable("commands.clear.success.multiple", finalJ, collection.size());
+                 }, true);
+             }
+ 

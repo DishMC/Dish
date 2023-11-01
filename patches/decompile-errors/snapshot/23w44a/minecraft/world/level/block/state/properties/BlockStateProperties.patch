@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/state/properties/BlockStateProperties.java b/minecraft/world/level/block/state/properties/BlockStateProperties.java
+index 32caf6d..a11f4a0 100644
+--- a/minecraft/world/level/block/state/properties/BlockStateProperties.java
++++ b/minecraft/world/level/block/state/properties/BlockStateProperties.java
+@@ -39,7 +39,7 @@ public class BlockStateProperties {
+     public static final BooleanProperty BLOOM = BooleanProperty.create("bloom");
+     public static final BooleanProperty SHRIEKING = BooleanProperty.create("shrieking");
+     public static final BooleanProperty CAN_SUMMON = BooleanProperty.create("can_summon");
+-    public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = EnumProperty.create("axis", Direction.Axis.class, (Enum[])(Direction.Axis.X, Direction.Axis.Z));
++    public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = EnumProperty.create("axis", Direction.Axis.class, Direction.Axis.X, Direction.Axis.Z);
+     public static final EnumProperty<Direction.Axis> AXIS = EnumProperty.create("axis", Direction.Axis.class);
+     public static final BooleanProperty UP = BooleanProperty.create("up");
+     public static final BooleanProperty DOWN = BooleanProperty.create("down");

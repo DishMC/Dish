@@ -1,0 +1,31 @@
+diff --git a/minecraft/world/level/gameevent/vibrations/VibrationInfo.java b/minecraft/world/level/gameevent/vibrations/VibrationInfo.java
+index 7e11725..a86ae35 100644
+--- a/minecraft/world/level/gameevent/vibrations/VibrationInfo.java
++++ b/minecraft/world/level/gameevent/vibrations/VibrationInfo.java
+@@ -22,7 +22,7 @@ public record VibrationInfo(GameEvent gameEvent, float distance, Vec3 pos, @Null
+         }), UUIDUtil.CODEC.optionalFieldOf("projectile_owner").forGetter((vibrationinfo) -> {
+             return Optional.ofNullable(vibrationinfo.projectileOwnerUuid());
+         })).apply(instance, (gameevent, ofloat, vec3, optional, optional1) -> {
+-            return new VibrationInfo(gameevent, ofloat, vec3, (UUID) optional.orElse((Object) null), (UUID) optional1.orElse((Object) null));
++            return new VibrationInfo(gameevent, ofloat, vec3, (UUID) optional.orElse(null), (UUID) optional1.orElse(null));
+         });
+     });
+ 
+@@ -49,7 +49,7 @@ public record VibrationInfo(GameEvent gameEvent, float distance, Vec3 pos, @Null
+ 
+     public Optional<Entity> getEntity(ServerLevel serverlevel) {
+         return Optional.ofNullable(this.entity).or(() -> {
+-            Optional optional = Optional.ofNullable(this.uuid);
++            Optional<UUID> optional = Optional.ofNullable(this.uuid);
+ 
+             Objects.requireNonNull(serverlevel);
+             return optional.map(serverlevel::getEntity);
+@@ -62,7 +62,7 @@ public record VibrationInfo(GameEvent gameEvent, float distance, Vec3 pos, @Null
+         }).map((entity) -> {
+             return (Projectile) entity;
+         }).map(Projectile::getOwner).or(() -> {
+-            Optional optional = Optional.ofNullable(this.projectileOwnerUuid);
++            Optional<UUID> optional = Optional.ofNullable(this.projectileOwnerUuid);
+ 
+             Objects.requireNonNull(serverlevel);
+             return optional.map(serverlevel::getEntity);

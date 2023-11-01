@@ -1,0 +1,47 @@
+diff --git a/minecraft/world/entity/monster/piglin/PiglinAi.java b/minecraft/world/entity/monster/piglin/PiglinAi.java
+index 6319c6a..9bd56bd 100644
+--- a/minecraft/world/entity/monster/piglin/PiglinAi.java
++++ b/minecraft/world/entity/monster/piglin/PiglinAi.java
+@@ -54,6 +54,7 @@ import net.minecraft.world.entity.ai.behavior.StopAttackingIfTargetInvalid;
+ import net.minecraft.world.entity.ai.behavior.StopBeingAngryIfTargetDead;
+ import net.minecraft.world.entity.ai.behavior.TriggerGate;
+ import net.minecraft.world.entity.ai.behavior.declarative.BehaviorBuilder;
++import net.minecraft.world.entity.ai.behavior.declarative.Trigger;
+ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+ import net.minecraft.world.entity.ai.sensing.Sensor;
+ import net.minecraft.world.entity.ai.util.LandRandomPos;
+@@ -164,7 +165,7 @@ public class PiglinAi {
+     }
+ 
+     private static void initRideHoglinActivity(Brain<Piglin> brain) {
+-        brain.addActivityAndRemoveMemoryWhenStopped(Activity.RIDE, 10, ImmutableList.of(Mount.create(0.8F), SetEntityLookTarget.create(PiglinAi::isPlayerHoldingLovedItem, 8.0F), BehaviorBuilder.sequence(BehaviorBuilder.triggerIf(Entity::isPassenger), TriggerGate.triggerOneShuffled(ImmutableList.builder().addAll(createLookBehaviors()).add(Pair.of(BehaviorBuilder.triggerIf((piglin) -> {
++        brain.addActivityAndRemoveMemoryWhenStopped(Activity.RIDE, 10, ImmutableList.of(Mount.create(0.8F), SetEntityLookTarget.create(PiglinAi::isPlayerHoldingLovedItem, 8.0F), BehaviorBuilder.sequence(BehaviorBuilder.triggerIf(Entity::isPassenger), TriggerGate.triggerOneShuffled(ImmutableList.<Pair<? extends Trigger<? super LivingEntity>, Integer>>builder().addAll(createLookBehaviors()).add(Pair.of(BehaviorBuilder.triggerIf((piglin) -> {
+             return true;
+         }), 1)).build())), DismountOrSkipMounting.create(8, PiglinAi::wantsToStopRiding)), MemoryModuleType.RIDE_TARGET);
+     }
+@@ -174,7 +175,7 @@ public class PiglinAi {
+     }
+ 
+     private static RunOne<LivingEntity> createIdleLookBehaviors() {
+-        return new RunOne<>(ImmutableList.builder().addAll(createLookBehaviors()).add(Pair.of(new DoNothing(30, 60), 1)).build());
++        return new RunOne<>(ImmutableList.<Pair<? extends BehaviorControl<? super LivingEntity>, Integer>>builder().addAll(createLookBehaviors()).add(Pair.of(new DoNothing(30, 60), 1)).build());
+     }
+ 
+     private static RunOne<Piglin> createIdleMovementBehaviors() {
+@@ -195,13 +196,13 @@ public class PiglinAi {
+ 
+     protected static void updateActivity(Piglin piglin) {
+         Brain<Piglin> brain = piglin.getBrain();
+-        Activity activity = (Activity) brain.getActiveNonCoreActivity().orElse((Object) null);
++        Activity activity = (Activity) brain.getActiveNonCoreActivity().orElse(null);
+ 
+         brain.setActiveActivityToFirstValid(ImmutableList.of(Activity.ADMIRE_ITEM, Activity.FIGHT, Activity.AVOID, Activity.CELEBRATE, Activity.RIDE, Activity.IDLE));
+-        Activity activity1 = (Activity) brain.getActiveNonCoreActivity().orElse((Object) null);
++        Activity activity1 = (Activity) brain.getActiveNonCoreActivity().orElse(null);
+ 
+         if (activity != activity1) {
+-            Optional optional = getSoundForCurrentActivity(piglin);
++            Optional<SoundEvent> optional = getSoundForCurrentActivity(piglin);
+ 
+             Objects.requireNonNull(piglin);
+             optional.ifPresent(piglin::playSoundEvent);

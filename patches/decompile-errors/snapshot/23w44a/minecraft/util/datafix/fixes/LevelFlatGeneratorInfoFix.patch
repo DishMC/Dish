@@ -1,0 +1,17 @@
+diff --git a/minecraft/util/datafix/fixes/LevelFlatGeneratorInfoFix.java b/minecraft/util/datafix/fixes/LevelFlatGeneratorInfoFix.java
+index f4c8c22..99c42d7 100644
+--- a/minecraft/util/datafix/fixes/LevelFlatGeneratorInfoFix.java
++++ b/minecraft/util/datafix/fixes/LevelFlatGeneratorInfoFix.java
+@@ -39,10 +39,10 @@ public class LevelFlatGeneratorInfoFix extends DataFix {
+ 
+     private Dynamic<?> fix(Dynamic<?> dynamic) {
+         return dynamic.get("generatorName").asString("").equalsIgnoreCase("flat") ? dynamic.update("generatorOptions", (dynamic1) -> {
+-            DataResult dataresult = dynamic1.asString().map(this::fixString);
++            DataResult<String> dataresult = dynamic1.asString().map(this::fixString);
+ 
+             Objects.requireNonNull(dynamic1);
+-            return (Dynamic) DataFixUtils.orElse(dataresult.map(dynamic1::createString).result(), dynamic1);
++            return DataFixUtils.orElse(dataresult.map(dynamic1::createString).result(), dynamic1);
+         }) : dynamic;
+     }
+ 
