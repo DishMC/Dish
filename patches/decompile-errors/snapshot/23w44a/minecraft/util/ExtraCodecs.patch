@@ -1,8 +1,8 @@
 diff --git a/minecraft/util/ExtraCodecs.java b/minecraft/util/ExtraCodecs.java
-index e2e7a9f..150b76d 100644
+index b4a2658..4bafcf4 100644
 --- a/minecraft/util/ExtraCodecs.java
 +++ b/minecraft/util/ExtraCodecs.java
-@@ -184,7 +184,7 @@ public class ExtraCodecs {
+@@ -180,7 +180,7 @@ public class ExtraCodecs {
          return instance.group(Codec.STRING.fieldOf("name").forGetter(Property::name), Codec.STRING.fieldOf("value").forGetter(Property::value), Codec.STRING.optionalFieldOf("signature").forGetter((property) -> {
              return Optional.ofNullable(property.signature());
          })).apply(instance, (s, s1, optional) -> {
@@ -11,7 +11,7 @@ index e2e7a9f..150b76d 100644
          });
      });
      @VisibleForTesting
-@@ -227,7 +227,7 @@ public class ExtraCodecs {
+@@ -223,7 +223,7 @@ public class ExtraCodecs {
              return gameprofile;
          });
      });
@@ -20,7 +20,7 @@ index e2e7a9f..150b76d 100644
          return s.isEmpty() ? DataResult.error(() -> {
              return "Expected non-empty string";
          }) : DataResult.success(s);
-@@ -239,7 +239,7 @@ public class ExtraCodecs {
+@@ -235,7 +235,7 @@ public class ExtraCodecs {
              return "Expected one codepoint, got: " + s;
          }) : DataResult.success(aint[0]);
      }, Character::toString);
@@ -29,7 +29,7 @@ index e2e7a9f..150b76d 100644
          return !ResourceLocation.isValidPath(s) ? DataResult.error(() -> {
              return "Invalid string to use as a resource path element: " + s;
          }) : DataResult.success(s);
-@@ -277,23 +277,23 @@ public class ExtraCodecs {
+@@ -261,23 +261,23 @@ public class ExtraCodecs {
                  P p0 = list1.get(0);
                  P p1 = list1.get(1);
  
@@ -58,7 +58,7 @@ index e2e7a9f..150b76d 100644
              }, DataResult::success);
          }, (object) -> {
              P p0 = function.apply(object);
-@@ -328,7 +328,7 @@ public class ExtraCodecs {
+@@ -312,7 +312,7 @@ public class ExtraCodecs {
  
      public static <E> Codec<E> idResolverCodec(ToIntFunction<E> tointfunction, IntFunction<E> intfunction, int i) {
          return Codec.INT.flatXmap((integer) -> {
@@ -67,7 +67,7 @@ index e2e7a9f..150b76d 100644
                  return DataResult.error(() -> {
                      return "Unknown element id: " + integer;
                  });
-@@ -344,13 +344,13 @@ public class ExtraCodecs {
+@@ -328,13 +328,13 @@ public class ExtraCodecs {
  
      public static <E> Codec<E> stringResolverCodec(Function<E, String> function, Function<String, E> function1) {
          return Codec.STRING.flatXmap((s) -> {
@@ -83,7 +83,7 @@ index e2e7a9f..150b76d 100644
                  return DataResult.error(() -> {
                      return "Element with unknown name: " + object;
                  });
-@@ -377,7 +377,7 @@ public class ExtraCodecs {
+@@ -381,7 +381,7 @@ public class ExtraCodecs {
      public static <E> Codec<E> overrideLifecycle(Codec<E> codec, final Function<E, Lifecycle> function, final Function<E, Lifecycle> function1) {
          return codec.mapResult(new ResultFunction<E>() {
              public <T> DataResult<Pair<E, T>> apply(DynamicOps<T> dynamicops, T t0, DataResult<Pair<E, T>> dataresult) {
@@ -92,7 +92,7 @@ index e2e7a9f..150b76d 100644
                      return dataresult.setLifecycle((Lifecycle) function.apply(pair.getFirst()));
                  }).orElse(dataresult);
              }
-@@ -415,7 +415,7 @@ public class ExtraCodecs {
+@@ -419,7 +419,7 @@ public class ExtraCodecs {
      }
  
      private static Codec<Integer> intRangeWithMessage(int i, int j, Function<Integer, String> function) {
@@ -101,7 +101,7 @@ index e2e7a9f..150b76d 100644
              return integer.compareTo(i) >= 0 && integer.compareTo(j) <= 0 ? DataResult.success(integer) : DataResult.error(() -> {
                  return (String) function.apply(integer);
              });
-@@ -429,7 +429,7 @@ public class ExtraCodecs {
+@@ -433,7 +433,7 @@ public class ExtraCodecs {
      }
  
      private static Codec<Float> floatRangeMinExclusiveWithMessage(float f, float f1, Function<Float, String> function) {
@@ -110,7 +110,7 @@ index e2e7a9f..150b76d 100644
              return ofloat.compareTo(f) > 0 && ofloat.compareTo(f1) <= 0 ? DataResult.success(ofloat) : DataResult.error(() -> {
                  return (String) function.apply(ofloat);
              });
-@@ -475,9 +475,9 @@ public class ExtraCodecs {
+@@ -479,9 +479,9 @@ public class ExtraCodecs {
      }
  
      public static <E> MapCodec<E> retrieveContext(final Function<DynamicOps<?>, DataResult<E>> function) {
@@ -122,7 +122,7 @@ index e2e7a9f..150b76d 100644
  }
  
              public <T> RecordBuilder<T> encode(E e0, DynamicOps<T> dynamicops, RecordBuilder<T> recordbuilder) {
-@@ -498,7 +498,7 @@ public class ExtraCodecs {
+@@ -502,7 +502,7 @@ public class ExtraCodecs {
          }
  
  
@@ -131,7 +131,7 @@ index e2e7a9f..150b76d 100644
      }
  
      public static <E, L extends Collection<E>, T> Function<L, DataResult<L>> ensureHomogenous(Function<E, T> function) {
-@@ -539,8 +539,8 @@ public class ExtraCodecs {
+@@ -543,8 +543,8 @@ public class ExtraCodecs {
      }
  
      public static Codec<TemporalAccessor> temporalCodec(DateTimeFormatter datetimeformatter) {
@@ -142,7 +142,7 @@ index e2e7a9f..150b76d 100644
              try {
                  return DataResult.success(datetimeformatter.parse(s));
              } catch (Exception exception) {
-@@ -558,7 +558,7 @@ public class ExtraCodecs {
+@@ -562,7 +562,7 @@ public class ExtraCodecs {
      }
  
      public static Codec<String> sizeLimitedString(int i, int j) {

@@ -1,5 +1,5 @@
 diff --git a/minecraft/gametest/framework/GameTestHelper.java b/minecraft/gametest/framework/GameTestHelper.java
-index 86cef6e..fd7f9bb 100644
+index 749848b..29dda0b 100644
 --- a/minecraft/gametest/framework/GameTestHelper.java
 +++ b/minecraft/gametest/framework/GameTestHelper.java
 @@ -141,7 +141,7 @@ public class GameTestHelper {
@@ -20,7 +20,7 @@ index 86cef6e..fd7f9bb 100644
  
          e0.removeFreeWill();
          return e0;
-@@ -601,7 +601,7 @@ public class GameTestHelper {
+@@ -638,7 +638,7 @@ public class GameTestHelper {
              Iterator iterator = list.iterator();
  
              while (iterator.hasNext()) {

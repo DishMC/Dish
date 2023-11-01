@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/level/block/state/properties/BlockStateProperties.java b/minecraft/world/level/block/state/properties/BlockStateProperties.java
-index 32caf6d..a11f4a0 100644
+index ba45023..b4a48cf 100644
 --- a/minecraft/world/level/block/state/properties/BlockStateProperties.java
 +++ b/minecraft/world/level/block/state/properties/BlockStateProperties.java
 @@ -39,7 +39,7 @@ public class BlockStateProperties {

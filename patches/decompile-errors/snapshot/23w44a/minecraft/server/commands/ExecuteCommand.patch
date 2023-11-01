@@ -1,8 +1,8 @@
 diff --git a/minecraft/server/commands/ExecuteCommand.java b/minecraft/server/commands/ExecuteCommand.java
-index 9321c57..657dca6 100644
+index 22b1e74..2e46e45 100644
 --- a/minecraft/server/commands/ExecuteCommand.java
 +++ b/minecraft/server/commands/ExecuteCommand.java
-@@ -564,7 +564,7 @@ public class ExecuteCommand {
+@@ -559,7 +559,7 @@ public class ExecuteCommand {
              CommandSourceStack commandsourcestack = (CommandSourceStack) commandcontext.getSource();
              Entity entity = commandsourcestack.getEntity();
  
@@ -11,7 +11,7 @@ index 9321c57..657dca6 100644
                  return !entity1.isRemoved();
              }).map((entity1) -> {
                  return List.of(commandsourcestack.withEntity(entity1));
-@@ -580,7 +580,7 @@ public class ExecuteCommand {
+@@ -575,7 +575,7 @@ public class ExecuteCommand {
              if (entity == null) {
                  return List.of();
              } else {
@@ -20,30 +20,14 @@ index 9321c57..657dca6 100644
                      return !entity1.isRemoved();
                  });
  
-@@ -672,14 +672,14 @@ public class ExecuteCommand {
-         Iterator iterator = list.iterator();
+@@ -699,8 +699,8 @@ public class ExecuteCommand {
+             iterator = list.iterator();
  
-         while (iterator.hasNext()) {
--            ExecutionCommandSource executioncommandsource = (ExecutionCommandSource) iterator.next();
-+            ExecutionCommandSource<T> executioncommandsource = (ExecutionCommandSource) iterator.next();
- 
-             try {
--                Collection<CommandFunction<T>> collection = (Collection) executecommand_commandgetter.get(commandcontext.copyFor(executioncommandsource));
-+                Collection<CommandFunction<T>> collection = (Collection) executecommand_commandgetter.get(commandcontext.copyFor((T) executioncommandsource));
-                 int i = collection.size();
- 
-                 if (i != 0) {
--                    T t0 = prepareCallback(function, intpredicate, list1, executioncommandsource, i == 1);
-+                    T t0 = prepareCallback(function, intpredicate, list1, (T) executioncommandsource, i == 1);
- 
-                     InstantiatedFunction instantiatedfunction;
- 
-@@ -705,7 +705,7 @@ public class ExecuteCommand {
-     }
- 
-     private static <T extends ExecutionCommandSource<T>> T prepareCallback(Function<T, T> function, IntPredicate intpredicate, List<T> list, T t0, boolean flag) {
--        T t1 = ((ExecutionCommandSource) function.apply(t0)).clearCallbacks();
-+        T t1 = (function.apply(t0)).clearCallbacks();
- 
-         if (flag) {
-             return t1.withReturnValueConsumer((i) -> {
+             while (iterator.hasNext()) {
+-                T t1 = (ExecutionCommandSource) iterator.next();
+-                T t2 = (ExecutionCommandSource) function.apply(t1.clearCallbacks());
++                T t1 = (T) iterator.next();
++                T t2 = function.apply(t1.clearCallbacks());
+                 CommandResultCallback commandresultcallback = (flag, j) -> {
+                     if (intpredicate.test(j)) {
+                         arraylist.add(t1);

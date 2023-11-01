@@ -1,5 +1,5 @@
 diff --git a/minecraft/server/commands/ClearInventoryCommands.java b/minecraft/server/commands/ClearInventoryCommands.java
-index 94b0a00..44b8c71 100644
+index 9ee6713..9d62edd 100644
 --- a/minecraft/server/commands/ClearInventoryCommands.java
 +++ b/minecraft/server/commands/ClearInventoryCommands.java
 @@ -67,23 +67,24 @@ public class ClearInventoryCommands {

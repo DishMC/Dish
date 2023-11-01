@@ -1,8 +1,8 @@
 diff --git a/minecraft/data/loot/packs/VanillaBlockLoot.java b/minecraft/data/loot/packs/VanillaBlockLoot.java
-index b686737..a32ab2c 100644
+index 4bbb6e8..997c9a4 100644
 --- a/minecraft/data/loot/packs/VanillaBlockLoot.java
 +++ b/minecraft/data/loot/packs/VanillaBlockLoot.java
-@@ -962,7 +962,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
+@@ -1016,7 +1016,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
              return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) this.applyExplosionDecay(block, LootItem.lootTableItem(Items.COCOA_BEANS).apply(SetItemCountFunction.setCount(ConstantValue.exactly(3.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CocoaBlock.AGE, 2)))))));
          });
          this.add(Blocks.SEA_PICKLE, (block) -> {
@@ -11,7 +11,7 @@ index b686737..a32ab2c 100644
                  return SetItemCountFunction.setCount(ConstantValue.exactly((float) integer)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SeaPickleBlock.PICKLES, integer)));
              }))));
          });
-@@ -1222,7 +1222,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
+@@ -1276,7 +1276,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
              return this.createPitcherCropLoot();
          });
          this.dropSelf(Blocks.PITCHER_PLANT);
@@ -20,7 +20,7 @@ index b686737..a32ab2c 100644
          this.add(Blocks.CARROTS, (LootTable.Builder) this.applyExplosionDecay(Blocks.CARROTS, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(Items.CARROT))).withPool(LootPool.lootPool().when(lootitemblockstatepropertycondition_builder2).add(LootItem.lootTableItem(Items.CARROT).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
          LootItemBlockStatePropertyCondition.Builder lootitemblockstatepropertycondition_builder4 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.POTATOES).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PotatoBlock.AGE, 7));
  
-@@ -1487,7 +1487,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
+@@ -1541,7 +1541,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
  
      private LootTable.Builder createPitcherCropLoot() {
          return (LootTable.Builder) this.applyExplosionDecay(Blocks.PITCHER_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(AlternativesEntry.alternatives(PitcherCropBlock.AGE.getPossibleValues(), (integer) -> {

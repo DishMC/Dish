@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/storage/DimensionDataStorage.java b/minecraft/world/level/storage/DimensionDataStorage.java
-index 2825fe6..ef9c212 100644
+index 604f37a..5847e7a 100644
 --- a/minecraft/world/level/storage/DimensionDataStorage.java
 +++ b/minecraft/world/level/storage/DimensionDataStorage.java
-@@ -43,7 +43,7 @@ public class DimensionDataStorage {
+@@ -44,7 +44,7 @@ public class DimensionDataStorage {
          if (t0 != null) {
              return t0;
          } else {
@@ -11,7 +11,7 @@ index 2825fe6..ef9c212 100644
  
              this.set(s, t1);
              return t1;
-@@ -59,7 +59,7 @@ public class DimensionDataStorage {
+@@ -60,7 +60,7 @@ public class DimensionDataStorage {
              this.cache.put(s, saveddata);
          }
  
@@ -20,7 +20,7 @@ index 2825fe6..ef9c212 100644
      }
  
      @Nullable
-@@ -70,7 +70,7 @@ public class DimensionDataStorage {
+@@ -71,7 +71,7 @@ public class DimensionDataStorage {
              if (file.exists()) {
                  CompoundTag compoundtag = this.readTagFromDisk(s, datafixtypes, SharedConstants.getCurrentVersion().getDataVersion().getVersion());
  

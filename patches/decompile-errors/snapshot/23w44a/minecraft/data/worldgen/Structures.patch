@@ -1,5 +1,5 @@
 diff --git a/minecraft/data/worldgen/Structures.java b/minecraft/data/worldgen/Structures.java
-index 82d0616..ba1c660 100644
+index 2e3ad39..bc258a4 100644
 --- a/minecraft/data/worldgen/Structures.java
 +++ b/minecraft/data/worldgen/Structures.java
 @@ -64,7 +64,7 @@ public class Structures {

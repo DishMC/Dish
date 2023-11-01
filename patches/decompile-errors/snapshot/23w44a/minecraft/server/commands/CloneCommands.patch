@@ -1,5 +1,5 @@
 diff --git a/minecraft/server/commands/CloneCommands.java b/minecraft/server/commands/CloneCommands.java
-index d4055c4..bbf6b92 100644
+index e16d489..ca6a5ab 100644
 --- a/minecraft/server/commands/CloneCommands.java
 +++ b/minecraft/server/commands/CloneCommands.java
 @@ -238,8 +238,9 @@ public class CloneCommands {

@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/block/DropperBlock.java b/minecraft/world/level/block/DropperBlock.java
-index 40d318f..6576eed 100644
+index dc79f14..61a5a7a 100644
 --- a/minecraft/world/level/block/DropperBlock.java
 +++ b/minecraft/world/level/block/DropperBlock.java
-@@ -39,7 +39,7 @@ public class DropperBlock extends DispenserBlock {
+@@ -46,7 +46,7 @@ public class DropperBlock extends DispenserBlock {
  
      @Override
      protected void dispenseFrom(ServerLevel serverlevel, BlockState blockstate, BlockPos blockpos) {

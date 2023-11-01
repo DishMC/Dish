@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/biome/FeatureSorter.java b/minecraft/world/level/biome/FeatureSorter.java
-index 8414cb7..7098065 100644
+index 6c58da9..d803f9a 100644
 --- a/minecraft/world/level/biome/FeatureSorter.java
 +++ b/minecraft/world/level/biome/FeatureSorter.java
-@@ -31,24 +31,22 @@ public class FeatureSorter {
+@@ -30,24 +30,22 @@ public class FeatureSorter {
  
      public FeatureSorter() {}
  
@@ -34,7 +34,7 @@ index 8414cb7..7098065 100644
  
              arraylist = Lists.newArrayList();
              List<HolderSet<PlacedFeature>> list1 = (List)function.apply(t0);
-@@ -62,39 +60,39 @@ public class FeatureSorter {
+@@ -61,39 +59,39 @@ public class FeatureSorter {
                      Holder<PlacedFeature> holder = (Holder)iterator1.next();
                      PlacedFeature placedfeature = (PlacedFeature)holder.value();
  
@@ -82,7 +82,7 @@ index 8414cb7..7098065 100644
                      if (!flag) {
                          throw new IllegalStateException("Feature order cycle found");
                      }
-@@ -108,7 +106,7 @@ public class FeatureSorter {
+@@ -107,7 +105,7 @@ public class FeatureSorter {
                          ListIterator listiterator = arraylist1.listIterator();
  
                          while(listiterator.hasNext()) {
@@ -91,7 +91,7 @@ index 8414cb7..7098065 100644
  
                              listiterator.remove();
  
-@@ -131,9 +129,10 @@ public class FeatureSorter {
+@@ -130,9 +128,10 @@ public class FeatureSorter {
          Builder<FeatureSorter.StepFeatureData> builder = ImmutableList.builder();
  
          for(j = 0; j < i; ++j) {

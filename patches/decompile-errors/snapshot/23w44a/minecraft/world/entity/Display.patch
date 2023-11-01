@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/entity/Display.java b/minecraft/world/entity/Display.java
-index 4f88d0d..726ccef 100644
+index d3b1020..cc84308 100644
 --- a/minecraft/world/entity/Display.java
 +++ b/minecraft/world/entity/Display.java
 @@ -17,6 +17,7 @@ import net.minecraft.core.registries.Registries;

@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/block/entity/BlockEntityType.java b/minecraft/world/level/block/entity/BlockEntityType.java
-index fc42186..6c6a315 100644
+index 5d65af8..1f06b89 100644
 --- a/minecraft/world/level/block/entity/BlockEntityType.java
 +++ b/minecraft/world/level/block/entity/BlockEntityType.java
-@@ -108,7 +108,7 @@ public class BlockEntityType<T extends BlockEntity> {
+@@ -109,7 +109,7 @@ public class BlockEntityType<T extends BlockEntity> {
      public T getBlockEntity(BlockGetter blockgetter, BlockPos blockpos) {
          BlockEntity blockentity = blockgetter.getBlockEntity(blockpos);
  

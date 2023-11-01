@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/level/block/entity/SignBlockEntity.java b/minecraft/world/level/block/entity/SignBlockEntity.java
-index 62a5fb0..fe5e1e0 100644
+index 3d61924..c87a102 100644
 --- a/minecraft/world/level/block/entity/SignBlockEntity.java
 +++ b/minecraft/world/level/block/entity/SignBlockEntity.java
 @@ -13,6 +13,7 @@ import net.minecraft.commands.CommandSourceStack;
@@ -10,7 +10,7 @@ index 62a5fb0..fe5e1e0 100644
  import net.minecraft.network.chat.ClickEvent;
  import net.minecraft.network.chat.Component;
  import net.minecraft.network.chat.ComponentUtils;
-@@ -100,7 +101,7 @@ public class SignBlockEntity extends BlockEntity {
+@@ -98,7 +99,7 @@ public class SignBlockEntity extends BlockEntity {
      @Override
      protected void saveAdditional(CompoundTag compoundtag) {
          super.saveAdditional(compoundtag);
@@ -19,7 +19,7 @@ index 62a5fb0..fe5e1e0 100644
          Logger logger = SignBlockEntity.LOGGER;
  
          Objects.requireNonNull(logger);
-@@ -119,7 +120,7 @@ public class SignBlockEntity extends BlockEntity {
+@@ -117,7 +118,7 @@ public class SignBlockEntity extends BlockEntity {
      @Override
      public void load(CompoundTag compoundtag) {
          super.load(compoundtag);

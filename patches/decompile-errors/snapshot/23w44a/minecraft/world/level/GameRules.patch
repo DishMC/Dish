@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/GameRules.java b/minecraft/world/level/GameRules.java
-index ec76d8b..6b278c6 100644
+index c82a352..4cff254 100644
 --- a/minecraft/world/level/GameRules.java
 +++ b/minecraft/world/level/GameRules.java
-@@ -138,7 +138,7 @@ public class GameRules {
+@@ -142,7 +142,7 @@ public class GameRules {
      }
  
      public <T extends GameRules.Value<T>> T getRule(GameRules.Key<T> gamerules_key) {
@@ -11,7 +11,7 @@ index ec76d8b..6b278c6 100644
      }
  
      public CompoundTag createTag() {
-@@ -152,7 +152,7 @@ public class GameRules {
+@@ -156,7 +156,7 @@ public class GameRules {
  
      private void loadFromTag(DynamicLike<?> dynamiclike) {
          this.rules.forEach((gamerules_key, gamerules_value) -> {
@@ -20,7 +20,7 @@ index ec76d8b..6b278c6 100644
  
              Objects.requireNonNull(gamerules_value);
              optional.ifPresent(gamerules_value::deserialize);
-@@ -265,11 +265,11 @@ public class GameRules {
+@@ -269,11 +269,11 @@ public class GameRules {
          }
  
          public T createRule() {
@@ -35,7 +35,7 @@ index ec76d8b..6b278c6 100644
          }
      }
  
-@@ -314,7 +314,7 @@ public class GameRules {
+@@ -318,7 +318,7 @@ public class GameRules {
  
      public interface GameRuleTypeVisitor {
  

@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/block/PointedDripstoneBlock.java b/minecraft/world/level/block/PointedDripstoneBlock.java
-index d809caf..937dd6c 100644
+index abe2b6d..d639822 100644
 --- a/minecraft/world/level/block/PointedDripstoneBlock.java
 +++ b/minecraft/world/level/block/PointedDripstoneBlock.java
-@@ -434,7 +434,7 @@ public class PointedDripstoneBlock extends Block implements Fallable, SimpleWate
+@@ -441,7 +441,7 @@ public class PointedDripstoneBlock extends Block implements Fallable, SimpleWate
  
              return (BlockPos) findBlockVertical(levelaccessor, blockpos, direction.getAxisDirection(), bipredicate, (blockstate1) -> {
                  return isTip(blockstate1, flag);
@@ -11,7 +11,7 @@ index d809caf..937dd6c 100644
          }
      }
  
-@@ -550,7 +550,7 @@ public class PointedDripstoneBlock extends Block implements Fallable, SimpleWate
+@@ -557,7 +557,7 @@ public class PointedDripstoneBlock extends Block implements Fallable, SimpleWate
              return canDripThrough(level, blockpos1, blockstate);
          };
  
@@ -20,7 +20,7 @@ index d809caf..937dd6c 100644
      }
  
      @Nullable
-@@ -559,7 +559,7 @@ public class PointedDripstoneBlock extends Block implements Fallable, SimpleWate
+@@ -566,7 +566,7 @@ public class PointedDripstoneBlock extends Block implements Fallable, SimpleWate
              return canDripThrough(level, blockpos1, blockstate);
          };
  

@@ -1,5 +1,5 @@
 diff --git a/minecraft/commands/arguments/selector/EntitySelectorParser.java b/minecraft/commands/arguments/selector/EntitySelectorParser.java
-index dd47d24..94e8291 100644
+index cba3075..f6853b8 100644
 --- a/minecraft/commands/arguments/selector/EntitySelectorParser.java
 +++ b/minecraft/commands/arguments/selector/EntitySelectorParser.java
 @@ -147,7 +147,7 @@ public class EntitySelectorParser {

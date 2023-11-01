@@ -1,8 +1,8 @@
 diff --git a/minecraft/nbt/NbtOps.java b/minecraft/nbt/NbtOps.java
-index 05decde..b96febd 100644
+index 1c026da..fcd91ee 100644
 --- a/minecraft/nbt/NbtOps.java
 +++ b/minecraft/nbt/NbtOps.java
-@@ -344,7 +344,7 @@ public class NbtOps implements DynamicOps<Tag> {
+@@ -343,7 +343,7 @@ public class NbtOps implements DynamicOps<Tag> {
  
              return DataResult.success(ByteBuffer.wrap(bytearraytag.getAsByteArray()));
          } else {
@@ -11,7 +11,7 @@ index 05decde..b96febd 100644
          }
      }
  
-@@ -358,7 +358,7 @@ public class NbtOps implements DynamicOps<Tag> {
+@@ -361,7 +361,7 @@ public class NbtOps implements DynamicOps<Tag> {
  
              return DataResult.success(Arrays.stream(intarraytag.getAsIntArray()));
          } else {
@@ -20,7 +20,7 @@ index 05decde..b96febd 100644
          }
      }
  
-@@ -372,7 +372,7 @@ public class NbtOps implements DynamicOps<Tag> {
+@@ -375,7 +375,7 @@ public class NbtOps implements DynamicOps<Tag> {
  
              return DataResult.success(Arrays.stream(longarraytag.getAsLongArray()));
          } else {

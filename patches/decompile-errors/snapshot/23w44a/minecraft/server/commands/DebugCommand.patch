@@ -1,13 +1,22 @@
 diff --git a/minecraft/server/commands/DebugCommand.java b/minecraft/server/commands/DebugCommand.java
-index f7af574..25a0264 100644
+index 22177b5..8819e72 100644
 --- a/minecraft/server/commands/DebugCommand.java
 +++ b/minecraft/server/commands/DebugCommand.java
-@@ -139,14 +139,15 @@ public class DebugCommand {
+@@ -132,7 +132,7 @@ public class DebugCommand {
+                             executioncontrol.queueNext((new CallFunction<CommandSourceStack>(instantiatedfunction, CommandResultCallback.EMPTY, false) {
+                                 public void execute(CommandSourceStack commandsourcestack2, ExecutionContext<CommandSourceStack> executioncontext, Frame frame) {
+                                     printwriter.println(commandfunction.id());
+-                                    super.execute((ExecutionCommandSource) commandsourcestack2, executioncontext, frame);
++                                    super.execute(commandsourcestack2, executioncontext, frame);
+                                 }
+                             }).bind(commandsourcestack1));
+                             i += instantiatedfunction.entries().size();
+@@ -145,14 +145,15 @@ public class DebugCommand {
                      commandsourcestack.sendFailure(Component.translatable("commands.debug.function.traceFailed"));
                  }
  
 +                int finalI = i;
-                 executioncontrol.queueNext((executioncontext, j) -> {
+                 executioncontrol.queueNext((executioncontext, frame) -> {
                      if (collection.size() == 1) {
                          commandsourcestack.sendSuccess(() -> {
 -                            return Component.translatable("commands.debug.function.success.single", i, Component.translationArg(((CommandFunction) collection.iterator().next()).id()), s);

@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/entity/animal/frog/Frog.java b/minecraft/world/entity/animal/frog/Frog.java
-index c092b16..ee425e8 100644
+index 1dcdfb8..dc4dedd 100644
 --- a/minecraft/world/entity/animal/frog/Frog.java
 +++ b/minecraft/world/entity/animal/frog/Frog.java
 @@ -103,7 +103,7 @@ public class Frog extends Animal implements VariantHolder<FrogVariant> {
@@ -11,7 +11,7 @@ index c092b16..ee425e8 100644
      }
  
      @Override
-@@ -253,7 +253,7 @@ public class Frog extends Animal implements VariantHolder<FrogVariant> {
+@@ -248,7 +248,7 @@ public class Frog extends Animal implements VariantHolder<FrogVariant> {
      @Override
      public void spawnChildFromBreeding(ServerLevel serverlevel, Animal animal) {
          this.finalizeSpawnChildFromBreeding(serverlevel, animal, (AgeableMob) null);

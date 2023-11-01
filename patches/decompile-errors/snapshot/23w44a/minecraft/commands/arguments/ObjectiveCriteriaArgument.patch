@@ -1,5 +1,5 @@
 diff --git a/minecraft/commands/arguments/ObjectiveCriteriaArgument.java b/minecraft/commands/arguments/ObjectiveCriteriaArgument.java
-index 9c5a175..099eb1f 100644
+index 97d7bf8..5b363ab 100644
 --- a/minecraft/commands/arguments/ObjectiveCriteriaArgument.java
 +++ b/minecraft/commands/arguments/ObjectiveCriteriaArgument.java
 @@ -73,7 +73,7 @@ public class ObjectiveCriteriaArgument implements ArgumentType<ObjectiveCriteria

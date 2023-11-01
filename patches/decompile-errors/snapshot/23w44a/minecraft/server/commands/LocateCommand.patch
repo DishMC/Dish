@@ -1,5 +1,5 @@
 diff --git a/minecraft/server/commands/LocateCommand.java b/minecraft/server/commands/LocateCommand.java
-index a067f91..e4df100 100644
+index 9c3a90b..18f8df1 100644
 --- a/minecraft/server/commands/LocateCommand.java
 +++ b/minecraft/server/commands/LocateCommand.java
 @@ -24,13 +24,16 @@ import net.minecraft.core.Holder;

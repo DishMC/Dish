@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/block/MultifaceBlock.java b/minecraft/world/level/block/MultifaceBlock.java
-index 40d0f32..01448cb 100644
+index 58dea77..452f5e8 100644
 --- a/minecraft/world/level/block/MultifaceBlock.java
 +++ b/minecraft/world/level/block/MultifaceBlock.java
-@@ -176,7 +176,7 @@ public abstract class MultifaceBlock extends Block {
+@@ -180,7 +180,7 @@ public abstract class MultifaceBlock extends Block {
  
          return (BlockState) Arrays.stream(blockplacecontext.getNearestLookingDirections()).map((direction) -> {
              return this.getStateForPlacement(blockstate, level, blockpos, direction);

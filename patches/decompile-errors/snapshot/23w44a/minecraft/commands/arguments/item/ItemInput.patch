@@ -1,5 +1,5 @@
 diff --git a/minecraft/commands/arguments/item/ItemInput.java b/minecraft/commands/arguments/item/ItemInput.java
-index 917fe36..1a3b8b2 100644
+index 3dd656d..638fe4a 100644
 --- a/minecraft/commands/arguments/item/ItemInput.java
 +++ b/minecraft/commands/arguments/item/ItemInput.java
 @@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag;

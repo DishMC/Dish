@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/storage/LevelStorageSource.java b/minecraft/world/level/storage/LevelStorageSource.java
-index 9bb5131..7f1c48c 100644
+index 77f751f..1a6024c 100644
 --- a/minecraft/world/level/storage/LevelStorageSource.java
 +++ b/minecraft/world/level/storage/LevelStorageSource.java
-@@ -155,7 +155,7 @@ public class LevelStorageSource {
+@@ -154,7 +154,7 @@ public class LevelStorageSource {
      }
  
      public static WorldDataConfiguration readDataConfig(Dynamic<?> dynamic) {
@@ -11,7 +11,7 @@ index 9bb5131..7f1c48c 100644
          Logger logger = LevelStorageSource.LOGGER;
  
          Objects.requireNonNull(logger);
-@@ -197,7 +197,7 @@ public class LevelStorageSource {
+@@ -196,7 +196,7 @@ public class LevelStorageSource {
              throw new LevelStorageException(Component.translatable("selectWorld.load_folder_access"));
          } else {
              try {
@@ -20,7 +20,7 @@ index 9bb5131..7f1c48c 100644
  
                  LevelStorageSource.LevelCandidates levelstoragesource_levelcandidates;
  
-@@ -535,7 +535,7 @@ public class LevelStorageSource {
+@@ -534,7 +534,7 @@ public class LevelStorageSource {
          }
  
          public Path getLevelPath(LevelResource levelresource) {
@@ -29,28 +29,27 @@ index 9bb5131..7f1c48c 100644
              LevelStorageSource.LevelDirectory levelstoragesource_leveldirectory = this.levelDirectory;
  
              Objects.requireNonNull(this.levelDirectory);
-@@ -631,13 +631,13 @@ public class LevelStorageSource {
-                         } else {
+@@ -627,12 +627,13 @@ public class LevelStorageSource {
                              object = exception2;
                          }
--
-+                        File finalFile = file1;
+ 
++                        Path finalPath = path1;
                          crashreportcategory.setDetail("Reading Exception", (Object) ((Throwable) object).toString());
                          crashreportcategory.setDetail("Uncompressed", () -> {
                              return Base64.getEncoder().encodeToString(NbtIo.writeToByteArray(compoundtag));
                          });
                          crashreportcategory.setDetail("Compressed saved", () -> {
--                            return Base64.getEncoder().encodeToString(Files.readAllBytes(file1.toPath()));
-+                            return Base64.getEncoder().encodeToString(Files.readAllBytes(finalFile.toPath()));
+-                            return Base64.getEncoder().encodeToString(Files.readAllBytes(path1));
++                            return Base64.getEncoder().encodeToString(Files.readAllBytes(finalPath));
                          });
                          crashreportcategory.setDetail("Compressed array", () -> {
                              return Base64.getEncoder().encodeToString(NbtIo.writeToByteArrayCompressed(compoundtag));
-@@ -647,7 +647,7 @@ public class LevelStorageSource {
+@@ -642,7 +643,7 @@ public class LevelStorageSource {
                          crashreportcategory.setDetail("Corrupted file", () -> {
-                             Path path1 = this.levelDirectory.corruptedDataFile(localdatetime);
+                             Path path4 = this.levelDirectory.corruptedDataFile(localdatetime);
  
--                            Files.move(file1.toPath(), path1);
-+                            Files.move(finalFile.toPath(), path1);
-                             return path1.getFileName().toString();
+-                            Files.move(path1, path4);
++                            Files.move(finalPath, path4);
+                             return path4.getFileName().toString();
                          });
                          crashreportcategory.setDetail("Raw file", () -> {

@@ -1,5 +1,5 @@
 diff --git a/minecraft/core/MappedRegistry.java b/minecraft/core/MappedRegistry.java
-index 1959a58..5eb5356 100644
+index c2ac522..009fa14 100644
 --- a/minecraft/core/MappedRegistry.java
 +++ b/minecraft/core/MappedRegistry.java
 @@ -207,13 +207,13 @@ public class MappedRegistry<T> implements WritableRegistry<T> {

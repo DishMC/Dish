@@ -1,5 +1,5 @@
 diff --git a/minecraft/server/commands/ScoreboardCommand.java b/minecraft/server/commands/ScoreboardCommand.java
-index 941b1c1..4d7d3d2 100644
+index 03385bc..764bd8c 100644
 --- a/minecraft/server/commands/ScoreboardCommand.java
 +++ b/minecraft/server/commands/ScoreboardCommand.java
 @@ -175,8 +175,9 @@ public class ScoreboardCommand {

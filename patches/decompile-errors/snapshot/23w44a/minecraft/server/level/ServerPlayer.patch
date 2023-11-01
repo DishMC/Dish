@@ -1,5 +1,5 @@
 diff --git a/minecraft/server/level/ServerPlayer.java b/minecraft/server/level/ServerPlayer.java
-index 2195718..161c17a 100644
+index 4610e81..039aed1 100644
 --- a/minecraft/server/level/ServerPlayer.java
 +++ b/minecraft/server/level/ServerPlayer.java
 @@ -33,6 +33,7 @@ import net.minecraft.core.SectionPos;
@@ -10,7 +10,7 @@ index 2195718..161c17a 100644
  import net.minecraft.network.PacketSendListener;
  import net.minecraft.network.chat.ChatType;
  import net.minecraft.network.chat.CommonComponents;
-@@ -330,7 +331,7 @@ public class ServerPlayer extends Player {
+@@ -336,7 +337,7 @@ public class ServerPlayer extends Player {
      public void readAdditionalSaveData(CompoundTag compoundtag) {
          super.readAdditionalSaveData(compoundtag);
          if (compoundtag.contains("warden_spawn_tracker", 10)) {
@@ -19,7 +19,7 @@ index 2195718..161c17a 100644
              Logger logger = ServerPlayer.LOGGER;
  
              Objects.requireNonNull(logger);
-@@ -359,7 +360,7 @@ public class ServerPlayer extends Player {
+@@ -365,7 +366,7 @@ public class ServerPlayer extends Player {
              this.respawnForced = compoundtag.getBoolean("SpawnForced");
              this.respawnAngle = compoundtag.getFloat("SpawnAngle");
              if (compoundtag.contains("SpawnDimension")) {
@@ -28,7 +28,7 @@ index 2195718..161c17a 100644
                  Logger logger1 = ServerPlayer.LOGGER;
  
                  Objects.requireNonNull(logger1);
-@@ -372,7 +373,7 @@ public class ServerPlayer extends Player {
+@@ -378,7 +379,7 @@ public class ServerPlayer extends Player {
      @Override
      public void addAdditionalSaveData(CompoundTag compoundtag) {
          super.addAdditionalSaveData(compoundtag);
@@ -37,7 +37,7 @@ index 2195718..161c17a 100644
          Logger logger = ServerPlayer.LOGGER;
  
          Objects.requireNonNull(logger);
-@@ -1165,7 +1166,7 @@ public class ServerPlayer extends Player {
+@@ -1276,7 +1277,7 @@ public class ServerPlayer extends Player {
  
          for (int j = 0; j < i; ++j) {
              ResourceLocation resourcelocation = aresourcelocation1[j];

@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/entity/animal/axolotl/Axolotl.java b/minecraft/world/entity/animal/axolotl/Axolotl.java
-index 0e04c75..58005e3 100644
+index 73f55ea..7b89a07 100644
 --- a/minecraft/world/entity/animal/axolotl/Axolotl.java
 +++ b/minecraft/world/entity/animal/axolotl/Axolotl.java
 @@ -70,7 +70,7 @@ public class Axolotl extends Animal implements LerpingModel, VariantHolder<Axolo
@@ -11,7 +11,7 @@ index 0e04c75..58005e3 100644
      private static final EntityDataAccessor<Integer> DATA_VARIANT = SynchedEntityData.defineId(Axolotl.class, EntityDataSerializers.INT);
      private static final EntityDataAccessor<Boolean> DATA_PLAYING_DEAD = SynchedEntityData.defineId(Axolotl.class, EntityDataSerializers.BOOLEAN);
      private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Axolotl.class, EntityDataSerializers.BOOLEAN);
-@@ -464,7 +464,7 @@ public class Axolotl extends Animal implements LerpingModel, VariantHolder<Axolo
+@@ -459,7 +459,7 @@ public class Axolotl extends Animal implements LerpingModel, VariantHolder<Axolo
  
      @Override
      public Brain<Axolotl> getBrain() {

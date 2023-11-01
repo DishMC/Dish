@@ -1,5 +1,5 @@
 diff --git a/minecraft/commands/arguments/blocks/BlockStateParser.java b/minecraft/commands/arguments/blocks/BlockStateParser.java
-index 370e0a4..15525b1 100644
+index 036ca48..f098136 100644
 --- a/minecraft/commands/arguments/blocks/BlockStateParser.java
 +++ b/minecraft/commands/arguments/blocks/BlockStateParser.java
 @@ -276,7 +276,7 @@ public class BlockStateParser {

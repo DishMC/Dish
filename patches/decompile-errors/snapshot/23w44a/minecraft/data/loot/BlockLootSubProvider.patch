@@ -1,5 +1,5 @@
 diff --git a/minecraft/data/loot/BlockLootSubProvider.java b/minecraft/data/loot/BlockLootSubProvider.java
-index 56ff0ed..0b600c5 100644
+index 0ff203d..8f14dfa 100644
 --- a/minecraft/data/loot/BlockLootSubProvider.java
 +++ b/minecraft/data/loot/BlockLootSubProvider.java
 @@ -147,7 +147,7 @@ public abstract class BlockLootSubProvider implements LootTableSubProvider {

@@ -1,8 +1,8 @@
 diff --git a/minecraft/data/structures/NbtToSnbt.java b/minecraft/data/structures/NbtToSnbt.java
-index e84c6a4..3e4508c 100644
+index 91a0211..2a5ede3 100644
 --- a/minecraft/data/structures/NbtToSnbt.java
 +++ b/minecraft/data/structures/NbtToSnbt.java
-@@ -46,7 +46,7 @@ public class NbtToSnbt implements DataProvider {
+@@ -47,7 +47,7 @@ public class NbtToSnbt implements DataProvider {
  
              list.add(CompletableFuture.supplyAsync(() -> {
                  try {

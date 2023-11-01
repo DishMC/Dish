@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/LivingEntity.java b/minecraft/world/entity/LivingEntity.java
-index 60353da..a35e32f 100644
+index ad2e84c..e6068e4 100644
 --- a/minecraft/world/entity/LivingEntity.java
 +++ b/minecraft/world/entity/LivingEntity.java
-@@ -3439,7 +3439,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3443,7 +3443,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
      }
  
      public void stopSleeping() {
@@ -11,7 +11,7 @@ index 60353da..a35e32f 100644
          Level level = this.level();
  
          java.util.Objects.requireNonNull(level);
-@@ -3473,7 +3473,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3477,7 +3477,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
  
      @Nullable
      public Direction getBedOrientation() {
