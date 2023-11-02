@@ -60,6 +60,17 @@ public class DishComponent implements Component {
         return net.ouja.api.network.chat.Component.create(component.getString(), component.getStyle().isBold(), component.getStyle().isUnderlined(), component.getStyle().isStrikethrough(), component.getStyle().isItalic());
     }
 
+    public static net.ouja.api.network.chat.Component[] fromComponent(Component[] componentsIn) {
+        net.ouja.api.network.chat.Component[] components = new net.ouja.api.network.chat.Component[componentsIn.length];
+
+        for (int i = 0; i < components.length; i++) {
+            Component component = componentsIn[i];
+            components[i] = fromComponent(component);
+        }
+
+        return components;
+    }
+
     public static MutableComponent toComponent(net.ouja.api.network.chat.Component component) {
         Style style = Style.EMPTY
                 .withColor(TextColor.parseColor(component.getColor()).get().orThrow())
