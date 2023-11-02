@@ -5,8 +5,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.SignBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.ouja.api.world.level.block.BlockInfo;
 import net.ouja.api.world.level.block.BlockPos;
@@ -27,12 +29,15 @@ public class DishBlockInfo implements BlockInfo {
     private net.ouja.api.world.level.block.Block getBlockClass() {
         BlockPos dishBlockPos = new BlockPos(this.blockPos.getX(), this.blockPos.getY(), this.blockPos.getY(), new DishLevel((ServerLevel) this.level));
         BlockTypes blockType = BlockTypes.valueOf(BuiltInRegistries.BLOCK.getKey(block).getPath().toUpperCase());
-        if (this.block instanceof StairBlock) return new DishStair(dishBlockPos, blockType, this.block);
+        if (this.block instanceof StairBlock) return new DishStairBlock(dishBlockPos, blockType, this.block);
         if (this.block instanceof SignBlock) {
             SignBlockEntity signBlockEntity = (SignBlockEntity) this.level.getBlockEntity(this.blockPos);
-            return new DishSign(dishBlockPos, blockType, this.block, signBlockEntity);
+            return new DishSignBlock(dishBlockPos, blockType, this.block, signBlockEntity);
         }
         if (this.block instanceof ButtonBlock) return new DishButtonBlock(dishBlockPos, blockType, this.block);
+        if (this.block instanceof DoorBlock) return new DishDoorBlock(dishBlockPos, blockType, this.block, this.level);
+        if (this.block instanceof TrapDoorBlock) return new DishTrapdoorBlock(dishBlockPos, blockType, this.block, this.level);
+
         return new DishBlock(dishBlockPos, blockType, this.block);
 
         // TODO: 11/1/2023 add specific types to it's own class. This is here to keep track 

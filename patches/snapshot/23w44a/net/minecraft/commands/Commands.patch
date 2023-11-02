@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index ae6838e..e505e6e 100644
+index 15938e3..ba12569 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
 @@ -143,7 +143,7 @@ public class Commands {

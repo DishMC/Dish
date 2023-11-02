@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 3617df2..992b324 100644
+index 0065843..4cbafa1 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -13,6 +13,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
