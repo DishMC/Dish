@@ -43,6 +43,16 @@ function parseLibraries(libraries) {
     }
   }
 
+  if (!fs.existsSync(`dish/libraries/${DECOMPILE_VERSION.split('/')[1]}.json`)) {
+    error(`Could not find file: dish/libraries/${DECOMPILE_VERSION.split('/')[1]}.json`);
+    return process.exit(1);
+  }
+
+  if (!fs.existsSync(`cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`)) {
+    error(`Could not find file: cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`);
+    return process.exit(1);
+  }
+
   if (fs.existsSync('dish/workspace')) {
     console.time('Moved directories');
     warn('Dish workspace already exists. Moving it, this may take a while...');
