@@ -1,0 +1,13 @@
+diff --git a/minecraft/commands/execution/tasks/FallthroughTask.java b/minecraft/commands/execution/tasks/FallthroughTask.java
+index bf86efa..a77d4f8 100644
+--- a/minecraft/commands/execution/tasks/FallthroughTask.java
++++ b/minecraft/commands/execution/tasks/FallthroughTask.java
+@@ -12,7 +12,7 @@ public class FallthroughTask<T extends ExecutionCommandSource<T>> implements Ent
+     public FallthroughTask() {}
+ 
+     public static <T extends ExecutionCommandSource<T>> EntryAction<T> instance() {
+-        return FallthroughTask.INSTANCE;
++        return (EntryAction<T>) FallthroughTask.INSTANCE;
+     }
+ 
+     @Override

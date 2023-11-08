@@ -1,0 +1,22 @@
+diff --git a/minecraft/data/recipes/RecipeProvider.java b/minecraft/data/recipes/RecipeProvider.java
+index a0f9afb..ec32d2e 100644
+--- a/minecraft/data/recipes/RecipeProvider.java
++++ b/minecraft/data/recipes/RecipeProvider.java
+@@ -47,7 +47,7 @@ public abstract class RecipeProvider implements DataProvider {
+ 
+     final PackOutput.PathProvider recipePathProvider;
+     final PackOutput.PathProvider advancementPathProvider;
+-    private static final Map<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>> SHAPE_BUILDERS = ImmutableMap.builder().put(BlockFamily.Variant.BUTTON, (itemlike, itemlike1) -> {
++    private static final Map<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>> SHAPE_BUILDERS = ImmutableMap.<BlockFamily.Variant, BiFunction<ItemLike, ItemLike, RecipeBuilder>>builder().put(BlockFamily.Variant.BUTTON, (itemlike, itemlike1) -> {
+         return buttonBuilder(itemlike, Ingredient.of(itemlike1));
+     }).put(BlockFamily.Variant.CHISELED, (itemlike, itemlike1) -> {
+         return chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, itemlike, Ingredient.of(itemlike1));
+@@ -393,7 +393,7 @@ public abstract class RecipeProvider implements DataProvider {
+     }
+ 
+     protected static void waxRecipes(RecipeOutput recipeoutput) {
+-        ((BiMap) HoneycombItem.WAXABLES.get()).forEach((block, block1) -> {
++        (HoneycombItem.WAXABLES.get()).forEach((block, block1) -> {
+             ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, block1).requires((ItemLike) block).requires((ItemLike) Items.HONEYCOMB).group(getItemName(block1)).unlockedBy(getHasName(block), has((ItemLike) block)).save(recipeoutput, getConversionRecipeName(block1, Items.HONEYCOMB));
+         });
+     }

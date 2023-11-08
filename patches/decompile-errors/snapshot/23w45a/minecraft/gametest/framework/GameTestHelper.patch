@@ -1,0 +1,31 @@
+diff --git a/minecraft/gametest/framework/GameTestHelper.java b/minecraft/gametest/framework/GameTestHelper.java
+index 749848b..29dda0b 100644
+--- a/minecraft/gametest/framework/GameTestHelper.java
++++ b/minecraft/gametest/framework/GameTestHelper.java
+@@ -141,7 +141,7 @@ public class GameTestHelper {
+     }
+ 
+     public <E extends Mob> E spawnWithNoFreeWill(EntityType<E> entitytype, BlockPos blockpos) {
+-        E e0 = (Mob) this.spawn(entitytype, blockpos);
++        E e0 = this.spawn(entitytype, blockpos);
+ 
+         e0.removeFreeWill();
+         return e0;
+@@ -152,7 +152,7 @@ public class GameTestHelper {
+     }
+ 
+     public <E extends Mob> E spawnWithNoFreeWill(EntityType<E> entitytype, Vec3 vec3) {
+-        E e0 = (Mob) this.spawn(entitytype, vec3);
++        E e0 = this.spawn(entitytype, vec3);
+ 
+         e0.removeFreeWill();
+         return e0;
+@@ -638,7 +638,7 @@ public class GameTestHelper {
+             Iterator iterator = list.iterator();
+ 
+             while (iterator.hasNext()) {
+-                E e0 = (Entity) iterator.next();
++                E e0 = (E) iterator.next();
+                 T t1 = function.apply(e0);
+ 
+                 if (t1 == null) {

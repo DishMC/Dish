@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/phys/shapes/IndirectMerger.java b/minecraft/world/phys/shapes/IndirectMerger.java
+index 35ac107..d6a98ed 100644
+--- a/minecraft/world/phys/shapes/IndirectMerger.java
++++ b/minecraft/world/phys/shapes/IndirectMerger.java
+@@ -54,7 +54,7 @@ public class IndirectMerger implements IndexMerger {
+             int l1 = j1 - 1;
+             double d1 = flag6 ? doublelist.getDouble(k1) : doublelist1.getDouble(l1);
+ 
+-            if (d0 < d1 - 1.0E-7D) {
++            if (!(d0 >= d1 - 1.0E-7D)) {
+                 this.firstIndices[l] = k1;
+                 this.secondIndices[l] = l1;
+                 this.result[l] = d1;

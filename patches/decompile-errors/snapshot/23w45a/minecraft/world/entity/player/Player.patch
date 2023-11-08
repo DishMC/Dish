@@ -1,0 +1,39 @@
+diff --git a/minecraft/world/entity/player/Player.java b/minecraft/world/entity/player/Player.java
+index 1394457..3e91b56 100644
+--- a/minecraft/world/entity/player/Player.java
++++ b/minecraft/world/entity/player/Player.java
+@@ -28,6 +28,7 @@ import net.minecraft.nbt.CompoundTag;
+ import net.minecraft.nbt.ListTag;
+ import net.minecraft.nbt.NbtOps;
+ import net.minecraft.nbt.NbtUtils;
++import net.minecraft.nbt.Tag;
+ import net.minecraft.network.chat.ClickEvent;
+ import net.minecraft.network.chat.Component;
+ import net.minecraft.network.chat.MutableComponent;
+@@ -127,7 +128,7 @@ public abstract class Player extends LivingEntity {
+     public static final float SWIMMING_BB_HEIGHT = 0.6F;
+     public static final float DEFAULT_EYE_HEIGHT = 1.62F;
+     public static final EntityDimensions STANDING_DIMENSIONS = EntityDimensions.scalable(0.6F, 1.8F);
+-    private static final Map<Pose, EntityDimensions> POSES = ImmutableMap.builder().put(Pose.STANDING, Player.STANDING_DIMENSIONS).put(Pose.SLEEPING, Player.SLEEPING_DIMENSIONS).put(Pose.FALL_FLYING, EntityDimensions.scalable(0.6F, 0.6F)).put(Pose.SWIMMING, EntityDimensions.scalable(0.6F, 0.6F)).put(Pose.SPIN_ATTACK, EntityDimensions.scalable(0.6F, 0.6F)).put(Pose.CROUCHING, EntityDimensions.scalable(0.6F, 1.5F)).put(Pose.DYING, EntityDimensions.fixed(0.2F, 0.2F)).build();
++    private static final Map<Pose, EntityDimensions> POSES = ImmutableMap.<Pose, EntityDimensions>builder().put(Pose.STANDING, Player.STANDING_DIMENSIONS).put(Pose.SLEEPING, Player.SLEEPING_DIMENSIONS).put(Pose.FALL_FLYING, EntityDimensions.scalable(0.6F, 0.6F)).put(Pose.SWIMMING, EntityDimensions.scalable(0.6F, 0.6F)).put(Pose.SPIN_ATTACK, EntityDimensions.scalable(0.6F, 0.6F)).put(Pose.CROUCHING, EntityDimensions.scalable(0.6F, 1.5F)).put(Pose.DYING, EntityDimensions.fixed(0.2F, 0.2F)).build();
+     private static final EntityDataAccessor<Float> DATA_PLAYER_ABSORPTION_ID = SynchedEntityData.defineId(Player.class, EntityDataSerializers.FLOAT);
+     private static final EntityDataAccessor<Integer> DATA_SCORE_ID = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
+     protected static final EntityDataAccessor<Byte> DATA_PLAYER_MODE_CUSTOMISATION = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BYTE);
+@@ -789,7 +790,7 @@ public abstract class Player extends LivingEntity {
+         }
+ 
+         if (compoundtag.contains("LastDeathLocation", 10)) {
+-            DataResult dataresult = GlobalPos.CODEC.parse(NbtOps.INSTANCE, compoundtag.get("LastDeathLocation"));
++            DataResult<GlobalPos> dataresult = GlobalPos.CODEC.parse(NbtOps.INSTANCE, compoundtag.get("LastDeathLocation"));
+             Logger logger = Player.LOGGER;
+ 
+             Objects.requireNonNull(logger);
+@@ -822,7 +823,7 @@ public abstract class Player extends LivingEntity {
+         }
+ 
+         this.getLastDeathLocation().flatMap((globalpos) -> {
+-            DataResult dataresult = GlobalPos.CODEC.encodeStart(NbtOps.INSTANCE, globalpos);
++            DataResult<Tag> dataresult = GlobalPos.CODEC.encodeStart(NbtOps.INSTANCE, globalpos);
+             Logger logger = Player.LOGGER;
+ 
+             Objects.requireNonNull(logger);

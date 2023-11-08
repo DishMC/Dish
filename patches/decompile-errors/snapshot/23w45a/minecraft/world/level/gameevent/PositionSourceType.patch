@@ -1,0 +1,21 @@
+diff --git a/minecraft/world/level/gameevent/PositionSourceType.java b/minecraft/world/level/gameevent/PositionSourceType.java
+index cb5231f..38ae579 100644
+--- a/minecraft/world/level/gameevent/PositionSourceType.java
++++ b/minecraft/world/level/gameevent/PositionSourceType.java
+@@ -18,7 +18,7 @@ public interface PositionSourceType<T extends PositionSource> {
+     Codec<T> codec();
+ 
+     static <S extends PositionSourceType<T>, T extends PositionSource> S register(String s, S s0) {
+-        return (PositionSourceType) Registry.register(BuiltInRegistries.POSITION_SOURCE_TYPE, s, s0);
++        return Registry.register(BuiltInRegistries.POSITION_SOURCE_TYPE, s, s0);
+     }
+ 
+     static PositionSource fromNetwork(FriendlyByteBuf friendlybytebuf) {
+@@ -31,6 +31,6 @@ public interface PositionSourceType<T extends PositionSource> {
+ 
+     static <T extends PositionSource> void toNetwork(T t0, FriendlyByteBuf friendlybytebuf) {
+         friendlybytebuf.writeResourceLocation(BuiltInRegistries.POSITION_SOURCE_TYPE.getKey(t0.getType()));
+-        t0.getType().write(friendlybytebuf, t0);
++        ((PositionSourceType<T>)t0.getType()).write(friendlybytebuf, t0);
+     }
+ }

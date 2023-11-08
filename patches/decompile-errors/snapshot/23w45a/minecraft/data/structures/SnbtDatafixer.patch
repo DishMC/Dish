@@ -1,0 +1,13 @@
+diff --git a/minecraft/data/structures/SnbtDatafixer.java b/minecraft/data/structures/SnbtDatafixer.java
+index b070071..79664d7 100644
+--- a/minecraft/data/structures/SnbtDatafixer.java
++++ b/minecraft/data/structures/SnbtDatafixer.java
+@@ -32,7 +32,7 @@ public class SnbtDatafixer {
+     }
+ 
+     private static void updateInDirectory(String s) throws IOException {
+-        Stream stream = Files.walk(Paths.get(s));
++        Stream<Path> stream = Files.walk(Paths.get(s));
+ 
+         try {
+             stream.filter((path) -> {

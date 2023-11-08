@@ -1,0 +1,31 @@
+diff --git a/minecraft/data/loot/packs/VanillaBlockLoot.java b/minecraft/data/loot/packs/VanillaBlockLoot.java
+index 4bbb6e8..997c9a4 100644
+--- a/minecraft/data/loot/packs/VanillaBlockLoot.java
++++ b/minecraft/data/loot/packs/VanillaBlockLoot.java
+@@ -1016,7 +1016,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
+             return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) this.applyExplosionDecay(block, LootItem.lootTableItem(Items.COCOA_BEANS).apply(SetItemCountFunction.setCount(ConstantValue.exactly(3.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CocoaBlock.AGE, 2)))))));
+         });
+         this.add(Blocks.SEA_PICKLE, (block) -> {
+-            return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) this.applyExplosionDecay(Blocks.SEA_PICKLE, LootItem.lootTableItem(block).apply((Iterable) List.of(2, 3, 4), (integer) -> {
++            return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add((LootPoolEntryContainer.Builder) this.applyExplosionDecay(Blocks.SEA_PICKLE, LootItem.lootTableItem(block).apply(List.of(2, 3, 4), (integer) -> {
+                 return SetItemCountFunction.setCount(ConstantValue.exactly((float) integer)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SeaPickleBlock.PICKLES, integer)));
+             }))));
+         });
+@@ -1276,7 +1276,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
+             return this.createPitcherCropLoot();
+         });
+         this.dropSelf(Blocks.PITCHER_PLANT);
+-        this.add(Blocks.PITCHER_PLANT, (LootTable.Builder) this.applyExplosionDecay(Blocks.PITCHER_PLANT, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(Items.PITCHER_PLANT).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PITCHER_PLANT).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, (Comparable) DoubleBlockHalf.LOWER)))))));
++        this.add(Blocks.PITCHER_PLANT, (LootTable.Builder) this.applyExplosionDecay(Blocks.PITCHER_PLANT, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(Items.PITCHER_PLANT).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PITCHER_PLANT).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER)))))));
+         this.add(Blocks.CARROTS, (LootTable.Builder) this.applyExplosionDecay(Blocks.CARROTS, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(Items.CARROT))).withPool(LootPool.lootPool().when(lootitemblockstatepropertycondition_builder2).add(LootItem.lootTableItem(Items.CARROT).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
+         LootItemBlockStatePropertyCondition.Builder lootitemblockstatepropertycondition_builder4 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.POTATOES).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PotatoBlock.AGE, 7));
+ 
+@@ -1541,7 +1541,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
+ 
+     private LootTable.Builder createPitcherCropLoot() {
+         return (LootTable.Builder) this.applyExplosionDecay(Blocks.PITCHER_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(AlternativesEntry.alternatives(PitcherCropBlock.AGE.getPossibleValues(), (integer) -> {
+-            LootItemBlockStatePropertyCondition.Builder lootitemblockstatepropertycondition_builder = LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PITCHER_CROP).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, (Comparable) DoubleBlockHalf.LOWER));
++            LootItemBlockStatePropertyCondition.Builder lootitemblockstatepropertycondition_builder = LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PITCHER_CROP).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+             LootItemBlockStatePropertyCondition.Builder lootitemblockstatepropertycondition_builder1 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.PITCHER_CROP).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PitcherCropBlock.AGE, integer));
+ 
+             return integer == 4 ? ((LootPoolSingletonContainer.Builder) ((LootPoolSingletonContainer.Builder) LootItem.lootTableItem(Items.PITCHER_PLANT).when(lootitemblockstatepropertycondition_builder1)).when(lootitemblockstatepropertycondition_builder)).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))) : ((LootPoolSingletonContainer.Builder) ((LootPoolSingletonContainer.Builder) LootItem.lootTableItem(Items.PITCHER_POD).when(lootitemblockstatepropertycondition_builder1)).when(lootitemblockstatepropertycondition_builder)).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)));

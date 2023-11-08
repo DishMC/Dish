@@ -1,0 +1,12 @@
+diff --git a/minecraft/world/level/block/BaseEntityBlock.java b/minecraft/world/level/block/BaseEntityBlock.java
+index 453bbbe..198f953 100644
+--- a/minecraft/world/level/block/BaseEntityBlock.java
++++ b/minecraft/world/level/block/BaseEntityBlock.java
+@@ -43,6 +43,6 @@ public abstract class BaseEntityBlock extends Block implements EntityBlock {
+ 
+     @Nullable
+     protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> blockentitytype, BlockEntityType<E> blockentitytype1, BlockEntityTicker<? super E> blockentityticker) {
+-        return blockentitytype1 == blockentitytype ? blockentityticker : null;
++        return blockentitytype1 == blockentitytype ? (BlockEntityTicker<A>) blockentityticker : null;
+     }
+ }

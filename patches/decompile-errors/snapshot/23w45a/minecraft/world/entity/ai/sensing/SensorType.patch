@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/sensing/SensorType.java b/minecraft/world/entity/ai/sensing/SensorType.java
+index 2b3f59d..4a4b922 100644
+--- a/minecraft/world/entity/ai/sensing/SensorType.java
++++ b/minecraft/world/entity/ai/sensing/SensorType.java
+@@ -53,7 +53,7 @@ public class SensorType<U extends Sensor<?>> {
+     }
+ 
+     public U create() {
+-        return (Sensor) this.factory.get();
++        return this.factory.get();
+     }
+ 
+     private static <U extends Sensor<?>> SensorType<U> register(String s, Supplier<U> supplier) {

@@ -1,0 +1,33 @@
+diff --git a/minecraft/server/commands/ExecuteCommand.java b/minecraft/server/commands/ExecuteCommand.java
+index 22b1e74..2e46e45 100644
+--- a/minecraft/server/commands/ExecuteCommand.java
++++ b/minecraft/server/commands/ExecuteCommand.java
+@@ -559,7 +559,7 @@ public class ExecuteCommand {
+             CommandSourceStack commandsourcestack = (CommandSourceStack) commandcontext.getSource();
+             Entity entity = commandsourcestack.getEntity();
+ 
+-            return (Collection) (entity == null ? List.of() : (Collection) ((Optional) function.apply(entity)).filter((entity1) -> {
++            return (entity == null ? List.of() : (function.apply(entity)).filter((entity1) -> {
+                 return !entity1.isRemoved();
+             }).map((entity1) -> {
+                 return List.of(commandsourcestack.withEntity(entity1));
+@@ -575,7 +575,7 @@ public class ExecuteCommand {
+             if (entity == null) {
+                 return List.of();
+             } else {
+-                Stream stream = ((Stream) function.apply(entity)).filter((entity1) -> {
++                Stream<Entity> stream = (function.apply(entity)).filter((entity1) -> {
+                     return !entity1.isRemoved();
+                 });
+ 
+@@ -699,8 +699,8 @@ public class ExecuteCommand {
+             iterator = list.iterator();
+ 
+             while (iterator.hasNext()) {
+-                T t1 = (ExecutionCommandSource) iterator.next();
+-                T t2 = (ExecutionCommandSource) function.apply(t1.clearCallbacks());
++                T t1 = (T) iterator.next();
++                T t2 = function.apply(t1.clearCallbacks());
+                 CommandResultCallback commandresultcallback = (flag, j) -> {
+                     if (intpredicate.test(j)) {
+                         arraylist.add(t1);
