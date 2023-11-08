@@ -1,8 +1,8 @@
 diff --git a/minecraft/data/loot/LootTableProvider.java b/minecraft/data/loot/LootTableProvider.java
-index 3c0c8d9..c95790f 100644
+index ef2265d..42c4f41 100644
 --- a/minecraft/data/loot/LootTableProvider.java
 +++ b/minecraft/data/loot/LootTableProvider.java
-@@ -65,7 +65,7 @@ public class LootTableProvider implements DataProvider {
+@@ -67,7 +67,7 @@ public class LootTableProvider implements DataProvider {
              @Nullable
              @Override
              public <T> T getElement(LootDataId<T> lootdataid) {

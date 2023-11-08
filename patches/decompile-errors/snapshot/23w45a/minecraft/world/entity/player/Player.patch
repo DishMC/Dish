@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/entity/player/Player.java b/minecraft/world/entity/player/Player.java
-index 1394457..3e91b56 100644
+index ec57cb3..51d3b4f 100644
 --- a/minecraft/world/entity/player/Player.java
 +++ b/minecraft/world/entity/player/Player.java
 @@ -28,6 +28,7 @@ import net.minecraft.nbt.CompoundTag;

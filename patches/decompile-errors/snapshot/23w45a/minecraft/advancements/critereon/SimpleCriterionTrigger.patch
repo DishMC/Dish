@@ -1,8 +1,8 @@
 diff --git a/minecraft/advancements/critereon/SimpleCriterionTrigger.java b/minecraft/advancements/critereon/SimpleCriterionTrigger.java
-index 188b97c..0925051 100644
+index c618d75..8424988 100644
 --- a/minecraft/advancements/critereon/SimpleCriterionTrigger.java
 +++ b/minecraft/advancements/critereon/SimpleCriterionTrigger.java
-@@ -69,7 +69,7 @@ public abstract class SimpleCriterionTrigger<T extends SimpleCriterionTrigger.Si
+@@ -59,7 +59,7 @@ public abstract class SimpleCriterionTrigger<T extends SimpleCriterionTrigger.Si
  
              while (iterator.hasNext()) {
                  criteriontrigger_listener = (CriterionTrigger.Listener) iterator.next();
@@ -10,4 +10,4 @@ index 188b97c..0925051 100644
 +                T t0 = (T) criteriontrigger_listener.trigger();
  
                  if (predicate.test(t0)) {
-                     Optional<ContextAwarePredicate> optional = t0.playerPredicate();
+                     Optional<ContextAwarePredicate> optional = t0.player();

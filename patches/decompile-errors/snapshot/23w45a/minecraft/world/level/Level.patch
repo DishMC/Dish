@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/Level.java b/minecraft/world/level/Level.java
-index 63d5e21..3360632 100644
+index 147f689..fe30915 100644
 --- a/minecraft/world/level/Level.java
 +++ b/minecraft/world/level/Level.java
-@@ -669,7 +669,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
+@@ -680,7 +680,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {
  
                  for (int k = 0; k < j; ++k) {
                      EnderDragonPart enderdragonpart = aenderdragonpart[k];

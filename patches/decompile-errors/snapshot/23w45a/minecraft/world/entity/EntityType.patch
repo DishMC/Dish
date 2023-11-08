@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/EntityType.java b/minecraft/world/entity/EntityType.java
-index 63fda61..e961079 100644
+index 172fe8d..fcf39f6 100644
 --- a/minecraft/world/entity/EntityType.java
 +++ b/minecraft/world/entity/EntityType.java
-@@ -168,74 +168,74 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
+@@ -170,75 +170,75 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
      private static final float MAGIC_HORSE_WIDTH = 1.3964844F;
      private static final int DISPLAY_TRACKING_RANGE = 10;
      public static final EntityType<Allay> ALLAY = register("allay", EntityType.Builder.of(Allay::new, MobCategory.CREATURE).sized(0.35F, 0.6F).clientTrackingRange(8).updateInterval(2));
@@ -19,6 +19,7 @@ index 63fda61..e961079 100644
      public static final EntityType<Display.BlockDisplay> BLOCK_DISPLAY = register("block_display", EntityType.Builder.of(Display.BlockDisplay::new, MobCategory.MISC).sized(0.0F, 0.0F).clientTrackingRange(10).updateInterval(1));
 -    public static final EntityType<Boat> BOAT = register("boat", EntityType.Builder.of(Boat::new, MobCategory.MISC).sized(1.375F, 0.5625F).clientTrackingRange(10));
 +    public static final EntityType<Boat> BOAT = register("boat", EntityType.Builder.<Boat>of(Boat::new, MobCategory.MISC).sized(1.375F, 0.5625F).clientTrackingRange(10));
+     public static final EntityType<Breeze> BREEZE = register("breeze", EntityType.Builder.of(Breeze::new, MobCategory.MONSTER).sized(0.6F, 1.7F).clientTrackingRange(10).requiredFeatures(FeatureFlags.UPDATE_1_21));
      public static final EntityType<Camel> CAMEL = register("camel", EntityType.Builder.of(Camel::new, MobCategory.CREATURE).sized(1.7F, 2.375F).clientTrackingRange(10));
      public static final EntityType<Cat> CAT = register("cat", EntityType.Builder.of(Cat::new, MobCategory.CREATURE).sized(0.6F, 0.7F).clientTrackingRange(8));
      public static final EntityType<CaveSpider> CAVE_SPIDER = register("cave_spider", EntityType.Builder.of(CaveSpider::new, MobCategory.MONSTER).sized(0.7F, 0.5F).clientTrackingRange(8));
@@ -103,7 +104,7 @@ index 63fda61..e961079 100644
      public static final EntityType<Panda> PANDA = register("panda", EntityType.Builder.of(Panda::new, MobCategory.CREATURE).sized(1.3F, 1.25F).clientTrackingRange(10));
      public static final EntityType<Parrot> PARROT = register("parrot", EntityType.Builder.of(Parrot::new, MobCategory.CREATURE).sized(0.5F, 0.9F).clientTrackingRange(8));
      public static final EntityType<Phantom> PHANTOM = register("phantom", EntityType.Builder.of(Phantom::new, MobCategory.MONSTER).sized(0.9F, 0.5F).clientTrackingRange(8));
-@@ -244,53 +244,53 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
+@@ -247,54 +247,54 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
      public static final EntityType<PiglinBrute> PIGLIN_BRUTE = register("piglin_brute", EntityType.Builder.of(PiglinBrute::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8));
      public static final EntityType<Pillager> PILLAGER = register("pillager", EntityType.Builder.of(Pillager::new, MobCategory.MONSTER).canSpawnFarFromPlayer().sized(0.6F, 1.95F).clientTrackingRange(8));
      public static final EntityType<PolarBear> POLAR_BEAR = register("polar_bear", EntityType.Builder.of(PolarBear::new, MobCategory.CREATURE).immuneTo(Blocks.POWDER_SNOW).sized(1.4F, 1.4F).clientTrackingRange(10));
@@ -152,6 +153,8 @@ index 63fda61..e961079 100644
      public static final EntityType<Vindicator> VINDICATOR = register("vindicator", EntityType.Builder.of(Vindicator::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8));
      public static final EntityType<WanderingTrader> WANDERING_TRADER = register("wandering_trader", EntityType.Builder.of(WanderingTrader::new, MobCategory.CREATURE).sized(0.6F, 1.95F).clientTrackingRange(10));
      public static final EntityType<Warden> WARDEN = register("warden", EntityType.Builder.of(Warden::new, MobCategory.MONSTER).sized(0.9F, 2.9F).clientTrackingRange(16).fireImmune());
+-    public static final EntityType<WindCharge> WIND_CHARGE = register("wind_charge", EntityType.Builder.of(WindCharge::new, MobCategory.MISC).sized(0.3125F, 0.3125F).clientTrackingRange(4).updateInterval(10));
++    public static final EntityType<WindCharge> WIND_CHARGE = register("wind_charge", EntityType.Builder.<WindCharge>of(WindCharge::new, MobCategory.MISC).sized(0.3125F, 0.3125F).clientTrackingRange(4).updateInterval(10));
      public static final EntityType<Witch> WITCH = register("witch", EntityType.Builder.of(Witch::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8));
      public static final EntityType<WitherBoss> WITHER = register("wither", EntityType.Builder.of(WitherBoss::new, MobCategory.MONSTER).fireImmune().immuneTo(Blocks.WITHER_ROSE).sized(0.9F, 3.5F).clientTrackingRange(10));
      public static final EntityType<WitherSkeleton> WITHER_SKELETON = register("wither_skeleton", EntityType.Builder.of(WitherSkeleton::new, MobCategory.MONSTER).fireImmune().immuneTo(Blocks.WITHER_ROSE).sized(0.7F, 2.4F).clientTrackingRange(8));
@@ -171,7 +174,7 @@ index 63fda61..e961079 100644
      private final EntityType.EntityFactory<T> factory;
      private final MobCategory category;
      private final ImmutableSet<Block> immuneTo;
-@@ -350,7 +350,7 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
+@@ -354,7 +354,7 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
              compoundtag = null;
          }
  
@@ -180,7 +183,7 @@ index 63fda61..e961079 100644
      }
  
      public static <T extends Entity> Consumer<T> createDefaultStackConfig(ServerLevel serverlevel, ItemStack itemstack, @Nullable Player player) {
-@@ -378,7 +378,7 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
+@@ -382,7 +382,7 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
  
      @Nullable
      public T spawn(ServerLevel serverlevel, BlockPos blockpos, MobSpawnType mobspawntype) {
@@ -189,7 +192,7 @@ index 63fda61..e961079 100644
      }
  
      @Nullable
-@@ -573,7 +573,7 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
+@@ -577,7 +577,7 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
              }
  
              return entity;
@@ -198,7 +201,7 @@ index 63fda61..e961079 100644
      }
  
      public static Stream<Entity> loadEntitiesRecursive(final List<? extends Tag> list, final Level level) {
-@@ -634,7 +634,7 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
+@@ -638,7 +638,7 @@ public class EntityType<T extends Entity> implements FeatureElement, EntityTypeT
  
      @Nullable
      public T tryCast(Entity entity) {

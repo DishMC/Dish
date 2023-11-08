@@ -1,8 +1,8 @@
 diff --git a/minecraft/advancements/critereon/MinMaxBounds.java b/minecraft/advancements/critereon/MinMaxBounds.java
-index 95d3f71..aa211e4 100644
+index 3e132d6..811791e 100644
 --- a/minecraft/advancements/critereon/MinMaxBounds.java
 +++ b/minecraft/advancements/critereon/MinMaxBounds.java
-@@ -44,14 +44,11 @@ public interface MinMaxBounds<T extends Number> {
+@@ -38,14 +38,11 @@ public interface MinMaxBounds<T extends Number> {
  
      static <T extends Number, R extends MinMaxBounds<T>> Codec<R> createCodec(Codec<T> codec, MinMaxBounds.BoundsFactory<T, R> minmaxbounds_boundsfactory) {
          Codec<R> codec1 = RecordCodecBuilder.create((instance) -> {
@@ -19,7 +19,7 @@ index 95d3f71..aa211e4 100644
                  return minmaxbounds;
              }, (number) -> {
                  return minmaxbounds_boundsfactory.create(Optional.of(number), Optional.of(number));
-@@ -59,7 +56,7 @@ public interface MinMaxBounds<T extends Number> {
+@@ -53,7 +50,7 @@ public interface MinMaxBounds<T extends Number> {
          }, (minmaxbounds) -> {
              Optional<T> optional = minmaxbounds.unwrapPoint();
  
@@ -28,7 +28,7 @@ index 95d3f71..aa211e4 100644
          });
      }
  
-@@ -87,7 +84,7 @@ public interface MinMaxBounds<T extends Number> {
+@@ -81,7 +78,7 @@ public interface MinMaxBounds<T extends Number> {
                  if (optional.isEmpty() && optional1.isEmpty()) {
                      throw MinMaxBounds.ERROR_EMPTY.createWithContext(stringreader);
                  } else {
@@ -37,7 +37,7 @@ index 95d3f71..aa211e4 100644
                  }
              } catch (CommandSyntaxException commandsyntaxexception) {
                  stringreader.setCursor(i);
-@@ -109,7 +106,7 @@ public interface MinMaxBounds<T extends Number> {
+@@ -103,7 +100,7 @@ public interface MinMaxBounds<T extends Number> {
              return Optional.empty();
          } else {
              try {
@@ -46,7 +46,7 @@ index 95d3f71..aa211e4 100644
              } catch (NumberFormatException numberformatexception) {
                  throw ((DynamicCommandExceptionType) supplier.get()).createWithContext(stringreader, s);
              }
-@@ -137,7 +134,7 @@ public interface MinMaxBounds<T extends Number> {
+@@ -131,7 +128,7 @@ public interface MinMaxBounds<T extends Number> {
      public static record Doubles(Optional<Double> min, Optional<Double> max, Optional<Double> minSq, Optional<Double> maxSq) implements MinMaxBounds<Double> {
  
          public static final MinMaxBounds.Doubles ANY = new MinMaxBounds.Doubles(Optional.empty(), Optional.empty());
@@ -55,7 +55,7 @@ index 95d3f71..aa211e4 100644
  
          private Doubles(Optional<Double> optional, Optional<Double> optional1) {
              this(optional, optional1, squareOpt(optional), squareOpt(optional1));
-@@ -197,18 +194,17 @@ public interface MinMaxBounds<T extends Number> {
+@@ -183,18 +180,17 @@ public interface MinMaxBounds<T extends Number> {
  
          public static MinMaxBounds.Doubles fromReader(StringReader stringreader, Function<Double, Double> function) throws CommandSyntaxException {
              MinMaxBounds.BoundsFromReaderFactory minmaxbounds_boundsfromreaderfactory = MinMaxBounds.Doubles::create;
@@ -76,7 +76,7 @@ index 95d3f71..aa211e4 100644
  
          private Ints(Optional<Integer> optional, Optional<Integer> optional1) {
              this(optional, optional1, optional.map((integer) -> {
-@@ -270,11 +266,10 @@ public interface MinMaxBounds<T extends Number> {
+@@ -248,11 +244,10 @@ public interface MinMaxBounds<T extends Number> {
  
          public static MinMaxBounds.Ints fromReader(StringReader stringreader, Function<Integer, Integer> function) throws CommandSyntaxException {
              MinMaxBounds.BoundsFromReaderFactory minmaxbounds_boundsfromreaderfactory = MinMaxBounds.Ints::create;

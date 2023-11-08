@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/item/CreativeModeTabs.java b/minecraft/world/item/CreativeModeTabs.java
-index ecbbefa..6a28994 100644
+index fdb0c98..a4eff00 100644
 --- a/minecraft/world/item/CreativeModeTabs.java
 +++ b/minecraft/world/item/CreativeModeTabs.java
 @@ -56,7 +56,7 @@ public class CreativeModeTabs {

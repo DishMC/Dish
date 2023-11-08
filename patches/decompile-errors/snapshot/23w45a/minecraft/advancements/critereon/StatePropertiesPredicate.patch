@@ -1,8 +1,8 @@
 diff --git a/minecraft/advancements/critereon/StatePropertiesPredicate.java b/minecraft/advancements/critereon/StatePropertiesPredicate.java
-index d259b8c..a0f857e 100644
+index e27d4ff..5046afe 100644
 --- a/minecraft/advancements/critereon/StatePropertiesPredicate.java
 +++ b/minecraft/advancements/critereon/StatePropertiesPredicate.java
-@@ -175,14 +175,14 @@ public record StatePropertiesPredicate(List<StatePropertiesPredicate.PropertyMat
+@@ -155,14 +155,14 @@ public record StatePropertiesPredicate(List<StatePropertiesPredicate.PropertyMat
  
              if (this.minValue.isPresent()) {
                  optional = property.getValue((String) this.minValue.get());
@@ -19,7 +19,7 @@ index d259b8c..a0f857e 100644
                      return false;
                  }
              }
-@@ -200,7 +200,7 @@ public record StatePropertiesPredicate(List<StatePropertiesPredicate.PropertyMat
+@@ -180,7 +180,7 @@ public record StatePropertiesPredicate(List<StatePropertiesPredicate.PropertyMat
              T t0 = stateholder.getValue(property);
              Optional<T> optional = property.getValue(this.value);
  

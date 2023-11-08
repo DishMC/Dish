@@ -1,8 +1,8 @@
 diff --git a/minecraft/util/datafix/fixes/StatsCounterFix.java b/minecraft/util/datafix/fixes/StatsCounterFix.java
-index 14a4a2c..455f329 100644
+index 9eea55d..a312aac 100644
 --- a/minecraft/util/datafix/fixes/StatsCounterFix.java
 +++ b/minecraft/util/datafix/fixes/StatsCounterFix.java
-@@ -25,13 +25,13 @@ import org.apache.commons.lang3.StringUtils;
+@@ -24,13 +24,13 @@ import org.apache.commons.lang3.StringUtils;
  public class StatsCounterFix extends DataFix {
  
      private static final Set<String> SPECIAL_OBJECTIVE_CRITERIA = Set.of("dummy", "trigger", "deathCount", "playerKillCount", "totalKillCount", "health", "food", "air", "armor", "xp", "level", "killedByTeam.aqua", "killedByTeam.black", "killedByTeam.blue", "killedByTeam.dark_aqua", "killedByTeam.dark_blue", "killedByTeam.dark_gray", "killedByTeam.dark_green", "killedByTeam.dark_purple", "killedByTeam.dark_red", "killedByTeam.gold", "killedByTeam.gray", "killedByTeam.green", "killedByTeam.light_purple", "killedByTeam.red", "killedByTeam.white", "killedByTeam.yellow", "teamkill.aqua", "teamkill.black", "teamkill.blue", "teamkill.dark_aqua", "teamkill.dark_blue", "teamkill.dark_gray", "teamkill.dark_green", "teamkill.dark_purple", "teamkill.dark_red", "teamkill.gold", "teamkill.gray", "teamkill.green", "teamkill.light_purple", "teamkill.red", "teamkill.white", "teamkill.yellow");
@@ -21,7 +21,7 @@ index 14a4a2c..455f329 100644
      private static final String NEW_CUSTOM_KEY = "minecraft:custom";
  
      public StatsCounterFix(Schema schema, boolean flag) {
-@@ -134,7 +134,7 @@ public class StatsCounterFix extends DataFix {
+@@ -131,7 +131,7 @@ public class StatsCounterFix extends DataFix {
          return this.fixTypeEverywhereTyped("ObjectiveStatFix", type, type1, (typed) -> {
              Dynamic<?> dynamic = (Dynamic) typed.get(DSL.remainderFinder());
              Dynamic<?> dynamic1 = dynamic.update("CriteriaName", (dynamic2) -> {
@@ -30,12 +30,3 @@ index 14a4a2c..455f329 100644
                      if (StatsCounterFix.SPECIAL_OBJECTIVE_CRITERIA.contains(s)) {
                          return s;
                      } else {
-@@ -151,7 +151,7 @@ public class StatsCounterFix extends DataFix {
-                 });
- 
-                 Objects.requireNonNull(dynamic2);
--                return (Dynamic) DataFixUtils.orElse(optional.map(dynamic2::createString), dynamic2);
-+                return DataFixUtils.orElse(optional.map(dynamic2::createString), dynamic2);
-             });
- 
-             return (Typed) ((Pair) type1.readTyped(dynamic1).result().orElseThrow(() -> {

@@ -1,5 +1,5 @@
 diff --git a/minecraft/gametest/framework/StructureUtils.java b/minecraft/gametest/framework/StructureUtils.java
-index ce44321..6996794 100644
+index 4c67115..8b07b6a 100644
 --- a/minecraft/gametest/framework/StructureUtils.java
 +++ b/minecraft/gametest/framework/StructureUtils.java
 @@ -185,7 +185,7 @@ public class StructureUtils {

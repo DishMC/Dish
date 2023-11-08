@@ -1,5 +1,5 @@
 diff --git a/minecraft/util/datafix/fixes/ChunkHeightAndBiomeFix.java b/minecraft/util/datafix/fixes/ChunkHeightAndBiomeFix.java
-index c6601fe..5e265f7 100644
+index 04b2cbb..125ae31 100644
 --- a/minecraft/util/datafix/fixes/ChunkHeightAndBiomeFix.java
 +++ b/minecraft/util/datafix/fixes/ChunkHeightAndBiomeFix.java
 @@ -83,7 +83,7 @@ public class ChunkHeightAndBiomeFix extends DataFix {
@@ -20,7 +20,7 @@ index c6601fe..5e265f7 100644
                                  return dynamic6.get("Name").asString("minecraft:air");
                              });
  
-@@ -172,23 +172,25 @@ public class ChunkHeightAndBiomeFix extends DataFix {
+@@ -170,23 +170,25 @@ public class ChunkHeightAndBiomeFix extends DataFix {
  
      private static Dynamic<?>[] getBiomeContainers(Dynamic<?> dynamic, boolean flag, int i, MutableBoolean mutableboolean) {
          Dynamic<?>[] adynamic = new Dynamic[flag ? 24 : 16];

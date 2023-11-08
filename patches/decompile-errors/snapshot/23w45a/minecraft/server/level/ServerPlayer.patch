@@ -1,5 +1,5 @@
 diff --git a/minecraft/server/level/ServerPlayer.java b/minecraft/server/level/ServerPlayer.java
-index 4610e81..039aed1 100644
+index 8c21822..ddb1b47 100644
 --- a/minecraft/server/level/ServerPlayer.java
 +++ b/minecraft/server/level/ServerPlayer.java
 @@ -33,6 +33,7 @@ import net.minecraft.core.SectionPos;
@@ -15,7 +15,7 @@ index 4610e81..039aed1 100644
          super.readAdditionalSaveData(compoundtag);
          if (compoundtag.contains("warden_spawn_tracker", 10)) {
 -            DataResult dataresult = WardenSpawnTracker.CODEC.parse(new Dynamic(NbtOps.INSTANCE, compoundtag.get("warden_spawn_tracker")));
-+            DataResult<WardenSpawnTracker> dataresult = WardenSpawnTracker.CODEC.parse(new Dynamic(NbtOps.INSTANCE, compoundtag.get("warden_spawn_tracker")));
++            DataResult<WardenSpawnTracker> dataresult = WardenSpawnTracker.CODEC.parse(new Dynamic<>(NbtOps.INSTANCE, compoundtag.get("warden_spawn_tracker")));
              Logger logger = ServerPlayer.LOGGER;
  
              Objects.requireNonNull(logger);
@@ -37,12 +37,3 @@ index 4610e81..039aed1 100644
          Logger logger = ServerPlayer.LOGGER;
  
          Objects.requireNonNull(logger);
-@@ -1276,7 +1277,7 @@ public class ServerPlayer extends Player {
- 
-         for (int j = 0; j < i; ++j) {
-             ResourceLocation resourcelocation = aresourcelocation1[j];
--            Optional optional = this.server.getRecipeManager().byKey(resourcelocation);
-+            Optional<RecipeHolder<?>> optional = this.server.getRecipeManager().byKey(resourcelocation);
- 
-             Objects.requireNonNull(list);
-             optional.ifPresent(list::add);

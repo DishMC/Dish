@@ -1,5 +1,5 @@
 diff --git a/minecraft/data/advancements/packs/VanillaAdventureAdvancements.java b/minecraft/data/advancements/packs/VanillaAdventureAdvancements.java
-index 3009722..687bb6a 100644
+index be101b2..ee82154 100644
 --- a/minecraft/data/advancements/packs/VanillaAdventureAdvancements.java
 +++ b/minecraft/data/advancements/packs/VanillaAdventureAdvancements.java
 @@ -142,7 +142,7 @@ public class VanillaAdventureAdvancements implements AdvancementSubProvider {

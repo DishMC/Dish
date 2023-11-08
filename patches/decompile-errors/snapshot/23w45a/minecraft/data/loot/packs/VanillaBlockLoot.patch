@@ -1,5 +1,5 @@
 diff --git a/minecraft/data/loot/packs/VanillaBlockLoot.java b/minecraft/data/loot/packs/VanillaBlockLoot.java
-index 4bbb6e8..997c9a4 100644
+index 1490122..1b9cab1 100644
 --- a/minecraft/data/loot/packs/VanillaBlockLoot.java
 +++ b/minecraft/data/loot/packs/VanillaBlockLoot.java
 @@ -1016,7 +1016,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
@@ -20,7 +20,7 @@ index 4bbb6e8..997c9a4 100644
          this.add(Blocks.CARROTS, (LootTable.Builder) this.applyExplosionDecay(Blocks.CARROTS, LootTable.lootTable().withPool(LootPool.lootPool().add(LootItem.lootTableItem(Items.CARROT))).withPool(LootPool.lootPool().when(lootitemblockstatepropertycondition_builder2).add(LootItem.lootTableItem(Items.CARROT).apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))));
          LootItemBlockStatePropertyCondition.Builder lootitemblockstatepropertycondition_builder4 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(Blocks.POTATOES).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(PotatoBlock.AGE, 7));
  
-@@ -1541,7 +1541,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
+@@ -1542,7 +1542,7 @@ public class VanillaBlockLoot extends BlockLootSubProvider {
  
      private LootTable.Builder createPitcherCropLoot() {
          return (LootTable.Builder) this.applyExplosionDecay(Blocks.PITCHER_CROP, LootTable.lootTable().withPool(LootPool.lootPool().add(AlternativesEntry.alternatives(PitcherCropBlock.AGE.getPossibleValues(), (integer) -> {

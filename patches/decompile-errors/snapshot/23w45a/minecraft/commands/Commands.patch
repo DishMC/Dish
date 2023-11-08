@@ -1,8 +1,8 @@
 diff --git a/minecraft/commands/Commands.java b/minecraft/commands/Commands.java
-index 25ec79f..15938e3 100644
+index a4859b9..04921e4 100644
 --- a/minecraft/commands/Commands.java
 +++ b/minecraft/commands/Commands.java
-@@ -363,7 +363,7 @@ public class Commands {
+@@ -361,7 +361,7 @@ public class Commands {
  
                  executioncontext1.close();
              } finally {
@@ -11,7 +11,7 @@ index 25ec79f..15938e3 100644
              }
          } else {
              consumer.accept(executioncontext);
-@@ -387,7 +387,7 @@ public class Commands {
+@@ -385,7 +385,7 @@ public class Commands {
              CommandNode<CommandSourceStack> commandnode2 = (CommandNode) iterator.next();
  
              if (commandnode2.canUse(commandsourcestack)) {

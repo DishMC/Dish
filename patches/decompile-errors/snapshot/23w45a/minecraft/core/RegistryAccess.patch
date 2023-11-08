@@ -1,8 +1,8 @@
 diff --git a/minecraft/core/RegistryAccess.java b/minecraft/core/RegistryAccess.java
-index e4d7f40..ae598e1 100644
+index 07ba35d..2734160 100644
 --- a/minecraft/core/RegistryAccess.java
 +++ b/minecraft/core/RegistryAccess.java
-@@ -36,9 +36,9 @@ public interface RegistryAccess extends HolderLookup.Provider {
+@@ -41,9 +41,9 @@ public interface RegistryAccess extends HolderLookup.Provider {
          return new RegistryAccess.Frozen() {
              @Override
              public <T> Optional<Registry<T>> registry(ResourceKey<? extends Registry<? extends T>> resourcekey) {
@@ -14,7 +14,7 @@ index e4d7f40..ae598e1 100644
              }
  
              @Override
-@@ -54,15 +54,15 @@ public interface RegistryAccess extends HolderLookup.Provider {
+@@ -59,15 +59,15 @@ public interface RegistryAccess extends HolderLookup.Provider {
      }
  
      default RegistryAccess.Frozen freeze() {
@@ -33,7 +33,7 @@ index e4d7f40..ae598e1 100644
      }
  
      default Lifecycle allRegistriesLifecycle() {
-@@ -78,7 +78,7 @@ public interface RegistryAccess extends HolderLookup.Provider {
+@@ -83,7 +83,7 @@ public interface RegistryAccess extends HolderLookup.Provider {
          }
  
          private static <T> RegistryAccess.RegistryEntry<T> fromUntyped(ResourceKey<? extends Registry<?>> resourcekey, Registry<?> registry) {

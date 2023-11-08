@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/storage/loot/LootDataManager.java b/minecraft/world/level/storage/loot/LootDataManager.java
-index d619d8e..40c4180 100644
+index f83a2bc..8a210b0 100644
 --- a/minecraft/world/level/storage/loot/LootDataManager.java
 +++ b/minecraft/world/level/storage/loot/LootDataManager.java
-@@ -87,7 +87,7 @@ public class LootDataManager implements PreparableReloadListener, LootDataResolv
+@@ -89,7 +89,7 @@ public class LootDataManager implements PreparableReloadListener, LootDataResolv
              @Nullable
              @Override
              public <T> T getElement(LootDataId<T> lootdataid) {
@@ -11,7 +11,7 @@ index d619d8e..40c4180 100644
              }
          });
  
-@@ -102,13 +102,13 @@ public class LootDataManager implements PreparableReloadListener, LootDataResolv
+@@ -104,13 +104,13 @@ public class LootDataManager implements PreparableReloadListener, LootDataResolv
      }
  
      private static <T> void castAndValidate(ValidationContext validationcontext, LootDataId<T> lootdataid, Object object) {

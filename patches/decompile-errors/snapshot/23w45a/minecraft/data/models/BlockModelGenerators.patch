@@ -1,5 +1,5 @@
 diff --git a/minecraft/data/models/BlockModelGenerators.java b/minecraft/data/models/BlockModelGenerators.java
-index f9e8f45..01a880d 100644
+index e490f67..279a739 100644
 --- a/minecraft/data/models/BlockModelGenerators.java
 +++ b/minecraft/data/models/BlockModelGenerators.java
 @@ -83,7 +83,7 @@ public class BlockModelGenerators {
@@ -124,7 +124,33 @@ index f9e8f45..01a880d 100644
      }
  
      private void createCocoa() {
-@@ -1447,7 +1447,7 @@ public class BlockModelGenerators {
+@@ -1344,21 +1344,21 @@ public class BlockModelGenerators {
+             switch (trialspawnerstate) {
+                 case INACTIVE:
+                 case COOLDOWN:
+-                    variant1 = Variant.variant().with(VariantProperties.MODEL, resourcelocation);
++                    variant = Variant.variant().with(VariantProperties.MODEL, resourcelocation);
+                     break;
+                 case WAITING_FOR_PLAYERS:
+                 case ACTIVE:
+                 case WAITING_FOR_REWARD_EJECTION:
+-                    variant2 = Variant.variant().with(VariantProperties.MODEL, resourcelocation1);
++                    variant = Variant.variant().with(VariantProperties.MODEL, resourcelocation1);
+                     break;
+                 case EJECTING_REWARD:
+-                    variant3 = Variant.variant().with(VariantProperties.MODEL, resourcelocation2);
++                    variant = Variant.variant().with(VariantProperties.MODEL, resourcelocation2);
+                     break;
+                 default:
+                     throw new IncompatibleClassChangeError();
+             }
+ 
+-            return variant4;
++            return variant;
+         })));
+     }
+ 
+@@ -1481,7 +1481,7 @@ public class BlockModelGenerators {
                  resourcelocation1 = resourcelocation;
              }
  
@@ -133,7 +159,7 @@ index f9e8f45..01a880d 100644
          })));
          this.delegateItemModel(Blocks.SNOW, ModelLocationUtils.getModelLocation(Blocks.SNOW, "_height2"));
          this.blockStateOutput.accept(createSimpleBlock(Blocks.SNOW_BLOCK, resourcelocation));
-@@ -1486,7 +1486,7 @@ public class BlockModelGenerators {
+@@ -1520,7 +1520,7 @@ public class BlockModelGenerators {
              Block block = Blocks.TRIPWIRE_HOOK;
              String s = obool ? "_attached" : "";
  
@@ -142,7 +168,7 @@ index f9e8f45..01a880d 100644
          })).with(createHorizontalFacingDispatch()));
      }
  
-@@ -1601,8 +1601,8 @@ public class BlockModelGenerators {
+@@ -1635,8 +1635,8 @@ public class BlockModelGenerators {
          Map.of(Direction.NORTH, VariantProperties.Rotation.R0, Direction.EAST, VariantProperties.Rotation.R90, Direction.SOUTH, VariantProperties.Rotation.R180, Direction.WEST, VariantProperties.Rotation.R270).forEach((direction, variantproperties_rotation) -> {
              Condition.TerminalCondition condition_terminalcondition = Condition.condition().term(BlockStateProperties.HORIZONTAL_FACING, direction);
  
@@ -153,7 +179,7 @@ index f9e8f45..01a880d 100644
          });
          this.blockStateOutput.accept(multipartgenerator);
          this.delegateItemModel(block, ModelLocationUtils.getModelLocation(block, "_inventory"));
-@@ -1614,8 +1614,8 @@ public class BlockModelGenerators {
+@@ -1648,8 +1648,8 @@ public class BlockModelGenerators {
              BooleanProperty booleanproperty = (BooleanProperty) pair.getFirst();
              ModelTemplate modeltemplate = (ModelTemplate) pair.getSecond();
  
@@ -164,7 +190,7 @@ index f9e8f45..01a880d 100644
          });
      }
  
-@@ -1627,7 +1627,7 @@ public class BlockModelGenerators {
+@@ -1661,7 +1661,7 @@ public class BlockModelGenerators {
              return modeltemplate.createWithSuffix(Blocks.CHISELED_BOOKSHELF, s, texturemapping, this.modelOutput);
          });
  
@@ -173,7 +199,7 @@ index f9e8f45..01a880d 100644
      }
  
      private void createMagmaBlock() {
-@@ -1693,29 +1693,29 @@ public class BlockModelGenerators {
+@@ -1727,29 +1727,29 @@ public class BlockModelGenerators {
      private Variant applyRotation(FrontAndTop frontandtop, Variant variant) {
          switch (frontandtop) {
              case DOWN_NORTH:

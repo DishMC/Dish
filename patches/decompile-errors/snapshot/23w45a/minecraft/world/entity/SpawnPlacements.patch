@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/SpawnPlacements.java b/minecraft/world/entity/SpawnPlacements.java
-index fa96a1a..e9e4464 100644
+index 1a46080..8a45ffe 100644
 --- a/minecraft/world/entity/SpawnPlacements.java
 +++ b/minecraft/world/entity/SpawnPlacements.java
-@@ -68,7 +68,7 @@ public class SpawnPlacements {
+@@ -70,7 +70,7 @@ public class SpawnPlacements {
      public static <T extends Entity> boolean checkSpawnRules(EntityType<T> entitytype, ServerLevelAccessor serverlevelaccessor, MobSpawnType mobspawntype, BlockPos blockpos, RandomSource randomsource) {
          SpawnPlacements.Data spawnplacements_data = (SpawnPlacements.Data) SpawnPlacements.DATA_BY_TYPE.get(entitytype);
  

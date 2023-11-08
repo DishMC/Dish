@@ -1,5 +1,5 @@
 diff --git a/minecraft/util/ExtraCodecs.java b/minecraft/util/ExtraCodecs.java
-index b4a2658..4bafcf4 100644
+index 0b1f954..7beffb5 100644
 --- a/minecraft/util/ExtraCodecs.java
 +++ b/minecraft/util/ExtraCodecs.java
 @@ -180,7 +180,7 @@ public class ExtraCodecs {
@@ -151,3 +151,24 @@ index b4a2658..4bafcf4 100644
              int k = s.length();
  
              return k < i ? DataResult.error(() -> {
+@@ -612,9 +612,9 @@ public class ExtraCodecs {
+                     Object object = maplike.get(s1);
+ 
+                     Objects.requireNonNull(dynamicops);
+-                    T t1 = Objects.requireNonNullElseGet(object, dynamicops::emptyMap);
++                    T t1 = (T) Objects.requireNonNullElseGet(object, dynamicops::emptyMap);
+ 
+-                    return ((Codec) function1.apply(pair.getFirst())).decode(dynamicops, t1).map(Pair::getFirst);
++                    return (function1.apply(pair.getFirst())).decode(dynamicops, t1).map(Pair::getFirst);
+                 });
+             }
+ 
+@@ -632,7 +632,7 @@ public class ExtraCodecs {
+             }
+ 
+             private <T, V2 extends V> DataResult<T> encode(Codec<V2> codec1, V v0, DynamicOps<T> dynamicops) {
+-                return codec1.encodeStart(dynamicops, v0);
++                return codec1.encodeStart(dynamicops, (V2) v0);
+             }
+         };
+     }

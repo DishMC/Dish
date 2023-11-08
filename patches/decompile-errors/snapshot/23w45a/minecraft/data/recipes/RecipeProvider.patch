@@ -1,8 +1,8 @@
 diff --git a/minecraft/data/recipes/RecipeProvider.java b/minecraft/data/recipes/RecipeProvider.java
-index a0f9afb..ec32d2e 100644
+index 061582f..8609238 100644
 --- a/minecraft/data/recipes/RecipeProvider.java
 +++ b/minecraft/data/recipes/RecipeProvider.java
-@@ -47,7 +47,7 @@ public abstract class RecipeProvider implements DataProvider {
+@@ -49,7 +49,7 @@ public abstract class RecipeProvider implements DataProvider {
  
      final PackOutput.PathProvider recipePathProvider;
      final PackOutput.PathProvider advancementPathProvider;
@@ -11,7 +11,7 @@ index a0f9afb..ec32d2e 100644
          return buttonBuilder(itemlike, Ingredient.of(itemlike1));
      }).put(BlockFamily.Variant.CHISELED, (itemlike, itemlike1) -> {
          return chiseledBuilder(RecipeCategory.BUILDING_BLOCKS, itemlike, Ingredient.of(itemlike1));
-@@ -393,7 +393,7 @@ public abstract class RecipeProvider implements DataProvider {
+@@ -391,7 +391,7 @@ public abstract class RecipeProvider implements DataProvider {
      }
  
      protected static void waxRecipes(RecipeOutput recipeoutput) {

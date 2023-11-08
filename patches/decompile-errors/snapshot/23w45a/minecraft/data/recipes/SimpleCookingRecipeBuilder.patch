@@ -1,8 +1,8 @@
 diff --git a/minecraft/data/recipes/SimpleCookingRecipeBuilder.java b/minecraft/data/recipes/SimpleCookingRecipeBuilder.java
-index f59be3c..24e0d1e 100644
+index 95ec134..d696dbd 100644
 --- a/minecraft/data/recipes/SimpleCookingRecipeBuilder.java
 +++ b/minecraft/data/recipes/SimpleCookingRecipeBuilder.java
-@@ -85,7 +85,7 @@ public class SimpleCookingRecipeBuilder implements RecipeBuilder {
+@@ -87,7 +87,7 @@ public class SimpleCookingRecipeBuilder implements RecipeBuilder {
      public void save(RecipeOutput recipeoutput, ResourceLocation resourcelocation) {
          this.ensureValid(resourcelocation);
          Advancement.Builder advancement_builder = recipeoutput.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourcelocation)).rewards(AdvancementRewards.Builder.recipe(resourcelocation)).requirements(AdvancementRequirements.Strategy.OR);

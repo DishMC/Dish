@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/entity/monster/warden/Warden.java b/minecraft/world/entity/monster/warden/Warden.java
-index a9a1458..1f7cf38 100644
+index 7d9c064..ec9dd02 100644
 --- a/minecraft/world/entity/monster/warden/Warden.java
 +++ b/minecraft/world/entity/monster/warden/Warden.java
 @@ -14,6 +14,7 @@ import net.minecraft.core.particles.BlockParticleOption;
@@ -10,7 +10,7 @@ index a9a1458..1f7cf38 100644
  import net.minecraft.network.protocol.Packet;
  import net.minecraft.network.protocol.game.ClientGamePacketListener;
  import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-@@ -372,7 +373,7 @@ public class Warden extends Monster implements VibrationSystem {
+@@ -373,7 +374,7 @@ public class Warden extends Monster implements VibrationSystem {
  
      @Override
      public Brain<Warden> getBrain() {
@@ -19,7 +19,7 @@ index a9a1458..1f7cf38 100644
      }
  
      @Override
-@@ -419,7 +420,7 @@ public class Warden extends Monster implements VibrationSystem {
+@@ -420,7 +421,7 @@ public class Warden extends Monster implements VibrationSystem {
      @Override
      public void addAdditionalSaveData(CompoundTag compoundtag) {
          super.addAdditionalSaveData(compoundtag);
@@ -28,7 +28,7 @@ index a9a1458..1f7cf38 100644
          Logger logger = Warden.LOGGER;
  
          Objects.requireNonNull(logger);
-@@ -437,24 +438,16 @@ public class Warden extends Monster implements VibrationSystem {
+@@ -438,24 +439,16 @@ public class Warden extends Monster implements VibrationSystem {
      @Override
      public void readAdditionalSaveData(CompoundTag compoundtag) {
          super.readAdditionalSaveData(compoundtag);
@@ -55,7 +55,7 @@ index a9a1458..1f7cf38 100644
                  this.vibrationData = vibrationsystem_data;
              });
          }
-@@ -488,7 +481,7 @@ public class Warden extends Monster implements VibrationSystem {
+@@ -489,7 +482,7 @@ public class Warden extends Monster implements VibrationSystem {
      public void increaseAngerAt(@Nullable Entity entity, int i, boolean flag) {
          if (!this.isNoAi() && this.canTargetEntity(entity)) {
              WardenAi.setDigCooldown(this);
@@ -64,7 +64,7 @@ index a9a1458..1f7cf38 100644
              int j = this.angerManagement.increaseAnger(entity, i);
  
              if (entity instanceof Player && flag1 && AngerLevel.byAnger(j).isAngry()) {
-@@ -509,7 +502,7 @@ public class Warden extends Monster implements VibrationSystem {
+@@ -510,7 +503,7 @@ public class Warden extends Monster implements VibrationSystem {
      @Nullable
      @Override
      public LivingEntity getTarget() {
@@ -73,7 +73,7 @@ index a9a1458..1f7cf38 100644
      }
  
      @Override
-@@ -552,7 +545,7 @@ public class Warden extends Monster implements VibrationSystem {
+@@ -553,7 +546,7 @@ public class Warden extends Monster implements VibrationSystem {
  
      public void setAttackTarget(LivingEntity livingentity) {
          this.getBrain().eraseMemory(MemoryModuleType.ROAR_TARGET);

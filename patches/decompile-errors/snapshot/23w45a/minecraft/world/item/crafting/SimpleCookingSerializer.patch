@@ -1,10 +1,10 @@
 diff --git a/minecraft/world/item/crafting/SimpleCookingSerializer.java b/minecraft/world/item/crafting/SimpleCookingSerializer.java
-index 0de4b19..75ddda9 100644
+index ee87eb7..da1c6e5 100644
 --- a/minecraft/world/item/crafting/SimpleCookingSerializer.java
 +++ b/minecraft/world/item/crafting/SimpleCookingSerializer.java
 @@ -17,7 +17,7 @@ public class SimpleCookingSerializer<T extends AbstractCookingRecipe> implements
-     public SimpleCookingSerializer(SimpleCookingSerializer.CookieBaker<T> simplecookingserializer_cookiebaker, int i) {
-         this.factory = simplecookingserializer_cookiebaker;
+     public SimpleCookingSerializer(AbstractCookingRecipe.Factory<T> abstractcookingrecipe_factory, int i) {
+         this.factory = abstractcookingrecipe_factory;
          this.codec = RecordCodecBuilder.create((instance) -> {
 -            P6 p6 = instance.group(ExtraCodecs.strictOptionalField(Codec.STRING, "group", "").forGetter((abstractcookingrecipe) -> {
 +            return instance.group(ExtraCodecs.strictOptionalField(Codec.STRING, "group", "").forGetter((abstractcookingrecipe) -> {
@@ -17,9 +17,9 @@ index 0de4b19..75ddda9 100644
                  return abstractcookingrecipe.cookingTime;
 -            }));
 -
--            Objects.requireNonNull(simplecookingserializer_cookiebaker);
--            return p6.apply(instance, simplecookingserializer_cookiebaker::create);
-+            })).apply(instance, simplecookingserializer_cookiebaker::create);
+-            Objects.requireNonNull(abstractcookingrecipe_factory);
+-            return p6.apply(instance, abstractcookingrecipe_factory::create);
++            })).apply(instance, abstractcookingrecipe_factory::create);
          });
      }
  

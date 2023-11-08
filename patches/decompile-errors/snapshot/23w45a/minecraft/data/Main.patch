@@ -1,8 +1,8 @@
 diff --git a/minecraft/data/Main.java b/minecraft/data/Main.java
-index c4d8604..d02fb2f 100644
+index 8a10084..267eee2 100644
 --- a/minecraft/data/Main.java
 +++ b/minecraft/data/Main.java
-@@ -98,7 +98,7 @@ public class Main {
+@@ -103,7 +103,7 @@ public class Main {
  
      private static <T extends DataProvider> DataProvider.Factory<T> bindRegistries(BiFunction<PackOutput, CompletableFuture<HolderLookup.Provider>, T> bifunction, CompletableFuture<HolderLookup.Provider> completablefuture) {
          return (packoutput) -> {

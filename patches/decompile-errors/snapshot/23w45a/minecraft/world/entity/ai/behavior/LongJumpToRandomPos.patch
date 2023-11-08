@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/ai/behavior/LongJumpToRandomPos.java b/minecraft/world/entity/ai/behavior/LongJumpToRandomPos.java
-index 64747a2..9ac4cf5 100644
+index 6c0fdd3..c089e8e 100644
 --- a/minecraft/world/entity/ai/behavior/LongJumpToRandomPos.java
 +++ b/minecraft/world/entity/ai/behavior/LongJumpToRandomPos.java
-@@ -80,7 +80,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
+@@ -78,7 +78,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
          boolean flag = mob.onGround() && !mob.isInWater() && !mob.isInLava() && !serverlevel.getBlockState(mob.blockPosition()).is(Blocks.HONEY_BLOCK);
  
          if (!flag) {
@@ -11,7 +11,7 @@ index 64747a2..9ac4cf5 100644
          }
  
          return flag;
-@@ -90,7 +90,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
+@@ -88,7 +88,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
          boolean flag = this.initialPosition.isPresent() && ((Vec3) this.initialPosition.get()).equals(mob.position()) && this.findJumpTries > 0 && !mob.isInWaterOrBubble() && (this.chosenJump != null || !this.jumpCandidates.isEmpty());
  
          if (!flag && mob.getBrain().getMemory(MemoryModuleType.LONG_JUMP_MID_JUMP).isEmpty()) {
@@ -20,7 +20,7 @@ index 64747a2..9ac4cf5 100644
              mob.getBrain().eraseMemory(MemoryModuleType.LOOK_TARGET);
          }
  
-@@ -122,7 +122,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
+@@ -120,7 +120,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
                  double d1 = d0 + (double) e0.getJumpBoostPower();
  
                  e0.setDeltaMovement(this.chosenJump.scale(d1 / d0));
@@ -29,7 +29,7 @@ index 64747a2..9ac4cf5 100644
                  serverlevel.playSound((Player) null, (Entity) e0, (SoundEvent) this.getJumpSound.apply(e0), SoundSource.NEUTRAL, 1.0F, 1.0F);
              }
          } else {
-@@ -155,7 +155,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
+@@ -153,7 +153,7 @@ public class LongJumpToRandomPos<E extends Mob> extends Behavior<E> {
                      continue;
                  }
  

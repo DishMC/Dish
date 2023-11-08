@@ -1,8 +1,8 @@
 diff --git a/minecraft/core/MappedRegistry.java b/minecraft/core/MappedRegistry.java
-index c2ac522..009fa14 100644
+index d7a1701..527fe7f 100644
 --- a/minecraft/core/MappedRegistry.java
 +++ b/minecraft/core/MappedRegistry.java
-@@ -207,13 +207,13 @@ public class MappedRegistry<T> implements WritableRegistry<T> {
+@@ -203,13 +203,13 @@ public class MappedRegistry<T> implements WritableRegistry<T> {
      @Nullable
      @Override
      public T get(@Nullable ResourceKey<T> resourcekey) {

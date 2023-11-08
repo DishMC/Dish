@@ -1,8 +1,8 @@
 diff --git a/minecraft/util/datafix/DataFixers.java b/minecraft/util/datafix/DataFixers.java
-index 1be6c1f..48f75d4 100644
+index 83d7e9d..d264442 100644
 --- a/minecraft/util/datafix/DataFixers.java
 +++ b/minecraft/util/datafix/DataFixers.java
-@@ -775,12 +775,12 @@ public class DataFixers {
+@@ -776,12 +776,12 @@ public class DataFixers {
          datafixerbuilder.addFixer(new AddNewChoices(schema130, "Added Glow Squid", References.ENTITY));
          datafixerbuilder.addFixer(new AddNewChoices(schema130, "Added Glow Item Frame", References.ENTITY));
          Schema schema131 = datafixerbuilder.addSchema(2690, DataFixers.SAME_NAMESPACED);
@@ -17,7 +17,7 @@ index 1be6c1f..48f75d4 100644
  
          datafixerbuilder.addFixer(ItemRenameFix.create(schema132, "Rename copper item suffixes", createRenamer(immutablemap1)));
          datafixerbuilder.addFixer(BlockRenameFixWithJigsaw.create(schema132, "Rename copper blocks suffixes", createRenamer(immutablemap1)));
-@@ -788,7 +788,7 @@ public class DataFixers {
+@@ -789,7 +789,7 @@ public class DataFixers {
  
          datafixerbuilder.addFixer(new AddFlagIfNotPresentFix(schema133, References.WORLD_GEN_SETTINGS, "has_increased_height_already", false));
          Schema schema134 = datafixerbuilder.addSchema(2696, DataFixers.SAME_NAMESPACED);
@@ -26,7 +26,7 @@ index 1be6c1f..48f75d4 100644
  
          datafixerbuilder.addFixer(ItemRenameFix.create(schema134, "Renamed grimstone block items to deepslate", createRenamer(immutablemap2)));
          datafixerbuilder.addFixer(BlockRenameFixWithJigsaw.create(schema134, "Renamed grimstone blocks to deepslate", createRenamer(immutablemap2)));
-@@ -875,10 +875,10 @@ public class DataFixers {
+@@ -876,10 +876,10 @@ public class DataFixers {
          datafixerbuilder.addFixer(new AddNewChoices(schema159, "Added Allay", References.ENTITY));
          Schema schema160 = datafixerbuilder.addSchema(3084, DataFixers.SAME_NAMESPACED);
  
@@ -39,7 +39,7 @@ index 1be6c1f..48f75d4 100644
              int2objectopenhashmap1.defaultReturnValue("minecraft:tabby");
              int2objectopenhashmap1.put(0, "minecraft:tabby");
              int2objectopenhashmap1.put(1, "minecraft:black");
-@@ -895,7 +895,7 @@ public class DataFixers {
+@@ -896,7 +896,7 @@ public class DataFixers {
  
          Objects.requireNonNull(int2objectopenhashmap);
          datafixerbuilder.addFixer(new EntityVariantFix(schema161, "Change cat variant type", typereference, "minecraft:cat", "CatType", int2objectopenhashmap::get));

@@ -1,20 +1,8 @@
 diff --git a/minecraft/util/datafix/fixes/LevelDataGeneratorOptionsFix.java b/minecraft/util/datafix/fixes/LevelDataGeneratorOptionsFix.java
-index 5ff5146..7fc6fa2 100644
+index a9c8cde..3e78b06 100644
 --- a/minecraft/util/datafix/fixes/LevelDataGeneratorOptionsFix.java
 +++ b/minecraft/util/datafix/fixes/LevelDataGeneratorOptionsFix.java
-@@ -112,9 +112,9 @@ public class LevelDataGeneratorOptionsFix extends DataFix {
-         Type<?> type = this.getOutputSchema().getType(References.LEVEL);
- 
-         return this.fixTypeEverywhereTyped("LevelDataGeneratorOptionsFix", this.getInputSchema().getType(References.LEVEL), type, (typed) -> {
--            return (Typed) typed.write().flatMap((dynamic) -> {
-+            return typed.write().flatMap((dynamic) -> {
-                 Optional<String> optional = dynamic.get("generatorOptions").asString().result();
--                Dynamic dynamic1;
-+                Dynamic<?> dynamic1;
- 
-                 if ("flat".equalsIgnoreCase(dynamic.get("generatorName").asString(""))) {
-                     String s = (String) optional.orElse("");
-@@ -139,7 +139,7 @@ public class LevelDataGeneratorOptionsFix extends DataFix {
+@@ -133,7 +133,7 @@ public class LevelDataGeneratorOptionsFix extends DataFix {
          Iterator<String> iterator = Splitter.on(';').split(s).iterator();
          String s1 = "minecraft:plains";
          Map<String, Map<String, String>> map = Maps.newHashMap();
@@ -23,7 +11,7 @@ index 5ff5146..7fc6fa2 100644
  
          if (!s.isEmpty() && iterator.hasNext()) {
              object = getLayersInfoFromString((String) iterator.next());
-@@ -187,11 +187,11 @@ public class LevelDataGeneratorOptionsFix extends DataFix {
+@@ -181,11 +181,11 @@ public class LevelDataGeneratorOptionsFix extends DataFix {
              map.put("village", Maps.newHashMap());
          }
  
@@ -34,7 +22,7 @@ index 5ff5146..7fc6fa2 100644
 -        T t1 = dynamicops.createMap((Map) map.entrySet().stream().map((entry) -> {
 -            return Pair.of(dynamicops.createString(((String) entry.getKey()).toLowerCase(Locale.ROOT)), dynamicops.createMap((Map) ((Map) entry.getValue()).entrySet().stream().map((entry1) -> {
 +        T t1 = dynamicops.createMap(map.entrySet().stream().map((entry) -> {
-+            return Pair.of(dynamicops.createString(((String) entry.getKey()).toLowerCase(Locale.ROOT)), dynamicops.createMap((entry.getValue()).entrySet().stream().map((entry1) -> {
++            return Pair.of(dynamicops.createString(((String) entry.getKey()).toLowerCase(Locale.ROOT)), dynamicops.createMap(entry.getValue().entrySet().stream().map((entry1) -> {
                  return Pair.of(dynamicops.createString((String) entry1.getKey()), dynamicops.createString((String) entry1.getValue()));
              }).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond))));
          }).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond)));

@@ -1,5 +1,5 @@
 diff --git a/minecraft/core/Holder.java b/minecraft/core/Holder.java
-index 6c997ec..3fd0325 100644
+index 4c302f5..69a205b 100644
 --- a/minecraft/core/Holder.java
 +++ b/minecraft/core/Holder.java
 @@ -114,7 +114,7 @@ public interface Holder<T> {
