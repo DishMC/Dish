@@ -1,0 +1,29 @@
+diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
+index 130d283..2b11c71 100644
+--- a/src/main/java/net/minecraft/server/players/PlayerList.java
++++ b/src/main/java/net/minecraft/server/players/PlayerList.java
+@@ -213,8 +213,14 @@ public abstract class PlayerList {
+         } else {
+             mutablecomponent = Component.translatable("multiplayer.player.joined.renamed", serverplayer.getDisplayName(), s);
+         }
+-
+-        this.broadcastSystemMessage(mutablecomponent.withStyle(ChatFormatting.YELLOW), false);
++        // dish start -- add event listener for players joining
++        net.ouja.api.event.player.PlayerJoinEvent event = new net.ouja.api.event.player.PlayerJoinEvent(new net.ouja.dish.entity.DishPlayer(serverplayer), net.ouja.dish.network.chat.DishComponent.fromComponent(mutablecomponent));
++        net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++        if (event.getJoinMessage() != null) {
++            mutablecomponent = net.ouja.dish.network.chat.DishComponent.toComponent(event.getJoinMessage());
++        }
++        // dish end
++//        this.broadcastSystemMessage(mutablecomponent.withStyle(ChatFormatting.YELLOW), false); // dish -- called later
+         servergamepacketlistenerimpl.teleport(serverplayer.getX(), serverplayer.getY(), serverplayer.getZ(), serverplayer.getYRot(), serverplayer.getXRot());
+         ServerStatus serverstatus = this.server.getStatus();
+ 
+@@ -225,6 +231,7 @@ public abstract class PlayerList {
+         serverplayer.connection.send(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(this.players));
+         this.players.add(serverplayer);
+         this.playersByUUID.put(serverplayer.getUUID(), serverplayer);
++        this.broadcastSystemMessage(mutablecomponent, false); // dish -- remove ".withStyle()" and move this here so that when players join, they can see their own join message.
+         this.broadcastAll(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(serverplayer)));
+         this.sendLevelInfo(serverplayer, serverlevel1);
+         serverlevel1.addNewPlayer(serverplayer);
