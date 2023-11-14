@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const colors = require('./libs/colors');
 
-const DEFAULT_MINECRAFT_VERSION = "snapshot/23w45a";
+const DEFAULT_MINECRAFT_VERSION = "release/1.20.2";
 
 function log(msg) {
   console.log(`[Info]${colors.reset} ${msg}`);
