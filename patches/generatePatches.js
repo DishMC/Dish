@@ -51,6 +51,10 @@ function readDir(dir) {
 
 function readDishDir(dir) {
   const PATCH_DIR = `${baseDir}/${dir}`.replace('/dish/workspace/src/main/java/', `/${DECOMPILE_VERSION}/`);
+  if (fs.existsSync(PATCH_DIR)) {
+    fs.rmSync(PATCH_DIR, { recursive: true });
+    fs.mkdirSync(PATCH_DIR, { recursive: true });
+  }
 
   fs.readdirSync(dir).forEach(function (f) {
     if (fs.statSync(dir + '/' + f).isDirectory()) return readDishDir(dir + '/' + f);
