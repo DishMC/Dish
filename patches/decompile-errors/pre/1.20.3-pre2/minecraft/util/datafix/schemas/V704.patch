@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/datafix/schemas/V704.java b/minecraft/util/datafix/schemas/V704.java
+index bb33bdc..2e0dbe6 100644
+--- a/minecraft/util/datafix/schemas/V704.java
++++ b/minecraft/util/datafix/schemas/V704.java
+@@ -142,7 +142,7 @@ public class V704 extends Schema {
+     });
+     protected static final HookFunction ADD_NAMES = new HookFunction() {
+         public <T> T apply(DynamicOps<T> dynamicops, T t0) {
+-            return V99.addNames(new Dynamic(dynamicops, t0), V704.ITEM_TO_BLOCKENTITY, "ArmorStand");
++            return V99.addNames(new Dynamic<>(dynamicops, t0), V704.ITEM_TO_BLOCKENTITY, "ArmorStand");
+         }
+     };
+ 

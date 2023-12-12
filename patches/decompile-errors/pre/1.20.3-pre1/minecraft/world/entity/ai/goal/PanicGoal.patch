@@ -1,0 +1,12 @@
+diff --git a/minecraft/world/entity/ai/goal/PanicGoal.java b/minecraft/world/entity/ai/goal/PanicGoal.java
+index 4a012e1..32b4cba 100644
+--- a/minecraft/world/entity/ai/goal/PanicGoal.java
++++ b/minecraft/world/entity/ai/goal/PanicGoal.java
+@@ -89,6 +89,6 @@ public class PanicGoal extends Goal {
+ 
+         return !blockgetter.getBlockState(blockpos).getCollisionShape(blockgetter, blockpos).isEmpty() ? null : (BlockPos) BlockPos.findClosestMatch(entity.blockPosition(), i, 1, (blockpos1) -> {
+             return blockgetter.getFluidState(blockpos1).is(FluidTags.WATER);
+-        }).orElse((Object) null);
++        }).orElse(null);
+     }
+ }

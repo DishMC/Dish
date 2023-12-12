@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/Graph.java b/minecraft/util/Graph.java
+index 382d659..cd470fe 100644
+--- a/minecraft/util/Graph.java
++++ b/minecraft/util/Graph.java
+@@ -30,7 +30,7 @@ public final class Graph {
+                 }
+ 
+                 object = iterator.next();
+-            } while (!depthFirstSearch(map, set, set1, consumer, object));
++            } while (!depthFirstSearch(map, set, set1, consumer, (T) object));
+ 
+             return true;
+         }

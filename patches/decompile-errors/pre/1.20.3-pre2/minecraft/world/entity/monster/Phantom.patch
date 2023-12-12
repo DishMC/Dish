@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/monster/Phantom.java b/minecraft/world/entity/monster/Phantom.java
+index 8587a75..3e53ee6 100644
+--- a/minecraft/world/entity/monster/Phantom.java
++++ b/minecraft/world/entity/monster/Phantom.java
+@@ -543,7 +543,7 @@ public class Phantom extends FlyingMob implements Enemy {
+                 List<Player> list = Phantom.this.level().getNearbyPlayers(this.attackTargeting, Phantom.this, Phantom.this.getBoundingBox().inflate(16.0D, 64.0D, 16.0D));
+ 
+                 if (!list.isEmpty()) {
+-                    list.sort(Comparator.comparing(Entity::getY).reversed());
++                    list.sort(Comparator.<Entity, Double>comparing(Entity::getY).reversed());
+                     Iterator iterator = list.iterator();
+ 
+                     while (iterator.hasNext()) {

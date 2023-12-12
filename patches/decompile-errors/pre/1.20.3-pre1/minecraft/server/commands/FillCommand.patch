@@ -1,0 +1,15 @@
+diff --git a/minecraft/server/commands/FillCommand.java b/minecraft/server/commands/FillCommand.java
+index cdc12c9..8adfd16 100644
+--- a/minecraft/server/commands/FillCommand.java
++++ b/minecraft/server/commands/FillCommand.java
+@@ -106,8 +106,9 @@ public class FillCommand {
+             if (k == 0) {
+                 throw FillCommand.ERROR_FAILED.create();
+             } else {
++                int finalK = k;
+                 commandsourcestack.sendSuccess(() -> {
+-                    return Component.translatable("commands.fill.success", k);
++                    return Component.translatable("commands.fill.success", finalK);
+                 }, true);
+                 return k;
+             }

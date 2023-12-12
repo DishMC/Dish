@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/commands/SpreadPlayersCommand.java b/minecraft/server/commands/SpreadPlayersCommand.java
+index 3f6e0cd..1ba54ef 100644
+--- a/minecraft/server/commands/SpreadPlayersCommand.java
++++ b/minecraft/server/commands/SpreadPlayersCommand.java
+@@ -94,7 +94,7 @@ public class SpreadPlayersCommand {
+             if (entity instanceof Player) {
+                 set.add(entity.getTeam());
+             } else {
+-                set.add((Object) null);
++                set.add(null);
+             }
+         }
+ 

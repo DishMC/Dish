@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/packs/OverlayMetadataSection.java b/minecraft/server/packs/OverlayMetadataSection.java
+index da28d75..e26735c 100644
+--- a/minecraft/server/packs/OverlayMetadataSection.java
++++ b/minecraft/server/packs/OverlayMetadataSection.java
+@@ -32,7 +32,7 @@ public record OverlayMetadataSection(List<OverlayMetadataSection.OverlayEntry> o
+     public static record OverlayEntry(InclusiveRange<Integer> format, String overlay) {
+ 
+         static final Codec<OverlayMetadataSection.OverlayEntry> CODEC = RecordCodecBuilder.create((instance) -> {
+-            return instance.group(InclusiveRange.codec(Codec.INT).fieldOf("formats").forGetter(OverlayMetadataSection.OverlayEntry::format), ExtraCodecs.validate((Codec) Codec.STRING, OverlayMetadataSection::validateOverlayDir).fieldOf("directory").forGetter(OverlayMetadataSection.OverlayEntry::overlay)).apply(instance, OverlayMetadataSection.OverlayEntry::new);
++            return instance.group(InclusiveRange.codec(Codec.INT).fieldOf("formats").forGetter(OverlayMetadataSection.OverlayEntry::format), ExtraCodecs.validate(Codec.STRING, OverlayMetadataSection::validateOverlayDir).fieldOf("directory").forGetter(OverlayMetadataSection.OverlayEntry::overlay)).apply(instance, OverlayMetadataSection.OverlayEntry::new);
+         });
+ 
+         public boolean isApplicable(int i) {

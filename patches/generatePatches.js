@@ -7,12 +7,11 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const { error, log, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION, warn } = require('../config');
+const { log, warn, error, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION, stdio } = require('../config');
 const calculateFileHash = require('../utils/checkFileHash');
 
 const args = process.argv.slice(2);
 const baseDir = __dirname;
-const stdio = [process.stdin, process.stdout, process.stderr];
 
 const DECOMPILE_VERSION = args[0];
 

@@ -19,7 +19,7 @@ function readDir(dir) {
     try {
       if (fs.statSync(`${dir}/${f}`).isDirectory()) return readDir(`${dir}/${f}`);
       fs.cpSync(`${dir}/${f}`, `${path.join(baseDir, '../../decompiled')}/${f}`);
-      execSync(`cd ${path.join(baseDir, '../../decompiled')} && git apply ${f}`, { stdio: [process.stdin, process.stdout, process.stderr] });
+      execSync(`cd ${path.join(baseDir, '../../decompiled')} && git apply ${f} --ignore-whitespace`, { stdio: [process.stdin, process.stdout, process.stderr] });
       log(`Applied ${f.replace('.patch', '')}`);
     } catch (e) {
       rejected.push(`${dir}/${f}`);
@@ -48,6 +48,7 @@ function readDir(dir) {
     fs.mkdirSync(`patches/decompile-errors/${args[0]}`, { recursive: true });
     // copy old version to new version
     copyDir(`patches/decompile-errors/${args[1]}`, `patches/decompile-errors/${args[0]}`);
+    if (fs.existsSync(`patches/decompile-errors/${args[1]}/removed`)) fs.rmSync(`patches/decompile-errors/${args[1]}/removed`, { recursive: true }); // remove deleted patch files for new version
   }
   readDir(`patches/decompile-errors/${args[0]}/minecraft`);
   if (fs.existsSync(`patches/decompile-errors/${args[0]}/mojang`)) readDir(`patches/decompile-errors/${args[0]}/mojang`);

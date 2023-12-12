@@ -1,0 +1,20 @@
+{
+  "version": "1.20.4",
+  "api_version": "R0.0-SNAPSHOT",
+  "libraries": [
+    {
+      "downloads": {
+        "url": "https://repo1.maven.org/maven2/org/yaml/snakeyaml/2.0/snakeyaml-2.0.jar",
+        "path": "org/yaml/snakeyaml/2.0/snakeyaml-2.0.jar"
+      },
+      "name": "org.yaml:snakeyaml:2.0"
+    },
+    {
+      "downloads": {
+        "url": "https://maven.ouja.net/net/ouja/api/1.20.4-R0.0-SNAPSHOT/api-1.20.4-R0.0-20231212.021737-1.jar",
+        "path": "net/ouja/api/1.20.4/1.20.4-R0.0-SNAPSHOT.jar"
+      },
+      "name": "net.ouja:api:1.20.4-R0.0-SNAPSHOT"
+    }
+  ]
+}

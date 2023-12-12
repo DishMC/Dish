@@ -53,6 +53,10 @@ const stdio = [process.stdin, process.stdout, process.stderr];
     execSync(`cd dish/workspace && gradlew build`, { stdio }); // build to make sure it works. Will error if there are decompile errors
   }
   console.timeEnd('Building Jar');
+  const dishVersion = fs.readFileSync('dish/workspace/src/main/resources/build.txt').toString();
+  const dishAPIVersion = fs.readFileSync('dish/workspace/build.gradle').toString().split('api_version = version + \'-')[1].split("'")[0];
+  log(`Found Dish version '${dishVersion}'`);
+  log(`Found Dish-API version '${dishAPIVersion}'`);
   console.time('Remapping server');
   remapServer(version);
   console.timeEnd('Remapping server');
@@ -65,6 +69,14 @@ const stdio = [process.stdin, process.stdout, process.stderr];
   readVersions(version);
   createClassPath(version);
   fs.writeFileSync('Dish-Bundler/libs/META-INF/main-class', 'net.minecraft.server.Main');
+  log('Getting version.json');
+  execSync(`cd cache/${version} && jar xf server-${version}.jar version.json`, { stdio });
+  const VERSION = JSON.parse(fs.readFileSync(`cache/${version}/version.json`).toString());
+  VERSION.build_time = new Date();
+  VERSION.dishVersion = dishVersion;
+  VERSION.dishAPIVersion = dishAPIVersion;
+  fs.mkdirSync('Dish-Bundler/src/main/resources', { recursive: true });
+  fs.writeFileSync('Dish-Bundler/src/main/resources/version.json', JSON.stringify(VERSION, null, 2.5));
   // Linux wants the gradlew file to be executable, and to run it with ./ in the beginning. Windows does not do this.
   if (process.platform !== 'win32') {
     execSync(`cd Dish-Bundler && chmod +x gradlew`, { stdio }); // for linux, you will need to make gradlew executable
@@ -73,6 +85,7 @@ const stdio = [process.stdin, process.stdout, process.stderr];
     execSync(`cd Dish-Bundler && gradlew build`, { stdio }); // build to make sure it works. Will error if there are decompile errors
   }
   fs.renameSync('Dish-Bundler/build/libs/bundler-0.1-SNAPSHOT.jar', 'Dish-Bundler/build/libs/server.jar');
+  fs.rmdirSync('Dish-Bundler/src/main/resources', { recursive: true }); // delete resources as it is only used for the version.json file, which changes.
   process.exit(0);
 })();
 

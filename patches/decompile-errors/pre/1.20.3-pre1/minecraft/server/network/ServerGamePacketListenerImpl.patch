@@ -1,0 +1,48 @@
+diff --git a/minecraft/server/network/ServerGamePacketListenerImpl.java b/minecraft/server/network/ServerGamePacketListenerImpl.java
+index 56008a0..0065843 100644
+--- a/minecraft/server/network/ServerGamePacketListenerImpl.java
++++ b/minecraft/server/network/ServerGamePacketListenerImpl.java
+@@ -162,6 +162,7 @@ import net.minecraft.world.item.BucketItem;
+ import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
++import net.minecraft.world.item.crafting.RecipeHolder;
+ import net.minecraft.world.level.BaseCommandBlock;
+ import net.minecraft.world.level.GameRules;
+ import net.minecraft.world.level.GameType;
+@@ -483,7 +484,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+     @Override
+     public void handleRecipeBookSeenRecipePacket(ServerboundRecipeBookSeenRecipePacket serverboundrecipebookseenrecipepacket) {
+         PacketUtils.ensureRunningOnSameThread(serverboundrecipebookseenrecipepacket, this, this.player.serverLevel());
+-        Optional optional = this.server.getRecipeManager().byKey(serverboundrecipebookseenrecipepacket.getRecipe());
++        Optional<RecipeHolder<?>> optional = this.server.getRecipeManager().byKey(serverboundrecipebookseenrecipepacket.getRecipe());
+         ServerRecipeBook serverrecipebook = this.player.getRecipeBook();
+ 
+         Objects.requireNonNull(serverrecipebook);
+@@ -791,7 +792,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+ 
+             Objects.requireNonNull(list);
+             optional.ifPresent(list::add);
+-            Stream stream = serverboundeditbookpacket.getPages().stream().limit(100L);
++            Stream<String> stream = serverboundeditbookpacket.getPages().stream().limit(100L);
+ 
+             Objects.requireNonNull(list);
+             stream.forEach(list::add);
+@@ -843,7 +844,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+         ListTag listtag = new ListTag();
+ 
+         if (this.player.isTextFilteringEnabled()) {
+-            Stream stream = list.stream().map((filteredtext) -> {
++            Stream<StringTag> stream = list.stream().map((filteredtext) -> {
+                 return StringTag.valueOf((String) unaryoperator.apply(filteredtext.filteredOrEmpty()));
+             });
+ 
+@@ -1325,7 +1326,7 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+     }
+ 
+     private void performChatCommand(ServerboundChatCommandPacket serverboundchatcommandpacket, LastSeenMessages lastseenmessages) {
+-        ParseResults parseresults = this.parseCommand(serverboundchatcommandpacket.command());
++        ParseResults<CommandSourceStack> parseresults = this.parseCommand(serverboundchatcommandpacket.command());
+ 
+         Map map;
+ 

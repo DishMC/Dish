@@ -1,0 +1,78 @@
+diff --git a/minecraft/Util.java b/minecraft/Util.java
+index 30ecbc5..9b2880d 100644
+--- a/minecraft/Util.java
++++ b/minecraft/Util.java
+@@ -118,7 +118,7 @@ public class Util {
+     }
+ 
+     public static <T extends Comparable<T>> String getPropertyName(Property<T> property, Object object) {
+-        return property.getName((Comparable) object);
++        return property.getName((T) object);
+     }
+ 
+     public static String makeDescriptionId(String s, @Nullable ResourceLocation resourcelocation) {
+@@ -302,7 +302,7 @@ public class Util {
+ 
+             thread.setName(s);
+ 
+-            Object object;
++            V object;
+ 
+             try {
+                 object = supplier.get();
+@@ -356,8 +356,8 @@ public class Util {
+     public static <T> T findPreviousInIterable(Iterable<T> iterable, @Nullable T t0) {
+         Iterator<T> iterator = iterable.iterator();
+ 
+-        Object object;
+-        Object object1;
++        T object;
++        T object1;
+ 
+         for (object1 = null; iterator.hasNext(); object1 = object) {
+             object = iterator.next();
+@@ -426,7 +426,7 @@ public class Util {
+         list.forEach((completablefuture) -> {
+             int i = list1.size();
+ 
+-            list1.add((Object) null);
++            list1.add(null);
+             acompletablefuture[i] = completablefuture.whenComplete((object, throwable) -> {
+                 if (throwable != null) {
+                     consumer.accept(throwable);
+@@ -813,7 +813,7 @@ public class Util {
+         BlockingQueue<Runnable> blockingqueue = new LinkedBlockingQueue();
+ 
+         Objects.requireNonNull(blockingqueue);
+-        Object object = function.apply(blockingqueue::add);
++        T object = function.apply(blockingqueue::add);
+ 
+         while (!predicate.test(object)) {
+             try {
+@@ -881,7 +881,7 @@ public class Util {
+         Optional<PartialResult<T>> optional = dataresult.error();
+ 
+         if (optional.isPresent()) {
+-            throw (Throwable) function.apply(((PartialResult) optional.get()).message());
++            throw function.apply((optional.get()).message());
+         } else {
+             return dataresult.result().orElseThrow();
+         }
+@@ -897,7 +897,7 @@ public class Util {
+             if (optional1.isPresent()) {
+                 return optional1.get();
+             } else {
+-                throw (Throwable) function.apply(((PartialResult) optional.get()).message());
++                throw function.apply(optional.get().message());
+             }
+         } else {
+             return dataresult.result().orElseThrow();
+@@ -961,7 +961,7 @@ public class Util {
+ 
+         public void openUrl(URL url) {
+             try {
+-                Process process = (Process) AccessController.doPrivileged(() -> {
++                Process process = (Process) AccessController.doPrivileged((java.security.PrivilegedExceptionAction<Process>) () -> {
+                     return Runtime.getRuntime().exec(this.getOpenUrlArguments(url));
+                 });
+ 

@@ -2,11 +2,7 @@ name: Check License Headers
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
 jobs:
   check_license:
     runs-on: ubuntu-latest

@@ -1,0 +1,13 @@
+diff --git a/minecraft/commands/ParserUtils.java b/minecraft/commands/ParserUtils.java
+index cc18b8a..46ea16a 100644
+--- a/minecraft/commands/ParserUtils.java
++++ b/minecraft/commands/ParserUtils.java
+@@ -48,7 +48,7 @@ public class ParserUtils {
+ 
+         jsonreader.setLenient(false);
+ 
+-        Object object;
++        T object;
+ 
+         try {
+             JsonElement jsonelement = Streams.parse(jsonreader);

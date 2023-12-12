@@ -1,0 +1,37 @@
+diff --git a/minecraft/server/commands/ScoreboardCommand.java b/minecraft/server/commands/ScoreboardCommand.java
+index c47bd84..daa6fcd 100644
+--- a/minecraft/server/commands/ScoreboardCommand.java
++++ b/minecraft/server/commands/ScoreboardCommand.java
+@@ -217,8 +217,9 @@ public class ScoreboardCommand {
+         }
+ 
+         if (collection.size() == 1) {
++            int finalI = i;
+             commandsourcestack.sendSuccess(() -> {
+-                return Component.translatable("commands.scoreboard.players.operation.success.single", objective.getFormattedDisplayName(), getFirstTargetName(collection), i);
++                return Component.translatable("commands.scoreboard.players.operation.success.single", objective.getFormattedDisplayName(), getFirstTargetName(collection), finalI);
+             }, true);
+         } else {
+             commandsourcestack.sendSuccess(() -> {
+@@ -414,8 +415,9 @@ public class ScoreboardCommand {
+         }
+ 
+         if (collection.size() == 1) {
++            int finalJ = j;
+             commandsourcestack.sendSuccess(() -> {
+-                return Component.translatable("commands.scoreboard.players.add.success.single", i, objective.getFormattedDisplayName(), getFirstTargetName(collection), j);
++                return Component.translatable("commands.scoreboard.players.add.success.single", i, objective.getFormattedDisplayName(), getFirstTargetName(collection), finalJ);
+             }, true);
+         } else {
+             commandsourcestack.sendSuccess(() -> {
+@@ -440,8 +442,9 @@ public class ScoreboardCommand {
+         }
+ 
+         if (collection.size() == 1) {
++            int finalJ = j;
+             commandsourcestack.sendSuccess(() -> {
+-                return Component.translatable("commands.scoreboard.players.remove.success.single", i, objective.getFormattedDisplayName(), getFirstTargetName(collection), j);
++                return Component.translatable("commands.scoreboard.players.remove.success.single", i, objective.getFormattedDisplayName(), getFirstTargetName(collection), finalJ);
+             }, true);
+         } else {
+             commandsourcestack.sendSuccess(() -> {

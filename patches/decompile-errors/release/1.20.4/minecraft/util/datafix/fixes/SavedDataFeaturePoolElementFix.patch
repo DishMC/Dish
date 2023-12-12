@@ -1,0 +1,17 @@
+diff --git a/minecraft/util/datafix/fixes/SavedDataFeaturePoolElementFix.java b/minecraft/util/datafix/fixes/SavedDataFeaturePoolElementFix.java
+index 3367b7c..569c7c1 100644
+--- a/minecraft/util/datafix/fixes/SavedDataFeaturePoolElementFix.java
++++ b/minecraft/util/datafix/fixes/SavedDataFeaturePoolElementFix.java
+@@ -36,10 +36,10 @@ public class SavedDataFeaturePoolElementFix extends DataFix {
+     }
+ 
+     private static <T> Dynamic<T> updateChildren(Dynamic<T> dynamic) {
+-        DataResult dataresult = dynamic.asStreamOpt().map(SavedDataFeaturePoolElementFix::updateChildren);
++        DataResult<Stream> dataresult = dynamic.asStreamOpt().map(SavedDataFeaturePoolElementFix::updateChildren);
+ 
+         Objects.requireNonNull(dynamic);
+-        return (Dynamic) dataresult.map(dynamic::createList).result().orElse(dynamic);
++        return dataresult.map(dynamic::createList).result().orElse(dynamic);
+     }
+ 
+     private static Stream<? extends Dynamic<?>> updateChildren(Stream<? extends Dynamic<?>> stream) {

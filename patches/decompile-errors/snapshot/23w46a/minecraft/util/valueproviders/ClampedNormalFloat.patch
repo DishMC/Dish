@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/valueproviders/ClampedNormalFloat.java b/minecraft/util/valueproviders/ClampedNormalFloat.java
+index 1de6515..bc2f3ac 100644
+--- a/minecraft/util/valueproviders/ClampedNormalFloat.java
++++ b/minecraft/util/valueproviders/ClampedNormalFloat.java
+@@ -9,7 +9,7 @@ import net.minecraft.util.RandomSource;
+ 
+ public class ClampedNormalFloat extends FloatProvider {
+ 
+-    public static final Codec<ClampedNormalFloat> CODEC = RecordCodecBuilder.create((instance) -> {
++    public static final Codec<ClampedNormalFloat> CODEC = RecordCodecBuilder.<ClampedNormalFloat>create((instance) -> {
+         return instance.group(Codec.FLOAT.fieldOf("mean").forGetter((clampednormalfloat) -> {
+             return clampednormalfloat.mean;
+         }), Codec.FLOAT.fieldOf("deviation").forGetter((clampednormalfloat) -> {

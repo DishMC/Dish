@@ -1,0 +1,13 @@
+diff --git a/minecraft/data/recipes/ShapedRecipeBuilder.java b/minecraft/data/recipes/ShapedRecipeBuilder.java
+index e71cbf3..3da5f5f 100644
+--- a/minecraft/data/recipes/ShapedRecipeBuilder.java
++++ b/minecraft/data/recipes/ShapedRecipeBuilder.java
+@@ -101,7 +101,7 @@ public class ShapedRecipeBuilder implements RecipeBuilder {
+     public void save(RecipeOutput recipeoutput, ResourceLocation resourcelocation) {
+         ShapedRecipePattern shapedrecipepattern = this.ensureValid(resourcelocation);
+         Advancement.Builder advancement_builder = recipeoutput.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourcelocation)).rewards(AdvancementRewards.Builder.recipe(resourcelocation)).requirements(AdvancementRequirements.Strategy.OR);
+-        Map map = this.criteria;
++        Map<String, Criterion<?>> map = this.criteria;
+ 
+         Objects.requireNonNull(advancement_builder);
+         map.forEach(advancement_builder::addCriterion);

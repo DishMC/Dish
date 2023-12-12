@@ -1,0 +1,40 @@
+diff --git a/minecraft/world/entity/npc/Villager.java b/minecraft/world/entity/npc/Villager.java
+index 9cf3676..66b9c34 100644
+--- a/minecraft/world/entity/npc/Villager.java
++++ b/minecraft/world/entity/npc/Villager.java
+@@ -150,7 +150,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
+ 
+     @Override
+     public Brain<Villager> getBrain() {
+-        return super.getBrain();
++        return (Brain<Villager>) super.getBrain();
+     }
+ 
+     @Override
+@@ -490,7 +490,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
+     @Override
+     public void addAdditionalSaveData(CompoundTag compoundtag) {
+         super.addAdditionalSaveData(compoundtag);
+-        DataResult dataresult = VillagerData.CODEC.encodeStart(NbtOps.INSTANCE, this.getVillagerData());
++        DataResult<Tag> dataresult = VillagerData.CODEC.encodeStart(NbtOps.INSTANCE, this.getVillagerData());
+         Logger logger = Villager.LOGGER;
+ 
+         Objects.requireNonNull(logger);
+@@ -990,7 +990,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
+     @Override
+     public void startSleeping(BlockPos blockpos) {
+         super.startSleeping(blockpos);
+-        this.brain.setMemory(MemoryModuleType.LAST_SLEPT, (Object) this.level().getGameTime());
++        this.brain.setMemory(MemoryModuleType.LAST_SLEPT, this.level().getGameTime());
+         this.brain.eraseMemory(MemoryModuleType.WALK_TARGET);
+         this.brain.eraseMemory(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
+     }
+@@ -998,7 +998,7 @@ public class Villager extends AbstractVillager implements ReputationEventHandler
+     @Override
+     public void stopSleeping() {
+         super.stopSleeping();
+-        this.brain.setMemory(MemoryModuleType.LAST_WOKEN, (Object) this.level().getGameTime());
++        this.brain.setMemory(MemoryModuleType.LAST_WOKEN, this.level().getGameTime());
+     }
+ 
+     private boolean golemSpawnConditionsMet(long i) {

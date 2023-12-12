@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/portal/PortalForcer.java b/minecraft/world/level/portal/PortalForcer.java
+index f8816bf..df0786c 100644
+--- a/minecraft/world/level/portal/PortalForcer.java
++++ b/minecraft/world/level/portal/PortalForcer.java
+@@ -50,7 +50,7 @@ public class PortalForcer {
+             return holder.is(PoiTypes.NETHER_PORTAL);
+         }, blockpos, i, PoiManager.Occupancy.ANY).filter((poirecord) -> {
+             return worldborder.isWithinBounds(poirecord.getPos());
+-        }).sorted(Comparator.comparingDouble((poirecord) -> {
++        }).sorted(Comparator.<PoiRecord>comparingDouble((poirecord) -> {
+             return poirecord.getPos().distSqr(blockpos);
+         }).thenComparingInt((poirecord) -> {
+             return poirecord.getPos().getY();

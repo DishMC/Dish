@@ -1,0 +1,78 @@
+diff --git a/minecraft/world/level/levelgen/WorldDimensions.java b/minecraft/world/level/levelgen/WorldDimensions.java
+index d0e0c2b..ed0a694 100644
+--- a/minecraft/world/level/levelgen/WorldDimensions.java
++++ b/minecraft/world/level/levelgen/WorldDimensions.java
+@@ -38,13 +38,13 @@ public record WorldDimensions(Registry<LevelStem> dimensions) {
+     private static final Set<ResourceKey<LevelStem>> BUILTIN_ORDER = ImmutableSet.of(LevelStem.OVERWORLD, LevelStem.NETHER, LevelStem.END);
+     private static final int VANILLA_DIMENSION_COUNT = WorldDimensions.BUILTIN_ORDER.size();
+ 
+-    public WorldDimensions(Registry<LevelStem> registry) {
+-        LevelStem levelstem = (LevelStem) registry.get(LevelStem.OVERWORLD);
++    public WorldDimensions(Registry<LevelStem> dimensions) {
++        LevelStem levelstem = (LevelStem) dimensions.get(LevelStem.OVERWORLD);
+ 
+         if (levelstem == null) {
+             throw new IllegalStateException("Overworld settings missing");
+         } else {
+-            this.dimensions = registry;
++            this.dimensions = dimensions;
+         }
+     }
+ 
+@@ -71,7 +71,7 @@ public record WorldDimensions(Registry<LevelStem> dimensions) {
+     public static Registry<LevelStem> withOverworld(Registry<LevelStem> registry, Holder<DimensionType> holder, ChunkGenerator chunkgenerator) {
+         WritableRegistry<LevelStem> writableregistry = new MappedRegistry<>(Registries.LEVEL_STEM, Lifecycle.experimental());
+ 
+-        writableregistry.register(LevelStem.OVERWORLD, (Object) (new LevelStem(holder, chunkgenerator)), Lifecycle.stable());
++        writableregistry.register(LevelStem.OVERWORLD, (new LevelStem(holder, chunkgenerator)), Lifecycle.stable());
+         Iterator iterator = registry.entrySet().iterator();
+ 
+         while (iterator.hasNext()) {
+@@ -79,7 +79,7 @@ public record WorldDimensions(Registry<LevelStem> dimensions) {
+             ResourceKey<LevelStem> resourcekey = (ResourceKey) entry.getKey();
+ 
+             if (resourcekey != LevelStem.OVERWORLD) {
+-                writableregistry.register(resourcekey, (Object) ((LevelStem) entry.getValue()), registry.lifecycle((LevelStem) entry.getValue()));
++                writableregistry.register(resourcekey, ((LevelStem) entry.getValue()), registry.lifecycle((LevelStem) entry.getValue()));
+             }
+         }
+ 
+@@ -193,29 +193,26 @@ public record WorldDimensions(Registry<LevelStem> dimensions) {
+     }
+ 
+     public WorldDimensions.Complete bake(Registry<LevelStem> registry) {
++        record Entry(ResourceKey<LevelStem> key, LevelStem value) {
++            Lifecycle lifecycle() {
++                return WorldDimensions.checkStability(this.key, this.value);
++            }
++        }
+         Stream<ResourceKey<LevelStem>> stream = Stream.concat(registry.registryKeySet().stream(), this.dimensions.registryKeySet().stream()).distinct();
+-        List<1Entry> list = new ArrayList();
++        List<Entry> list = new ArrayList();
+ 
+         keysInOrder(stream).forEach((resourcekey) -> {
+             registry.getOptional(resourcekey).or(() -> {
+                 return this.dimensions.getOptional(resourcekey);
+             }).ifPresent((levelstem) -> {
+-                record 1Entry(ResourceKey<LevelStem> key, LevelStem value) {
+-
+-                    Lifecycle lifecycle() {
+-                        return WorldDimensions.checkStability(this.key, this.value);
+-                    }
+-                }
+-
+-
+-                list.add(new 1Entry(resourcekey, levelstem));
++                list.add(new Entry(resourcekey, levelstem));
+             });
+         });
+         Lifecycle lifecycle = list.size() == WorldDimensions.VANILLA_DIMENSION_COUNT ? Lifecycle.stable() : Lifecycle.experimental();
+         WritableRegistry<LevelStem> writableregistry = new MappedRegistry<>(Registries.LEVEL_STEM, lifecycle);
+ 
+-        list.forEach((1entry) -> {
+-            writableregistry.register(1entry.key, (Object)1entry.value, 1entry.lifecycle());
++        list.forEach((entry) -> {
++            writableregistry.register(entry.key, entry.value, entry.lifecycle());
+         });
+         Registry<LevelStem> registry1 = writableregistry.freeze();
+         PrimaryLevelData.SpecialWorldProperty primaryleveldata_specialworldproperty = specialWorldProperty(registry1);

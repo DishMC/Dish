@@ -1,0 +1,12 @@
+diff --git a/minecraft/network/protocol/game/ClientboundUpdateRecipesPacket.java b/minecraft/network/protocol/game/ClientboundUpdateRecipesPacket.java
+index f674b8b..0d279ce 100644
+--- a/minecraft/network/protocol/game/ClientboundUpdateRecipesPacket.java
++++ b/minecraft/network/protocol/game/ClientboundUpdateRecipesPacket.java
+@@ -49,6 +49,6 @@ public class ClientboundUpdateRecipesPacket implements Packet<ClientGamePacketLi
+     public static <T extends Recipe<?>> void toNetwork(FriendlyByteBuf friendlybytebuf, RecipeHolder<?> recipeholder) {
+         friendlybytebuf.writeResourceLocation(BuiltInRegistries.RECIPE_SERIALIZER.getKey(recipeholder.value().getSerializer()));
+         friendlybytebuf.writeResourceLocation(recipeholder.id());
+-        recipeholder.value().getSerializer().toNetwork(friendlybytebuf, recipeholder.value());
++        ((RecipeSerializer)recipeholder.value().getSerializer()).toNetwork(friendlybytebuf, recipeholder.value());
+     }
+ }

@@ -1,0 +1,28 @@
+diff --git a/minecraft/world/level/storage/loot/entries/LootPoolSingletonContainer.java b/minecraft/world/level/storage/loot/entries/LootPoolSingletonContainer.java
+index 09407a7..f985699 100644
+--- a/minecraft/world/level/storage/loot/entries/LootPoolSingletonContainer.java
++++ b/minecraft/world/level/storage/loot/entries/LootPoolSingletonContainer.java
+@@ -113,7 +113,7 @@ public abstract class LootPoolSingletonContainer extends LootPoolEntryContainer
+         @Override
+         public T apply(LootItemFunction.Builder lootitemfunction_builder) {
+             this.functions.add(lootitemfunction_builder.build());
+-            return (LootPoolSingletonContainer.Builder) this.getThis();
++            return this.getThis();
+         }
+ 
+         protected List<LootItemFunction> getFunctions() {
+@@ -122,12 +122,12 @@ public abstract class LootPoolSingletonContainer extends LootPoolEntryContainer
+ 
+         public T setWeight(int i) {
+             this.weight = i;
+-            return (LootPoolSingletonContainer.Builder) this.getThis();
++            return this.getThis();
+         }
+ 
+         public T setQuality(int i) {
+             this.quality = i;
+-            return (LootPoolSingletonContainer.Builder) this.getThis();
++            return this.getThis();
+         }
+     }
+ 

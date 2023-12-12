@@ -1,0 +1,68 @@
+diff --git a/minecraft/world/entity/ai/Brain.java b/minecraft/world/entity/ai/Brain.java
+index 192f7fc..0f080b9 100644
+--- a/minecraft/world/entity/ai/Brain.java
++++ b/minecraft/world/entity/ai/Brain.java
+@@ -87,23 +87,23 @@ public class Brain<E extends LivingEntity> {
+                         return this.captureRead(memorymoduletype, dynamicops, pair.getSecond());
+                     });
+ 
+-                    mutableobject1.setValue(((DataResult) mutableobject1.getValue()).apply2(Builder::add, dataresult1));
++                    mutableobject1.setValue((mutableobject1.getValue()).apply2(Builder::add, dataresult1));
+                 });
+-                DataResult dataresult = (DataResult) mutableobject1.getValue();
++                DataResult<Builder<MemoryValue<?>>> dataresult = mutableobject1.getValue();
+                 Logger logger = Brain.LOGGER;
+ 
+                 Objects.requireNonNull(logger);
+                 ImmutableList<Brain.MemoryValue<?>> immutablelist = (ImmutableList) dataresult.resultOrPartial(logger::error).map(Builder::build).orElseGet(ImmutableList::of);
+                 Collection collection2 = collection;
+                 Collection collection3 = collection1;
+-                MutableObject mutableobject2 = mutableobject;
++                MutableObject<Codec<Brain<E>>> mutableobject2 = mutableobject;
+ 
+                 Objects.requireNonNull(mutableobject);
+                 return DataResult.success(new Brain<>(collection2, collection3, immutablelist, mutableobject2::getValue));
+             }
+ 
+             private <T, U> DataResult<Brain.MemoryValue<U>> captureRead(MemoryModuleType<U> memorymoduletype, DynamicOps<T> dynamicops, T t0) {
+-                return ((DataResult) memorymoduletype.getCodec().map(DataResult::success).orElseGet(() -> {
++                return (memorymoduletype.getCodec().map(DataResult::success).orElseGet(() -> {
+                     return DataResult.error(() -> {
+                         return "No codec for memory: " + memorymoduletype;
+                     });
+@@ -225,7 +225,7 @@ public class Brain<E extends LivingEntity> {
+         if (optional == null) {
+             throw new IllegalStateException("Unregistered memory fetched: " + memorymoduletype);
+         } else {
+-            return optional.map(ExpirableValue::getValue);
++            return (Optional<U>) optional.map(ExpirableValue::getValue);
+         }
+     }
+ 
+@@ -233,7 +233,7 @@ public class Brain<E extends LivingEntity> {
+     public <U> Optional<U> getMemoryInternal(MemoryModuleType<U> memorymoduletype) {
+         Optional<? extends ExpirableValue<?>> optional = (Optional) this.memories.get(memorymoduletype);
+ 
+-        return optional == null ? null : optional.map(ExpirableValue::getValue);
++        return optional == null ? null : (Optional<U>) optional.map(ExpirableValue::getValue);
+     }
+ 
+     public <U> long getTimeUntilExpiry(MemoryModuleType<U> memorymoduletype) {
+@@ -608,7 +608,7 @@ public class Brain<E extends LivingEntity> {
+         }
+ 
+         public Brain<E> makeBrain(Dynamic<?> dynamic) {
+-            DataResult dataresult = this.codec.parse(dynamic);
++            DataResult<Brain<E>> dataresult = this.codec.parse(dynamic);
+             Logger logger = Brain.LOGGER;
+ 
+             Objects.requireNonNull(logger);
+@@ -626,7 +626,7 @@ public class Brain<E extends LivingEntity> {
+         private final Optional<? extends ExpirableValue<U>> value;
+ 
+         static <U> Brain.MemoryValue<U> createUnchecked(MemoryModuleType<U> memorymoduletype, Optional<? extends ExpirableValue<?>> optional) {
+-            return new Brain.MemoryValue<>(memorymoduletype, optional);
++            return new Brain.MemoryValue(memorymoduletype, optional);
+         }
+ 
+         MemoryValue(MemoryModuleType<U> memorymoduletype, Optional<? extends ExpirableValue<U>> optional) {

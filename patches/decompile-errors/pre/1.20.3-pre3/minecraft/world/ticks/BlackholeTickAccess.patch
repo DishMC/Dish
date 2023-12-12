@@ -1,0 +1,17 @@
+diff --git a/minecraft/world/ticks/BlackholeTickAccess.java b/minecraft/world/ticks/BlackholeTickAccess.java
+index 20137fe..0fc3f99 100644
+--- a/minecraft/world/ticks/BlackholeTickAccess.java
++++ b/minecraft/world/ticks/BlackholeTickAccess.java
+@@ -41,10 +41,10 @@ public class BlackholeTickAccess {
+     public BlackholeTickAccess() {}
+ 
+     public static <T> TickContainerAccess<T> emptyContainer() {
+-        return BlackholeTickAccess.CONTAINER_BLACKHOLE;
++        return (TickContainerAccess<T>) BlackholeTickAccess.CONTAINER_BLACKHOLE;
+     }
+ 
+     public static <T> LevelTickAccess<T> emptyLevelList() {
+-        return BlackholeTickAccess.LEVEL_BLACKHOLE;
++        return (LevelTickAccess<T>) BlackholeTickAccess.LEVEL_BLACKHOLE;
+     }
+ }

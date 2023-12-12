@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/scores/Scoreboard.java b/minecraft/world/scores/Scoreboard.java
+index 5f66004..595462f 100644
+--- a/minecraft/world/scores/Scoreboard.java
++++ b/minecraft/world/scores/Scoreboard.java
+@@ -62,7 +62,7 @@ public class Scoreboard {
+     }
+ 
+     public final void forAllObjectives(ObjectiveCriteria objectivecriteria, ScoreHolder scoreholder, Consumer<ScoreAccess> consumer) {
+-        ((List) this.objectivesByCriteria.getOrDefault(objectivecriteria, Collections.emptyList())).forEach((objective) -> {
++        (this.objectivesByCriteria.getOrDefault(objectivecriteria, Collections.emptyList())).forEach((objective) -> {
+             consumer.accept(this.getOrCreatePlayerScore(scoreholder, objective, true));
+         });
+     }

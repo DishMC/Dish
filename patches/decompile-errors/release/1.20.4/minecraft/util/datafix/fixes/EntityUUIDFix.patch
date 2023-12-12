@@ -1,0 +1,22 @@
+diff --git a/minecraft/util/datafix/fixes/EntityUUIDFix.java b/minecraft/util/datafix/fixes/EntityUUIDFix.java
+index 0b68e4f..ccfd1ec 100644
+--- a/minecraft/util/datafix/fixes/EntityUUIDFix.java
++++ b/minecraft/util/datafix/fixes/EntityUUIDFix.java
+@@ -108,7 +108,7 @@ public class EntityUUIDFix extends AbstractUUIDFix {
+     private static Dynamic<?> updateFox(Dynamic<?> dynamic) {
+         Optional<Dynamic<?>> optional = dynamic.get("TrustedUUIDs").result().map((dynamic1) -> {
+             return dynamic.createList(dynamic1.asStream().map((dynamic2) -> {
+-                return (Dynamic) createUUIDFromML(dynamic2).orElseGet(() -> {
++                return createUUIDFromML(dynamic2).orElseGet(() -> {
+                     EntityUUIDFix.LOGGER.warn("Trusted contained invalid data.");
+                     return dynamic2;
+                 });
+@@ -147,7 +147,7 @@ public class EntityUUIDFix extends AbstractUUIDFix {
+             return dynamic.createList(dynamic1.asStream().map((dynamic2) -> {
+                 return dynamic2.update("Modifiers", (dynamic3) -> {
+                     return dynamic2.createList(dynamic3.asStream().map((dynamic4) -> {
+-                        return (Dynamic) replaceUUIDLeastMost(dynamic4, "UUID", "UUID").orElse(dynamic4);
++                        return replaceUUIDLeastMost(dynamic4, "UUID", "UUID").orElse(dynamic4);
+                     }));
+                 });
+             }));

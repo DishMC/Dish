@@ -1,0 +1,24 @@
+diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
+index e6068e4..3de5dac 100644
+--- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
++++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
+@@ -1277,6 +1277,10 @@ public abstract class LivingEntity extends Entity implements Attackable {
+             }
+ 
+             if (this.isDeadOrDying()) {
++                if (!(this instanceof Player)) { // dish -- make sure the entity that died is not a player, then call the EntityDeathEvent.
++                    net.ouja.api.event.entity.EntityDeathEvent event = new net.ouja.api.event.entity.EntityDeathEvent(this.toDish(), new net.ouja.api.world.level.block.BlockPos(this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ(), new net.ouja.dish.world.DishLevel((ServerLevel)this.level())), damagesource.toDish(), net.ouja.dish.network.chat.DishComponent.fromComponent(this.getCombatTracker().getDeathMessage()));
++                    net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++                } // dish end
+                 if (!this.checkTotemDeathProtection(damagesource)) {
+                     SoundEvent soundevent = this.getDeathSound();
+ 
+@@ -3659,6 +3663,8 @@ public abstract class LivingEntity extends Entity implements Attackable {
+         this.yHeadRot = (float) Mth.rotLerp(1.0D / (double) i, (double) this.yHeadRot, d0);
+     }
+ 
++    public net.ouja.dish.entity.DishEntity toDish() { return new net.ouja.dish.entity.DishEntity(this); } // dish
++
+     public static record Fallsounds(SoundEvent small, SoundEvent big) {
+ 
+     }

@@ -1,0 +1,22 @@
+diff --git a/minecraft/world/level/chunk/ChunkGenerator.java b/minecraft/world/level/chunk/ChunkGenerator.java
+index 84d8a58..07d42c2 100644
+--- a/minecraft/world/level/chunk/ChunkGenerator.java
++++ b/minecraft/world/level/chunk/ChunkGenerator.java
+@@ -329,7 +329,7 @@ public abstract class ChunkGenerator {
+ 
+                 for (int k = 0; k < j; ++k) {
+                     LevelChunkSection levelchunksection = alevelchunksection[k];
+-                    PalettedContainerRO palettedcontainerro = levelchunksection.getBiomes();
++                    PalettedContainerRO<Holder<Biome>> palettedcontainerro = levelchunksection.getBiomes();
+ 
+                     Objects.requireNonNull(set);
+                     palettedcontainerro.getAll(set::add);
+@@ -355,7 +355,7 @@ public abstract class ChunkGenerator {
+                             Structure structure = (Structure) iterator.next();
+ 
+                             worldgenrandom.setFeatureSeed(i, i1, l);
+-                            Supplier supplier = () -> {
++                            Supplier<String> supplier = () -> {
+                                 Optional optional = registry.getResourceKey(structure).map(Object::toString);
+ 
+                                 Objects.requireNonNull(structure);

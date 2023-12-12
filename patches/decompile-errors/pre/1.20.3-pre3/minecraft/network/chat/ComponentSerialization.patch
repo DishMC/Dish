@@ -1,0 +1,13 @@
+diff --git a/minecraft/network/chat/ComponentSerialization.java b/minecraft/network/chat/ComponentSerialization.java
+index 7bbbf3a..69bf83a 100644
+--- a/minecraft/network/chat/ComponentSerialization.java
++++ b/minecraft/network/chat/ComponentSerialization.java
+@@ -47,7 +47,7 @@ public class ComponentSerialization {
+ 
+     public static <T extends StringRepresentable, E> MapCodec<E> createLegacyComponentMatcher(T[] at, Function<T, MapCodec<? extends E>> function, Function<E, T> function1, String s) {
+         MapCodec<E> mapcodec = new ComponentSerialization.FuzzyCodec<>(Stream.of(at).map(function).toList(), (object) -> {
+-            return (MapEncoder) function.apply((StringRepresentable) function1.apply(object));
++            return (MapEncoder) function.apply(function1.apply(object));
+         });
+         Codec<T> codec = StringRepresentable.fromValues(() -> {
+             return at;

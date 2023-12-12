@@ -1,0 +1,13 @@
+diff --git a/minecraft/network/syncher/SynchedEntityData.java b/minecraft/network/syncher/SynchedEntityData.java
+index 222810a..9a949ec 100644
+--- a/minecraft/network/syncher/SynchedEntityData.java
++++ b/minecraft/network/syncher/SynchedEntityData.java
+@@ -227,7 +227,7 @@ public class SynchedEntityData {
+         if (!Objects.equals(synchedentitydata_datavalue.serializer(), synchedentitydata_dataitem.accessor.getSerializer())) {
+             throw new IllegalStateException(String.format(Locale.ROOT, "Invalid entity data item type for field %d on entity %s: old=%s(%s), new=%s(%s)", synchedentitydata_dataitem.accessor.getId(), this.entity, synchedentitydata_dataitem.value, synchedentitydata_dataitem.value.getClass(), synchedentitydata_datavalue.value, synchedentitydata_datavalue.value.getClass()));
+         } else {
+-            synchedentitydata_dataitem.setValue(synchedentitydata_datavalue.value);
++            synchedentitydata_dataitem.setValue((T) synchedentitydata_datavalue.value);
+         }
+     }
+ 

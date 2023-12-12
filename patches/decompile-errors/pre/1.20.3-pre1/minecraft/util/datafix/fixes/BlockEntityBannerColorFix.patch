@@ -1,0 +1,21 @@
+diff --git a/minecraft/util/datafix/fixes/BlockEntityBannerColorFix.java b/minecraft/util/datafix/fixes/BlockEntityBannerColorFix.java
+index f8220ad..dc433ba 100644
+--- a/minecraft/util/datafix/fixes/BlockEntityBannerColorFix.java
++++ b/minecraft/util/datafix/fixes/BlockEntityBannerColorFix.java
+@@ -7,6 +7,7 @@ import com.mojang.datafixers.schemas.Schema;
+ import com.mojang.serialization.DataResult;
+ import com.mojang.serialization.Dynamic;
+ import java.util.Objects;
++import java.util.stream.Stream;
+ 
+ public class BlockEntityBannerColorFix extends NamedEntityFix {
+ 
+@@ -19,7 +20,7 @@ public class BlockEntityBannerColorFix extends NamedEntityFix {
+             return dynamic1.createInt(15 - dynamic1.asInt(0));
+         });
+         dynamic = dynamic.update("Patterns", (dynamic1) -> {
+-            DataResult dataresult = dynamic1.asStreamOpt().map((stream) -> {
++            DataResult<Stream<Dynamic<?>>> dataresult = dynamic1.asStreamOpt().map((stream) -> {
+                 return stream.map((dynamic2) -> {
+                     return dynamic2.update("Color", (dynamic3) -> {
+                         return dynamic3.createInt(15 - dynamic3.asInt(0));

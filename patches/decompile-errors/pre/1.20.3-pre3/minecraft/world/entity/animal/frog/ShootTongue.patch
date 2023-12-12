@@ -1,0 +1,22 @@
+diff --git a/minecraft/world/entity/animal/frog/ShootTongue.java b/minecraft/world/entity/animal/frog/ShootTongue.java
+index 3e4ef43..91e11b9 100644
+--- a/minecraft/world/entity/animal/frog/ShootTongue.java
++++ b/minecraft/world/entity/animal/frog/ShootTongue.java
+@@ -64,7 +64,7 @@ public class ShootTongue extends Behavior<Frog> {
+ 
+         BehaviorUtils.lookAtEntity(frog, livingentity);
+         frog.setTongueTarget(livingentity);
+-        frog.getBrain().setMemory(MemoryModuleType.WALK_TARGET, (Object) (new WalkTarget(livingentity.position(), 2.0F, 0)));
++        frog.getBrain().setMemory(MemoryModuleType.WALK_TARGET, (new WalkTarget(livingentity.position(), 2.0F, 0)));
+         this.calculatePathCounter = 10;
+         this.state = ShootTongue.State.MOVE_TO_TARGET;
+     }
+@@ -106,7 +106,7 @@ public class ShootTongue extends Behavior<Frog> {
+                     this.eatAnimationTimer = 0;
+                     this.state = ShootTongue.State.CATCH_ANIMATION;
+                 } else if (this.calculatePathCounter <= 0) {
+-                    frog.getBrain().setMemory(MemoryModuleType.WALK_TARGET, (Object) (new WalkTarget(livingentity.position(), 2.0F, 0)));
++                    frog.getBrain().setMemory(MemoryModuleType.WALK_TARGET, (new WalkTarget(livingentity.position(), 2.0F, 0)));
+                     this.calculatePathCounter = 10;
+                 } else {
+                     --this.calculatePathCounter;

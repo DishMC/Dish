@@ -1,0 +1,13 @@
+diff --git a/minecraft/core/registries/BuiltInRegistries.java b/minecraft/core/registries/BuiltInRegistries.java
+index ed04868..d913f69 100644
+--- a/minecraft/core/registries/BuiltInRegistries.java
++++ b/minecraft/core/registries/BuiltInRegistries.java
+@@ -338,7 +338,7 @@ public class BuiltInRegistries {
+         BuiltInRegistries.LOADERS.put(resourcelocation, () -> {
+             return builtinregistries_registrybootstrap.run(r0);
+         });
+-        BuiltInRegistries.WRITABLE_REGISTRY.register(resourcekey, (Object) r0, lifecycle);
++        BuiltInRegistries.WRITABLE_REGISTRY.register((ResourceKey) resourcekey, r0, lifecycle);
+         return r0;
+     }
+ 

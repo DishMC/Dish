@@ -1,0 +1,13 @@
+diff --git a/minecraft/network/chat/PlayerChatMessage.java b/minecraft/network/chat/PlayerChatMessage.java
+index 3c7a971..e346edc 100644
+--- a/minecraft/network/chat/PlayerChatMessage.java
++++ b/minecraft/network/chat/PlayerChatMessage.java
+@@ -22,7 +22,7 @@ public record PlayerChatMessage(SignedMessageLink link, @Nullable MessageSignatu
+         }), SignedMessageBody.MAP_CODEC.forGetter(PlayerChatMessage::signedBody), ComponentSerialization.CODEC.optionalFieldOf("unsigned_content").forGetter((playerchatmessage) -> {
+             return Optional.ofNullable(playerchatmessage.unsignedContent);
+         }), FilterMask.CODEC.optionalFieldOf("filter_mask", FilterMask.PASS_THROUGH).forGetter(PlayerChatMessage::filterMask)).apply(instance, (signedmessagelink, optional, signedmessagebody, optional1, filtermask) -> {
+-            return new PlayerChatMessage(signedmessagelink, (MessageSignature) optional.orElse((Object) null), signedmessagebody, (Component) optional1.orElse((Object) null), filtermask);
++            return new PlayerChatMessage(signedmessagelink, (MessageSignature) optional.orElse(null), signedmessagebody, (Component) optional1.orElse(null), filtermask);
+         });
+     });
+     private static final UUID SYSTEM_SENDER = Util.NIL_UUID;

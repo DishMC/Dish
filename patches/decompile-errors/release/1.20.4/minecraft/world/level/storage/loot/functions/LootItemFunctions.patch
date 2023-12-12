@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/storage/loot/functions/LootItemFunctions.java b/minecraft/world/level/storage/loot/functions/LootItemFunctions.java
+index 6781dc7..e1d5023 100644
+--- a/minecraft/world/level/storage/loot/functions/LootItemFunctions.java
++++ b/minecraft/world/level/storage/loot/functions/LootItemFunctions.java
+@@ -70,7 +70,7 @@ public class LootItemFunctions {
+                 BiFunction<ItemStack, LootContext, ItemStack> bifunction2 = (BiFunction) list1.get(1);
+ 
+                 bifunction = (itemstack, lootcontext) -> {
+-                    return (ItemStack) bifunction2.apply((ItemStack) bifunction1.apply(itemstack, lootcontext), lootcontext);
++                    return (ItemStack) bifunction2.apply((ItemStack) bifunction1.apply((ItemStack) itemstack, (LootContext) lootcontext), (LootContext) lootcontext);
+                 };
+                 break;
+             default:

@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/Rotation.java b/minecraft/world/level/block/Rotation.java
+index 522fb42..e9982d8 100644
+--- a/minecraft/world/level/block/Rotation.java
++++ b/minecraft/world/level/block/Rotation.java
+@@ -100,7 +100,7 @@ public enum Rotation implements StringRepresentable {
+     }
+ 
+     public static List<Rotation> getShuffled(RandomSource randomsource) {
+-        return Util.shuffledCopy((Object[]) values(), randomsource);
++        return Util.shuffledCopy(values(), randomsource);
+     }
+ 
+     @Override

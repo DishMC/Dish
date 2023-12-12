@@ -20,7 +20,7 @@ function readDir(dir) {
     try {
       if (fs.statSync(`${dir}/${f}`).isDirectory()) return readDir(`${dir}/${f}`);
       fs.cpSync(`${dir}/${f}`, `${PATH}/${f}`);
-      execSync(`cd ${PATH} && git apply ${f}`, { stdio: [process.stdin, process.stdout, process.stderr] });
+      execSync(`cd ${PATH} && git apply ${f} --ignore-whitespace`, { stdio: [process.stdin, process.stdout, process.stderr] });
       log(`Applied ${f.replace('.patch', '')}`);
     } catch (e) {
       rejected.push(`${dir}/${f}`);

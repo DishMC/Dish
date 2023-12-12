@@ -1,0 +1,20 @@
+diff --git a/minecraft/data/tags/GameEventTagsProvider.java b/minecraft/data/tags/GameEventTagsProvider.java
+index 6e01d09..6e0f2eb 100644
+--- a/minecraft/data/tags/GameEventTagsProvider.java
++++ b/minecraft/data/tags/GameEventTagsProvider.java
+@@ -22,10 +22,10 @@ public class GameEventTagsProvider extends IntrinsicHolderTagsProvider<GameEvent
+ 
+     @Override
+     protected void addTags(HolderLookup.Provider holderlookup_provider) {
+-        this.tag(GameEventTags.VIBRATIONS).add((Object[])GameEventTagsProvider.VIBRATIONS_EXCEPT_FLAP).add((Object[])VibrationSystem.RESONANCE_EVENTS).add((Object)GameEvent.FLAP);
+-        this.tag(GameEventTags.SHRIEKER_CAN_LISTEN).add((Object)GameEvent.SCULK_SENSOR_TENDRILS_CLICKING);
+-        this.tag(GameEventTags.WARDEN_CAN_LISTEN).add((Object[])GameEventTagsProvider.VIBRATIONS_EXCEPT_FLAP).add((Object[])VibrationSystem.RESONANCE_EVENTS).add((Object)GameEvent.SHRIEK).addTag(GameEventTags.SHRIEKER_CAN_LISTEN);
+-        this.tag(GameEventTags.IGNORE_VIBRATIONS_SNEAKING).add((Object[])(GameEvent.HIT_GROUND, GameEvent.PROJECTILE_SHOOT, GameEvent.STEP, GameEvent.SWIM, GameEvent.ITEM_INTERACT_START, GameEvent.ITEM_INTERACT_FINISH));
+-        this.tag(GameEventTags.ALLAY_CAN_LISTEN).add((Object)GameEvent.NOTE_BLOCK_PLAY);
++        this.tag(GameEventTags.VIBRATIONS).add(GameEventTagsProvider.VIBRATIONS_EXCEPT_FLAP).add(VibrationSystem.RESONANCE_EVENTS).add(GameEvent.FLAP);
++        this.tag(GameEventTags.SHRIEKER_CAN_LISTEN).add(GameEvent.SCULK_SENSOR_TENDRILS_CLICKING);
++        this.tag(GameEventTags.WARDEN_CAN_LISTEN).add(GameEventTagsProvider.VIBRATIONS_EXCEPT_FLAP).add(VibrationSystem.RESONANCE_EVENTS).add(GameEvent.SHRIEK).addTag(GameEventTags.SHRIEKER_CAN_LISTEN);
++        this.tag(GameEventTags.IGNORE_VIBRATIONS_SNEAKING).add(GameEvent.HIT_GROUND, GameEvent.PROJECTILE_SHOOT, GameEvent.STEP, GameEvent.SWIM, GameEvent.ITEM_INTERACT_START, GameEvent.ITEM_INTERACT_FINISH);
++        this.tag(GameEventTags.ALLAY_CAN_LISTEN).add(GameEvent.NOTE_BLOCK_PLAY);
+     }
+ }

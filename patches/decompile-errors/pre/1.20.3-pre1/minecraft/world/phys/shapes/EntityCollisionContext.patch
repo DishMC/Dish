@@ -1,0 +1,29 @@
+diff --git a/minecraft/world/phys/shapes/EntityCollisionContext.java b/minecraft/world/phys/shapes/EntityCollisionContext.java
+index 0e88c8b..032d66d 100644
+--- a/minecraft/world/phys/shapes/EntityCollisionContext.java
++++ b/minecraft/world/phys/shapes/EntityCollisionContext.java
+@@ -39,23 +39,7 @@ public class EntityCollisionContext implements CollisionContext {
+     /** @deprecated */
+     @Deprecated
+     protected EntityCollisionContext(Entity entity) {
+-        boolean flag = entity.isDescending();
+-        double d0 = entity.getY();
+-        ItemStack itemstack = entity instanceof LivingEntity ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY;
+-        Predicate predicate;
+-
+-        if (entity instanceof LivingEntity) {
+-            LivingEntity livingentity = (LivingEntity) entity;
+-
+-            Objects.requireNonNull((LivingEntity) entity);
+-            predicate = livingentity::canStandOnFluid;
+-        } else {
+-            predicate = (fluidstate) -> {
+-                return false;
+-            };
+-        }
+-
+-        this(flag, d0, itemstack, predicate, entity);
++        this(entity.isDescending(), entity.getY(), entity instanceof LivingEntity ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY, entity instanceof LivingEntity ? ((LivingEntity)entity)::canStandOnFluid : (fluidstate) -> false, entity);
+     }
+ 
+     @Override

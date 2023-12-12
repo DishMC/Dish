@@ -1,0 +1,13 @@
+diff --git a/minecraft/data/worldgen/placement/PlacementUtils.java b/minecraft/data/worldgen/placement/PlacementUtils.java
+index 601c99f..62e5eec 100644
+--- a/minecraft/data/worldgen/placement/PlacementUtils.java
++++ b/minecraft/data/worldgen/placement/PlacementUtils.java
+@@ -70,7 +70,7 @@ public class PlacementUtils {
+         if (Math.abs(f1 - (float) ((int) f1)) > 1.0E-5F) {
+             throw new IllegalStateException("Chance data cannot be represented as list weight");
+         } else {
+-            SimpleWeightedRandomList<IntProvider> simpleweightedrandomlist = SimpleWeightedRandomList.builder().add(ConstantInt.of(i), (int) f1 - 1).add(ConstantInt.of(i + j), 1).build();
++            SimpleWeightedRandomList<IntProvider> simpleweightedrandomlist = SimpleWeightedRandomList.<IntProvider>builder().add(ConstantInt.of(i), (int) f1 - 1).add(ConstantInt.of(i + j), 1).build();
+ 
+             return CountPlacement.of(new WeightedListInt(simpleweightedrandomlist));
+         }

@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/presets/WorldPreset.java b/minecraft/world/level/levelgen/presets/WorldPreset.java
+index 38a6baf..5aaf642 100644
+--- a/minecraft/world/level/levelgen/presets/WorldPreset.java
++++ b/minecraft/world/level/levelgen/presets/WorldPreset.java
+@@ -38,7 +38,7 @@ public class WorldPreset {
+             LevelStem levelstem = (LevelStem) this.dimensions.get(resourcekey);
+ 
+             if (levelstem != null) {
+-                writableregistry.register(resourcekey, (Object) levelstem, Lifecycle.stable());
++                writableregistry.register(resourcekey, levelstem, Lifecycle.stable());
+             }
+ 
+         });

@@ -1,0 +1,65 @@
+diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
+index 7436496..8d589f3 100644
+--- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
++++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
+@@ -636,11 +636,26 @@ public class ServerPlayer extends Player {
+ 
+     @Override
+     public void die(DamageSource damagesource) {
++        // dish
++        net.ouja.api.event.player.PlayerDeathEvent event = new net.ouja.api.event.player.PlayerDeathEvent(
++                new net.ouja.dish.entity.DishPlayer(this),
++                new net.ouja.api.world.level.block.BlockPos(
++                        this.blockPosition().getX(),
++                        this.blockPosition().getY(),
++                        this.blockPosition().getZ(),
++                        new net.ouja.dish.world.DishLevel((ServerLevel)this.level())
++                ),
++                damagesource.toDish(),
++                net.ouja.dish.network.chat.DishComponent.fromComponent(this.getCombatTracker().getDeathMessage())
++        );
++        net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++        if (event.isCancelled()) return;
++        // dish end
+         this.gameEvent(GameEvent.ENTITY_DIE);
+         boolean flag = this.level().getGameRules().getBoolean(GameRules.RULE_SHOWDEATHMESSAGES);
+ 
+         if (flag) {
+-            Component component = this.getCombatTracker().getDeathMessage();
++            Component component = net.ouja.dish.network.chat.DishComponent.toComponent(event.getDeathMessage()); // dish -- allow plugins to modify the death message
+ 
+             this.connection.send(new ClientboundPlayerCombatKillPacket(this.getId(), component), PacketSendListener.exceptionallySend(() -> {
+                 boolean flag1 = true;
+@@ -936,6 +951,11 @@ public class ServerPlayer extends Player {
+             } else if (this.bedBlocked(blockpos, direction)) {
+                 return Either.left(Player.BedSleepingProblem.OBSTRUCTED);
+             } else {
++                // dish
++                net.ouja.api.event.player.PlayerSleepEvent event = new net.ouja.api.event.player.PlayerSleepEvent(new net.ouja.dish.entity.DishPlayer(this), new net.ouja.api.world.level.block.BlockPos(blockpos.getX(), blockpos.getY(), blockpos.getZ(), new net.ouja.dish.world.DishLevel((ServerLevel)this.level())));
++                net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++                if (event.isCancelled()) return Either.left(Player.BedSleepingProblem.NOT_POSSIBLE_HERE);
++                // dish end
+                 this.setRespawnPosition(this.level().dimension(), blockpos, this.getYRot(), false, true);
+                 if (this.level().isDay()) {
+                     return Either.left(Player.BedSleepingProblem.NOT_POSSIBLE_NOW);
+@@ -948,7 +968,7 @@ public class ServerPlayer extends Player {
+                             return monster.isPreventingPlayerRest(this);
+                         });
+ 
+-                        if (!list.isEmpty()) {
++                        if (!event.canSleepWhileMonstersAreNear() && !list.isEmpty()) { // dish -- PlayerSleepEvent modifies if the player can sleep while monsters are near.
+                             return Either.left(Player.BedSleepingProblem.NOT_SAFE);
+                         }
+                     }
+@@ -1633,6 +1653,11 @@ public class ServerPlayer extends Player {
+         if (this.gameMode.getGameModeForPlayer() == GameType.SPECTATOR) {
+             this.setCamera(entity);
+         } else {
++            // dish start
++            net.ouja.api.event.player.PlayerAttackEvent event = new net.ouja.api.event.player.PlayerAttackEvent(new net.ouja.dish.entity.DishPlayer(this), new net.ouja.dish.entity.DishEntity((LivingEntity)entity));
++            net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++            if (event.isCancelled()) return;
++            // dish end
+             super.attack(entity);
+         }
+ 

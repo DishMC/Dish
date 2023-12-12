@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/datafix/fixes/OverreachingTickFix.java b/minecraft/util/datafix/fixes/OverreachingTickFix.java
+index dfcb307..132549a 100644
+--- a/minecraft/util/datafix/fixes/OverreachingTickFix.java
++++ b/minecraft/util/datafix/fixes/OverreachingTickFix.java
+@@ -39,7 +39,7 @@ public class OverreachingTickFix extends DataFix {
+ 
+     private static Dynamic<?> extractOverreachingTicks(Dynamic<?> dynamic, int i, int j, Optional<? extends Dynamic<?>> optional, String s) {
+         if (optional.isPresent()) {
+-            List<? extends Dynamic<?>> list = ((Dynamic) optional.get()).asStream().filter((dynamic1) -> {
++            List<? extends Dynamic<?>> list = (optional.get()).asStream().filter((dynamic1) -> {
+                 int k = dynamic1.get("x").asInt(0);
+                 int l = dynamic1.get("z").asInt(0);
+                 int i1 = Math.abs(i - (k >> 4));

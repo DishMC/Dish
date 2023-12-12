@@ -1,0 +1,15 @@
+diff --git a/minecraft/server/commands/CloneCommands.java b/minecraft/server/commands/CloneCommands.java
+index e16d489..ca6a5ab 100644
+--- a/minecraft/server/commands/CloneCommands.java
++++ b/minecraft/server/commands/CloneCommands.java
+@@ -238,8 +238,9 @@ public class CloneCommands {
+                 if (k == 0) {
+                     throw CloneCommands.ERROR_FAILED.create();
+                 } else {
++                    int finalK = k;
+                     commandsourcestack.sendSuccess(() -> {
+-                        return Component.translatable("commands.clone.success", k);
++                        return Component.translatable("commands.clone.success", finalK);
+                     }, true);
+                     return k;
+                 }

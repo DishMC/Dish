@@ -6,7 +6,7 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 
-const { error, log, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION, warn } = require('../../config');
+const { log, warn, error, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION } = require('../../config');
 const calculateFileHash = require('../../utils/checkFileHash');
 const path = require('path');
 
@@ -46,6 +46,13 @@ function readDir(dir) {
           }
 
           fs.rmSync(`${baseDir}/${f.replace('.java', '.patch')}`, { recursive: true });
+        } else {
+          if (fs.existsSync(`${PATCH_DIR}/${f.replace('.java', '.patch')}`)) {
+            warn(`Patch for '~/${f}' seems to have been made useless.`);
+            const removedDir = PATCH_DIR.replace('/minecraft/', '/removed/').replace('/mojang/', '/removed/');
+            if (!fs.existsSync(removedDir)) fs.mkdirSync(removedDir, { recursive: true });
+            fs.renameSync(`${PATCH_DIR}/${f.replace('.java', '.patch')}`, `${removedDir}/${f.replace('.java', '.patch')}`);
+          }
         }
       } else {
         error(`Can't find ${WORKSPACE_DIR}/${f}`);
@@ -67,7 +74,7 @@ function readDir(dir) {
 
 (async function () {
   // check if git repo is initialized, if not, it will not apply patches. 
-  if (!fs.existsSync('decompiled/.git')) return error('Git repo is not initialized. Run git init inside decompiled');
+  // if (!fs.existsSync('decompiled/.git')) return error('Git repo is not initialized. Run git init inside decompiled');
   // args[0] should be {releaseType}/{version}
   // releaseType is release or snapshot
   if (!DECOMPILE_VERSION || !DECOMPILE_VERSION.includes('/')) return error('Missing releaseType and version!');

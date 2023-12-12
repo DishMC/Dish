@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/behavior/VillagerGoalPackages.java b/minecraft/world/entity/ai/behavior/VillagerGoalPackages.java
+index d6ffc2c..90f4cb9 100644
+--- a/minecraft/world/entity/ai/behavior/VillagerGoalPackages.java
++++ b/minecraft/world/entity/ai/behavior/VillagerGoalPackages.java
+@@ -33,7 +33,7 @@ public class VillagerGoalPackages {
+     }
+ 
+     public static ImmutableList<Pair<Integer, ? extends BehaviorControl<? super Villager>>> getWorkPackage(VillagerProfession villagerprofession, float f) {
+-        Object object;
++        WorkAtPoi object;
+ 
+         if (villagerprofession == VillagerProfession.FARMER) {
+             object = new WorkAtComposter();

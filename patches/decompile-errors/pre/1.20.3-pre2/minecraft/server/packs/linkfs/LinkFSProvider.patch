@@ -1,0 +1,30 @@
+diff --git a/minecraft/server/packs/linkfs/LinkFSProvider.java b/minecraft/server/packs/linkfs/LinkFSProvider.java
+index 2d483f4..41301b0 100644
+--- a/minecraft/server/packs/linkfs/LinkFSProvider.java
++++ b/minecraft/server/packs/linkfs/LinkFSProvider.java
+@@ -73,7 +73,7 @@ class LinkFSProvider extends FileSystemProvider {
+             throw new NotDirectoryException(path.toString());
+         } else {
+             return new DirectoryStream<Path>() {
+-                public Iterator<Path> iterator() {
++                public Iterator iterator() {
+                     return pathcontents_directorycontents.children().values().stream().filter((linkfspath) -> {
+                         try {
+                             return filter.accept(linkfspath);
+@@ -150,14 +150,14 @@ class LinkFSProvider extends FileSystemProvider {
+     public <V extends FileAttributeView> V getFileAttributeView(Path path, Class<V> oclass, LinkOption... alinkoption) {
+         LinkFSPath linkfspath = toLinkPath(path);
+ 
+-        return oclass == BasicFileAttributeView.class ? linkfspath.getBasicAttributeView() : null;
++        return oclass == BasicFileAttributeView.class ? (V) linkfspath.getBasicAttributeView() : null;
+     }
+ 
+     public <A extends BasicFileAttributes> A readAttributes(Path path, Class<A> oclass, LinkOption... alinkoption) throws IOException {
+         LinkFSPath linkfspath = toLinkPath(path).toAbsolutePath();
+ 
+         if (oclass == BasicFileAttributes.class) {
+-            return linkfspath.getBasicAttributes();
++            return (A) linkfspath.getBasicAttributes();
+         } else {
+             throw new UnsupportedOperationException("Attributes of type " + oclass.getName() + " not supported");
+         }

@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/eventlog/JsonEventLog.java b/minecraft/util/eventlog/JsonEventLog.java
+index ea3368a..7dc6cbc 100644
+--- a/minecraft/util/eventlog/JsonEventLog.java
++++ b/minecraft/util/eventlog/JsonEventLog.java
+@@ -59,7 +59,7 @@ public class JsonEventLog<T> implements Closeable {
+                 @Nullable
+                 @Override
+                 public T next() throws IOException {
+-                    Object object;
++                    T object;
+ 
+                     try {
+                         JsonEventLog.this.channel.position(this.position);

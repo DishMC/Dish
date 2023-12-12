@@ -1,0 +1,13 @@
+diff --git a/minecraft/commands/arguments/OperationArgument.java b/minecraft/commands/arguments/OperationArgument.java
+index e4be1a8..d367fd9 100644
+--- a/minecraft/commands/arguments/OperationArgument.java
++++ b/minecraft/commands/arguments/OperationArgument.java
+@@ -55,7 +55,7 @@ public class OperationArgument implements ArgumentType<OperationArgument.Operati
+     }
+ 
+     private static OperationArgument.Operation getOperation(String s) throws CommandSyntaxException {
+-        return (OperationArgument.Operation) (s.equals("><") ? (scoreaccess, scoreaccess1) -> {
++        return (s.equals("><") ? (scoreaccess, scoreaccess1) -> {
+             int i = scoreaccess.get();
+ 
+             scoreaccess.set(scoreaccess1.get());

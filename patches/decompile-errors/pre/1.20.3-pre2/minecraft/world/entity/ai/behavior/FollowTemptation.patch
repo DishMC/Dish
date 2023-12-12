@@ -1,0 +1,37 @@
+diff --git a/minecraft/world/entity/ai/behavior/FollowTemptation.java b/minecraft/world/entity/ai/behavior/FollowTemptation.java
+index 4c40366..d2fae1d 100644
+--- a/minecraft/world/entity/ai/behavior/FollowTemptation.java
++++ b/minecraft/world/entity/ai/behavior/FollowTemptation.java
+@@ -66,14 +66,14 @@ public class FollowTemptation extends Behavior<PathfinderMob> {
+     }
+ 
+     protected void start(ServerLevel serverlevel, PathfinderMob pathfindermob, long i) {
+-        pathfindermob.getBrain().setMemory(MemoryModuleType.IS_TEMPTED, (Object) true);
++        pathfindermob.getBrain().setMemory(MemoryModuleType.IS_TEMPTED, true);
+     }
+ 
+     protected void stop(ServerLevel serverlevel, PathfinderMob pathfindermob, long i) {
+         Brain<?> brain = pathfindermob.getBrain();
+ 
+         brain.setMemory(MemoryModuleType.TEMPTATION_COOLDOWN_TICKS, (int) 100);
+-        brain.setMemory(MemoryModuleType.IS_TEMPTED, (Object) false);
++        brain.setMemory(MemoryModuleType.IS_TEMPTED, false);
+         brain.eraseMemory(MemoryModuleType.WALK_TARGET);
+         brain.eraseMemory(MemoryModuleType.LOOK_TARGET);
+     }
+@@ -82,13 +82,13 @@ public class FollowTemptation extends Behavior<PathfinderMob> {
+         Player player = (Player) this.getTemptingPlayer(pathfindermob).get();
+         Brain<?> brain = pathfindermob.getBrain();
+ 
+-        brain.setMemory(MemoryModuleType.LOOK_TARGET, (Object) (new EntityTracker(player, true)));
++        brain.setMemory(MemoryModuleType.LOOK_TARGET, (new EntityTracker(player, true)));
+         double d0 = (Double) this.closeEnoughDistance.apply(pathfindermob);
+ 
+         if (pathfindermob.distanceToSqr((Entity) player) < Mth.square(d0)) {
+             brain.eraseMemory(MemoryModuleType.WALK_TARGET);
+         } else {
+-            brain.setMemory(MemoryModuleType.WALK_TARGET, (Object) (new WalkTarget(new EntityTracker(player, false), this.getSpeedModifier(pathfindermob), 2)));
++            brain.setMemory(MemoryModuleType.WALK_TARGET, (new WalkTarget(new EntityTracker(player, false), this.getSpeedModifier(pathfindermob), 2)));
+         }
+ 
+     }

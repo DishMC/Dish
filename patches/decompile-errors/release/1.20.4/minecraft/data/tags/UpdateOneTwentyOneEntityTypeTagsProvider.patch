@@ -1,0 +1,20 @@
+diff --git a/minecraft/data/tags/UpdateOneTwentyOneEntityTypeTagsProvider.java b/minecraft/data/tags/UpdateOneTwentyOneEntityTypeTagsProvider.java
+index 61d4f72..fa5b87d 100644
+--- a/minecraft/data/tags/UpdateOneTwentyOneEntityTypeTagsProvider.java
++++ b/minecraft/data/tags/UpdateOneTwentyOneEntityTypeTagsProvider.java
+@@ -17,10 +17,10 @@ public class UpdateOneTwentyOneEntityTypeTagsProvider extends IntrinsicHolderTag
+ 
+     @Override
+     protected void addTags(HolderLookup.Provider holderlookup_provider) {
+-        this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add((Object) EntityType.BREEZE);
+-        this.tag(EntityTypeTags.DEFLECTS_ARROWS).add((Object) EntityType.BREEZE);
+-        this.tag(EntityTypeTags.DEFLECTS_TRIDENTS).add((Object) EntityType.BREEZE);
+-        this.tag(EntityTypeTags.CAN_TURN_IN_BOATS).add((Object) EntityType.BREEZE);
+-        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add((Object) EntityType.WIND_CHARGE);
++        this.tag(EntityTypeTags.FALL_DAMAGE_IMMUNE).add(EntityType.BREEZE);
++        this.tag(EntityTypeTags.DEFLECTS_ARROWS).add(EntityType.BREEZE);
++        this.tag(EntityTypeTags.DEFLECTS_TRIDENTS).add(EntityType.BREEZE);
++        this.tag(EntityTypeTags.CAN_TURN_IN_BOATS).add(EntityType.BREEZE);
++        this.tag(EntityTypeTags.IMPACT_PROJECTILES).add(EntityType.WIND_CHARGE);
+     }
+ }

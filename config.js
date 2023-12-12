@@ -8,22 +8,22 @@ const fs = require('fs');
 
 const colors = require('./libs/colors');
 
-const DEFAULT_MINECRAFT_VERSION = "release/1.20.2";
+const DEFAULT_MINECRAFT_VERSION = "release/1.20.4";
 
 function log(msg) {
   console.log(`[Info]${colors.reset} ${msg}`);
 }
 
 function debug(msg) {
-  console.debug(`${colors.fgMagenta}[Debug]${colors.reset} ${msg}`);
+  console.debug(`[${colors.fgMagenta}Debug${colors.reset}] ${msg}`);
 }
 
 function warn(msg) {
-  console.warn(`${colors.fgYellow}[Warning]${colors.reset} ${msg}`);
+  console.warn(`[${colors.fgYellow}Warning${colors.reset}] ${msg}`);
 }
 
 function error(msg) {
-  console.error(`${colors.fgRed}[Error]${colors.reset} ${msg}`);
+  console.error(`[${colors.fgRed}Error${colors.reset}] ${msg}`);
 }
 
 /**
@@ -93,5 +93,6 @@ module.exports = {
   log, debug, warn, error,
   deleteDir, deleteFile, copyDir,
   cacheExpired, checkMinecraftVersion,
-  DEFAULT_MINECRAFT_VERSION
+  DEFAULT_MINECRAFT_VERSION,
+  stdio: [process.stdin, process.stdout, process.stderr]
 };

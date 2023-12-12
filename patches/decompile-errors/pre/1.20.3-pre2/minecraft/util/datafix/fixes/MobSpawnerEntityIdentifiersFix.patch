@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/datafix/fixes/MobSpawnerEntityIdentifiersFix.java b/minecraft/util/datafix/fixes/MobSpawnerEntityIdentifiersFix.java
+index 1cd3677..841f538 100644
+--- a/minecraft/util/datafix/fixes/MobSpawnerEntityIdentifiersFix.java
++++ b/minecraft/util/datafix/fixes/MobSpawnerEntityIdentifiersFix.java
+@@ -36,7 +36,7 @@ public class MobSpawnerEntityIdentifiersFix extends DataFix {
+             Optional<? extends Stream<? extends Dynamic<?>>> optional1 = dynamic.get("SpawnPotentials").asStreamOpt().result();
+ 
+             if (optional1.isPresent()) {
+-                dynamic = dynamic.set("SpawnPotentials", dynamic.createList(((Stream) optional1.get()).map((dynamic2) -> {
++                dynamic = dynamic.set("SpawnPotentials", dynamic.createList((optional1.get()).map((dynamic2) -> {
+                     Optional<String> optional2 = dynamic2.get("Type").asString().result();
+ 
+                     if (optional2.isPresent()) {

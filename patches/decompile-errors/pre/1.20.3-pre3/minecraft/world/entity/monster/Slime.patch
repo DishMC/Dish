@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/monster/Slime.java b/minecraft/world/entity/monster/Slime.java
+index 13baf9f..fad559c 100644
+--- a/minecraft/world/entity/monster/Slime.java
++++ b/minecraft/world/entity/monster/Slime.java
+@@ -192,7 +192,7 @@ public class Slime extends Mob implements Enemy {
+ 
+     @Override
+     public EntityType<? extends Slime> getType() {
+-        return super.getType();
++        return (EntityType<? extends Slime>) super.getType();
+     }
+ 
+     @Override

@@ -1,0 +1,31 @@
+diff --git a/minecraft/server/level/ChunkTaskPriorityQueueSorter.java b/minecraft/server/level/ChunkTaskPriorityQueueSorter.java
+index 9f33318..7faa562 100644
+--- a/minecraft/server/level/ChunkTaskPriorityQueueSorter.java
++++ b/minecraft/server/level/ChunkTaskPriorityQueueSorter.java
+@@ -78,7 +78,7 @@ public class ChunkTaskPriorityQueueSorter implements ChunkHolder.LevelChangeList
+         return (ProcessorHandle) this.mailbox.ask((processorhandle1) -> {
+             return new StrictQueue.IntRunnable(0, () -> {
+                 this.getQueue(processorhandle);
+-                processorhandle1.tell(ProcessorHandle.of("chunk priority sorter around " + processorhandle.name(), (chunktaskpriorityqueuesorter_message) -> {
++                processorhandle1.tell(ProcessorHandle.<ChunkTaskPriorityQueueSorter.Message<T>>of("chunk priority sorter around " + processorhandle.name(), (chunktaskpriorityqueuesorter_message) -> {
+                     this.submit(processorhandle, chunktaskpriorityqueuesorter_message.task, chunktaskpriorityqueuesorter_message.pos, chunktaskpriorityqueuesorter_message.level, flag);
+                 }));
+             });
+@@ -88,7 +88,7 @@ public class ChunkTaskPriorityQueueSorter implements ChunkHolder.LevelChangeList
+     public ProcessorHandle<ChunkTaskPriorityQueueSorter.Release> getReleaseProcessor(ProcessorHandle<Runnable> processorhandle) {
+         return (ProcessorHandle) this.mailbox.ask((processorhandle1) -> {
+             return new StrictQueue.IntRunnable(0, () -> {
+-                processorhandle1.tell(ProcessorHandle.of("chunk priority sorter around " + processorhandle.name(), (chunktaskpriorityqueuesorter_release) -> {
++                processorhandle1.tell(ProcessorHandle.<ChunkTaskPriorityQueueSorter.Release>of("chunk priority sorter around " + processorhandle.name(), (chunktaskpriorityqueuesorter_release) -> {
+                     this.release(processorhandle, chunktaskpriorityqueuesorter_release.pos, chunktaskpriorityqueuesorter_release.task, chunktaskpriorityqueuesorter_release.clearQueue);
+                 }));
+             });
+@@ -166,7 +166,7 @@ public class ChunkTaskPriorityQueueSorter implements ChunkHolder.LevelChangeList
+         if (chunktaskpriorityqueue == null) {
+             throw (IllegalArgumentException) Util.pauseInIde(new IllegalArgumentException("No queue for: " + processorhandle));
+         } else {
+-            return chunktaskpriorityqueue;
++            return (ChunkTaskPriorityQueue<Function<ProcessorHandle<Unit>, T>>) chunktaskpriorityqueue;
+         }
+     }
+ 

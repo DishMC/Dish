@@ -1,0 +1,49 @@
+diff --git a/minecraft/util/SortedArraySet.java b/minecraft/util/SortedArraySet.java
+index 6a98ad5..d8d3eeb 100644
+--- a/minecraft/util/SortedArraySet.java
++++ b/minecraft/util/SortedArraySet.java
+@@ -29,7 +29,7 @@ public class SortedArraySet<T> extends AbstractSet<T> {
+     }
+ 
+     public static <T extends Comparable<T>> SortedArraySet<T> create(int i) {
+-        return new SortedArraySet<>(i, Comparator.naturalOrder());
++        return new SortedArraySet(i, Comparator.naturalOrder());
+     }
+ 
+     public static <T> SortedArraySet<T> create(Comparator<T> comparator) {
+@@ -41,7 +41,7 @@ public class SortedArraySet<T> extends AbstractSet<T> {
+     }
+ 
+     private static <T> T[] castRawArray(Object[] aobject) {
+-        return aobject;
++        return (T[]) aobject;
+     }
+ 
+     private int findIndex(T t0) {
+@@ -115,7 +115,7 @@ public class SortedArraySet<T> extends AbstractSet<T> {
+     }
+ 
+     public boolean remove(Object object) {
+-        int i = this.findIndex(object);
++        int i = this.findIndex((T) object);
+ 
+         if (i >= 0) {
+             this.removeInternal(i);
+@@ -141,7 +141,7 @@ public class SortedArraySet<T> extends AbstractSet<T> {
+     }
+ 
+     public boolean contains(Object object) {
+-        int i = this.findIndex(object);
++        int i = this.findIndex((T) object);
+ 
+         return i >= 0;
+     }
+@@ -160,7 +160,7 @@ public class SortedArraySet<T> extends AbstractSet<T> {
+ 
+     public <U> U[] toArray(U[] au) {
+         if (au.length < this.size) {
+-            return Arrays.copyOf(this.contents, this.size, au.getClass());
++            return (U[]) Arrays.copyOf(this.contents, this.size, au.getClass());
+         } else {
+             System.arraycopy(this.contents, 0, au, 0, this.size);
+             if (au.length > this.size) {

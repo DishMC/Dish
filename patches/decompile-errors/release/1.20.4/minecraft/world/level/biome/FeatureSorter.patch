@@ -1,0 +1,107 @@
+diff --git a/minecraft/world/level/biome/FeatureSorter.java b/minecraft/world/level/biome/FeatureSorter.java
+index 6c58da9..d803f9a 100644
+--- a/minecraft/world/level/biome/FeatureSorter.java
++++ b/minecraft/world/level/biome/FeatureSorter.java
+@@ -30,24 +30,22 @@ public class FeatureSorter {
+ 
+     public FeatureSorter() {}
+ 
++    record FeatureData(int featureIndex, int step, PlacedFeature feature) {
++    }
++
+     public static <T> List<FeatureSorter.StepFeatureData> buildFeaturesPerStep(List<T> list, Function<T, List<HolderSet<PlacedFeature>>> function, boolean flag) {
+         Object2IntMap<PlacedFeature> object2intmap = new Object2IntOpenHashMap();
+         MutableInt mutableint = new MutableInt(0);
+-        Comparator<1FeatureData> comparator = Comparator.comparingInt(1FeatureData::step).thenComparingInt(1FeatureData::featureIndex);
+-        Map<1FeatureData, Set<1FeatureData>> map = new TreeMap(comparator);
++        Comparator<FeatureData> comparator = Comparator.comparingInt(FeatureData::step).thenComparingInt(FeatureData::featureIndex);
++        Map<FeatureData, Set<FeatureData>> map = new TreeMap(comparator);
+         int i = 0;
+         Iterator iterator = list.iterator();
+ 
+-        ArrayList arraylist;
++        ArrayList<FeatureData> arraylist;
+         int j;
+ 
+-        record 1FeatureData(int featureIndex, int step, PlacedFeature feature) {
+-
+-        }
+-
+-
+         while(iterator.hasNext()) {
+-            T t0 = iterator.next();
++            T t0 = (T) iterator.next();
+ 
+             arraylist = Lists.newArrayList();
+             List<HolderSet<PlacedFeature>> list1 = (List)function.apply(t0);
+@@ -61,39 +59,39 @@ public class FeatureSorter {
+                     Holder<PlacedFeature> holder = (Holder)iterator1.next();
+                     PlacedFeature placedfeature = (PlacedFeature)holder.value();
+ 
+-                    arraylist.add(new 1FeatureData(object2intmap.computeIfAbsent(placedfeature, (object) -> {
++                    arraylist.add(new FeatureData(object2intmap.computeIfAbsent(placedfeature, (object) -> {
+                         return mutableint.getAndIncrement();
+                     }), j, placedfeature));
+                 }
+             }
+ 
+             for(j = 0; j < arraylist.size(); ++j) {
+-                Set<1FeatureData> set = (Set)map.computeIfAbsent((1FeatureData)arraylist.get(j), (1featuredata) -> {
++                Set<FeatureData> set = (Set)map.computeIfAbsent((FeatureData)arraylist.get(j), (featuredata) -> {
+                     return new TreeSet(comparator);
+                 });
+ 
+                 if (j < arraylist.size() - 1) {
+-                    set.add((1FeatureData)arraylist.get(j + 1));
++                    set.add((FeatureData)arraylist.get(j + 1));
+                 }
+             }
+         }
+ 
+-        Set<1FeatureData> set1 = new TreeSet(comparator);
+-        Set<1FeatureData> set2 = new TreeSet(comparator);
++        Set<FeatureData> set1 = new TreeSet(comparator);
++        Set<FeatureData> set2 = new TreeSet(comparator);
+ 
+         arraylist = Lists.newArrayList();
+         Iterator iterator2 = map.keySet().iterator();
+ 
+         while(iterator2.hasNext()) {
+-            1FeatureData 1featuredata = (1FeatureData)iterator2.next();
++            FeatureData featuredata = (FeatureData)iterator2.next();
+ 
+             if (!set2.isEmpty()) {
+                 throw new IllegalStateException("You somehow broke the universe; DFS bork (iteration finished with non-empty in-progress vertex set");
+             }
+ 
+-            if (!set1.contains(1featuredata)) {
++            if (!set1.contains(featuredata)) {
+                 Objects.requireNonNull(arraylist);
+-                if (Graph.depthFirstSearch(map, set1, set2, arraylist::add, 1featuredata)) {
++                if (Graph.depthFirstSearch(map, set1, set2, arraylist::add, featuredata)) {
+                     if (!flag) {
+                         throw new IllegalStateException("Feature order cycle found");
+                     }
+@@ -107,7 +105,7 @@ public class FeatureSorter {
+                         ListIterator listiterator = arraylist1.listIterator();
+ 
+                         while(listiterator.hasNext()) {
+-                            T t1 = listiterator.next();
++                            T t1 = (T) listiterator.next();
+ 
+                             listiterator.remove();
+ 
+@@ -130,9 +128,10 @@ public class FeatureSorter {
+         Builder<FeatureSorter.StepFeatureData> builder = ImmutableList.builder();
+ 
+         for(j = 0; j < i; ++j) {
+-            List<PlacedFeature> list2 = (List)arraylist.stream().filter((1featuredata1) -> {
+-                return 1featuredata1.step() == j;
+-            }).map(1FeatureData::feature).collect(Collectors.toList());
++            int finalJ = j;
++            List<PlacedFeature> list2 = (List) arraylist.stream().filter((featuredata1) -> {
++                return featuredata1.step() == finalJ;
++            }).map(FeatureData::feature).collect(Collectors.toList());
+ 
+             builder.add(new FeatureSorter.StepFeatureData(list2));
+         }

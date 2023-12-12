@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/packs/resources/SimplePreparableReloadListener.java b/minecraft/server/packs/resources/SimplePreparableReloadListener.java
+index 99f4d14..a8c0c88 100644
+--- a/minecraft/server/packs/resources/SimplePreparableReloadListener.java
++++ b/minecraft/server/packs/resources/SimplePreparableReloadListener.java
+@@ -17,7 +17,7 @@ public abstract class SimplePreparableReloadListener<T> implements PreparableRel
+ 
+         Objects.requireNonNull(preparablereloadlistener_preparationbarrier);
+         return completablefuture.thenCompose(preparablereloadlistener_preparationbarrier::wait).thenAcceptAsync((object) -> {
+-            this.apply(object, resourcemanager, profilerfiller1);
++            this.apply((T) object, resourcemanager, profilerfiller1);
+         }, executor1);
+     }
+ 

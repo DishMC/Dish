@@ -9,12 +9,12 @@ const { execSync } = require('child_process');
 const crypto = require('crypto');
 const path = require('path');
 const calculateFileHash = require('./utils/checkFileHash');
-const { warn, deleteDir, copyDir, log, deleteFile, cacheExpired, error, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION } = require('./config');
+const { warn, deleteDir, copyDir, log, deleteFile, cacheExpired, error, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION, stdio } = require('./config');
+const parseArg = require('./utils/parseArguments');
 
-const stdio = [process.stdin, process.stdout, process.stderr];
-
-const DECOMPILE_VERSION = args[0] ?? DEFAULT_MINECRAFT_VERSION;
-const OLD_VERSION = args[1] ?? null;
+const DECOMPILE_VERSION = parseArg('MC', DEFAULT_MINECRAFT_VERSION);
+const OLD_VERSION = parseArg('OLD_MC', null);
+const IGNORE_CACHE = parseArg('IGNORE-CACHE', null);
 
 let MINECRAFT_VERSION = "UNKNOWN";
 
@@ -79,8 +79,9 @@ let MINECRAFT_VERSION = "UNKNOWN";
 async function downloadServer() {
   let manifest;
   if (!fs.existsSync('cache')) fs.mkdirSync('cache');
-  if (fs.existsSync('cache/manifest.json') && !cacheExpired('cache/manifest.json')) {
+  if (fs.existsSync('cache/manifest.json') && !cacheExpired('cache/manifest.json') && !IGNORE_CACHE) {
     manifest = JSON.parse(fs.readFileSync('cache/manifest.json').toString());
+    warn('Using cache/manifest.json');
   } else {
     manifest = await (await fetch('https://launchermeta.mojang.com/mc/game/version_manifest_v2.json')).json();
     fs.writeFileSync('cache/manifest.json', JSON.stringify(manifest));
@@ -92,8 +93,9 @@ async function downloadServer() {
   MINECRAFT_VERSION = version;
   warn(`Found Minecraft version '${version}' with the release type '${manifest.versions[index].type}'`);
   let meta;
-  if (fs.existsSync(`cache/${version}.json`) && !cacheExpired(`cache/${version}.json`)) {
+  if (fs.existsSync(`cache/${version}.json`) && !cacheExpired(`cache/${version}.json`) && !IGNORE_CACHE) {
     meta = JSON.parse(fs.readFileSync(`cache/${version}.json`).toString());
+    warn(`using cache/${version}.json`);
   } else {
     meta = await (await fetch(manifest.versions[index].url)).json();
     fs.writeFileSync(`cache/${manifest.versions[index].id}.json`, JSON.stringify(meta));
@@ -101,7 +103,7 @@ async function downloadServer() {
 
   if (!fs.existsSync(`cache/${version}`)) fs.mkdirSync(`cache/${version}`);
 
-  if (fs.existsSync(`cache/${version}/server.jar`)) {
+  if (fs.existsSync(`cache/${version}/server.jar`) && !IGNORE_CACHE) {
     const hash = calculateFileHash(`cache/${version}/server.jar`);
     if (hash !== meta.downloads.server.sha1) {
       warn(`Server jar sha1 hash does not match!\nFile Hash: ${hash}\nMeta: ${meta.downloads.server.sha1}`);
@@ -109,11 +111,12 @@ async function downloadServer() {
       deleteDir(`cache/${version}`);
       return await downloadServer();
     }
+    warn(`using cache/${version}/server.jar`);
   } else {
     execSync(`curl -o cache/${version}/server.jar ${meta.downloads.server.url}`, { stdio });
   }
 
-  if (fs.existsSync(`cache/${version}/mappings.txt`)) {
+  if (fs.existsSync(`cache/${version}/mappings.txt`) && !IGNORE_CACHE) {
     const hash = calculateFileHash(`cache/${version}/mappings.txt`);
     if (hash !== meta.downloads.server_mappings.sha1) {
       warn(`Server mappings sha1 hash does not match!\nFile Hash: ${hash}\nMeta: ${meta.downloads.server_mappings.sha1}`);
@@ -121,6 +124,7 @@ async function downloadServer() {
       deleteDir(`cache/${version}`);
       return await downloadServer();
     }
+    warn(`using cache/${version}/mappings.txt`);
   } else {
     execSync(`curl -o cache/${version}/mappings.txt ${meta.downloads.server_mappings.url}`, { stdio });
   }

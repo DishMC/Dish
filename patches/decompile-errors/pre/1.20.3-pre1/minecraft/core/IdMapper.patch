@@ -1,0 +1,13 @@
+diff --git a/minecraft/core/IdMapper.java b/minecraft/core/IdMapper.java
+index f6f577a..8db017d 100644
+--- a/minecraft/core/IdMapper.java
++++ b/minecraft/core/IdMapper.java
+@@ -29,7 +29,7 @@ public class IdMapper<T> implements IdMap<T> {
+         this.tToId.put(t0, i);
+ 
+         while (this.idToT.size() <= i) {
+-            this.idToT.add((Object) null);
++            this.idToT.add(null);
+         }
+ 
+         this.idToT.set(i, t0);

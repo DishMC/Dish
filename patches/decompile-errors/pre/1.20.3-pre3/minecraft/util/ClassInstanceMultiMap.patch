@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/ClassInstanceMultiMap.java b/minecraft/util/ClassInstanceMultiMap.java
+index 3b5d023..1d48f8f 100644
+--- a/minecraft/util/ClassInstanceMultiMap.java
++++ b/minecraft/util/ClassInstanceMultiMap.java
+@@ -73,7 +73,7 @@ public class ClassInstanceMultiMap<T> extends AbstractCollection<T> {
+                 return (List) stream.filter(oclass1::isInstance).collect(Collectors.toList());
+             });
+ 
+-            return Collections.unmodifiableCollection(list);
++            return (Collection<S>) Collections.unmodifiableCollection(list);
+         }
+     }
+ 

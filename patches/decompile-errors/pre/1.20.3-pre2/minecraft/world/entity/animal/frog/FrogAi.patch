@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/animal/frog/FrogAi.java b/minecraft/world/entity/animal/frog/FrogAi.java
+index 011b03a..bf6d88b 100644
+--- a/minecraft/world/entity/animal/frog/FrogAi.java
++++ b/minecraft/world/entity/animal/frog/FrogAi.java
+@@ -61,7 +61,7 @@ public class FrogAi {
+     public FrogAi() {}
+ 
+     protected static void initMemories(Frog frog, RandomSource randomsource) {
+-        frog.getBrain().setMemory(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, (Object) FrogAi.TIME_BETWEEN_LONG_JUMPS.sample(randomsource));
++        frog.getBrain().setMemory(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, FrogAi.TIME_BETWEEN_LONG_JUMPS.sample(randomsource));
+     }
+ 
+     protected static Brain<?> makeBrain(Brain<Frog> brain) {

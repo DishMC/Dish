@@ -1,0 +1,17 @@
+diff --git a/minecraft/util/datafix/fixes/PoiTypeRenameFix.java b/minecraft/util/datafix/fixes/PoiTypeRenameFix.java
+index a7d52f7..4bc2043 100644
+--- a/minecraft/util/datafix/fixes/PoiTypeRenameFix.java
++++ b/minecraft/util/datafix/fixes/PoiTypeRenameFix.java
+@@ -21,10 +21,10 @@ public class PoiTypeRenameFix extends AbstractPoiSectionFix {
+     protected <T> Stream<Dynamic<T>> processRecords(Stream<Dynamic<T>> stream) {
+         return stream.map((dynamic) -> {
+             return dynamic.update("type", (dynamic1) -> {
+-                DataResult dataresult = dynamic1.asString().map(this.renamer);
++                DataResult<String> dataresult = dynamic1.asString().map(this.renamer);
+ 
+                 Objects.requireNonNull(dynamic1);
+-                return (Dynamic) DataFixUtils.orElse(dataresult.map(dynamic1::createString).result(), dynamic1);
++                return DataFixUtils.orElse(dataresult.map(dynamic1::createString).result(), dynamic1);
+             });
+         });
+     }

@@ -1,0 +1,15 @@
+diff --git a/minecraft/util/datafix/fixes/BlockEntityRenameFix.java b/minecraft/util/datafix/fixes/BlockEntityRenameFix.java
+index 4492828..8cd36fa 100644
+--- a/minecraft/util/datafix/fixes/BlockEntityRenameFix.java
++++ b/minecraft/util/datafix/fixes/BlockEntityRenameFix.java
+@@ -18,8 +18,8 @@ public class BlockEntityRenameFix extends DataFix {
+     }
+ 
+     public TypeRewriteRule makeRule() {
+-        TaggedChoiceType<String> taggedchoicetype = this.getInputSchema().findChoiceType(References.BLOCK_ENTITY);
+-        TaggedChoiceType<String> taggedchoicetype1 = this.getOutputSchema().findChoiceType(References.BLOCK_ENTITY);
++        TaggedChoiceType<String> taggedchoicetype = (TaggedChoiceType<String>) this.getInputSchema().findChoiceType(References.BLOCK_ENTITY);
++        TaggedChoiceType<String> taggedchoicetype1 = (TaggedChoiceType<String>) this.getOutputSchema().findChoiceType(References.BLOCK_ENTITY);
+ 
+         return this.fixTypeEverywhere(this.name, taggedchoicetype, taggedchoicetype1, (dynamicops) -> {
+             return (pair) -> {

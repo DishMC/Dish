@@ -1,7 +1,9 @@
 node_modules
 /cache
 /decompiled
+/compiled
 test*
 *.rej
 workspaces
 dish/workspace*
+.env

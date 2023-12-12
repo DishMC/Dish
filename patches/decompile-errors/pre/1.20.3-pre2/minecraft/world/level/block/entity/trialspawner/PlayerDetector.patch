@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/entity/trialspawner/PlayerDetector.java b/minecraft/world/level/block/entity/trialspawner/PlayerDetector.java
+index 5bda45e..4769772 100644
+--- a/minecraft/world/level/block/entity/trialspawner/PlayerDetector.java
++++ b/minecraft/world/level/block/entity/trialspawner/PlayerDetector.java
+@@ -20,7 +20,7 @@ public interface PlayerDetector {
+     PlayerDetector SHEEP = (serverlevel, blockpos, i) -> {
+         AABB aabb = (new AABB(blockpos)).inflate((double) i);
+ 
+-        return serverlevel.getEntities((EntityTypeTest) EntityType.SHEEP, aabb, LivingEntity::isAlive).stream().map(Entity::getUUID).toList();
++        return serverlevel.getEntities(EntityType.SHEEP, aabb, LivingEntity::isAlive).stream().map(Entity::getUUID).toList();
+     };
+ 
+     List<UUID> detect(ServerLevel serverlevel, BlockPos blockpos, int i);

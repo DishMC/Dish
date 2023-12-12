@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/ArrayListDeque.java b/minecraft/util/ArrayListDeque.java
+index 0f8cd1e..02a8121 100644
+--- a/minecraft/util/ArrayListDeque.java
++++ b/minecraft/util/ArrayListDeque.java
+@@ -59,7 +59,7 @@ public class ArrayListDeque<T> extends AbstractList<T> implements Serializable,
+     }
+ 
+     private T getInner(int i) {
+-        return this.contents[i];
++        return (T) this.contents[i];
+     }
+ 
+     public T set(int i, T t0) {
