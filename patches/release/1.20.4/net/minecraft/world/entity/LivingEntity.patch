@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index e6068e4..3de5dac 100644
+index e6068e4..d438378 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -1277,6 +1277,10 @@ public abstract class LivingEntity extends Entity implements Attackable {
@@ -13,7 +13,19 @@ index e6068e4..3de5dac 100644
                  if (!this.checkTotemDeathProtection(damagesource)) {
                      SoundEvent soundevent = this.getDeathSound();
  
-@@ -3659,6 +3663,8 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2989,6 +2993,11 @@ public abstract class LivingEntity extends Entity implements Attackable {
+         Entity entity = itementity.getOwner();
+ 
+         if (entity instanceof ServerPlayer) {
++            // dish
++            net.ouja.api.event.player.PlayerPickUpItemEvent event = new net.ouja.api.event.player.PlayerPickUpItemEvent(new net.ouja.dish.entity.DishPlayer((ServerPlayer)this), itementity.getItem().toDish());
++            net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++            if (event.isCancelled()) return;
++            // dish end
+             CriteriaTriggers.THROWN_ITEM_PICKED_UP_BY_ENTITY.trigger((ServerPlayer) entity, itementity.getItem(), this);
+         }
+ 
+@@ -3659,6 +3668,8 @@ public abstract class LivingEntity extends Entity implements Attackable {
          this.yHeadRot = (float) Mth.rotLerp(1.0D / (double) i, (double) this.yHeadRot, d0);
      }
  

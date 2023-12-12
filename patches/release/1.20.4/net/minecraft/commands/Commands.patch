@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
-index 04921e4..f126b03 100644
+index f19707c..d7729df 100644
 --- a/src/main/java/net/minecraft/commands/Commands.java
 +++ b/src/main/java/net/minecraft/commands/Commands.java
-@@ -143,7 +143,7 @@ public class Commands {
+@@ -144,7 +144,7 @@ public class Commands {
      public static final int LEVEL_GAMEMASTERS = 2;
      public static final int LEVEL_ADMINS = 3;
      public static final int LEVEL_OWNERS = 4;
@@ -11,7 +11,7 @@ index 04921e4..f126b03 100644
  
      public Commands(Commands.CommandSelection commands_commandselection, CommandBuildContext commandbuildcontext) {
          AdvancementCommands.register(this.dispatcher);
-@@ -439,8 +439,8 @@ public class Commands {
+@@ -441,8 +441,8 @@ public class Commands {
          };
      }
  

@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 6e7f187..be59a6d 100644
+index 99c087f..b515f39 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 @@ -69,6 +69,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface

@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 0065843..7781ebf 100644
+index 3d9f7e4..5e57942 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -390,6 +390,23 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -388,6 +388,23 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                  double d5 = clampHorizontal(serverboundmovevehiclepacket.getZ());
                  float f = Mth.wrapDegrees(serverboundmovevehiclepacket.getYRot());
                  float f1 = Mth.wrapDegrees(serverboundmovevehiclepacket.getXRot());
@@ -26,7 +26,7 @@ index 0065843..7781ebf 100644
                  double d6 = d3 - this.vehicleFirstGoodX;
                  double d7 = d4 - this.vehicleFirstGoodY;
                  double d8 = d5 - this.vehicleFirstGoodZ;
-@@ -944,7 +961,19 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -942,7 +959,19 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
                      double d2 = clampHorizontal(serverboundmoveplayerpacket.getZ(this.player.getZ()));
                      float f = Mth.wrapDegrees(serverboundmoveplayerpacket.getYRot(this.player.getYRot()));
                      float f1 = Mth.wrapDegrees(serverboundmoveplayerpacket.getXRot(this.player.getXRot()));
@@ -47,7 +47,7 @@ index 0065843..7781ebf 100644
                      if (this.player.isPassenger()) {
                          this.player.absMoveTo(this.player.getX(), this.player.getY(), this.player.getZ(), f, f1);
                          this.player.serverLevel().getChunkSource().move(this.player);
-@@ -1245,9 +1274,17 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1243,9 +1272,17 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
      }
  
      private void removePlayerFromWorld() {
@@ -66,7 +66,7 @@ index 0065843..7781ebf 100644
          this.player.disconnect();
          this.server.getPlayerList().remove(this.player);
          this.player.getTextFilter().leave();
-@@ -1299,7 +1336,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
+@@ -1297,7 +1334,11 @@ public class ServerGamePacketListenerImpl extends ServerCommonPacketListenerImpl
  
                      this.chatMessageChain.append(completablefuture, (filteredtext) -> {
                          PlayerChatMessage playerchatmessage1 = playerchatmessage.withUnsignedContent(component).filter(filteredtext.mask());

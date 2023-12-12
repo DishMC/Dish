@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 97fd12c..08eecdd 100644
+index 8e3eb65..3c35ff7 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -213,7 +213,14 @@ public abstract class PlayerList {
