@@ -27,3 +27,4 @@
 - Add Dish error handling
 - Send clientInformation to plugins, language, viewDistance, chatColours, modelCustomization, mainHand (ServerPlayer.java:updateOptions(), clientInformation())
 - Add logger for plugins
+- Add a proper documentation
