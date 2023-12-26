@@ -1,0 +1,19 @@
+diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
+index 0a9b139..749bccf 100644
+--- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
++++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
+@@ -140,7 +140,13 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+     private void verifyLoginAndFinishConnectionSetup(GameProfile gameprofile) {
+         PlayerList playerlist = this.server.getPlayerList();
+         Component component = playerlist.canPlayerLogin(this.connection.getRemoteAddress(), gameprofile);
+-
++        // dish
++        net.ouja.api.event.player.PlayerLoginEvent event = new net.ouja.api.event.player.PlayerLoginEvent(new net.ouja.api.auth.GameProfile(gameprofile.getName(), gameprofile.getId()), component != null ? net.ouja.dish.network.chat.DishComponent.fromComponent(component) : null);
++        net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++        if (event.getErrorMessage() != null) {
++            component = net.ouja.dish.network.chat.DishComponent.toComponent(event.getErrorMessage()); // dish -- return custom error message
++        }
++        // dish end
+         if (component != null) {
+             this.disconnect(component);
+         } else {

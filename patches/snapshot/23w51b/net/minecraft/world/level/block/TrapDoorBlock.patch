@@ -1,0 +1,22 @@
+diff --git a/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java b/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java
+index 90ddbea..03ab606 100644
+--- a/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java
++++ b/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java
+@@ -194,4 +194,17 @@ public class TrapDoorBlock extends HorizontalDirectionalBlock implements SimpleW
+     protected BlockSetType getType() {
+         return this.type;
+     }
++
++    // dish -- add a new method for plugins to open trapdoors. It's easier to do this than the use method
++    public void setOpen(@Nullable Player player, Level level, BlockState blockstate, BlockPos blockpos, boolean flag) {
++        if (blockstate.is(this) && blockstate.getValue(TrapDoorBlock.OPEN) != flag) {
++            level.setBlock(blockpos, blockstate.setValue(TrapDoorBlock.OPEN, flag), 2);
++            if (blockstate.getValue(TrapDoorBlock.WATERLOGGED)) {
++                level.scheduleTick(blockpos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
++            }
++
++            this.playSound(player, level, blockpos, flag);
++        }
++    }
++    // dish end
+ }

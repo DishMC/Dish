@@ -1,0 +1,13 @@
+diff --git a/src/main/java/net/minecraft/world/level/chunk/ChunkStatus.java b/src/main/java/net/minecraft/world/level/chunk/ChunkStatus.java
+index 397d4ca..7ab7c58 100644
+--- a/src/main/java/net/minecraft/world/level/chunk/ChunkStatus.java
++++ b/src/main/java/net/minecraft/world/level/chunk/ChunkStatus.java
+@@ -40,7 +40,7 @@ public class ChunkStatus {
+     });
+     public static final ChunkStatus STRUCTURE_STARTS = register("structure_starts", ChunkStatus.EMPTY, 0, false, ChunkStatus.PRE_FEATURES, ChunkStatus.ChunkType.PROTOCHUNK, (chunkstatus, executor, serverlevel, chunkgenerator, structuretemplatemanager, threadedlevellightengine, function, list, chunkaccess) -> {
+         if (serverlevel.getServer().getWorldData().worldGenOptions().generateStructures()) {
+-            chunkgenerator.createStructures(serverlevel.registryAccess(), serverlevel.getChunkSource().getGeneratorState(), serverlevel.structureManager(), chunkaccess, structuretemplatemanager);
++            chunkgenerator.createStructures(serverlevel.registryAccess(), serverlevel.getChunkSource().getGeneratorState(), serverlevel.structureManager(), chunkaccess, structuretemplatemanager, serverlevel); // dish -- add serverlevel
+         }
+ 
+         serverlevel.onStructureStartsAvailable(chunkaccess);
