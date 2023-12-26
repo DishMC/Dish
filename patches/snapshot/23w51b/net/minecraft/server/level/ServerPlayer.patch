@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 7436496..8d589f3 100644
+index ba3da8e..9fbe576 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -636,11 +636,26 @@ public class ServerPlayer extends Player {
+@@ -666,11 +666,26 @@ public class ServerPlayer extends Player {
  
      @Override
      public void die(DamageSource damagesource) {
@@ -30,7 +30,7 @@ index 7436496..8d589f3 100644
  
              this.connection.send(new ClientboundPlayerCombatKillPacket(this.getId(), component), PacketSendListener.exceptionallySend(() -> {
                  boolean flag1 = true;
-@@ -936,6 +951,11 @@ public class ServerPlayer extends Player {
+@@ -966,6 +981,11 @@ public class ServerPlayer extends Player {
              } else if (this.bedBlocked(blockpos, direction)) {
                  return Either.left(Player.BedSleepingProblem.OBSTRUCTED);
              } else {
@@ -42,7 +42,7 @@ index 7436496..8d589f3 100644
                  this.setRespawnPosition(this.level().dimension(), blockpos, this.getYRot(), false, true);
                  if (this.level().isDay()) {
                      return Either.left(Player.BedSleepingProblem.NOT_POSSIBLE_NOW);
-@@ -948,7 +968,7 @@ public class ServerPlayer extends Player {
+@@ -978,7 +998,7 @@ public class ServerPlayer extends Player {
                              return monster.isPreventingPlayerRest(this);
                          });
  
@@ -51,7 +51,7 @@ index 7436496..8d589f3 100644
                              return Either.left(Player.BedSleepingProblem.NOT_SAFE);
                          }
                      }
-@@ -1633,6 +1653,11 @@ public class ServerPlayer extends Player {
+@@ -1663,6 +1683,11 @@ public class ServerPlayer extends Player {
          if (this.gameMode.getGameModeForPlayer() == GameType.SPECTATOR) {
              this.setCamera(entity);
          } else {

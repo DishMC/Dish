@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java b/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
-index dded89d..444c979 100644
+index 112df4f..6d206af 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
-@@ -264,12 +264,12 @@ public class Piglin extends AbstractPiglin implements CrossbowAttackMob, Invento
+@@ -262,12 +262,12 @@ public class Piglin extends AbstractPiglin implements CrossbowAttackMob, Invento
          return (Boolean) this.getEntityData().get(Piglin.DATA_BABY_ID);
      }
  

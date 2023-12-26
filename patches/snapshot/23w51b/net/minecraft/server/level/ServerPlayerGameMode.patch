@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 2a552c7..9dfe7c0 100644
+index 8d913e1..16602bb 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-@@ -241,7 +241,20 @@ public class ServerPlayerGameMode {
+@@ -240,7 +240,20 @@ public class ServerPlayerGameMode {
          } else {
              BlockEntity blockentity = this.level.getBlockEntity(blockpos);
              Block block = blockstate.getBlock();

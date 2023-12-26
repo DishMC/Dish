@@ -31,6 +31,9 @@ public class DishEntity implements Entity {
         if (entityType == EntityType.ALLAY) {
             return new DishAllay(this.entity);
         }
+        else if (entityType == EntityType.ARMADILLO) {
+            return new DishArmadillo(this.entity);
+        }
         else if (entityType == EntityType.AXOLOTL) {
             return new DishAxolotl(this.entity);
         }

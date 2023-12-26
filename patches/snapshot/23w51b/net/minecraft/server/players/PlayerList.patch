@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 8e3eb65..3c35ff7 100644
+index 542934c..a478ec7 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -213,7 +213,14 @@ public abstract class PlayerList {
+@@ -207,7 +207,14 @@ public abstract class PlayerList {
              mutablecomponent = Component.translatable("multiplayer.player.joined.renamed", serverplayer.getDisplayName(), s);
          }
  
@@ -18,7 +18,7 @@ index 8e3eb65..3c35ff7 100644
          servergamepacketlistenerimpl.teleport(serverplayer.getX(), serverplayer.getY(), serverplayer.getZ(), serverplayer.getYRot(), serverplayer.getXRot());
          ServerStatus serverstatus = this.server.getStatus();
  
-@@ -224,6 +231,7 @@ public abstract class PlayerList {
+@@ -218,6 +225,7 @@ public abstract class PlayerList {
          serverplayer.connection.send(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(this.players));
          this.players.add(serverplayer);
          this.playersByUUID.put(serverplayer.getUUID(), serverplayer);

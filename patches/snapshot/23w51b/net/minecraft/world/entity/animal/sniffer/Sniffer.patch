@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java b/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
-index b6e22b5..3070171 100644
+index be01feb..bbf7b55 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
-@@ -141,7 +141,7 @@ public class Sniffer extends Animal {
+@@ -136,7 +136,7 @@ public class Sniffer extends Animal {
          return this.position().add(this.getForward().scale(2.25D));
      }
  

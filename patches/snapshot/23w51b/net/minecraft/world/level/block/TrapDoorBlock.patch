@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java b/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java
-index 90ddbea..03ab606 100644
+index 6f75ca3..da823bf 100644
 --- a/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java
 +++ b/src/main/java/net/minecraft/world/level/block/TrapDoorBlock.java
 @@ -194,4 +194,17 @@ public class TrapDoorBlock extends HorizontalDirectionalBlock implements SimpleW

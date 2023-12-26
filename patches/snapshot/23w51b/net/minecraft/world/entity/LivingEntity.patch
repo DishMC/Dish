@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index e6068e4..d438378 100644
+index a8a4a6e..0962955 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-@@ -1277,6 +1277,10 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -1279,6 +1279,10 @@ public abstract class LivingEntity extends Entity implements Attackable {
              }
  
              if (this.isDeadOrDying()) {
@@ -13,7 +13,7 @@ index e6068e4..d438378 100644
                  if (!this.checkTotemDeathProtection(damagesource)) {
                      SoundEvent soundevent = this.getDeathSound();
  
-@@ -2989,6 +2993,11 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -2990,6 +2994,11 @@ public abstract class LivingEntity extends Entity implements Attackable {
          Entity entity = itementity.getOwner();
  
          if (entity instanceof ServerPlayer) {
@@ -25,7 +25,7 @@ index e6068e4..d438378 100644
              CriteriaTriggers.THROWN_ITEM_PICKED_UP_BY_ENTITY.trigger((ServerPlayer) entity, itementity.getItem(), this);
          }
  
-@@ -3659,6 +3668,8 @@ public abstract class LivingEntity extends Entity implements Attackable {
+@@ -3650,6 +3659,8 @@ public abstract class LivingEntity extends Entity implements Attackable {
          this.yHeadRot = (float) Mth.rotLerp(1.0D / (double) i, (double) this.yHeadRot, d0);
      }
  

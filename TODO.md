@@ -3,6 +3,8 @@
 - Add tests (maybe JUnit?) to workspaces
 - Add a permission system for commands
 - Add event listeners for
+  - PlayerReachChange, cancellable
+  - PlayerScaleChange, cancellable
   - PlaceBlock, cancellable -- done
   - Sleep, cancellable (ServerPlayer.java:startSleepInBed()) -- done
   - Death, cancellable (ServerPlayer.java:die()) -- done
