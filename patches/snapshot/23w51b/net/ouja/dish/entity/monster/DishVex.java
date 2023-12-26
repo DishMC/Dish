@@ -15,7 +15,7 @@ public class DishVex extends DishEntity implements net.ouja.api.entity.monster.V
 
     @Override
     @Nullable
-    public net.ouja.api.Entity getOwner() {
+    public net.ouja.api.entity.Entity getOwner() {
         if (this.vex.getOwner() == null) return null;
         return new DishEntity(this.vex.getOwner());
     }

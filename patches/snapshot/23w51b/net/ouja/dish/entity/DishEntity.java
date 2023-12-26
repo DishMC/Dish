@@ -2,7 +2,7 @@ package net.ouja.dish.entity;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
-import net.ouja.api.Entity;
+import net.ouja.api.entity.Entity;
 import net.ouja.api.entity.EntityTypes;
 import net.ouja.dish.entity.monster.*;
 import net.ouja.dish.entity.neutral.*;

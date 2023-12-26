@@ -4,7 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.players.UserBanListEntry;
 import net.ouja.api.DishAPI;
-import net.ouja.api.Player;
+import net.ouja.api.entity.Player;
 import net.ouja.api.Server;
 import net.ouja.api.auth.GameProfile;
 import net.ouja.api.commands.Command;

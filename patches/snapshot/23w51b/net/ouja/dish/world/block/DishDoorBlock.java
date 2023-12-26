@@ -2,7 +2,7 @@ package net.ouja.dish.world.block;
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.ouja.api.Entity;
+import net.ouja.api.entity.Entity;
 import net.ouja.api.world.level.block.BlockPos;
 import net.ouja.api.world.level.block.BlockTypes;
 import net.ouja.api.world.level.block.DoorBlock;

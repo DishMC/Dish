@@ -1,7 +1,7 @@
 package net.ouja.dish.world;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.ouja.api.Entity;
+import net.ouja.api.entity.Entity;
 import net.ouja.api.world.DamageSource;
 import net.ouja.dish.entity.DishEntity;
 import org.jetbrains.annotations.Nullable;

@@ -3,7 +3,7 @@ package net.ouja.dish.world.block;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.TrapDoorBlock;
-import net.ouja.api.Player;
+import net.ouja.api.entity.Player;
 import net.ouja.api.world.level.block.BlockPos;
 import net.ouja.api.world.level.block.BlockTypes;
 import net.ouja.api.world.level.block.TrapdoorBlock;

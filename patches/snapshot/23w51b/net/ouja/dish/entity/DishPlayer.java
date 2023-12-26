@@ -3,8 +3,8 @@ package net.ouja.dish.entity;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.LivingEntity;
-import net.ouja.api.Player;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.ouja.api.entity.Player;
 import net.ouja.api.world.Level;
 import net.ouja.api.world.level.block.BlockPos;
 import net.ouja.dish.network.chat.DishComponent;
@@ -50,7 +50,6 @@ public class DishPlayer extends DishEntity implements Player {
 
     @Override
     public void sendMessage(net.ouja.api.network.chat.Component component) {
-//        this.player.sendSystemMessage(Component.literal(message));
         this.player.sendSystemMessage(new DishComponent(component));
     }
 
@@ -60,5 +59,29 @@ public class DishPlayer extends DishEntity implements Player {
         GlobalPos globalPos = this.player.getLastDeathLocation().get();
         if (globalPos == null) return null;
         return new BlockPos(globalPos.pos().getX(), globalPos.pos().getX(), globalPos.pos().getX(), new DishLevel((ServerLevel)this.player.level()));
+    }
+
+    @Override
+    public double getReach() {
+        return this.player.blockInteractionRange();
+    }
+
+    @Override
+    public float getScale() {
+        return this.player.getScale();
+    }
+
+    @Override
+    public void setReach(double reach) {
+        if (reach >= 0) {
+            this.player.getAttribute(Attributes.BLOCK_INTERACTION_RANGE).setBaseValue(reach);
+        }
+    }
+
+    @Override
+    public void setScale(float scale) {
+        if (scale >= 0) {
+            this.player.getAttribute(Attributes.SCALE).setBaseValue(scale);
+        }
     }
 }

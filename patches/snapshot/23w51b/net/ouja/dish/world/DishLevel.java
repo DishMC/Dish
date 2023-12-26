@@ -2,7 +2,7 @@ package net.ouja.dish.world;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.ouja.api.Player;
+import net.ouja.api.entity.Player;
 import net.ouja.api.world.Level;
 import net.ouja.dish.entity.DishPlayer;
 
