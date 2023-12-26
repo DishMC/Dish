@@ -1,0 +1,18 @@
+diff --git a/minecraft/data/models/blockstates/Selector.java b/minecraft/data/models/blockstates/Selector.java
+index 78d389f..c3708e4 100644
+--- a/minecraft/data/models/blockstates/Selector.java
++++ b/minecraft/data/models/blockstates/Selector.java
+@@ -15,11 +15,11 @@ public final class Selector {
+     private final List<Property.Value<?>> values;
+ 
+     public Selector extend(Property.Value<?> property_value) {
+-        return new Selector(ImmutableList.builder().addAll(this.values).add(property_value).build());
++        return new Selector(ImmutableList.<Property.Value<?>>builder().addAll(this.values).add(property_value).build());
+     }
+ 
+     public Selector extend(Selector selector) {
+-        return new Selector(ImmutableList.builder().addAll(this.values).addAll(selector.values).build());
++        return new Selector(ImmutableList.<Property.Value<?>>builder().addAll(this.values).addAll(selector.values).build());
+     }
+ 
+     private Selector(List<Property.Value<?>> list) {

@@ -1,0 +1,91 @@
+diff --git a/minecraft/advancements/critereon/MinMaxBounds.java b/minecraft/advancements/critereon/MinMaxBounds.java
+index 3e132d6..811791e 100644
+--- a/minecraft/advancements/critereon/MinMaxBounds.java
++++ b/minecraft/advancements/critereon/MinMaxBounds.java
+@@ -38,14 +38,11 @@ public interface MinMaxBounds<T extends Number> {
+ 
+     static <T extends Number, R extends MinMaxBounds<T>> Codec<R> createCodec(Codec<T> codec, MinMaxBounds.BoundsFactory<T, R> minmaxbounds_boundsfactory) {
+         Codec<R> codec1 = RecordCodecBuilder.create((instance) -> {
+-            P2 p2 = instance.group(ExtraCodecs.strictOptionalField(codec, "min").forGetter(MinMaxBounds::min), ExtraCodecs.strictOptionalField(codec, "max").forGetter(MinMaxBounds::max));
+-
+-            Objects.requireNonNull(minmaxbounds_boundsfactory);
+-            return p2.apply(instance, minmaxbounds_boundsfactory::create);
++            return instance.group(ExtraCodecs.strictOptionalField(codec, "min").forGetter(MinMaxBounds::min), ExtraCodecs.strictOptionalField(codec, "max").forGetter(MinMaxBounds::max)).apply(instance, minmaxbounds_boundsfactory::create);
+         });
+ 
+         return Codec.either(codec1, codec).xmap((either) -> {
+-            return (MinMaxBounds) either.map((minmaxbounds) -> {
++            return either.map((minmaxbounds) -> {
+                 return minmaxbounds;
+             }, (number) -> {
+                 return minmaxbounds_boundsfactory.create(Optional.of(number), Optional.of(number));
+@@ -53,7 +50,7 @@ public interface MinMaxBounds<T extends Number> {
+         }, (minmaxbounds) -> {
+             Optional<T> optional = minmaxbounds.unwrapPoint();
+ 
+-            return optional.isPresent() ? Either.right((Number) optional.get()) : Either.left(minmaxbounds);
++            return optional.isPresent() ? Either.right(optional.get()) : Either.left(minmaxbounds);
+         });
+     }
+ 
+@@ -81,7 +78,7 @@ public interface MinMaxBounds<T extends Number> {
+                 if (optional.isEmpty() && optional1.isEmpty()) {
+                     throw MinMaxBounds.ERROR_EMPTY.createWithContext(stringreader);
+                 } else {
+-                    return minmaxbounds_boundsfromreaderfactory.create(stringreader, optional, optional1);
++                    return (R) minmaxbounds_boundsfromreaderfactory.create(stringreader, optional, optional1);
+                 }
+             } catch (CommandSyntaxException commandsyntaxexception) {
+                 stringreader.setCursor(i);
+@@ -103,7 +100,7 @@ public interface MinMaxBounds<T extends Number> {
+             return Optional.empty();
+         } else {
+             try {
+-                return Optional.of((Number) function.apply(s));
++                return Optional.of(function.apply(s));
+             } catch (NumberFormatException numberformatexception) {
+                 throw ((DynamicCommandExceptionType) supplier.get()).createWithContext(stringreader, s);
+             }
+@@ -131,7 +128,7 @@ public interface MinMaxBounds<T extends Number> {
+     public static record Doubles(Optional<Double> min, Optional<Double> max, Optional<Double> minSq, Optional<Double> maxSq) implements MinMaxBounds<Double> {
+ 
+         public static final MinMaxBounds.Doubles ANY = new MinMaxBounds.Doubles(Optional.empty(), Optional.empty());
+-        public static final Codec<MinMaxBounds.Doubles> CODEC = MinMaxBounds.createCodec(Codec.DOUBLE, MinMaxBounds.Doubles::new);
++        public static final Codec<MinMaxBounds.Doubles> CODEC = MinMaxBounds.<Double, Doubles>createCodec(Codec.DOUBLE, MinMaxBounds.Doubles::new);
+ 
+         private Doubles(Optional<Double> optional, Optional<Double> optional1) {
+             this(optional, optional1, squareOpt(optional), squareOpt(optional1));
+@@ -183,18 +180,17 @@ public interface MinMaxBounds<T extends Number> {
+ 
+         public static MinMaxBounds.Doubles fromReader(StringReader stringreader, Function<Double, Double> function) throws CommandSyntaxException {
+             MinMaxBounds.BoundsFromReaderFactory minmaxbounds_boundsfromreaderfactory = MinMaxBounds.Doubles::create;
+-            Function function1 = Double::parseDouble;
+             BuiltInExceptionProvider builtinexceptionprovider = CommandSyntaxException.BUILT_IN_EXCEPTIONS;
+ 
+             Objects.requireNonNull(builtinexceptionprovider);
+-            return (MinMaxBounds.Doubles) MinMaxBounds.fromReader(stringreader, minmaxbounds_boundsfromreaderfactory, function1, builtinexceptionprovider::readerInvalidDouble, function);
++            return (MinMaxBounds.Doubles) MinMaxBounds.fromReader(stringreader, minmaxbounds_boundsfromreaderfactory, Double::parseDouble, builtinexceptionprovider::readerInvalidDouble, function);
+         }
+     }
+ 
+     public static record Ints(Optional<Integer> min, Optional<Integer> max, Optional<Long> minSq, Optional<Long> maxSq) implements MinMaxBounds<Integer> {
+ 
+         public static final MinMaxBounds.Ints ANY = new MinMaxBounds.Ints(Optional.empty(), Optional.empty());
+-        public static final Codec<MinMaxBounds.Ints> CODEC = MinMaxBounds.createCodec(Codec.INT, MinMaxBounds.Ints::new);
++        public static final Codec<MinMaxBounds.Ints> CODEC = MinMaxBounds.<Integer, Ints>createCodec(Codec.INT, MinMaxBounds.Ints::new);
+ 
+         private Ints(Optional<Integer> optional, Optional<Integer> optional1) {
+             this(optional, optional1, optional.map((integer) -> {
+@@ -248,11 +244,10 @@ public interface MinMaxBounds<T extends Number> {
+ 
+         public static MinMaxBounds.Ints fromReader(StringReader stringreader, Function<Integer, Integer> function) throws CommandSyntaxException {
+             MinMaxBounds.BoundsFromReaderFactory minmaxbounds_boundsfromreaderfactory = MinMaxBounds.Ints::create;
+-            Function function1 = Integer::parseInt;
+             BuiltInExceptionProvider builtinexceptionprovider = CommandSyntaxException.BUILT_IN_EXCEPTIONS;
+ 
+             Objects.requireNonNull(builtinexceptionprovider);
+-            return (MinMaxBounds.Ints) MinMaxBounds.fromReader(stringreader, minmaxbounds_boundsfromreaderfactory, function1, builtinexceptionprovider::readerInvalidInt, function);
++            return (MinMaxBounds.Ints) MinMaxBounds.fromReader(stringreader, minmaxbounds_boundsfromreaderfactory, Integer::parseInt, builtinexceptionprovider::readerInvalidInt, function);
+         }
+     }
+ }

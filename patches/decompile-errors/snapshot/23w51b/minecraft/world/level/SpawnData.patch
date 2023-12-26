@@ -1,0 +1,31 @@
+diff --git a/minecraft/world/level/SpawnData.java b/minecraft/world/level/SpawnData.java
+index 51f5ddd..0c144dc 100644
+--- a/minecraft/world/level/SpawnData.java
++++ b/minecraft/world/level/SpawnData.java
+@@ -27,19 +27,19 @@ public record SpawnData(CompoundTag entityToSpawn, Optional<SpawnData.CustomSpaw
+         this(new CompoundTag(), Optional.empty());
+     }
+ 
+-    public SpawnData(CompoundTag compoundtag, Optional<SpawnData.CustomSpawnRules> optional) {
+-        if (compoundtag.contains("id")) {
+-            ResourceLocation resourcelocation = ResourceLocation.tryParse(compoundtag.getString("id"));
++    public SpawnData(CompoundTag entityToSpawn, Optional<SpawnData.CustomSpawnRules> customSpawnRules) {
++        if (entityToSpawn.contains("id")) {
++            ResourceLocation resourcelocation = ResourceLocation.tryParse(entityToSpawn.getString("id"));
+ 
+             if (resourcelocation != null) {
+-                compoundtag.putString("id", resourcelocation.toString());
++                entityToSpawn.putString("id", resourcelocation.toString());
+             } else {
+-                compoundtag.remove("id");
++                entityToSpawn.remove("id");
+             }
+         }
+ 
+-        this.entityToSpawn = compoundtag;
+-        this.customSpawnRules = optional;
++        this.entityToSpawn = entityToSpawn;
++        this.customSpawnRules = customSpawnRules;
+     }
+ 
+     public CompoundTag getEntityToSpawn() {

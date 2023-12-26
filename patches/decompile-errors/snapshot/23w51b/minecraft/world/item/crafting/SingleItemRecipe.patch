@@ -1,0 +1,23 @@
+diff --git a/minecraft/world/item/crafting/SingleItemRecipe.java b/minecraft/world/item/crafting/SingleItemRecipe.java
+index 5600780..1891c10 100644
+--- a/minecraft/world/item/crafting/SingleItemRecipe.java
++++ b/minecraft/world/item/crafting/SingleItemRecipe.java
+@@ -78,16 +78,13 @@ public abstract class SingleItemRecipe implements Recipe<Container> {
+         protected Serializer(SingleItemRecipe.Factory<T> singleitemrecipe_factory) {
+             this.factory = singleitemrecipe_factory;
+             this.codec = RecordCodecBuilder.create((instance) -> {
+-                P3 p3 = instance.group(ExtraCodecs.strictOptionalField(Codec.STRING, "group", "").forGetter((singleitemrecipe) -> {
++                return instance.group(ExtraCodecs.strictOptionalField(Codec.STRING, "group", "").forGetter((singleitemrecipe) -> {
+                     return singleitemrecipe.group;
+                 }), Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter((singleitemrecipe) -> {
+                     return singleitemrecipe.ingredient;
+                 }), ItemStack.RESULT_CODEC.forGetter((singleitemrecipe) -> {
+                     return singleitemrecipe.result;
+-                }));
+-
+-                Objects.requireNonNull(singleitemrecipe_factory);
+-                return p3.apply(instance, singleitemrecipe_factory::create);
++                })).apply(instance, singleitemrecipe_factory::create);
+             });
+         }
+ 

@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/feature/configurations/SpikeConfiguration.java b/minecraft/world/level/levelgen/feature/configurations/SpikeConfiguration.java
+index 02f0bf5..239c227 100644
+--- a/minecraft/world/level/levelgen/feature/configurations/SpikeConfiguration.java
++++ b/minecraft/world/level/levelgen/feature/configurations/SpikeConfiguration.java
+@@ -31,7 +31,7 @@ public class SpikeConfiguration implements FeatureConfiguration {
+     private SpikeConfiguration(boolean flag, List<SpikeFeature.EndSpike> list, Optional<BlockPos> optional) {
+         this.crystalInvulnerable = flag;
+         this.spikes = list;
+-        this.crystalBeamTarget = (BlockPos) optional.orElse((Object) null);
++        this.crystalBeamTarget = (BlockPos) optional.orElse(null);
+     }
+ 
+     public boolean isCrystalInvulnerable() {

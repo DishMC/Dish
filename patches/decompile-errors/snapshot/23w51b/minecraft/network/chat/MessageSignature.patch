@@ -1,0 +1,17 @@
+diff --git a/minecraft/network/chat/MessageSignature.java b/minecraft/network/chat/MessageSignature.java
+index a5c1605..6e5fffb 100644
+--- a/minecraft/network/chat/MessageSignature.java
++++ b/minecraft/network/chat/MessageSignature.java
+@@ -17,9 +17,9 @@ public record MessageSignature(byte[] bytes) {
+     public static final Codec<MessageSignature> CODEC = ExtraCodecs.BASE64_STRING.xmap(MessageSignature::new, MessageSignature::bytes);
+     public static final int BYTES = 256;
+ 
+-    public MessageSignature(byte[] abyte) {
+-        Preconditions.checkState(abyte.length == 256, "Invalid message signature size");
+-        this.bytes = abyte;
++    public MessageSignature(byte[] bytes) {
++        Preconditions.checkState(bytes.length == 256, "Invalid message signature size");
++        this.bytes = bytes;
+     }
+ 
+     public static MessageSignature read(FriendlyByteBuf friendlybytebuf) {

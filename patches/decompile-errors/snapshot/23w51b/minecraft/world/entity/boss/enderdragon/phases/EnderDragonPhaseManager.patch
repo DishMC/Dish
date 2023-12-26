@@ -1,0 +1,12 @@
+diff --git a/minecraft/world/entity/boss/enderdragon/phases/EnderDragonPhaseManager.java b/minecraft/world/entity/boss/enderdragon/phases/EnderDragonPhaseManager.java
+index 749422d..2850031 100644
+--- a/minecraft/world/entity/boss/enderdragon/phases/EnderDragonPhaseManager.java
++++ b/minecraft/world/entity/boss/enderdragon/phases/EnderDragonPhaseManager.java
+@@ -45,6 +45,6 @@ public class EnderDragonPhaseManager {
+             this.phases[i] = enderdragonphase.createInstance(this.dragon);
+         }
+ 
+-        return this.phases[i];
++        return (T) this.phases[i];
+     }
+ }

@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/structure/placement/StructurePlacementType.java b/minecraft/world/level/levelgen/structure/placement/StructurePlacementType.java
+index 702fc9d..2268939 100644
+--- a/minecraft/world/level/levelgen/structure/placement/StructurePlacementType.java
++++ b/minecraft/world/level/levelgen/structure/placement/StructurePlacementType.java
+@@ -12,7 +12,7 @@ public interface StructurePlacementType<SP extends StructurePlacement> {
+     Codec<SP> codec();
+ 
+     private static <SP extends StructurePlacement> StructurePlacementType<SP> register(String s, Codec<SP> codec) {
+-        return (StructurePlacementType) Registry.register(BuiltInRegistries.STRUCTURE_PLACEMENT, s, () -> {
++        return Registry.register(BuiltInRegistries.STRUCTURE_PLACEMENT, s, () -> {
+             return codec;
+         });
+     }

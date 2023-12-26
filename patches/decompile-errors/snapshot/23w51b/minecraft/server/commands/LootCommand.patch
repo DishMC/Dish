@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/commands/LootCommand.java b/minecraft/server/commands/LootCommand.java
+index 2505644..6b8c73e 100644
+--- a/minecraft/server/commands/LootCommand.java
++++ b/minecraft/server/commands/LootCommand.java
+@@ -91,7 +91,7 @@ public class LootCommand {
+     }
+ 
+     private static <T extends ArgumentBuilder<CommandSourceStack, T>> T addTargets(T t0, LootCommand.TailProvider lootcommand_tailprovider) {
+-        return t0.then(((LiteralArgumentBuilder) Commands.literal("replace").then(Commands.literal("entity").then(Commands.argument("entities", EntityArgument.entities()).then(lootcommand_tailprovider.construct(Commands.argument("slot", SlotArgument.slot()), (commandcontext, list, lootcommand_callback) -> {
++        return t0.then((Commands.literal("replace").then(Commands.literal("entity").then(Commands.argument("entities", EntityArgument.entities()).then(lootcommand_tailprovider.construct(Commands.argument("slot", SlotArgument.slot()), (commandcontext, list, lootcommand_callback) -> {
+             return entityReplace(EntityArgument.getEntities(commandcontext, "entities"), SlotArgument.getSlot(commandcontext, "slot"), list.size(), list, lootcommand_callback);
+         }).then(lootcommand_tailprovider.construct(Commands.argument("count", IntegerArgumentType.integer(0)), (commandcontext, list, lootcommand_callback) -> {
+             return entityReplace(EntityArgument.getEntities(commandcontext, "entities"), SlotArgument.getSlot(commandcontext, "slot"), IntegerArgumentType.getInteger(commandcontext, "count"), list, lootcommand_callback);

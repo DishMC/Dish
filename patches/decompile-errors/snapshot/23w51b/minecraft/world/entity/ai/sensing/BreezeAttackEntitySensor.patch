@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/sensing/BreezeAttackEntitySensor.java b/minecraft/world/entity/ai/sensing/BreezeAttackEntitySensor.java
+index ea9198a..ec5ca91 100644
+--- a/minecraft/world/entity/ai/sensing/BreezeAttackEntitySensor.java
++++ b/minecraft/world/entity/ai/sensing/BreezeAttackEntitySensor.java
+@@ -25,7 +25,7 @@ public class BreezeAttackEntitySensor extends NearestLivingEntitySensor<Breeze>
+         breeze.getBrain().getMemory(MemoryModuleType.NEAREST_LIVING_ENTITIES).stream().flatMap(Collection::stream).filter((livingentity) -> {
+             return Sensor.isEntityAttackable(breeze, livingentity);
+         }).findFirst().ifPresentOrElse((livingentity) -> {
+-            breeze.getBrain().setMemory(MemoryModuleType.NEAREST_ATTACKABLE, (Object) livingentity);
++            breeze.getBrain().setMemory(MemoryModuleType.NEAREST_ATTACKABLE, livingentity);
+         }, () -> {
+             breeze.getBrain().eraseMemory(MemoryModuleType.NEAREST_ATTACKABLE);
+         });

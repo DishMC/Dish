@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/entity/BellBlockEntity.java b/minecraft/world/level/block/entity/BellBlockEntity.java
+index 8eb5a75..cd4792c 100644
+--- a/minecraft/world/level/block/entity/BellBlockEntity.java
++++ b/minecraft/world/level/block/entity/BellBlockEntity.java
+@@ -120,7 +120,7 @@ public class BellBlockEntity extends BlockEntity {
+                 LivingEntity livingentity = (LivingEntity) iterator.next();
+ 
+                 if (livingentity.isAlive() && !livingentity.isRemoved() && blockpos.closerToCenterThan(livingentity.position(), 32.0D)) {
+-                    livingentity.getBrain().setMemory(MemoryModuleType.HEARD_BELL_TIME, (Object) this.level.getGameTime());
++                    livingentity.getBrain().setMemory(MemoryModuleType.HEARD_BELL_TIME, this.level.getGameTime());
+                 }
+             }
+         }

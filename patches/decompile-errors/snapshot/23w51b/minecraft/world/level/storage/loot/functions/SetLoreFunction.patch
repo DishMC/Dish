@@ -1,0 +1,15 @@
+diff --git a/minecraft/world/level/storage/loot/functions/SetLoreFunction.java b/minecraft/world/level/storage/loot/functions/SetLoreFunction.java
+index 880f533..8bcadb8 100644
+--- a/minecraft/world/level/storage/loot/functions/SetLoreFunction.java
++++ b/minecraft/world/level/storage/loot/functions/SetLoreFunction.java
+@@ -64,8 +64,8 @@ public class SetLoreFunction extends LootItemConditionalFunction {
+                 listtag.clear();
+             }
+ 
+-            UnaryOperator<Component> unaryoperator = SetNameFunction.createResolver(lootcontext, (LootContext.EntityTarget) this.resolutionContext.orElse((Object) null));
+-            Stream stream = this.lore.stream().map(unaryoperator).map(Component.Serializer::toJson).map(StringTag::valueOf);
++            UnaryOperator<Component> unaryoperator = SetNameFunction.createResolver(lootcontext, (LootContext.EntityTarget) this.resolutionContext.orElse(null));
++            Stream<StringTag> stream = this.lore.stream().map(unaryoperator).map(Component.Serializer::toJson).map(StringTag::valueOf);
+ 
+             Objects.requireNonNull(listtag);
+             stream.forEach(listtag::add);

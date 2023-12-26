@@ -1,0 +1,13 @@
+diff --git a/minecraft/data/structures/SnbtToNbt.java b/minecraft/data/structures/SnbtToNbt.java
+index f5858ab..4b76522 100644
+--- a/minecraft/data/structures/SnbtToNbt.java
++++ b/minecraft/data/structures/SnbtToNbt.java
+@@ -65,7 +65,7 @@ public class SnbtToNbt implements DataProvider {
+ 
+             list.add(CompletableFuture.supplyAsync(() -> {
+                 try {
+-                    Stream stream = Files.walk(path1);
++                    Stream<Path> stream = Files.walk(path1);
+ 
+                     CompletableFuture completablefuture;
+ 

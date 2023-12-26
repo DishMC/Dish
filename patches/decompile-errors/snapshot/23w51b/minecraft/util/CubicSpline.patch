@@ -1,0 +1,86 @@
+diff --git a/minecraft/util/CubicSpline.java b/minecraft/util/CubicSpline.java
+index 91e252f..4f90d95 100644
+--- a/minecraft/util/CubicSpline.java
++++ b/minecraft/util/CubicSpline.java
+@@ -24,25 +24,23 @@ public interface CubicSpline<C, I extends ToFloatFunction<C>> extends ToFloatFun
+ 
+     CubicSpline<C, I> mapAll(CubicSpline.CoordinateVisitor<I> cubicspline_coordinatevisitor);
+ 
++    record Point<C, I extends ToFloatFunction<C>>(float location, CubicSpline<C, I> value, float derivative) {
++    }
++
+     static <C, I extends ToFloatFunction<C>> Codec<CubicSpline<C, I>> codec(Codec<I> codec) {
+         MutableObject<Codec<CubicSpline<C, I>>> mutableobject = new MutableObject();
+-        Codec<1Point<C, I>> codec1 = RecordCodecBuilder.create((instance) -> {
+-            RecordCodecBuilder recordcodecbuilder = Codec.FLOAT.fieldOf("location").forGetter(1Point::location);
++        Codec<Point<C, I>> codec1 = RecordCodecBuilder.create((instance) -> {
++            RecordCodecBuilder<Point<C, I>, Float> recordcodecbuilder = Codec.FLOAT.fieldOf("location").forGetter(Point::location);
+ 
+             Objects.requireNonNull(mutableobject);
+-            return instance.group(recordcodecbuilder, ExtraCodecs.lazyInitializedCodec(mutableobject::getValue).fieldOf("value").forGetter(1Point::value), Codec.FLOAT.fieldOf("derivative").forGetter(1Point::derivative)).apply(instance, (f, cubicspline, f1) -> {
+-                record 1Point<C, I extends ToFloatFunction<C>>(float location, CubicSpline<C, I> value, float derivative) {
+-
+-                }
+-
+-
+-                return new 1Point<>(f, cubicspline, f1);
++            return instance.group(recordcodecbuilder, ExtraCodecs.lazyInitializedCodec(mutableobject::getValue).fieldOf("value").forGetter(Point::value), Codec.FLOAT.fieldOf("derivative").forGetter(Point::derivative)).apply(instance, (f, cubicspline, f1) -> {
++                return new Point<>((float)f, cubicspline, (float)f1);
+             });
+         });
+         Codec<CubicSpline.Multipoint<C, I>> codec2 = RecordCodecBuilder.create((instance) -> {
+             return instance.group(codec.fieldOf("coordinate").forGetter(CubicSpline.Multipoint::coordinate), ExtraCodecs.nonEmptyList(codec1.listOf()).fieldOf("points").forGetter((cubicspline_multipoint) -> {
+                 return IntStream.range(0, cubicspline_multipoint.locations.length).mapToObj((i) -> {
+-                    return new 1Point<>(cubicspline_multipoint.locations()[i], (CubicSpline)cubicspline_multipoint.values().get(i), cubicspline_multipoint.derivatives()[i]);
++                    return new Point<>(cubicspline_multipoint.locations()[i], cubicspline_multipoint.values().get(i), cubicspline_multipoint.derivatives()[i]);
+                 }).toList();
+             })).apply(instance, (tofloatfunction, list) -> {
+                 float[] afloat = new float[list.size()];
+@@ -50,11 +48,11 @@ public interface CubicSpline<C, I extends ToFloatFunction<C>> extends ToFloatFun
+                 float[] afloat1 = new float[list.size()];
+ 
+                 for(int i = 0; i < list.size(); ++i) {
+-                    1Point<C, I> 1point = (1Point)list.get(i);
++                    Point<C, I> point = (Point)list.get(i);
+ 
+-                    afloat[i] = 1point.location();
+-                    com_google_common_collect_immutablelist_builder.add(1point.value());
+-                    afloat1[i] = 1point.derivative();
++                    afloat[i] = point.location();
++                    com_google_common_collect_immutablelist_builder.add(point.value());
++                    afloat1[i] = point.derivative();
+                 }
+ 
+                 return CubicSpline.Multipoint.create(tofloatfunction, afloat, com_google_common_collect_immutablelist_builder.build(), afloat1);
+@@ -177,14 +175,14 @@ public interface CubicSpline<C, I extends ToFloatFunction<C>> extends ToFloatFun
+     @VisibleForDebug
+     public static record Multipoint<C, I extends ToFloatFunction<C>> (I coordinate, float[] locations, List<CubicSpline<C, I>> values, float[] derivatives, float minValue, float maxValue) implements CubicSpline<C, I> {
+ 
+-        public Multipoint(I i0, float[] afloat, List<CubicSpline<C, I>> list, float[] afloat1, float f, float f1) {
+-            validateSizes(afloat, list, afloat1);
+-            this.coordinate = i0;
+-            this.locations = afloat;
+-            this.values = list;
+-            this.derivatives = afloat1;
+-            this.minValue = f;
+-            this.maxValue = f1;
++        public Multipoint(I coordinate, float[] locations, List<CubicSpline<C, I>> values, float[] derivatives, float minValue, float maxValue) {
++            validateSizes(locations, values, derivatives);
++            this.coordinate = coordinate;
++            this.locations = locations;
++            this.values = values;
++            this.derivatives = derivatives;
++            this.minValue = minValue;
++            this.maxValue = maxValue;
+         }
+ 
+         static <C, I extends ToFloatFunction<C>> CubicSpline.Multipoint<C, I> create(I i0, float[] afloat, List<CubicSpline<C, I>> list, float[] afloat1) {
+@@ -319,7 +317,7 @@ public interface CubicSpline<C, I extends ToFloatFunction<C>> extends ToFloatFun
+ 
+         @Override
+         public CubicSpline<C, I> mapAll(CubicSpline.CoordinateVisitor<I> cubicspline_coordinatevisitor) {
+-            return create((ToFloatFunction) cubicspline_coordinatevisitor.visit(this.coordinate), this.locations, this.values().stream().map((cubicspline) -> {
++            return create(cubicspline_coordinatevisitor.visit(this.coordinate), this.locations, this.values().stream().map((cubicspline) -> {
+                 return cubicspline.mapAll(cubicspline_coordinatevisitor);
+             }).toList(), this.derivatives);
+         }

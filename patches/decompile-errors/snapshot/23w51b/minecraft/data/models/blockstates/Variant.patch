@@ -1,0 +1,48 @@
+diff --git a/minecraft/data/models/blockstates/Variant.java b/minecraft/data/models/blockstates/Variant.java
+index 731ee8e..24b1080 100644
+--- a/minecraft/data/models/blockstates/Variant.java
++++ b/minecraft/data/models/blockstates/Variant.java
+@@ -15,10 +15,10 @@ public class Variant implements Supplier<JsonElement> {
+     public Variant() {}
+ 
+     public <T> Variant with(VariantProperty<T> variantproperty, T t0) {
+-        VariantProperty<?>.Value variantproperty_value = (VariantProperty.Value) this.values.put(variantproperty1, variantproperty2.withValue(t0));
++        VariantProperty<?>.Value variantproperty_value = (VariantProperty.Value) this.values.put(variantproperty, variantproperty.withValue(t0));
+ 
+-        if (variantproperty_value1 != null) {
+-            throw new IllegalStateException("Replacing value of " + variantproperty_value2 + " with " + t0);
++        if (variantproperty_value != null) {
++            throw new IllegalStateException("Replacing value of " + variantproperty_value + " with " + t0);
+         } else {
+             return this;
+         }
+@@ -31,16 +31,16 @@ public class Variant implements Supplier<JsonElement> {
+     public static Variant merge(Variant variant, Variant variant1) {
+         Variant variant2 = new Variant();
+ 
+-        variant3.values.putAll(variant4.values);
+-        variant5.values.putAll(variant6.values);
+-        return variant7;
++        variant2.values.putAll(variant.values);
++        variant2.values.putAll(variant1.values);
++        return variant2;
+     }
+ 
+     public JsonElement get() {
+         JsonObject jsonobject = new JsonObject();
+ 
+         this.values.values().forEach((variantproperty_value) -> {
+-            variantproperty_value1.addToVariant(jsonobject);
++            variantproperty_value.addToVariant(jsonobject);
+         });
+         return jsonobject;
+     }
+@@ -52,7 +52,7 @@ public class Variant implements Supplier<JsonElement> {
+             JsonArray jsonarray = new JsonArray();
+ 
+             list.forEach((variant) -> {
+-                jsonarray.add(variant1.get());
++                jsonarray.add(variant.get());
+             });
+             return jsonarray;
+         }

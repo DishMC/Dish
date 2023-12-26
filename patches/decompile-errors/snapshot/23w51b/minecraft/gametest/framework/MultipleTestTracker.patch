@@ -1,0 +1,13 @@
+diff --git a/minecraft/gametest/framework/MultipleTestTracker.java b/minecraft/gametest/framework/MultipleTestTracker.java
+index c044231..86b3b3c 100644
+--- a/minecraft/gametest/framework/MultipleTestTracker.java
++++ b/minecraft/gametest/framework/MultipleTestTracker.java
+@@ -26,7 +26,7 @@ public class MultipleTestTracker {
+ 
+     public void addTestToTrack(GameTestInfo gametestinfo) {
+         this.tests.add(gametestinfo);
+-        Collection collection = this.listeners;
++        Collection<GameTestListener> collection = this.listeners;
+ 
+         Objects.requireNonNull(gametestinfo);
+         collection.forEach(gametestinfo::addListener);

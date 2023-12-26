@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/schedule/ScheduleBuilder.java b/minecraft/world/entity/schedule/ScheduleBuilder.java
+index 032a296..1d48abf 100644
+--- a/minecraft/world/entity/schedule/ScheduleBuilder.java
++++ b/minecraft/world/entity/schedule/ScheduleBuilder.java
+@@ -21,7 +21,7 @@ public class ScheduleBuilder {
+     }
+ 
+     public Schedule build() {
+-        Set set = (Set) this.transitions.stream().map(ScheduleBuilder.ActivityTransition::getActivity).collect(Collectors.toSet());
++        Set<Activity> set = (Set) this.transitions.stream().map(ScheduleBuilder.ActivityTransition::getActivity).collect(Collectors.toSet());
+         Schedule schedule = this.schedule;
+ 
+         Objects.requireNonNull(this.schedule);

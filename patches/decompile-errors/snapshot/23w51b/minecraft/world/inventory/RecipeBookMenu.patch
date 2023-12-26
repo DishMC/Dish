@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/inventory/RecipeBookMenu.java b/minecraft/world/inventory/RecipeBookMenu.java
+index 0fe131f..157d2bf 100644
+--- a/minecraft/world/inventory/RecipeBookMenu.java
++++ b/minecraft/world/inventory/RecipeBookMenu.java
+@@ -14,7 +14,7 @@ public abstract class RecipeBookMenu<C extends Container> extends AbstractContai
+     }
+ 
+     public void handlePlacement(boolean flag, RecipeHolder<?> recipeholder, ServerPlayer serverplayer) {
+-        (new ServerPlaceRecipe<>(this)).recipeClicked(serverplayer, recipeholder, flag);
++        (new ServerPlaceRecipe<>(this)).recipeClicked(serverplayer, (RecipeHolder<? extends Recipe<C>>) recipeholder, flag);
+     }
+ 
+     public abstract void fillCraftSlotsStackedContents(StackedContents stackedcontents);

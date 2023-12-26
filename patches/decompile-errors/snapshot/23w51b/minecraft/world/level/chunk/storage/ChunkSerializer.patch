@@ -1,0 +1,74 @@
+diff --git a/minecraft/world/level/chunk/storage/ChunkSerializer.java b/minecraft/world/level/chunk/storage/ChunkSerializer.java
+index 01e6cbb..6defa04 100644
+--- a/minecraft/world/level/chunk/storage/ChunkSerializer.java
++++ b/minecraft/world/level/chunk/storage/ChunkSerializer.java
+@@ -105,7 +105,7 @@ public class ChunkSerializer {
+         Codec<PalettedContainerRO<Holder<Biome>>> codec = makeBiomeCodec(registry);
+         boolean flag2 = false;
+ 
+-        DataResult dataresult;
++        DataResult<PalettedContainer<BlockState>> dataresult;
+ 
+         for (int j = 0; j < listtag.size(); ++j) {
+             CompoundTag compoundtag1 = listtag.getCompound(j);
+@@ -130,12 +130,11 @@ public class ChunkSerializer {
+                 Object object;
+ 
+                 if (compoundtag1.contains("biomes", 10)) {
+-                    dataresult = codec.parse(NbtOps.INSTANCE, compoundtag1.getCompound("biomes")).promotePartial((s) -> {
+-                        logErrors(chunkpos, b0, s);
+-                    });
+                     logger = ChunkSerializer.LOGGER;
+                     Objects.requireNonNull(logger);
+-                    object = (PalettedContainerRO) dataresult.getOrThrow(false, logger::error);
++                    object = (PalettedContainerRO) codec.parse(NbtOps.INSTANCE, compoundtag1.getCompound("biomes")).promotePartial((s) -> {
++                        logErrors(chunkpos, b0, s);
++                    }).getOrThrow(false, logger::error);
+                 } else {
+                     object = new PalettedContainer<>(registry.asHolderIdMap(), registry.getHolderOrThrow(Biomes.PLAINS), PalettedContainer.Strategy.SECTION_BIOMES);
+                 }
+@@ -173,10 +172,7 @@ public class ChunkSerializer {
+         BlendingData blendingdata;
+ 
+         if (compoundtag.contains("blending_data", 10)) {
+-            dataresult = BlendingData.CODEC.parse(new Dynamic(NbtOps.INSTANCE, compoundtag.getCompound("blending_data")));
+-            logger1 = ChunkSerializer.LOGGER;
+-            Objects.requireNonNull(logger1);
+-            blendingdata = (BlendingData) dataresult.resultOrPartial(logger1::error).orElse((Object) null);
++            blendingdata = BlendingData.CODEC.parse(new Dynamic<>(NbtOps.INSTANCE, compoundtag.getCompound("blending_data"))).resultOrPartial(ChunkSerializer.LOGGER::error).orElse(null);
+         } else {
+             blendingdata = null;
+         }
+@@ -204,13 +200,7 @@ public class ChunkSerializer {
+             object1 = protochunk;
+             protochunk.setInhabitedTime(l);
+             if (compoundtag.contains("below_zero_retrogen", 10)) {
+-                dataresult = BelowZeroRetrogen.CODEC.parse(new Dynamic(NbtOps.INSTANCE, compoundtag.getCompound("below_zero_retrogen")));
+-                logger1 = ChunkSerializer.LOGGER;
+-                Objects.requireNonNull(logger1);
+-                Optional optional = dataresult.resultOrPartial(logger1::error);
+-
+-                Objects.requireNonNull(protochunk);
+-                optional.ifPresent(protochunk::setBelowZeroRetrogen);
++                BelowZeroRetrogen.CODEC.parse(new Dynamic<>(NbtOps.INSTANCE, compoundtag.getCompound("below_zero_retrogen"))).resultOrPartial(ChunkSerializer.LOGGER::error).ifPresent(protochunk::setBelowZeroRetrogen);
+             }
+ 
+             ChunkStatus chunkstatus = ChunkStatus.byName(compoundtag.getString("Status"));
+@@ -311,7 +301,7 @@ public class ChunkSerializer {
+         compoundtag.putLong("InhabitedTime", chunkaccess.getInhabitedTime());
+         compoundtag.putString("Status", BuiltInRegistries.CHUNK_STATUS.getKey(chunkaccess.getStatus()).toString());
+         BlendingData blendingdata = chunkaccess.getBlendingData();
+-        DataResult dataresult;
++        DataResult<Tag> dataresult;
+         Logger logger;
+ 
+         if (blendingdata != null) {
+@@ -358,7 +348,7 @@ public class ChunkSerializer {
+ 
+                 if (flag1) {
+                     LevelChunkSection levelchunksection = alevelchunksection[j];
+-                    DataResult dataresult1 = ChunkSerializer.BLOCK_STATE_CODEC.encodeStart(NbtOps.INSTANCE, levelchunksection.getStates());
++                    DataResult<Tag> dataresult1 = ChunkSerializer.BLOCK_STATE_CODEC.encodeStart(NbtOps.INSTANCE, levelchunksection.getStates());
+                     Logger logger1 = ChunkSerializer.LOGGER;
+ 
+                     Objects.requireNonNull(logger1);

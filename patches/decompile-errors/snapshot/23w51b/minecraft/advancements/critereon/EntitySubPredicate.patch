@@ -1,0 +1,13 @@
+diff --git a/minecraft/advancements/critereon/EntitySubPredicate.java b/minecraft/advancements/critereon/EntitySubPredicate.java
+index e5e8657..96dfe37 100644
+--- a/minecraft/advancements/critereon/EntitySubPredicate.java
++++ b/minecraft/advancements/critereon/EntitySubPredicate.java
+@@ -237,7 +237,7 @@ public interface EntitySubPredicate {
+ 
+             return optional;
+         });
+-        public static final BiMap<String, EntitySubPredicate.Type> TYPES = ImmutableBiMap.builder().put("any", EntitySubPredicate.Types.ANY).put("lightning", EntitySubPredicate.Types.LIGHTNING).put("fishing_hook", EntitySubPredicate.Types.FISHING_HOOK).put("player", EntitySubPredicate.Types.PLAYER).put("slime", EntitySubPredicate.Types.SLIME).put("cat", EntitySubPredicate.Types.CAT.type()).put("frog", EntitySubPredicate.Types.FROG.type()).put("axolotl", EntitySubPredicate.Types.AXOLOTL.type()).put("boat", EntitySubPredicate.Types.BOAT.type()).put("fox", EntitySubPredicate.Types.FOX.type()).put("mooshroom", EntitySubPredicate.Types.MOOSHROOM.type()).put("painting", EntitySubPredicate.Types.PAINTING.type()).put("rabbit", EntitySubPredicate.Types.RABBIT.type()).put("horse", EntitySubPredicate.Types.HORSE.type()).put("llama", EntitySubPredicate.Types.LLAMA.type()).put("villager", EntitySubPredicate.Types.VILLAGER.type()).put("parrot", EntitySubPredicate.Types.PARROT.type()).put("tropical_fish", EntitySubPredicate.Types.TROPICAL_FISH.type()).buildOrThrow();
++        public static final BiMap<String, EntitySubPredicate.Type> TYPES = ImmutableBiMap.<String, EntitySubPredicate.Type>builder().put("any", EntitySubPredicate.Types.ANY).put("lightning", EntitySubPredicate.Types.LIGHTNING).put("fishing_hook", EntitySubPredicate.Types.FISHING_HOOK).put("player", EntitySubPredicate.Types.PLAYER).put("slime", EntitySubPredicate.Types.SLIME).put("cat", EntitySubPredicate.Types.CAT.type()).put("frog", EntitySubPredicate.Types.FROG.type()).put("axolotl", EntitySubPredicate.Types.AXOLOTL.type()).put("boat", EntitySubPredicate.Types.BOAT.type()).put("fox", EntitySubPredicate.Types.FOX.type()).put("mooshroom", EntitySubPredicate.Types.MOOSHROOM.type()).put("painting", EntitySubPredicate.Types.PAINTING.type()).put("rabbit", EntitySubPredicate.Types.RABBIT.type()).put("horse", EntitySubPredicate.Types.HORSE.type()).put("llama", EntitySubPredicate.Types.LLAMA.type()).put("villager", EntitySubPredicate.Types.VILLAGER.type()).put("parrot", EntitySubPredicate.Types.PARROT.type()).put("tropical_fish", EntitySubPredicate.Types.TROPICAL_FISH.type()).buildOrThrow();
+         public static final Codec<EntitySubPredicate.Type> TYPE_CODEC;
+ 
+         public Types() {}

@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/sensing/GolemSensor.java b/minecraft/world/entity/ai/sensing/GolemSensor.java
+index 8e73693..85b1a97 100644
+--- a/minecraft/world/entity/ai/sensing/GolemSensor.java
++++ b/minecraft/world/entity/ai/sensing/GolemSensor.java
+@@ -36,7 +36,7 @@ public class GolemSensor extends Sensor<LivingEntity> {
+         Optional<List<LivingEntity>> optional = livingentity.getBrain().getMemory(MemoryModuleType.NEAREST_LIVING_ENTITIES);
+ 
+         if (!optional.isEmpty()) {
+-            boolean flag = ((List) optional.get()).stream().anyMatch((livingentity1) -> {
++            boolean flag = (optional.get()).stream().anyMatch((livingentity1) -> {
+                 return livingentity1.getType().equals(EntityType.IRON_GOLEM);
+             });
+ 

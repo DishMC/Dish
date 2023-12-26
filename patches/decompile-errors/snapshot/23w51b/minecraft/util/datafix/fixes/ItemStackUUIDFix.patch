@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/datafix/fixes/ItemStackUUIDFix.java b/minecraft/util/datafix/fixes/ItemStackUUIDFix.java
+index 8774dfc..c56ad53 100644
+--- a/minecraft/util/datafix/fixes/ItemStackUUIDFix.java
++++ b/minecraft/util/datafix/fixes/ItemStackUUIDFix.java
+@@ -38,7 +38,7 @@ public class ItemStackUUIDFix extends AbstractUUIDFix {
+     private Dynamic<?> updateAttributeModifiers(Dynamic<?> dynamic) {
+         return dynamic.update("AttributeModifiers", (dynamic1) -> {
+             return dynamic.createList(dynamic1.asStream().map((dynamic2) -> {
+-                return (Dynamic) replaceUUIDLeastMost(dynamic2, "UUID", "UUID").orElse(dynamic2);
++                return replaceUUIDLeastMost(dynamic2, "UUID", "UUID").orElse(dynamic2);
+             }));
+         });
+     }

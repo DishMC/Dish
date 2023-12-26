@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/storage/loot/entries/CompositeEntryBase.java b/minecraft/world/level/storage/loot/entries/CompositeEntryBase.java
+index 0da50bf..75afc0c 100644
+--- a/minecraft/world/level/storage/loot/entries/CompositeEntryBase.java
++++ b/minecraft/world/level/storage/loot/entries/CompositeEntryBase.java
+@@ -44,7 +44,7 @@ public abstract class CompositeEntryBase extends LootPoolEntryContainer {
+ 
+     public static <T extends CompositeEntryBase> Codec<T> createCodec(CompositeEntryBase.CompositeEntryConstructor<T> compositeentrybase_compositeentryconstructor) {
+         return RecordCodecBuilder.create((instance) -> {
+-            P2 p2 = instance.group(ExtraCodecs.strictOptionalField(LootPoolEntries.CODEC.listOf(), "children", List.of()).forGetter((compositeentrybase) -> {
++            P2<RecordCodecBuilder.Mu<T>, List<LootPoolEntryContainer>, List<LootItemCondition>> p2 = instance.group(ExtraCodecs.strictOptionalField(LootPoolEntries.CODEC.listOf(), "children", List.of()).forGetter((compositeentrybase) -> {
+                 return compositeentrybase.children;
+             })).and(commonFields(instance).t1());
+ 

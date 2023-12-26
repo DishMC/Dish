@@ -1,0 +1,21 @@
+diff --git a/minecraft/world/level/levelgen/structure/templatesystem/rule/blockentity/AppendLoot.java b/minecraft/world/level/levelgen/structure/templatesystem/rule/blockentity/AppendLoot.java
+index f46d76d..f52a93f 100644
+--- a/minecraft/world/level/levelgen/structure/templatesystem/rule/blockentity/AppendLoot.java
++++ b/minecraft/world/level/levelgen/structure/templatesystem/rule/blockentity/AppendLoot.java
+@@ -8,6 +8,7 @@ import java.util.Objects;
+ import javax.annotation.Nullable;
+ import net.minecraft.nbt.CompoundTag;
+ import net.minecraft.nbt.NbtOps;
++import net.minecraft.nbt.Tag;
+ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.util.RandomSource;
+ import org.slf4j.Logger;
+@@ -29,7 +30,7 @@ public class AppendLoot implements RuleBlockEntityModifier {
+     @Override
+     public CompoundTag apply(RandomSource randomsource, @Nullable CompoundTag compoundtag) {
+         CompoundTag compoundtag1 = compoundtag == null ? new CompoundTag() : compoundtag.copy();
+-        DataResult dataresult = ResourceLocation.CODEC.encodeStart(NbtOps.INSTANCE, this.lootTable);
++        DataResult<Tag> dataresult = ResourceLocation.CODEC.encodeStart(NbtOps.INSTANCE, this.lootTable);
+         Logger logger = AppendLoot.LOGGER;
+ 
+         Objects.requireNonNull(logger);

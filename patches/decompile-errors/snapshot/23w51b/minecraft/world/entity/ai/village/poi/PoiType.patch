@@ -1,0 +1,21 @@
+diff --git a/minecraft/world/entity/ai/village/poi/PoiType.java b/minecraft/world/entity/ai/village/poi/PoiType.java
+index 5161c92..9bbb454 100644
+--- a/minecraft/world/entity/ai/village/poi/PoiType.java
++++ b/minecraft/world/entity/ai/village/poi/PoiType.java
+@@ -11,11 +11,11 @@ public record PoiType(Set<BlockState> matchingStates, int maxTickets, int validR
+         return false;
+     };
+ 
+-    public PoiType(Set<BlockState> set, int i, int j) {
+-        set = Set.copyOf(set);
+-        this.matchingStates = set;
+-        this.maxTickets = i;
+-        this.validRange = j;
++    public PoiType(Set<BlockState> matchingStates, int maxTickets, int validRange) {
++        matchingStates = Set.copyOf(matchingStates);
++        this.matchingStates = matchingStates;
++        this.maxTickets = maxTickets;
++        this.validRange = validRange;
+     }
+ 
+     public boolean is(BlockState blockstate) {

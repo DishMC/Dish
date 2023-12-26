@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/datafix/fixes/MobEffectIdFix.java b/minecraft/util/datafix/fixes/MobEffectIdFix.java
+index 2119c53..6a80b48 100644
+--- a/minecraft/util/datafix/fixes/MobEffectIdFix.java
++++ b/minecraft/util/datafix/fixes/MobEffectIdFix.java
+@@ -64,7 +64,7 @@ public class MobEffectIdFix extends DataFix {
+     }
+ 
+     private static <T> Optional<Dynamic<T>> getAndConvertMobEffectId(Dynamic<T> dynamic, String s) {
+-        Optional optional = dynamic.get(s).asNumber().result().map((number) -> {
++        Optional<String> optional = dynamic.get(s).asNumber().result().map((number) -> {
+             return (String) MobEffectIdFix.ID_MAP.get(number.intValue());
+         });
+ 

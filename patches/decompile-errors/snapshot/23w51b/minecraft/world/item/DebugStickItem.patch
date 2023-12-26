@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/item/DebugStickItem.java b/minecraft/world/item/DebugStickItem.java
+index 9911033..d9fbcdd 100644
+--- a/minecraft/world/item/DebugStickItem.java
++++ b/minecraft/world/item/DebugStickItem.java
+@@ -95,7 +95,7 @@ public class DebugStickItem extends Item {
+     }
+ 
+     private static <T extends Comparable<T>> BlockState cycleState(BlockState blockstate, Property<T> property, boolean flag) {
+-        return (BlockState) blockstate.setValue(property, (Comparable) getRelative(property.getPossibleValues(), blockstate.getValue(property), flag));
++        return blockstate.setValue(property, getRelative(property.getPossibleValues(), blockstate.getValue(property), flag));
+     }
+ 
+     private static <T> T getRelative(Iterable<T> iterable, @Nullable T t0, boolean flag) {

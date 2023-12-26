@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/behavior/warden/SonicBoom.java b/minecraft/world/entity/ai/behavior/warden/SonicBoom.java
+index ca966f2..5113f53 100644
+--- a/minecraft/world/entity/ai/behavior/warden/SonicBoom.java
++++ b/minecraft/world/entity/ai/behavior/warden/SonicBoom.java
+@@ -52,7 +52,7 @@ public class SonicBoom extends Behavior<Warden> {
+         });
+         if (!warden.getBrain().hasMemoryValue(MemoryModuleType.SONIC_BOOM_SOUND_DELAY) && !warden.getBrain().hasMemoryValue(MemoryModuleType.SONIC_BOOM_SOUND_COOLDOWN)) {
+             warden.getBrain().setMemoryWithExpiry(MemoryModuleType.SONIC_BOOM_SOUND_COOLDOWN, Unit.INSTANCE, (long) (SonicBoom.DURATION - SonicBoom.TICKS_BEFORE_PLAYING_SOUND));
+-            Optional optional = warden.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
++            Optional<LivingEntity> optional = warden.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET);
+ 
+             Objects.requireNonNull(warden);
+             optional.filter(warden::canTargetEntity).filter((livingentity) -> {

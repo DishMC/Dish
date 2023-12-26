@@ -1,0 +1,13 @@
+diff --git a/minecraft/network/protocol/game/ClientboundAwardStatsPacket.java b/minecraft/network/protocol/game/ClientboundAwardStatsPacket.java
+index d9fa1fc..0654b63 100644
+--- a/minecraft/network/protocol/game/ClientboundAwardStatsPacket.java
++++ b/minecraft/network/protocol/game/ClientboundAwardStatsPacket.java
+@@ -27,7 +27,7 @@ public class ClientboundAwardStatsPacket implements Packet<ClientGamePacketListe
+     }
+ 
+     private static <T> Stat<T> readStatCap(FriendlyByteBuf friendlybytebuf, StatType<T> stattype) {
+-        return stattype.get(friendlybytebuf.readById((IdMap) stattype.getRegistry()));
++        return stattype.get(friendlybytebuf.readById(stattype.getRegistry()));
+     }
+ 
+     public void handle(ClientGamePacketListener clientgamepacketlistener) {

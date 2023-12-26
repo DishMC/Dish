@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/monster/ZombieVillager.java b/minecraft/world/entity/monster/ZombieVillager.java
+index 5353727..923366d 100644
+--- a/minecraft/world/entity/monster/ZombieVillager.java
++++ b/minecraft/world/entity/monster/ZombieVillager.java
+@@ -85,7 +85,7 @@ public class ZombieVillager extends Zombie implements VillagerDataHolder {
+     @Override
+     public void addAdditionalSaveData(CompoundTag compoundtag) {
+         super.addAdditionalSaveData(compoundtag);
+-        DataResult dataresult = VillagerData.CODEC.encodeStart(NbtOps.INSTANCE, this.getVillagerData());
++        DataResult<Tag> dataresult = VillagerData.CODEC.encodeStart(NbtOps.INSTANCE, this.getVillagerData());
+         Logger logger = ZombieVillager.LOGGER;
+ 
+         Objects.requireNonNull(logger);

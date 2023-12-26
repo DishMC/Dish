@@ -1,0 +1,21 @@
+diff --git a/minecraft/world/level/block/SkullBlock.java b/minecraft/world/level/block/SkullBlock.java
+index 6b018c8..1778fec 100644
+--- a/minecraft/world/level/block/SkullBlock.java
++++ b/minecraft/world/level/block/SkullBlock.java
+@@ -77,15 +77,7 @@ public class SkullBlock extends AbstractSkullBlock {
+     public interface Type extends StringRepresentable {
+ 
+         Map<String, SkullBlock.Type> TYPES = new Object2ObjectArrayMap();
+-        Codec<SkullBlock.Type> CODEC;
+-
+-        static {
+-            Function function = StringRepresentable::getSerializedName;
+-            Map map = SkullBlock.Type.TYPES;
+-
+-            Objects.requireNonNull(map);
+-            CODEC = ExtraCodecs.stringResolverCodec(function, map::get);
+-        }
++        Codec<SkullBlock.Type> CODEC = ExtraCodecs.stringResolverCodec(StringRepresentable::getSerializedName, SkullBlock.Type.TYPES::get);
+     }
+ 
+     public static enum Types implements SkullBlock.Type {

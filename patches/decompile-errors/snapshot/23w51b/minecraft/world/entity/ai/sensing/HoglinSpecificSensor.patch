@@ -1,0 +1,17 @@
+diff --git a/minecraft/world/entity/ai/sensing/HoglinSpecificSensor.java b/minecraft/world/entity/ai/sensing/HoglinSpecificSensor.java
+index 15e5588..ba1957b 100644
+--- a/minecraft/world/entity/ai/sensing/HoglinSpecificSensor.java
++++ b/minecraft/world/entity/ai/sensing/HoglinSpecificSensor.java
+@@ -57,9 +57,9 @@ public class HoglinSpecificSensor extends Sensor<Hoglin> {
+         }
+ 
+         brain.setMemory(MemoryModuleType.NEAREST_VISIBLE_ADULT_PIGLIN, optional);
+-        brain.setMemory(MemoryModuleType.NEAREST_VISIBLE_ADULT_HOGLINS, (Object) list);
+-        brain.setMemory(MemoryModuleType.VISIBLE_ADULT_PIGLIN_COUNT, (Object) i);
+-        brain.setMemory(MemoryModuleType.VISIBLE_ADULT_HOGLIN_COUNT, (Object) list.size());
++        brain.setMemory(MemoryModuleType.NEAREST_VISIBLE_ADULT_HOGLINS, list);
++        brain.setMemory(MemoryModuleType.VISIBLE_ADULT_PIGLIN_COUNT, i);
++        brain.setMemory(MemoryModuleType.VISIBLE_ADULT_HOGLIN_COUNT, list.size());
+     }
+ 
+     private Optional<BlockPos> findNearestRepellent(ServerLevel serverlevel, Hoglin hoglin) {

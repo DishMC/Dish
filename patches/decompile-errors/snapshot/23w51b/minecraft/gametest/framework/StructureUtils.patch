@@ -1,0 +1,13 @@
+diff --git a/minecraft/gametest/framework/StructureUtils.java b/minecraft/gametest/framework/StructureUtils.java
+index 4c67115..8b07b6a 100644
+--- a/minecraft/gametest/framework/StructureUtils.java
++++ b/minecraft/gametest/framework/StructureUtils.java
+@@ -185,7 +185,7 @@ public class StructureUtils {
+         Collection<BlockPos> collection = findStructureBlocks(blockpos, i, serverlevel);
+         Optional<BlockPos> optional = collection.stream().min(comparator);
+ 
+-        return (BlockPos) optional.orElse((Object) null);
++        return (BlockPos) optional.orElse(null);
+     }
+ 
+     public static Collection<BlockPos> findStructureBlocks(BlockPos blockpos, int i, ServerLevel serverlevel) {

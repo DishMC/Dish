@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/LiquidBlock.java b/minecraft/world/level/block/LiquidBlock.java
+index 1c2640d..b3965bf 100644
+--- a/minecraft/world/level/block/LiquidBlock.java
++++ b/minecraft/world/level/block/LiquidBlock.java
+@@ -39,7 +39,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
+ public class LiquidBlock extends Block implements BucketPickup {
+ 
+     private static final Codec<FlowingFluid> FLOWING_FLUID = BuiltInRegistries.FLUID.byNameCodec().comapFlatMap((fluid) -> {
+-        DataResult dataresult;
++        DataResult<FlowingFluid> dataresult;
+ 
+         if (fluid instanceof FlowingFluid) {
+             FlowingFluid flowingfluid = (FlowingFluid) fluid;

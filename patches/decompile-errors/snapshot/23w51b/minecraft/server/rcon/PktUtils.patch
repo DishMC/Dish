@@ -1,0 +1,12 @@
+diff --git a/minecraft/server/rcon/PktUtils.java b/minecraft/server/rcon/PktUtils.java
+index 9e00c2b..14bd362 100644
+--- a/minecraft/server/rcon/PktUtils.java
++++ b/minecraft/server/rcon/PktUtils.java
+@@ -36,6 +36,6 @@ public class PktUtils {
+     public static String toHexString(byte b0) {
+         char c0 = PktUtils.HEX_CHAR[(b0 & 240) >>> 4];
+ 
+-        return c0 + PktUtils.HEX_CHAR[b0 & 15];
++        return "" + c0 + PktUtils.HEX_CHAR[b0 & 15];
+     }
+ }

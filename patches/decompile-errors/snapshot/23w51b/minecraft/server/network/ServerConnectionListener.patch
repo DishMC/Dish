@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/network/ServerConnectionListener.java b/minecraft/server/network/ServerConnectionListener.java
+index 44df9aa..e8521e0 100644
+--- a/minecraft/server/network/ServerConnectionListener.java
++++ b/minecraft/server/network/ServerConnectionListener.java
+@@ -98,7 +98,7 @@ public class ServerConnectionListener {
+ 
+                     Connection.configureSerialization(channelpipeline, PacketFlow.SERVERBOUND, (BandwidthDebugMonitor) null);
+                     int j = ServerConnectionListener.this.server.getRateLimitPacketsPerSecond();
+-                    Object object = j > 0 ? new RateKickingConnection(j) : new Connection(PacketFlow.SERVERBOUND);
++                    Connection object = j > 0 ? new RateKickingConnection(j) : new Connection(PacketFlow.SERVERBOUND);
+ 
+                     ServerConnectionListener.this.connections.add(object);
+                     ((Connection) object).configurePacketHandler(channelpipeline);

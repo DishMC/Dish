@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/sensing/VillagerBabiesSensor.java b/minecraft/world/entity/ai/sensing/VillagerBabiesSensor.java
+index 0704934..0bf8748 100644
+--- a/minecraft/world/entity/ai/sensing/VillagerBabiesSensor.java
++++ b/minecraft/world/entity/ai/sensing/VillagerBabiesSensor.java
+@@ -21,7 +21,7 @@ public class VillagerBabiesSensor extends Sensor<LivingEntity> {
+ 
+     @Override
+     protected void doTick(ServerLevel serverlevel, LivingEntity livingentity) {
+-        livingentity.getBrain().setMemory(MemoryModuleType.VISIBLE_VILLAGER_BABIES, (Object) this.getNearestVillagerBabies(livingentity));
++        livingentity.getBrain().setMemory(MemoryModuleType.VISIBLE_VILLAGER_BABIES, this.getNearestVillagerBabies(livingentity));
+     }
+ 
+     private List<LivingEntity> getNearestVillagerBabies(LivingEntity livingentity) {

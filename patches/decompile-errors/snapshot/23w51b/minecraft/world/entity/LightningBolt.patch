@@ -1,0 +1,15 @@
+diff --git a/minecraft/world/entity/LightningBolt.java b/minecraft/world/entity/LightningBolt.java
+index 7efac29..2717369 100644
+--- a/minecraft/world/entity/LightningBolt.java
++++ b/minecraft/world/entity/LightningBolt.java
+@@ -237,8 +237,9 @@ public class LightningBolt extends Entity {
+             blockstate = level.getBlockState(blockpos1);
+         } while (!(blockstate.getBlock() instanceof WeatheringCopper));
+ 
++        BlockPos finalBlockpos = blockpos1;
+         WeatheringCopper.getPrevious(blockstate).ifPresent((blockstate1) -> {
+-            level.setBlockAndUpdate(blockpos1, blockstate1);
++            level.setBlockAndUpdate(finalBlockpos, blockstate1);
+         });
+         level.levelEvent(3002, blockpos1, -1);
+         return Optional.of(blockpos1);

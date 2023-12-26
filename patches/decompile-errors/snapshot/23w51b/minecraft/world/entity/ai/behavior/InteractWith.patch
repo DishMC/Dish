@@ -1,0 +1,22 @@
+diff --git a/minecraft/world/entity/ai/behavior/InteractWith.java b/minecraft/world/entity/ai/behavior/InteractWith.java
+index 7557a6b..c5bea41 100644
+--- a/minecraft/world/entity/ai/behavior/InteractWith.java
++++ b/minecraft/world/entity/ai/behavior/InteractWith.java
+@@ -25,7 +25,7 @@ public class InteractWith {
+     public static <E extends LivingEntity, T extends LivingEntity> BehaviorControl<E> of(EntityType<? extends T> entitytype, int i, Predicate<E> predicate, Predicate<T> predicate1, MemoryModuleType<T> memorymoduletype, float f, int j) {
+         int k = i * i;
+         Predicate<LivingEntity> predicate2 = (livingentity) -> {
+-            return entitytype.equals(livingentity.getType()) && predicate1.test(livingentity);
++            return entitytype.equals(livingentity.getType()) && predicate1.test((T) livingentity);
+         };
+ 
+         return BehaviorBuilder.create((behaviorbuilder_instance) -> {
+@@ -39,7 +39,7 @@ public class InteractWith {
+                         });
+ 
+                         optional.ifPresent((livingentity1) -> {
+-                            memoryaccessor.set(livingentity1);
++                            memoryaccessor.set((T) livingentity1);
+                             memoryaccessor1.set(new EntityTracker(livingentity1, true));
+                             memoryaccessor2.set(new WalkTarget(new EntityTracker(livingentity1, false), f, j));
+                         });

@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/random/WeightedRandom.java b/minecraft/util/random/WeightedRandom.java
+index c578db4..acbd088 100644
+--- a/minecraft/util/random/WeightedRandom.java
++++ b/minecraft/util/random/WeightedRandom.java
+@@ -52,7 +52,7 @@ public class WeightedRandom {
+             i -= weightedentry.getWeight().asInt();
+         } while (i >= 0);
+ 
+-        return Optional.of(weightedentry);
++        return Optional.of((T) weightedentry);
+     }
+ 
+     public static <T extends WeightedEntry> Optional<T> getRandomItem(RandomSource randomsource, List<T> list) {

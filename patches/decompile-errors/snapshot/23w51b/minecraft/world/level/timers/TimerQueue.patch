@@ -1,0 +1,22 @@
+diff --git a/minecraft/world/level/timers/TimerQueue.java b/minecraft/world/level/timers/TimerQueue.java
+index ff4bb28..660cbe6 100644
+--- a/minecraft/world/level/timers/TimerQueue.java
++++ b/minecraft/world/level/timers/TimerQueue.java
+@@ -31,7 +31,7 @@ public class TimerQueue<T> {
+     private final Table<String, Long, TimerQueue.Event<T>> events;
+ 
+     private static <T> Comparator<TimerQueue.Event<T>> createComparator() {
+-        return Comparator.comparingLong((timerqueue_event) -> {
++        return Comparator.<TimerQueue.Event<T>>comparingLong((timerqueue_event) -> {
+             return timerqueue_event.triggerTime;
+         }).thenComparing((timerqueue_event) -> {
+             return timerqueue_event.sequentialId;
+@@ -128,7 +128,7 @@ public class TimerQueue<T> {
+ 
+     public ListTag store() {
+         ListTag listtag = new ListTag();
+-        Stream stream = this.queue.stream().sorted(createComparator()).map(this::storeEvent);
++        Stream<Tag> stream = this.queue.stream().sorted(createComparator()).map(this::storeEvent);
+ 
+         Objects.requireNonNull(listtag);
+         stream.forEach(listtag::add);

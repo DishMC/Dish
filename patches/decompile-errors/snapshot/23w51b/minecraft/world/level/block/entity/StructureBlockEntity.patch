@@ -1,0 +1,31 @@
+diff --git a/minecraft/world/level/block/entity/StructureBlockEntity.java b/minecraft/world/level/block/entity/StructureBlockEntity.java
+index a0ea3c5..75b6961 100644
+--- a/minecraft/world/level/block/entity/StructureBlockEntity.java
++++ b/minecraft/world/level/block/entity/StructureBlockEntity.java
+@@ -299,7 +299,7 @@ public class StructureBlockEntity extends BlockEntity {
+     }
+ 
+     private Stream<BlockPos> getRelatedCorners(BlockPos blockpos, BlockPos blockpos1) {
+-        Stream stream = BlockPos.betweenClosedStream(blockpos, blockpos1).filter((blockpos2) -> {
++        Stream<BlockPos> stream = BlockPos.betweenClosedStream(blockpos, blockpos1).filter((blockpos2) -> {
+             return this.level.getBlockState(blockpos2).is(Blocks.STRUCTURE_BLOCK);
+         });
+         Level level = this.level;
+@@ -374,7 +374,7 @@ public class StructureBlockEntity extends BlockEntity {
+ 
+     public boolean placeStructureIfSameSize(ServerLevel serverlevel) {
+         if (this.mode == StructureMode.LOAD && this.structureName != null) {
+-            StructureTemplate structuretemplate = (StructureTemplate) serverlevel.getStructureManager().get(this.structureName).orElse((Object) null);
++            StructureTemplate structuretemplate = (StructureTemplate) serverlevel.getStructureManager().get(this.structureName).orElse(null);
+ 
+             if (structuretemplate == null) {
+                 return false;
+@@ -418,7 +418,7 @@ public class StructureBlockEntity extends BlockEntity {
+ 
+     @Nullable
+     private StructureTemplate getStructureTemplate(ServerLevel serverlevel) {
+-        return this.structureName == null ? null : (StructureTemplate) serverlevel.getStructureManager().get(this.structureName).orElse((Object) null);
++        return this.structureName == null ? null : (StructureTemplate) serverlevel.getStructureManager().get(this.structureName).orElse(null);
+     }
+ 
+     private void placeStructure(ServerLevel serverlevel, StructureTemplate structuretemplate) {

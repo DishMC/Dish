@@ -1,0 +1,21 @@
+diff --git a/minecraft/world/entity/ai/behavior/warden/Sniffing.java b/minecraft/world/entity/ai/behavior/warden/Sniffing.java
+index 557e01b..01f3a69 100644
+--- a/minecraft/world/entity/ai/behavior/warden/Sniffing.java
++++ b/minecraft/world/entity/ai/behavior/warden/Sniffing.java
+@@ -5,6 +5,7 @@ import java.util.Objects;
+ import java.util.Optional;
+ import net.minecraft.server.level.ServerLevel;
+ import net.minecraft.sounds.SoundEvents;
++import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.entity.Pose;
+ import net.minecraft.world.entity.ai.behavior.Behavior;
+ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+@@ -35,7 +36,7 @@ public class Sniffing<E extends Warden> extends Behavior<E> {
+         }
+ 
+         e0.getBrain().eraseMemory(MemoryModuleType.IS_SNIFFING);
+-        Optional optional = e0.getBrain().getMemory(MemoryModuleType.NEAREST_ATTACKABLE);
++        Optional<LivingEntity> optional = e0.getBrain().getMemory(MemoryModuleType.NEAREST_ATTACKABLE);
+ 
+         Objects.requireNonNull(e0);
+         optional.filter(e0::canTargetEntity).ifPresent((livingentity) -> {

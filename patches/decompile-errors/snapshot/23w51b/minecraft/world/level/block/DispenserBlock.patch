@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/DispenserBlock.java b/minecraft/world/level/block/DispenserBlock.java
+index 7906b3c..709b65d 100644
+--- a/minecraft/world/level/block/DispenserBlock.java
++++ b/minecraft/world/level/block/DispenserBlock.java
+@@ -85,7 +85,7 @@ public class DispenserBlock extends BaseEntityBlock {
+     }
+ 
+     protected void dispenseFrom(ServerLevel serverlevel, BlockState blockstate, BlockPos blockpos) {
+-        DispenserBlockEntity dispenserblockentity = (DispenserBlockEntity) serverlevel.getBlockEntity(blockpos, BlockEntityType.DISPENSER).orElse((Object) null);
++        DispenserBlockEntity dispenserblockentity = (DispenserBlockEntity) serverlevel.getBlockEntity(blockpos, BlockEntityType.DISPENSER).orElse(null);
+ 
+         if (dispenserblockentity == null) {
+             DispenserBlock.LOGGER.warn("Ignoring dispensing attempt for Dispenser without matching block entity at {}", blockpos);

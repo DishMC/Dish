@@ -1,0 +1,22 @@
+diff --git a/minecraft/network/chat/LastSeenMessagesValidator.java b/minecraft/network/chat/LastSeenMessagesValidator.java
+index e9cae4e..5c0a99e 100644
+--- a/minecraft/network/chat/LastSeenMessagesValidator.java
++++ b/minecraft/network/chat/LastSeenMessagesValidator.java
+@@ -16,7 +16,7 @@ public class LastSeenMessagesValidator {
+         this.lastSeenCount = i;
+ 
+         for (int j = 0; j < i; ++j) {
+-            this.trackedMessages.add((Object) null);
++            this.trackedMessages.add(null);
+         }
+ 
+     }
+@@ -69,7 +69,7 @@ public class LastSeenMessagesValidator {
+                             return Optional.empty();
+                         }
+ 
+-                        this.trackedMessages.set(i, (Object) null);
++                        this.trackedMessages.set(i, null);
+                     }
+                 }
+ 

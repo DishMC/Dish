@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/ShulkerBoxBlock.java b/minecraft/world/level/block/ShulkerBoxBlock.java
+index c4eddc2..c040d46 100644
+--- a/minecraft/world/level/block/ShulkerBoxBlock.java
++++ b/minecraft/world/level/block/ShulkerBoxBlock.java
+@@ -57,7 +57,7 @@ public class ShulkerBoxBlock extends BaseEntityBlock {
+         return instance.group(DyeColor.CODEC.optionalFieldOf("color").forGetter((shulkerboxblock) -> {
+             return Optional.ofNullable(shulkerboxblock.color);
+         }), propertiesCodec()).apply(instance, (optional, blockbehaviour_properties) -> {
+-            return new ShulkerBoxBlock((DyeColor) optional.orElse((Object) null), blockbehaviour_properties);
++            return new ShulkerBoxBlock((DyeColor) optional.orElse(null), blockbehaviour_properties);
+         });
+     });
+     private static final float OPEN_AABB_SIZE = 1.0F;

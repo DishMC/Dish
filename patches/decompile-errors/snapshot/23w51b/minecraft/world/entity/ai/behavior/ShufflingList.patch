@@ -1,0 +1,19 @@
+diff --git a/minecraft/world/entity/ai/behavior/ShufflingList.java b/minecraft/world/entity/ai/behavior/ShufflingList.java
+index d9fca46..31e57fb 100644
+--- a/minecraft/world/entity/ai/behavior/ShufflingList.java
++++ b/minecraft/world/entity/ai/behavior/ShufflingList.java
+@@ -93,12 +93,8 @@ public class ShufflingList<U> implements Iterable<U> {
+         public static <E> Codec<ShufflingList.WeightedEntry<E>> codec(final Codec<E> codec) {
+             return new Codec<ShufflingList.WeightedEntry<E>>() {
+                 public <T> DataResult<Pair<ShufflingList.WeightedEntry<E>, T>> decode(DynamicOps<T> dynamicops, T t0) {
+-                    Dynamic<T> dynamic = new Dynamic(dynamicops, t0);
+-                    OptionalDynamic optionaldynamic = dynamic.get("data");
+-                    Codec codec1 = codec;
+-
+-                    Objects.requireNonNull(codec);
+-                    return optionaldynamic.flatMap(codec1::parse).map((object) -> {
++                    Dynamic<T> dynamic = new Dynamic<>(dynamicops, t0);
++                    return dynamic.get("data").flatMap(codec::parse).map((object) -> {
+                         return new ShufflingList.WeightedEntry<>(object, dynamic.get("weight").asInt(1));
+                     }).map((shufflinglist_weightedentry) -> {
+                         return Pair.of(shufflinglist_weightedentry, dynamicops.empty());

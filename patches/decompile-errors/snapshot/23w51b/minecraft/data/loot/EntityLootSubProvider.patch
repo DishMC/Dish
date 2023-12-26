@@ -1,0 +1,13 @@
+diff --git a/minecraft/data/loot/EntityLootSubProvider.java b/minecraft/data/loot/EntityLootSubProvider.java
+index 1a403eb..9d5e614 100644
+--- a/minecraft/data/loot/EntityLootSubProvider.java
++++ b/minecraft/data/loot/EntityLootSubProvider.java
+@@ -62,7 +62,7 @@ public abstract class EntityLootSubProvider implements LootTableSubProvider {
+             EntityType<?> entitytype = (EntityType) holder_reference.value();
+ 
+             if (entitytype.isEnabled(this.allowed)) {
+-                Map map;
++                Map<ResourceLocation, LootTable.Builder> map;
+ 
+                 if (canHaveLootTable(entitytype)) {
+                     map = (Map) this.map.remove(entitytype);

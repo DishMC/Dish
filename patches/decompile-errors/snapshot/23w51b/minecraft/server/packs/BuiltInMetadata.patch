@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/packs/BuiltInMetadata.java b/minecraft/server/packs/BuiltInMetadata.java
+index a66dfe0..075cdb6 100644
+--- a/minecraft/server/packs/BuiltInMetadata.java
++++ b/minecraft/server/packs/BuiltInMetadata.java
+@@ -13,7 +13,7 @@ public class BuiltInMetadata {
+     }
+ 
+     public <T> T get(MetadataSectionSerializer<T> metadatasectionserializer) {
+-        return this.values.get(metadatasectionserializer);
++        return (T) this.values.get(metadatasectionserializer);
+     }
+ 
+     public static BuiltInMetadata of() {

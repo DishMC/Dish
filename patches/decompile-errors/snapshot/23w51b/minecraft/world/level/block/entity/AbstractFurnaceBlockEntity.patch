@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java b/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java
+index 3f373ad..b203feb 100644
+--- a/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java
++++ b/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity.java
+@@ -271,7 +271,7 @@ public abstract class AbstractFurnaceBlockEntity extends BaseContainerBlockEntit
+             RecipeHolder recipeholder;
+ 
+             if (flag2) {
+-                recipeholder = (RecipeHolder) abstractfurnaceblockentity.quickCheck.getRecipeFor(abstractfurnaceblockentity, level).orElse((Object) null);
++                recipeholder = (RecipeHolder) abstractfurnaceblockentity.quickCheck.getRecipeFor(abstractfurnaceblockentity, level).orElse(null);
+             } else {
+                 recipeholder = null;
+             }

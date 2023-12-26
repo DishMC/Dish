@@ -1,0 +1,44 @@
+diff --git a/minecraft/world/level/chunk/UpgradeData.java b/minecraft/world/level/chunk/UpgradeData.java
+index 8599cf8..1f5aede 100644
+--- a/minecraft/world/level/chunk/UpgradeData.java
++++ b/minecraft/world/level/chunk/UpgradeData.java
+@@ -109,7 +109,7 @@ public class UpgradeData {
+ 
+             while (iterator.hasNext()) {
+                 Tag tag = (Tag) iterator.next();
+-                Optional optional = SavedTick.loadTick((CompoundTag) tag, function);
++                Optional<SavedTick<T>> optional = SavedTick.loadTick((CompoundTag) tag, function);
+ 
+                 Objects.requireNonNull(list);
+                 optional.ifPresent(list::add);
+@@ -294,8 +294,9 @@ public class UpgradeData {
+ 
+         if (!this.neighborBlockTicks.isEmpty()) {
+             listtag = new ListTag();
++            ListTag finalListtag = listtag;
+             this.neighborBlockTicks.forEach((savedtick) -> {
+-                listtag.add(savedtick.save((block) -> {
++                finalListtag.add(savedtick.save((block) -> {
+                     return BuiltInRegistries.BLOCK.getKey(block).toString();
+                 }));
+             });
+@@ -304,8 +305,9 @@ public class UpgradeData {
+ 
+         if (!this.neighborFluidTicks.isEmpty()) {
+             listtag = new ListTag();
++            ListTag finalListtag1 = listtag;
+             this.neighborFluidTicks.forEach((savedtick) -> {
+-                listtag.add(savedtick.save((fluid) -> {
++                finalListtag1.add(savedtick.save((fluid) -> {
+                     return BuiltInRegistries.FLUID.getKey(fluid).toString();
+                 }));
+             });
+@@ -398,7 +400,7 @@ public class UpgradeData {
+                         if ((Integer) blockstate.getValue(BlockStateProperties.DISTANCE) >= j) {
+                             levelaccessor.setBlock(blockpos, (BlockState) blockstate.setValue(BlockStateProperties.DISTANCE, j), 18);
+                             if (i != 7) {
+-                                Direction[] adirection = null.DIRECTIONS;
++                                Direction[] adirection = DIRECTIONS;
+                                 int k = adirection.length;
+ 
+                                 for (int l = 0; l < k; ++l) {

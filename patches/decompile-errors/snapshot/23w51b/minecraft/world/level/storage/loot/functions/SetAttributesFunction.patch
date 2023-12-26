@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/storage/loot/functions/SetAttributesFunction.java b/minecraft/world/level/storage/loot/functions/SetAttributesFunction.java
+index c8e9f65..ddc8e1e 100644
+--- a/minecraft/world/level/storage/loot/functions/SetAttributesFunction.java
++++ b/minecraft/world/level/storage/loot/functions/SetAttributesFunction.java
+@@ -81,7 +81,7 @@ public class SetAttributesFunction extends LootItemConditionalFunction {
+     private static record Modifier(String name, Holder<Attribute> attribute, AttributeModifier.Operation operation, NumberProvider amount, List<EquipmentSlot> slots, Optional<UUID> id) {
+ 
+         private static final Codec<List<EquipmentSlot>> SLOTS_CODEC = ExtraCodecs.nonEmptyList(Codec.either(EquipmentSlot.CODEC, EquipmentSlot.CODEC.listOf()).xmap((either) -> {
+-            return (List) either.map(List::of, Function.identity());
++            return either.map(List::of, Function.identity());
+         }, (list) -> {
+             return list.size() == 1 ? Either.left((EquipmentSlot) list.get(0)) : Either.right(list);
+         }));

@@ -1,0 +1,13 @@
+diff --git a/minecraft/nbt/SnbtPrinterTagVisitor.java b/minecraft/nbt/SnbtPrinterTagVisitor.java
+index ec72858..55be8a1 100644
+--- a/minecraft/nbt/SnbtPrinterTagVisitor.java
++++ b/minecraft/nbt/SnbtPrinterTagVisitor.java
+@@ -234,7 +234,7 @@ public class SnbtPrinterTagVisitor implements TagVisitor {
+             }
+ 
+             if (!set.isEmpty()) {
+-                Stream stream = set.stream().sorted();
++                Stream<String> stream = set.stream().sorted();
+ 
+                 Objects.requireNonNull(list);
+                 stream.forEach(list::add);

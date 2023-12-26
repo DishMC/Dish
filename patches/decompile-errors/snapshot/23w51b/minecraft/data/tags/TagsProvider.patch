@@ -1,0 +1,45 @@
+diff --git a/minecraft/data/tags/TagsProvider.java b/minecraft/data/tags/TagsProvider.java
+index 03ee0c4..3c42dc1 100644
+--- a/minecraft/data/tags/TagsProvider.java
++++ b/minecraft/data/tags/TagsProvider.java
+@@ -61,23 +61,21 @@ public abstract class TagsProvider<T> implements DataProvider {
+ 
+     @Override
+     public CompletableFuture<?> run(CachedOutput cachedoutput) {
++        record CombinedData<T>(HolderLookup.Provider contents, TagsProvider.TagLookup<T> parent) {
++        }
++
+         return this.createContentsProvider().thenApply((holderlookup_provider) -> {
+-            this.contentsDone.complete((Object)null);
++            this.contentsDone.complete(null);
+             return holderlookup_provider;
+         }).thenCombineAsync(this.parentProvider, (holderlookup_provider, tagsprovider_taglookup) -> {
+-            record 1CombinedData<T>(HolderLookup.Provider contents, TagsProvider.TagLookup<T> parent) {
+-
+-            }
+-
+-
+-            return new 1CombinedData<>(holderlookup_provider, tagsprovider_taglookup);
+-        }).thenCompose((1combineddata) -> {
+-            HolderLookup.RegistryLookup<T> holderlookup_registrylookup = 1combineddata.contents.lookupOrThrow(this.registryKey);
++            return new CombinedData<>(holderlookup_provider, tagsprovider_taglookup);
++        }).thenCompose((combineddata) -> {
++            HolderLookup.RegistryLookup<T> holderlookup_registrylookup = combineddata.contents.lookupOrThrow(this.registryKey);
+             Predicate<ResourceLocation> predicate = (resourcelocation) -> {
+                 return holderlookup_registrylookup.get(ResourceKey.create(this.registryKey, resourcelocation)).isPresent();
+             };
+             Predicate<ResourceLocation> predicate1 = (resourcelocation) -> {
+-                return this.builders.containsKey(resourcelocation) || 1combineddata.parent.contains(TagKey.create(this.registryKey, resourcelocation));
++                return this.builders.containsKey(resourcelocation) || combineddata.parent.contains(TagKey.create(this.registryKey, resourcelocation));
+             };
+ 
+             return CompletableFuture.allOf((CompletableFuture[])this.builders.entrySet().stream().map((entry) -> {
+@@ -91,7 +89,7 @@ public abstract class TagsProvider<T> implements DataProvider {
+                 if (!list1.isEmpty()) {
+                     throw new IllegalArgumentException(String.format(Locale.ROOT, "Couldn't define tag %s as it is missing following references: %s", resourcelocation, list1.stream().map(Objects::toString).collect(Collectors.joining(","))));
+                 } else {
+-                    DataResult dataresult = TagFile.CODEC.encodeStart(JsonOps.INSTANCE, new TagFile(list, false));
++                    DataResult<JsonElement> dataresult = TagFile.CODEC.encodeStart(JsonOps.INSTANCE, new TagFile(list, false));
+                     Logger logger = TagsProvider.LOGGER;
+ 
+                     Objects.requireNonNull(logger);

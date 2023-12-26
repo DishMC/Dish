@@ -1,0 +1,27 @@
+diff --git a/minecraft/world/level/biome/BiomeGenerationSettings.java b/minecraft/world/level/biome/BiomeGenerationSettings.java
+index 44e19c6..12a4e93 100644
+--- a/minecraft/world/level/biome/BiomeGenerationSettings.java
++++ b/minecraft/world/level/biome/BiomeGenerationSettings.java
+@@ -34,19 +34,12 @@ public class BiomeGenerationSettings {
+     private static final Logger LOGGER = LogUtils.getLogger();
+     public static final BiomeGenerationSettings EMPTY = new BiomeGenerationSettings(ImmutableMap.of(), ImmutableList.of());
+     public static final MapCodec<BiomeGenerationSettings> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
+-        Codec codec = GenerationStep.Carving.CODEC;
+-        Codec codec1 = ConfiguredWorldCarver.LIST_CODEC;
+         Logger logger = BiomeGenerationSettings.LOGGER;
+-
+         Objects.requireNonNull(logger);
+-        RecordCodecBuilder recordcodecbuilder = Codec.simpleMap(codec, codec1.promotePartial(Util.prefix("Carver: ", logger::error)), StringRepresentable.keys(GenerationStep.Carving.values())).fieldOf("carvers").forGetter((biomegenerationsettings) -> {
+-            return biomegenerationsettings.carvers;
+-        });
+ 
+-        codec1 = PlacedFeature.LIST_OF_LISTS_CODEC;
+-        logger = BiomeGenerationSettings.LOGGER;
+-        Objects.requireNonNull(logger);
+-        return instance.group(recordcodecbuilder, codec1.promotePartial(Util.prefix("Features: ", logger::error)).fieldOf("features").forGetter((biomegenerationsettings) -> {
++        return instance.group(Codec.simpleMap(GenerationStep.Carving.CODEC, ConfiguredWorldCarver.LIST_CODEC.promotePartial(Util.prefix("Carver: ", logger::error)), StringRepresentable.keys(GenerationStep.Carving.values())).fieldOf("carvers").forGetter((biomegenerationsettings) -> {
++            return biomegenerationsettings.carvers;
++        }), PlacedFeature.LIST_OF_LISTS_CODEC.promotePartial(Util.prefix("Features: ", logger::error)).fieldOf("features").forGetter((biomegenerationsettings) -> {
+             return biomegenerationsettings.features;
+         })).apply(instance, BiomeGenerationSettings::new);
+     });

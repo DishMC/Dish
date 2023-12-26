@@ -1,0 +1,130 @@
+diff --git a/minecraft/world/level/levelgen/SurfaceRules.java b/minecraft/world/level/levelgen/SurfaceRules.java
+index 4b8b149..07083ac 100644
+--- a/minecraft/world/level/levelgen/SurfaceRules.java
++++ b/minecraft/world/level/levelgen/SurfaceRules.java
+@@ -146,9 +146,9 @@ public class SurfaceRules {
+         public SurfaceRules.Condition apply(final SurfaceRules.Context surfacerules_context) {
+             final boolean flag = this.surfaceType == CaveSurface.CEILING;
+ 
+-            class 1StoneDepthCondition extends SurfaceRules.LazyYCondition {
++            class StoneDepthCondition extends SurfaceRules.LazyYCondition {
+ 
+-                _StoneDepthCondition/* $FF was: 1StoneDepthCondition*/() {
++                StoneDepthCondition/* $FF was: 1StoneDepthCondition*/() {
+                     super(surfacerules_context);
+                 }
+ 
+@@ -163,7 +163,7 @@ public class SurfaceRules {
+             }
+ 
+ 
+-            return new 1StoneDepthCondition();
++            return new StoneDepthCondition();
+         }
+     }
+ 
+@@ -216,9 +216,9 @@ public class SurfaceRules {
+         }
+ 
+         public SurfaceRules.Condition apply(final SurfaceRules.Context surfacerules_context) {
+-            class 1YCondition extends SurfaceRules.LazyYCondition {
++            class YCondition extends SurfaceRules.LazyYCondition {
+ 
+-                _YCondition/* $FF was: 1YCondition*/() {
++                YCondition/* $FF was: 1YCondition*/() {
+                     super(surfacerules_context);
+                 }
+ 
+@@ -229,7 +229,7 @@ public class SurfaceRules {
+             }
+ 
+ 
+-            return new 1YCondition();
++            return new YCondition();
+         }
+     }
+ 
+@@ -245,9 +245,9 @@ public class SurfaceRules {
+         }
+ 
+         public SurfaceRules.Condition apply(final SurfaceRules.Context surfacerules_context) {
+-            class 1WaterCondition extends SurfaceRules.LazyYCondition {
++            class WaterCondition extends SurfaceRules.LazyYCondition {
+ 
+-                _WaterCondition/* $FF was: 1WaterCondition*/() {
++                WaterCondition/* $FF was: 1WaterCondition*/() {
+                     super(surfacerules_context);
+                 }
+ 
+@@ -258,7 +258,7 @@ public class SurfaceRules {
+             }
+ 
+ 
+-            return new 1WaterCondition();
++            return new WaterCondition();
+         }
+     }
+ 
+@@ -284,9 +284,9 @@ public class SurfaceRules {
+         }
+ 
+         public SurfaceRules.Condition apply(final SurfaceRules.Context surfacerules_context) {
+-            class 1BiomeCondition extends SurfaceRules.LazyYCondition {
++            class BiomeCondition extends SurfaceRules.LazyYCondition {
+ 
+-                _BiomeCondition/* $FF was: 1BiomeCondition*/() {
++                BiomeCondition/* $FF was: 1BiomeCondition*/() {
+                     super(surfacerules_context);
+                 }
+ 
+@@ -297,7 +297,7 @@ public class SurfaceRules {
+             }
+ 
+ 
+-            return new 1BiomeCondition();
++            return new BiomeCondition();
+         }
+ 
+         public boolean equals(Object object) {
+@@ -335,9 +335,9 @@ public class SurfaceRules {
+         public SurfaceRules.Condition apply(final SurfaceRules.Context surfacerules_context) {
+             final NormalNoise normalnoise = surfacerules_context.randomState.getOrCreateNoise(this.noise);
+ 
+-            class 1NoiseThresholdCondition extends SurfaceRules.LazyXZCondition {
++            class NoiseThresholdCondition extends SurfaceRules.LazyXZCondition {
+ 
+-                _NoiseThresholdCondition/* $FF was: 1NoiseThresholdCondition*/() {
++                NoiseThresholdCondition/* $FF was: 1NoiseThresholdCondition*/() {
+                     super(surfacerules_context);
+                 }
+ 
+@@ -350,7 +350,7 @@ public class SurfaceRules {
+             }
+ 
+ 
+-            return new 1NoiseThresholdCondition();
++            return new NoiseThresholdCondition();
+         }
+     }
+ 
+@@ -370,9 +370,9 @@ public class SurfaceRules {
+             final int j = this.falseAtAndAbove().resolveY(surfacerules_context.context);
+             final PositionalRandomFactory positionalrandomfactory = surfacerules_context.randomState.getOrCreateRandomFactory(this.randomName());
+ 
+-            class 1VerticalGradientCondition extends SurfaceRules.LazyYCondition {
++            class VerticalGradientCondition extends SurfaceRules.LazyYCondition {
+ 
+-                _VerticalGradientCondition/* $FF was: 1VerticalGradientCondition*/() {
++                VerticalGradientCondition/* $FF was: 1VerticalGradientCondition*/() {
+                     super(surfacerules_context);
+                 }
+ 
+@@ -394,7 +394,7 @@ public class SurfaceRules {
+             }
+ 
+ 
+-            return new 1VerticalGradientCondition();
++            return new VerticalGradientCondition();
+         }
+     }
+ 

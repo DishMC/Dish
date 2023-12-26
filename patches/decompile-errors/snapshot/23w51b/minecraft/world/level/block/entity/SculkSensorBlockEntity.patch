@@ -1,0 +1,30 @@
+diff --git a/minecraft/world/level/block/entity/SculkSensorBlockEntity.java b/minecraft/world/level/block/entity/SculkSensorBlockEntity.java
+index 7f34465..3253f51 100644
+--- a/minecraft/world/level/block/entity/SculkSensorBlockEntity.java
++++ b/minecraft/world/level/block/entity/SculkSensorBlockEntity.java
+@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.nbt.CompoundTag;
+ import net.minecraft.nbt.NbtOps;
++import net.minecraft.nbt.Tag;
+ import net.minecraft.server.level.ServerLevel;
+ import net.minecraft.world.entity.Entity;
+ import net.minecraft.world.level.block.Block;
+@@ -48,7 +49,7 @@ public class SculkSensorBlockEntity extends BlockEntity implements GameEventList
+         super.load(compoundtag);
+         this.lastVibrationFrequency = compoundtag.getInt("last_vibration_frequency");
+         if (compoundtag.contains("listener", 10)) {
+-            DataResult dataresult = VibrationSystem.Data.CODEC.parse(new Dynamic(NbtOps.INSTANCE, compoundtag.getCompound("listener")));
++            DataResult<Data> dataresult = VibrationSystem.Data.CODEC.parse(new Dynamic<>(NbtOps.INSTANCE, compoundtag.getCompound("listener")));
+             Logger logger = SculkSensorBlockEntity.LOGGER;
+ 
+             Objects.requireNonNull(logger);
+@@ -63,7 +64,7 @@ public class SculkSensorBlockEntity extends BlockEntity implements GameEventList
+     protected void saveAdditional(CompoundTag compoundtag) {
+         super.saveAdditional(compoundtag);
+         compoundtag.putInt("last_vibration_frequency", this.lastVibrationFrequency);
+-        DataResult dataresult = VibrationSystem.Data.CODEC.encodeStart(NbtOps.INSTANCE, this.vibrationData);
++        DataResult<Tag> dataresult = VibrationSystem.Data.CODEC.encodeStart(NbtOps.INSTANCE, this.vibrationData);
+         Logger logger = SculkSensorBlockEntity.LOGGER;
+ 
+         Objects.requireNonNull(logger);

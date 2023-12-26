@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/behavior/ShowTradesToPlayer.java b/minecraft/world/entity/ai/behavior/ShowTradesToPlayer.java
+index 837d6f4..f950b23 100644
+--- a/minecraft/world/entity/ai/behavior/ShowTradesToPlayer.java
++++ b/minecraft/world/entity/ai/behavior/ShowTradesToPlayer.java
+@@ -132,7 +132,7 @@ public class ShowTradesToPlayer extends Behavior<Villager> {
+         Brain<?> brain = villager.getBrain();
+         LivingEntity livingentity = (LivingEntity) brain.getMemory(MemoryModuleType.INTERACTION_TARGET).get();
+ 
+-        brain.setMemory(MemoryModuleType.LOOK_TARGET, (Object) (new EntityTracker(livingentity, true)));
++        brain.setMemory(MemoryModuleType.LOOK_TARGET, (new EntityTracker(livingentity, true)));
+         return livingentity;
+     }
+ 

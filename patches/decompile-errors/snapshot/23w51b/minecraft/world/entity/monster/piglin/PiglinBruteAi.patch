@@ -1,0 +1,26 @@
+diff --git a/minecraft/world/entity/monster/piglin/PiglinBruteAi.java b/minecraft/world/entity/monster/piglin/PiglinBruteAi.java
+index 6ca622f..1014c1e 100644
+--- a/minecraft/world/entity/monster/piglin/PiglinBruteAi.java
++++ b/minecraft/world/entity/monster/piglin/PiglinBruteAi.java
+@@ -57,7 +57,7 @@ public class PiglinBruteAi {
+     protected static void initMemories(PiglinBrute piglinbrute) {
+         GlobalPos globalpos = GlobalPos.of(piglinbrute.level().dimension(), piglinbrute.blockPosition());
+ 
+-        piglinbrute.getBrain().setMemory(MemoryModuleType.HOME, (Object) globalpos);
++        piglinbrute.getBrain().setMemory(MemoryModuleType.HOME, globalpos);
+     }
+ 
+     private static void initCoreActivity(PiglinBrute piglinbrute, Brain<PiglinBrute> brain) {
+@@ -84,10 +84,10 @@ public class PiglinBruteAi {
+ 
+     protected static void updateActivity(PiglinBrute piglinbrute) {
+         Brain<PiglinBrute> brain = piglinbrute.getBrain();
+-        Activity activity = (Activity) brain.getActiveNonCoreActivity().orElse((Object) null);
++        Activity activity = (Activity) brain.getActiveNonCoreActivity().orElse(null);
+ 
+         brain.setActiveActivityToFirstValid(ImmutableList.of(Activity.FIGHT, Activity.IDLE));
+-        Activity activity1 = (Activity) brain.getActiveNonCoreActivity().orElse((Object) null);
++        Activity activity1 = (Activity) brain.getActiveNonCoreActivity().orElse(null);
+ 
+         if (activity != activity1) {
+             playActivitySound(piglinbrute);

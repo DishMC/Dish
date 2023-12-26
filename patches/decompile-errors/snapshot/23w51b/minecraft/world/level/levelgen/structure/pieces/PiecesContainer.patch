@@ -1,0 +1,18 @@
+diff --git a/minecraft/world/level/levelgen/structure/pieces/PiecesContainer.java b/minecraft/world/level/levelgen/structure/pieces/PiecesContainer.java
+index c95937a..01e5155 100644
+--- a/minecraft/world/level/levelgen/structure/pieces/PiecesContainer.java
++++ b/minecraft/world/level/levelgen/structure/pieces/PiecesContainer.java
+@@ -21,10 +21,10 @@ public record PiecesContainer(List<StructurePiece> pieces) {
+ 
+     private static final Logger LOGGER = LogUtils.getLogger();
+     private static final ResourceLocation JIGSAW_RENAME = new ResourceLocation("jigsaw");
+-    private static final Map<ResourceLocation, ResourceLocation> RENAMES = ImmutableMap.builder().put(new ResourceLocation("nvi"), PiecesContainer.JIGSAW_RENAME).put(new ResourceLocation("pcp"), PiecesContainer.JIGSAW_RENAME).put(new ResourceLocation("bastionremnant"), PiecesContainer.JIGSAW_RENAME).put(new ResourceLocation("runtime"), PiecesContainer.JIGSAW_RENAME).build();
++    private static final Map<ResourceLocation, ResourceLocation> RENAMES = ImmutableMap.<ResourceLocation, ResourceLocation>builder().put(new ResourceLocation("nvi"), PiecesContainer.JIGSAW_RENAME).put(new ResourceLocation("pcp"), PiecesContainer.JIGSAW_RENAME).put(new ResourceLocation("bastionremnant"), PiecesContainer.JIGSAW_RENAME).put(new ResourceLocation("runtime"), PiecesContainer.JIGSAW_RENAME).build();
+ 
+-    public PiecesContainer(List<StructurePiece> list) {
+-        this.pieces = List.copyOf(list);
++    public PiecesContainer(List<StructurePiece> pieces) {
++        this.pieces = List.copyOf(pieces);
+     }
+ 
+     public boolean isEmpty() {

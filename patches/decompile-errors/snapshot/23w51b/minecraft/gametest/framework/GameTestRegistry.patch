@@ -1,0 +1,22 @@
+diff --git a/minecraft/gametest/framework/GameTestRegistry.java b/minecraft/gametest/framework/GameTestRegistry.java
+index 92d15b0..b6940f8 100644
+--- a/minecraft/gametest/framework/GameTestRegistry.java
++++ b/minecraft/gametest/framework/GameTestRegistry.java
+@@ -58,7 +58,7 @@ public class GameTestRegistry {
+ 
+         if (t0 != null) {
+             String s = (String) function.apply(t0);
+-            Consumer<ServerLevel> consumer = (Consumer) map.putIfAbsent(s, turnMethodIntoConsumer(method));
++            Consumer<ServerLevel> consumer = (Consumer) map.putIfAbsent(s, (Consumer<ServerLevel>) turnMethodIntoConsumer(method));
+ 
+             if (consumer != null) {
+                 throw new RuntimeException("Hey, there should only be one " + oclass + " method per batch. Batch '" + s + "' has more than one!");
+@@ -130,7 +130,7 @@ public class GameTestRegistry {
+         String s4 = gametest.batch();
+         Rotation rotation = StructureUtils.getRotationForRotationSteps(gametest.rotationSteps());
+ 
+-        return new TestFunction(s4, s2, s3, rotation, gametest.timeoutTicks(), gametest.setupTicks(), gametest.required(), gametest.requiredSuccesses(), gametest.attempts(), turnMethodIntoConsumer(method));
++        return new TestFunction(s4, s2, s3, rotation, gametest.timeoutTicks(), gametest.setupTicks(), gametest.required(), gametest.requiredSuccesses(), gametest.attempts(), (Consumer<GameTestHelper>) turnMethodIntoConsumer(method));
+     }
+ 
+     private static Consumer<?> turnMethodIntoConsumer(Method method) {

@@ -1,0 +1,13 @@
+diff --git a/minecraft/core/dispenser/DispenseItemBehavior.java b/minecraft/core/dispenser/DispenseItemBehavior.java
+index ab9d4e3..71371c7 100644
+--- a/minecraft/core/dispenser/DispenseItemBehavior.java
++++ b/minecraft/core/dispenser/DispenseItemBehavior.java
+@@ -204,7 +204,7 @@ public interface DispenseItemBehavior {
+                 try {
+                     entitytype.spawn(blocksource.level(), itemstack, (Player) null, blocksource.pos().relative(direction), MobSpawnType.DISPENSER, direction != Direction.UP, false);
+                 } catch (Exception exception) {
+-                    null.LOGGER.error("Error while dispensing spawn egg from dispenser at {}", blocksource.pos(), exception);
++                    LOGGER.error("Error while dispensing spawn egg from dispenser at {}", blocksource.pos(), exception);
+                     return ItemStack.EMPTY;
+                 }
+ 

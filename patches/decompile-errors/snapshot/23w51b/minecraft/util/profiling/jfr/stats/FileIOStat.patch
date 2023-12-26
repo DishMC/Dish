@@ -1,0 +1,28 @@
+diff --git a/minecraft/util/profiling/jfr/stats/FileIOStat.java b/minecraft/util/profiling/jfr/stats/FileIOStat.java
+index a958c41..90b5ee7 100644
+--- a/minecraft/util/profiling/jfr/stats/FileIOStat.java
++++ b/minecraft/util/profiling/jfr/stats/FileIOStat.java
+@@ -2,6 +2,7 @@ package net.minecraft.util.profiling.jfr.stats;
+ 
+ import com.mojang.datafixers.util.Pair;
+ import java.time.Duration;
++import java.util.Comparator;
+ import java.util.List;
+ import java.util.Map;
+ import java.util.Map.Entry;
+@@ -15,13 +16,13 @@ public record FileIOStat(Duration duration, @Nullable String path, long bytes) {
+             return fileiostat.bytes;
+         }).sum();
+ 
+-        return new FileIOStat.Summary(i, (double) i / (double) duration.getSeconds(), (long) list.size(), (double) list.size() / (double) duration.getSeconds(), (Duration) list.stream().map(FileIOStat::duration).reduce(Duration.ZERO, Duration::plus), ((Map) list.stream().filter((fileiostat) -> {
++        return new FileIOStat.Summary(i, (double) i / (double) duration.getSeconds(), (long) list.size(), (double) list.size() / (double) duration.getSeconds(), (Duration) list.stream().map(FileIOStat::duration).reduce(Duration.ZERO, Duration::plus), (list.stream().filter((fileiostat) -> {
+             return fileiostat.path != null;
+         }).collect(Collectors.groupingBy((fileiostat) -> {
+             return fileiostat.path;
+         }, Collectors.summingLong((fileiostat) -> {
+             return fileiostat.bytes;
+-        })))).entrySet().stream().sorted(Entry.comparingByValue().reversed()).map((entry) -> {
++        })))).entrySet().stream().sorted(Entry.<String, Long>comparingByValue().reversed()).map((entry) -> {
+             return Pair.of((String) entry.getKey(), (Long) entry.getValue());
+         }).limit(10L).toList());
+     }

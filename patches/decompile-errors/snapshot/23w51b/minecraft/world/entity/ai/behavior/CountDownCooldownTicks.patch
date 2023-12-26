@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/behavior/CountDownCooldownTicks.java b/minecraft/world/entity/ai/behavior/CountDownCooldownTicks.java
+index 3b89fd2..cc38a2a 100644
+--- a/minecraft/world/entity/ai/behavior/CountDownCooldownTicks.java
++++ b/minecraft/world/entity/ai/behavior/CountDownCooldownTicks.java
+@@ -36,7 +36,7 @@ public class CountDownCooldownTicks extends Behavior<LivingEntity> {
+     protected void tick(ServerLevel serverlevel, LivingEntity livingentity, long i) {
+         Optional<Integer> optional = this.getCooldownTickMemory(livingentity);
+ 
+-        livingentity.getBrain().setMemory(this.cooldownTicks, (Object) ((Integer) optional.get() - 1));
++        livingentity.getBrain().setMemory(this.cooldownTicks, ((Integer) optional.get() - 1));
+     }
+ 
+     @Override

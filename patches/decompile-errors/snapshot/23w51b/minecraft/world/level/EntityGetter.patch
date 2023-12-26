@@ -1,0 +1,31 @@
+diff --git a/minecraft/world/level/EntityGetter.java b/minecraft/world/level/EntityGetter.java
+index dea4e56..186af46 100644
+--- a/minecraft/world/level/EntityGetter.java
++++ b/minecraft/world/level/EntityGetter.java
+@@ -64,7 +64,7 @@ public interface EntityGetter {
+         if (aabb.getSize() < 1.0E-7D) {
+             return List.of();
+         } else {
+-            Predicate predicate;
++            Predicate<Entity> predicate;
+ 
+             if (entity == null) {
+                 predicate = EntitySelector.CAN_BE_COLLIDED_WITH;
+@@ -181,7 +181,7 @@ public interface EntityGetter {
+         Iterator iterator = list.iterator();
+ 
+         while (iterator.hasNext()) {
+-            T t1 = (LivingEntity) iterator.next();
++            T t1 = (T) iterator.next();
+ 
+             if (targetingconditions.test(livingentity, t1)) {
+                 double d4 = t1.distanceToSqr(d0, d1, d2);
+@@ -219,7 +219,7 @@ public interface EntityGetter {
+         Iterator iterator = list.iterator();
+ 
+         while (iterator.hasNext()) {
+-            T t0 = (LivingEntity) iterator.next();
++            T t0 = (T) iterator.next();
+ 
+             if (targetingconditions.test(livingentity, t0)) {
+                 list1.add(t0);

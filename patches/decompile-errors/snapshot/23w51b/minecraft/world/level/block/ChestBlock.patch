@@ -1,0 +1,25 @@
+diff --git a/minecraft/world/level/block/ChestBlock.java b/minecraft/world/level/block/ChestBlock.java
+index 83acc90..ee6d94f 100644
+--- a/minecraft/world/level/block/ChestBlock.java
++++ b/minecraft/world/level/block/ChestBlock.java
+@@ -278,17 +278,9 @@ public class ChestBlock extends AbstractChestBlock<ChestBlockEntity> implements
+ 
+     @Override
+     public DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> combine(BlockState blockstate, Level level, BlockPos blockpos, boolean flag) {
+-        BiPredicate bipredicate;
+-
+-        if (flag) {
+-            bipredicate = (levelaccessor, blockpos1) -> {
+-                return false;
+-            };
+-        } else {
+-            bipredicate = ChestBlock::isChestBlockedAt;
+-        }
+-
+-        return DoubleBlockCombiner.combineWithNeigbour((BlockEntityType) this.blockEntityType.get(), ChestBlock::getBlockType, ChestBlock::getConnectedDirection, ChestBlock.FACING, blockstate, level, blockpos, bipredicate);
++        return DoubleBlockCombiner.combineWithNeigbour((BlockEntityType) this.blockEntityType.get(), ChestBlock::getBlockType, ChestBlock::getConnectedDirection, ChestBlock.FACING, blockstate, level, blockpos, flag ? (levelaccessor, blockpos1) -> {
++            return false;
++        } : ChestBlock::isChestBlockedAt);
+     }
+ 
+     @Nullable

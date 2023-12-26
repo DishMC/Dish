@@ -1,0 +1,26 @@
+diff --git a/minecraft/server/level/progress/ProcessorChunkProgressListener.java b/minecraft/server/level/progress/ProcessorChunkProgressListener.java
+index 889aa65..96bf33d 100644
+--- a/minecraft/server/level/progress/ProcessorChunkProgressListener.java
++++ b/minecraft/server/level/progress/ProcessorChunkProgressListener.java
+@@ -40,19 +40,11 @@ public class ProcessorChunkProgressListener implements ChunkProgressListener {
+ 
+     @Override
+     public void start() {
+-        ProcessorMailbox processormailbox = this.mailbox;
+-        ChunkProgressListener chunkprogresslistener = this.delegate;
+-
+-        Objects.requireNonNull(this.delegate);
+-        processormailbox.tell(chunkprogresslistener::start);
++        this.mailbox.tell(this.delegate::start);
+     }
+ 
+     @Override
+     public void stop() {
+-        ProcessorMailbox processormailbox = this.mailbox;
+-        ChunkProgressListener chunkprogresslistener = this.delegate;
+-
+-        Objects.requireNonNull(this.delegate);
+-        processormailbox.tell(chunkprogresslistener::stop);
++        this.mailbox.tell(this.delegate::stop);
+     }
+ }

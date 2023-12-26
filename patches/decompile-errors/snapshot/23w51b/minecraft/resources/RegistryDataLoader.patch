@@ -1,0 +1,13 @@
+diff --git a/minecraft/resources/RegistryDataLoader.java b/minecraft/resources/RegistryDataLoader.java
+index edafae8..92889de 100644
+--- a/minecraft/resources/RegistryDataLoader.java
++++ b/minecraft/resources/RegistryDataLoader.java
+@@ -122,7 +122,7 @@ public class RegistryDataLoader {
+ 
+         map1.entrySet().stream().sorted(Entry.comparingByKey()).forEach((entry) -> {
+             printwriter.printf("> Errors in registry %s:%n", entry.getKey());
+-            ((Map) entry.getValue()).entrySet().stream().sorted(Entry.comparingByKey()).forEach((entry1) -> {
++            (entry.getValue()).entrySet().stream().sorted(Entry.comparingByKey()).forEach((entry1) -> {
+                 printwriter.printf(">> Errors in element %s:%n", entry1.getKey());
+                 ((Exception) entry1.getValue()).printStackTrace(printwriter);
+             });

@@ -1,0 +1,42 @@
+diff --git a/minecraft/world/entity/ai/behavior/PrepareRamNearestTarget.java b/minecraft/world/entity/ai/behavior/PrepareRamNearestTarget.java
+index c3de8f8..78fde93 100644
+--- a/minecraft/world/entity/ai/behavior/PrepareRamNearestTarget.java
++++ b/minecraft/world/entity/ai/behavior/PrepareRamNearestTarget.java
+@@ -71,7 +71,7 @@ public class PrepareRamNearestTarget<E extends PathfinderMob> extends Behavior<E
+ 
+         if (!brain.hasMemoryValue(MemoryModuleType.RAM_TARGET)) {
+             serverlevel.broadcastEntityEvent(e0, (byte) 59);
+-            brain.setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, (Object) this.getCooldownOnFail.applyAsInt(e0));
++            brain.setMemory(MemoryModuleType.RAM_COOLDOWN_TICKS, this.getCooldownOnFail.applyAsInt(e0));
+         }
+ 
+     }
+@@ -82,8 +82,8 @@ public class PrepareRamNearestTarget<E extends PathfinderMob> extends Behavior<E
+ 
+     protected void tick(ServerLevel serverlevel, E e0, long i) {
+         if (!this.ramCandidate.isEmpty()) {
+-            e0.getBrain().setMemory(MemoryModuleType.WALK_TARGET, (Object) (new WalkTarget(((PrepareRamNearestTarget.RamCandidate) this.ramCandidate.get()).getStartPosition(), this.walkSpeed, 0)));
+-            e0.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, (Object) (new EntityTracker(((PrepareRamNearestTarget.RamCandidate) this.ramCandidate.get()).getTarget(), true)));
++            e0.getBrain().setMemory(MemoryModuleType.WALK_TARGET, (new WalkTarget(((PrepareRamNearestTarget.RamCandidate) this.ramCandidate.get()).getStartPosition(), this.walkSpeed, 0)));
++            e0.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, (new EntityTracker(((PrepareRamNearestTarget.RamCandidate) this.ramCandidate.get()).getTarget(), true)));
+             boolean flag = !((PrepareRamNearestTarget.RamCandidate) this.ramCandidate.get()).getTarget().blockPosition().equals(((PrepareRamNearestTarget.RamCandidate) this.ramCandidate.get()).getTargetPosition());
+ 
+             if (flag) {
+@@ -100,7 +100,7 @@ public class PrepareRamNearestTarget<E extends PathfinderMob> extends Behavior<E
+                     }
+ 
+                     if (i - (Long) this.reachedRamPositionTimestamp.get() >= (long) this.ramPrepareTime) {
+-                        e0.getBrain().setMemory(MemoryModuleType.RAM_TARGET, (Object) this.getEdgeOfBlock(blockpos, ((PrepareRamNearestTarget.RamCandidate) this.ramCandidate.get()).getTargetPosition()));
++                        e0.getBrain().setMemory(MemoryModuleType.RAM_TARGET, this.getEdgeOfBlock(blockpos, ((PrepareRamNearestTarget.RamCandidate) this.ramCandidate.get()).getTargetPosition()));
+                         serverlevel.playSound((Player) null, (Entity) e0, (SoundEvent) this.getPrepareRamSound.apply(e0), SoundSource.NEUTRAL, 1.0F, e0.getVoicePitch());
+                         this.ramCandidate = Optional.empty();
+                     }
+@@ -152,7 +152,7 @@ public class PrepareRamNearestTarget<E extends PathfinderMob> extends Behavior<E
+             }
+ 
+             PathNavigation pathnavigation = pathfindermob.getNavigation();
+-            Stream stream = list.stream();
++            Stream<BlockPos> stream = list.stream();
+             BlockPos blockpos1 = pathfindermob.blockPosition();
+ 
+             Objects.requireNonNull(blockpos1);

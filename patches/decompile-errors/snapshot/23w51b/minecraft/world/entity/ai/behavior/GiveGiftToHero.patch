@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/behavior/GiveGiftToHero.java b/minecraft/world/entity/ai/behavior/GiveGiftToHero.java
+index fb2b67f..70775db 100644
+--- a/minecraft/world/entity/ai/behavior/GiveGiftToHero.java
++++ b/minecraft/world/entity/ai/behavior/GiveGiftToHero.java
+@@ -73,7 +73,7 @@ public class GiveGiftToHero extends Behavior<Villager> {
+         this.timeSinceStart = i;
+         Player player = (Player) this.getNearestTargetableHero(villager).get();
+ 
+-        villager.getBrain().setMemory(MemoryModuleType.INTERACTION_TARGET, (Object) player);
++        villager.getBrain().setMemory(MemoryModuleType.INTERACTION_TARGET, player);
+         BehaviorUtils.lookAtEntity(villager, player);
+     }
+ 

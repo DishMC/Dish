@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/behavior/CrossbowAttack.java b/minecraft/world/entity/ai/behavior/CrossbowAttack.java
+index 40cffd2..61f0262 100644
+--- a/minecraft/world/entity/ai/behavior/CrossbowAttack.java
++++ b/minecraft/world/entity/ai/behavior/CrossbowAttack.java
+@@ -88,7 +88,7 @@ public class CrossbowAttack<E extends Mob & CrossbowAttackMob, T extends LivingE
+     }
+ 
+     private void lookAtTarget(Mob mob, LivingEntity livingentity) {
+-        mob.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, (Object) (new EntityTracker(livingentity, true)));
++        mob.getBrain().setMemory(MemoryModuleType.LOOK_TARGET, (new EntityTracker(livingentity, true)));
+     }
+ 
+     private static LivingEntity getAttackTarget(LivingEntity livingentity) {

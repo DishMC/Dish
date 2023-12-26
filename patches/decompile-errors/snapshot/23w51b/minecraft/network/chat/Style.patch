@@ -1,0 +1,58 @@
+diff --git a/minecraft/network/chat/Style.java b/minecraft/network/chat/Style.java
+index efe6069..b2d1c14 100644
+--- a/minecraft/network/chat/Style.java
++++ b/minecraft/network/chat/Style.java
+@@ -36,7 +36,7 @@ public class Style {
+     final ResourceLocation font;
+ 
+     private static Style create(Optional<TextColor> optional, Optional<Boolean> optional1, Optional<Boolean> optional2, Optional<Boolean> optional3, Optional<Boolean> optional4, Optional<Boolean> optional5, Optional<ClickEvent> optional6, Optional<HoverEvent> optional7, Optional<String> optional8, Optional<ResourceLocation> optional9) {
+-        Style style = new Style((TextColor) optional.orElse((Object) null), (Boolean) optional1.orElse((Object) null), (Boolean) optional2.orElse((Object) null), (Boolean) optional3.orElse((Object) null), (Boolean) optional4.orElse((Object) null), (Boolean) optional5.orElse((Object) null), (ClickEvent) optional6.orElse((Object) null), (HoverEvent) optional7.orElse((Object) null), (String) optional8.orElse((Object) null), (ResourceLocation) optional9.orElse((Object) null));
++        Style style = new Style((TextColor) optional.orElse(null), (Boolean) optional1.orElse(null), (Boolean) optional2.orElse(null), (Boolean) optional3.orElse(null), (Boolean) optional4.orElse(null), (Boolean) optional5.orElse(null), (ClickEvent) optional6.orElse(null), (HoverEvent) optional7.orElse(null), (String) optional8.orElse(null), (ResourceLocation) optional9.orElse(null));
+ 
+         return style.equals(Style.EMPTY) ? Style.EMPTY : style;
+     }
+@@ -271,11 +271,11 @@ public class Style {
+     public String toString() {
+         final StringBuilder stringbuilder = new StringBuilder("{");
+ 
+-        class 1Collector {
++        class Collector {
+ 
+             private boolean isNotFirst;
+ 
+-            _Collector/* $FF was: 1Collector*/() {
++            Collector/* $FF was: 1Collector*/() {
+ }
+ 
+             private void prependSeparator() {
+@@ -309,18 +309,18 @@ public class Style {
+             }
+         }
+ 
+-        1Collector 1collector = new 1Collector();
+-
+-        1collector.addValueString("color", this.color);
+-        1collector.addFlagString("bold", this.bold);
+-        1collector.addFlagString("italic", this.italic);
+-        1collector.addFlagString("underlined", this.underlined);
+-        1collector.addFlagString("strikethrough", this.strikethrough);
+-        1collector.addFlagString("obfuscated", this.obfuscated);
+-        1collector.addValueString("clickEvent", this.clickEvent);
+-        1collector.addValueString("hoverEvent", this.hoverEvent);
+-        1collector.addValueString("insertion", this.insertion);
+-        1collector.addValueString("font", this.font);
++        Collector collector = new Collector();
++
++        collector.addValueString("color", this.color);
++        collector.addFlagString("bold", this.bold);
++        collector.addFlagString("italic", this.italic);
++        collector.addFlagString("underlined", this.underlined);
++        collector.addFlagString("strikethrough", this.strikethrough);
++        collector.addFlagString("obfuscated", this.obfuscated);
++        collector.addValueString("clickEvent", this.clickEvent);
++        collector.addValueString("hoverEvent", this.hoverEvent);
++        collector.addValueString("insertion", this.insertion);
++        collector.addValueString("font", this.font);
+         stringbuilder.append("}");
+         return stringbuilder.toString();
+     }

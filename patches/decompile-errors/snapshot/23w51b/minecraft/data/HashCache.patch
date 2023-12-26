@@ -1,0 +1,13 @@
+diff --git a/minecraft/data/HashCache.java b/minecraft/data/HashCache.java
+index 2e53a72..ceaf879 100644
+--- a/minecraft/data/HashCache.java
++++ b/minecraft/data/HashCache.java
+@@ -129,7 +129,7 @@ public class HashCache {
+         set.add(this.rootDir.resolve("version.json"));
+         MutableInt mutableint = new MutableInt();
+         MutableInt mutableint1 = new MutableInt();
+-        Stream stream = Files.walk(this.rootDir);
++        Stream<Path> stream = Files.walk(this.rootDir);
+ 
+         try {
+             stream.forEach((path) -> {

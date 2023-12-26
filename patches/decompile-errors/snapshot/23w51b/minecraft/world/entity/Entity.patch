@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/Entity.java b/minecraft/world/entity/Entity.java
+index ce6001e..6aa4531 100644
+--- a/minecraft/world/entity/Entity.java
++++ b/minecraft/world/entity/Entity.java
+@@ -2665,7 +2665,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource, S
+                     }
+ 
+                     return PortalShape.createPortalInfo(serverlevel, blockutil_foundrectangle, direction_axis, vec3, this, this.getDeltaMovement(), this.getYRot(), this.getXRot());
+-                }).orElse((Object) null);
++                }).orElse(null);
+             }
+         } else {
+             BlockPos blockpos1;

@@ -1,0 +1,15 @@
+diff --git a/minecraft/util/datafix/fixes/SimplestEntityRenameFix.java b/minecraft/util/datafix/fixes/SimplestEntityRenameFix.java
+index 587eaf1..0a4a8ac 100644
+--- a/minecraft/util/datafix/fixes/SimplestEntityRenameFix.java
++++ b/minecraft/util/datafix/fixes/SimplestEntityRenameFix.java
+@@ -21,8 +21,8 @@ public abstract class SimplestEntityRenameFix extends DataFix {
+     }
+ 
+     public TypeRewriteRule makeRule() {
+-        TaggedChoiceType<String> taggedchoicetype = this.getInputSchema().findChoiceType(References.ENTITY);
+-        TaggedChoiceType<String> taggedchoicetype1 = this.getOutputSchema().findChoiceType(References.ENTITY);
++        TaggedChoiceType<String> taggedchoicetype = (TaggedChoiceType<String>) this.getInputSchema().findChoiceType(References.ENTITY);
++        TaggedChoiceType<String> taggedchoicetype1 = (TaggedChoiceType<String>) this.getOutputSchema().findChoiceType(References.ENTITY);
+         Type<Pair<String, String>> type = DSL.named(References.ENTITY_NAME.typeName(), NamespacedSchema.namespacedString());
+ 
+         if (!Objects.equals(this.getOutputSchema().getType(References.ENTITY_NAME), type)) {

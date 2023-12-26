@@ -1,0 +1,20 @@
+diff --git a/minecraft/world/entity/ai/goal/AvoidEntityGoal.java b/minecraft/world/entity/ai/goal/AvoidEntityGoal.java
+index a1aeba1..319f003 100644
+--- a/minecraft/world/entity/ai/goal/AvoidEntityGoal.java
++++ b/minecraft/world/entity/ai/goal/AvoidEntityGoal.java
+@@ -31,13 +31,9 @@ public class AvoidEntityGoal<T extends LivingEntity> extends Goal {
+     private final TargetingConditions avoidEntityTargeting;
+ 
+     public AvoidEntityGoal(PathfinderMob pathfindermob, Class<T> oclass, float f, double d0, double d1) {
+-        Predicate predicate = (livingentity) -> {
++        this(pathfindermob, oclass, (livingentity) -> {
+             return true;
+-        };
+-        Predicate predicate1 = EntitySelector.NO_CREATIVE_OR_SPECTATOR;
+-
+-        Objects.requireNonNull(predicate1);
+-        this(pathfindermob, oclass, predicate, f, d0, d1, predicate1::test);
++        }, f, d0, d1, EntitySelector.NO_CREATIVE_OR_SPECTATOR::test);
+     }
+ 
+     public AvoidEntityGoal(PathfinderMob pathfindermob, Class<T> oclass, Predicate<LivingEntity> predicate, float f, double d0, double d1, Predicate<LivingEntity> predicate1) {

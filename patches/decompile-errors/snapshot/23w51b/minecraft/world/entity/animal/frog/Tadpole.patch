@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/animal/frog/Tadpole.java b/minecraft/world/entity/animal/frog/Tadpole.java
+index 4707725..d16056c 100644
+--- a/minecraft/world/entity/animal/frog/Tadpole.java
++++ b/minecraft/world/entity/animal/frog/Tadpole.java
+@@ -68,7 +68,7 @@ public class Tadpole extends AbstractFish {
+ 
+     @Override
+     public Brain<Tadpole> getBrain() {
+-        return super.getBrain();
++        return (Brain<Tadpole>) super.getBrain();
+     }
+ 
+     @Override

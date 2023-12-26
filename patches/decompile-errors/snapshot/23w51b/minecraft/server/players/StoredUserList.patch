@@ -1,0 +1,49 @@
+diff --git a/minecraft/server/players/StoredUserList.java b/minecraft/server/players/StoredUserList.java
+index 9f1f523..b5acb5c 100644
+--- a/minecraft/server/players/StoredUserList.java
++++ b/minecraft/server/players/StoredUserList.java
+@@ -54,7 +54,7 @@ public abstract class StoredUserList<K, V extends StoredUserEntry<K>> {
+     @Nullable
+     public V get(K k0) {
+         this.removeExpired();
+-        return (StoredUserEntry) this.map.get(this.getKeyForUser(k0));
++        return this.map.get(this.getKeyForUser(k0));
+     }
+ 
+     public void remove(K k0) {
+@@ -93,7 +93,7 @@ public abstract class StoredUserList<K, V extends StoredUserEntry<K>> {
+         Iterator iterator = this.map.values().iterator();
+ 
+         while (iterator.hasNext()) {
+-            V v0 = (StoredUserEntry) iterator.next();
++            V v0 = (V) iterator.next();
+ 
+             if (v0.hasExpired()) {
+                 list.add(v0.getUser());
+@@ -103,7 +103,7 @@ public abstract class StoredUserList<K, V extends StoredUserEntry<K>> {
+         iterator = list.iterator();
+ 
+         while (iterator.hasNext()) {
+-            K k0 = iterator.next();
++            K k0 = (K) iterator.next();
+ 
+             this.map.remove(this.getKeyForUser(k0));
+         }
+@@ -118,7 +118,7 @@ public abstract class StoredUserList<K, V extends StoredUserEntry<K>> {
+ 
+     public void save() throws IOException {
+         JsonArray jsonarray = new JsonArray();
+-        Stream stream = this.map.values().stream().map((storeduserentry) -> {
++        Stream<JsonObject> stream = this.map.values().stream().map((storeduserentry) -> {
+             JsonObject jsonobject = new JsonObject();
+ 
+             Objects.requireNonNull(storeduserentry);
+@@ -171,7 +171,7 @@ public abstract class StoredUserList<K, V extends StoredUserEntry<K>> {
+                         StoredUserEntry<K> storeduserentry = this.createEntry(jsonobject);
+ 
+                         if (storeduserentry.getUser() != null) {
+-                            this.map.put(this.getKeyForUser(storeduserentry.getUser()), storeduserentry);
++                            this.map.put(this.getKeyForUser(storeduserentry.getUser()), (V) storeduserentry);
+                         }
+                     }
+                 } catch (Throwable throwable) {

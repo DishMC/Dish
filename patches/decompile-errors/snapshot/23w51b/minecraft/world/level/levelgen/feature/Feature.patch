@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/feature/Feature.java b/minecraft/world/level/levelgen/feature/Feature.java
+index d3e1754..a0dd1dc 100644
+--- a/minecraft/world/level/levelgen/feature/Feature.java
++++ b/minecraft/world/level/levelgen/feature/Feature.java
+@@ -120,7 +120,7 @@ public abstract class Feature<FC extends FeatureConfiguration> {
+     private final Codec<ConfiguredFeature<FC, Feature<FC>>> configuredCodec;
+ 
+     private static <C extends FeatureConfiguration, F extends Feature<C>> F register(String s, F f0) {
+-        return (Feature) Registry.register(BuiltInRegistries.FEATURE, s, f0);
++        return Registry.register(BuiltInRegistries.FEATURE, s, f0);
+     }
+ 
+     public Feature(Codec<FC> codec) {

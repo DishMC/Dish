@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/Spawner.java b/minecraft/world/level/Spawner.java
+index 11691fc..48e1b50 100644
+--- a/minecraft/world/level/Spawner.java
++++ b/minecraft/world/level/Spawner.java
+@@ -40,7 +40,7 @@ public interface Spawner {
+             if (resourcelocation != null) {
+                 return (Component) BuiltInRegistries.ENTITY_TYPE.getOptional(resourcelocation).map((entitytype) -> {
+                     return Component.translatable(entitytype.getDescriptionId()).withStyle(ChatFormatting.GRAY);
+-                }).orElse((Object) null);
++                }).orElse(null);
+             }
+         }
+ 

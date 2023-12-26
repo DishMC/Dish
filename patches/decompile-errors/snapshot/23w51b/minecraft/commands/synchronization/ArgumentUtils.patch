@@ -1,0 +1,13 @@
+diff --git a/minecraft/commands/synchronization/ArgumentUtils.java b/minecraft/commands/synchronization/ArgumentUtils.java
+index 63a8a3a..15f6fc9 100644
+--- a/minecraft/commands/synchronization/ArgumentUtils.java
++++ b/minecraft/commands/synchronization/ArgumentUtils.java
+@@ -51,7 +51,7 @@ public class ArgumentUtils {
+     }
+ 
+     private static <A extends ArgumentType<?>, T extends ArgumentTypeInfo.Template<A>> void serializeCap(JsonObject jsonobject, ArgumentTypeInfo<A, T> argumenttypeinfo, ArgumentTypeInfo.Template<A> argumenttypeinfo_template) {
+-        argumenttypeinfo.serializeToJson(argumenttypeinfo_template, jsonobject);
++        argumenttypeinfo.serializeToJson((T) argumenttypeinfo_template, jsonobject);
+     }
+ 
+     private static <T extends ArgumentType<?>> void serializeArgumentToJson(JsonObject jsonobject, T t0) {

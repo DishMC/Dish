@@ -1,0 +1,13 @@
+diff --git a/minecraft/data/worldgen/placement/VegetationPlacements.java b/minecraft/data/worldgen/placement/VegetationPlacements.java
+index 5088acd..ef5fd51 100644
+--- a/minecraft/data/worldgen/placement/VegetationPlacements.java
++++ b/minecraft/data/worldgen/placement/VegetationPlacements.java
+@@ -134,7 +134,7 @@ public class VegetationPlacements {
+     }
+ 
+     private static Builder<PlacementModifier> treePlacementBase(PlacementModifier placementmodifier) {
+-        return ImmutableList.builder().add(placementmodifier).add(InSquarePlacement.spread()).add(VegetationPlacements.TREE_THRESHOLD).add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR).add(BiomeFilter.biome());
++        return ImmutableList.<PlacementModifier>builder().add(placementmodifier).add(InSquarePlacement.spread()).add(VegetationPlacements.TREE_THRESHOLD).add(PlacementUtils.HEIGHTMAP_OCEAN_FLOOR).add(BiomeFilter.biome());
+     }
+ 
+     public static List<PlacementModifier> treePlacement(PlacementModifier placementmodifier) {

@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/monster/breeze/Shoot.java b/minecraft/world/entity/monster/breeze/Shoot.java
+index 8c4fca7..0271d3b 100644
+--- a/minecraft/world/entity/monster/breeze/Shoot.java
++++ b/minecraft/world/entity/monster/breeze/Shoot.java
+@@ -67,7 +67,7 @@ public class Shoot extends Behavior<Breeze> {
+ 
+     protected void tick(ServerLevel serverlevel, Breeze breeze, long i) {
+         Brain<Breeze> brain = breeze.getBrain();
+-        LivingEntity livingentity = (LivingEntity) brain.getMemory(MemoryModuleType.ATTACK_TARGET).orElse((Object) null);
++        LivingEntity livingentity = (LivingEntity) brain.getMemory(MemoryModuleType.ATTACK_TARGET).orElse(null);
+ 
+         if (livingentity != null) {
+             breeze.lookAt(EntityAnchorArgument.Anchor.EYES, livingentity.position());

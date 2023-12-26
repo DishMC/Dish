@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/eventlog/EventLogDirectory.java b/minecraft/util/eventlog/EventLogDirectory.java
+index 8f7087c..91c1d53 100644
+--- a/minecraft/util/eventlog/EventLogDirectory.java
++++ b/minecraft/util/eventlog/EventLogDirectory.java
+@@ -48,7 +48,7 @@ public class EventLogDirectory {
+     }
+ 
+     public EventLogDirectory.FileList listFiles() throws IOException {
+-        Stream stream = Files.list(this.root);
++        Stream<Path> stream = Files.list(this.root);
+ 
+         EventLogDirectory.FileList eventlogdirectory_filelist;
+ 

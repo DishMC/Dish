@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/village/poi/PoiManager.java b/minecraft/world/entity/ai/village/poi/PoiManager.java
+index 4d19951..ecca6e8 100644
+--- a/minecraft/world/entity/ai/village/poi/PoiManager.java
++++ b/minecraft/world/entity/ai/village/poi/PoiManager.java
+@@ -253,7 +253,7 @@ public class PoiManager extends SectionStorage<PoiSection> {
+         SectionPos.aroundChunk(new ChunkPos(blockpos), Math.floorDiv(i, 16), this.levelHeightAccessor.getMinSection(), this.levelHeightAccessor.getMaxSection()).map((sectionpos) -> {
+             return Pair.of(sectionpos, this.getOrLoad(sectionpos.asLong()));
+         }).filter((pair) -> {
+-            return !(Boolean) ((Optional) pair.getSecond()).map(PoiSection::isValid).orElse(false);
++            return !(Boolean) (pair.getSecond()).map(PoiSection::isValid).orElse(false);
+         }).map((pair) -> {
+             return ((SectionPos) pair.getFirst()).chunk();
+         }).filter((chunkpos) -> {

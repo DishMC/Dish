@@ -1,0 +1,58 @@
+diff --git a/minecraft/core/Registry.java b/minecraft/core/Registry.java
+index 0dc6808..6dd2b2e 100644
+--- a/minecraft/core/Registry.java
++++ b/minecraft/core/Registry.java
+@@ -28,7 +28,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
+ 
+     default Codec<T> byNameCodec() {
+         Codec<T> codec = ResourceLocation.CODEC.flatXmap((resourcelocation) -> {
+-            return (DataResult) Optional.ofNullable(this.get(resourcelocation)).map(DataResult::success).orElseGet(() -> {
++            return Optional.ofNullable(this.get(resourcelocation)).map(DataResult::success).orElseGet(() -> {
+                 return DataResult.error(() -> {
+                     ResourceKey resourcekey = this.key();
+ 
+@@ -36,7 +36,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
+                 });
+             });
+         }, (object) -> {
+-            return (DataResult) this.getResourceKey(object).map(ResourceKey::location).map(DataResult::success).orElseGet(() -> {
++            return this.getResourceKey(object).map(ResourceKey::location).map(DataResult::success).orElseGet(() -> {
+                 return DataResult.error(() -> {
+                     ResourceKey resourcekey = this.key();
+ 
+@@ -53,7 +53,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
+ 
+     default Codec<Holder<T>> holderByNameCodec() {
+         Codec<Holder<T>> codec = ResourceLocation.CODEC.flatXmap((resourcelocation) -> {
+-            return (DataResult) this.getHolder(ResourceKey.create(this.key(), resourcelocation)).map(DataResult::success).orElseGet(() -> {
++            return this.getHolder(ResourceKey.create(this.key(), resourcelocation)).map(DataResult::success).orElseGet(() -> {
+                 return DataResult.error(() -> {
+                     ResourceKey resourcekey = this.key();
+ 
+@@ -61,7 +61,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
+                 });
+             });
+         }, (holder) -> {
+-            return (DataResult) holder.unwrapKey().map(ResourceKey::location).map(DataResult::success).orElseGet(() -> {
++            return holder.unwrapKey().map(ResourceKey::location).map(DataResult::success).orElseGet(() -> {
+                 return DataResult.error(() -> {
+                     ResourceKey resourcekey = this.key();
+ 
+@@ -203,7 +203,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
+             @Nullable
+             @Override
+             public Holder<T> byId(int i) {
+-                return (Holder) Registry.this.getHolder(i).orElse((Object) null);
++                return (Holder) Registry.this.getHolder(i).orElse(null);
+             }
+ 
+             @Override
+@@ -212,7 +212,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
+             }
+ 
+             public Iterator<Holder<T>> iterator() {
+-                return Registry.this.holders().map((holder_reference) -> {
++                return Registry.this.holders().<Holder<T>>map((holder_reference) -> {
+                     return holder_reference;
+                 }).iterator();
+             }

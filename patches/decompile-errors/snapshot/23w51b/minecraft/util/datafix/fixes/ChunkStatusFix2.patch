@@ -1,0 +1,13 @@
+diff --git a/minecraft/util/datafix/fixes/ChunkStatusFix2.java b/minecraft/util/datafix/fixes/ChunkStatusFix2.java
+index 65e49ed..1e28657 100644
+--- a/minecraft/util/datafix/fixes/ChunkStatusFix2.java
++++ b/minecraft/util/datafix/fixes/ChunkStatusFix2.java
+@@ -13,7 +13,7 @@ import java.util.Objects;
+ 
+ public class ChunkStatusFix2 extends DataFix {
+ 
+-    private static final Map<String, String> RENAMES_AND_DOWNGRADES = ImmutableMap.builder().put("structure_references", "empty").put("biomes", "empty").put("base", "surface").put("carved", "carvers").put("liquid_carved", "liquid_carvers").put("decorated", "features").put("lighted", "light").put("mobs_spawned", "spawn").put("finalized", "heightmaps").put("fullchunk", "full").build();
++    private static final Map<String, String> RENAMES_AND_DOWNGRADES = ImmutableMap.<String, String>builder().put("structure_references", "empty").put("biomes", "empty").put("base", "surface").put("carved", "carvers").put("liquid_carved", "liquid_carvers").put("decorated", "features").put("lighted", "light").put("mobs_spawned", "spawn").put("finalized", "heightmaps").put("fullchunk", "full").build();
+ 
+     public ChunkStatusFix2(Schema schema, boolean flag) {
+         super(schema, flag);

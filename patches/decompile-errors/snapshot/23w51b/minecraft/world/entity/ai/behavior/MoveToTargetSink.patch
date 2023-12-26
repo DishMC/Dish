@@ -1,0 +1,31 @@
+diff --git a/minecraft/world/entity/ai/behavior/MoveToTargetSink.java b/minecraft/world/entity/ai/behavior/MoveToTargetSink.java
+index 67a4456..37b2f77 100644
+--- a/minecraft/world/entity/ai/behavior/MoveToTargetSink.java
++++ b/minecraft/world/entity/ai/behavior/MoveToTargetSink.java
+@@ -81,7 +81,7 @@ public class MoveToTargetSink extends Behavior<Mob> {
+     }
+ 
+     protected void start(ServerLevel serverlevel, Mob mob, long i) {
+-        mob.getBrain().setMemory(MemoryModuleType.PATH, (Object) this.path);
++        mob.getBrain().setMemory(MemoryModuleType.PATH, this.path);
+         mob.getNavigation().moveTo(this.path, (double) this.speedModifier);
+     }
+ 
+@@ -91,7 +91,7 @@ public class MoveToTargetSink extends Behavior<Mob> {
+ 
+         if (this.path != path) {
+             this.path = path;
+-            brain.setMemory(MemoryModuleType.PATH, (Object) path);
++            brain.setMemory(MemoryModuleType.PATH, path);
+         }
+ 
+         if (path != null && this.lastTargetPos != null) {
+@@ -120,7 +120,7 @@ public class MoveToTargetSink extends Behavior<Mob> {
+             if (flag) {
+                 brain.eraseMemory(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
+             } else if (!brain.hasMemoryValue(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE)) {
+-                brain.setMemory(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, (Object) i);
++                brain.setMemory(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, i);
+             }
+ 
+             if (this.path != null) {

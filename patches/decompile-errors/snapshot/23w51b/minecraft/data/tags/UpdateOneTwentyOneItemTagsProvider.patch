@@ -1,0 +1,16 @@
+diff --git a/minecraft/data/tags/UpdateOneTwentyOneItemTagsProvider.java b/minecraft/data/tags/UpdateOneTwentyOneItemTagsProvider.java
+index 7534983..b9123d1 100644
+--- a/minecraft/data/tags/UpdateOneTwentyOneItemTagsProvider.java
++++ b/minecraft/data/tags/UpdateOneTwentyOneItemTagsProvider.java
+@@ -16,8 +16,8 @@ public class UpdateOneTwentyOneItemTagsProvider extends ItemTagsProvider {
+ 
+     @Override
+     protected void addTags(HolderLookup.Provider holderlookup_provider) {
+-        this.tag(ItemTags.STAIRS).add((Object[])(Items.TUFF_STAIRS, Items.POLISHED_TUFF_STAIRS, Items.TUFF_BRICK_STAIRS));
+-        this.tag(ItemTags.SLABS).add((Object[])(Items.TUFF_SLAB, Items.POLISHED_TUFF_SLAB, Items.TUFF_BRICK_SLAB));
+-        this.tag(ItemTags.WALLS).add((Object[])(Items.TUFF_WALL, Items.POLISHED_TUFF_WALL, Items.TUFF_BRICK_WALL));
++        this.tag(ItemTags.STAIRS).add(Items.TUFF_STAIRS, Items.POLISHED_TUFF_STAIRS, Items.TUFF_BRICK_STAIRS);
++        this.tag(ItemTags.SLABS).add(Items.TUFF_SLAB, Items.POLISHED_TUFF_SLAB, Items.TUFF_BRICK_SLAB);
++        this.tag(ItemTags.WALLS).add(Items.TUFF_WALL, Items.POLISHED_TUFF_WALL, Items.TUFF_BRICK_WALL);
+     }
+ }

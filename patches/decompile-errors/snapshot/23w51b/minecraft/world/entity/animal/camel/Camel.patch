@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/animal/camel/Camel.java b/minecraft/world/entity/animal/camel/Camel.java
+index 4a4ba0e..7144fe4 100644
+--- a/minecraft/world/entity/animal/camel/Camel.java
++++ b/minecraft/world/entity/animal/camel/Camel.java
+@@ -152,7 +152,7 @@ public class Camel extends AbstractHorse implements PlayerRideableJumping, Saddl
+         this.level().getProfiler().push("camelBrain");
+         Brain<?> brain = this.getBrain();
+ 
+-        brain.tick((ServerLevel) this.level(), this);
++        ((Brain<Camel>)brain).tick((ServerLevel) this.level(), this);
+         this.level().getProfiler().pop();
+         this.level().getProfiler().push("camelActivityUpdate");
+         CamelAi.updateActivity(this);

@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/levelgen/blending/BlendingData.java b/minecraft/world/level/levelgen/blending/BlendingData.java
+index f3658b3..e1e9bb0 100644
+--- a/minecraft/world/level/levelgen/blending/BlendingData.java
++++ b/minecraft/world/level/levelgen/blending/BlendingData.java
+@@ -56,7 +56,7 @@ public class BlendingData {
+     private final List<List<Holder<Biome>>> biomes;
+     private final transient double[][] densities;
+     private static final Codec<double[]> DOUBLE_ARRAY_CODEC = Codec.DOUBLE.listOf().xmap(Doubles::toArray, Doubles::asList);
+-    public static final Codec<BlendingData> CODEC = RecordCodecBuilder.create((instance) -> {
++    public static final Codec<BlendingData> CODEC = RecordCodecBuilder.<BlendingData>create((instance) -> {
+         return instance.group(Codec.INT.fieldOf("min_section").forGetter((blendingdata) -> {
+             return blendingdata.areaWithOldGeneration.getMinSection();
+         }), Codec.INT.fieldOf("max_section").forGetter((blendingdata) -> {

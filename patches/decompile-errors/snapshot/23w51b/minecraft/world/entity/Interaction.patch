@@ -1,0 +1,28 @@
+diff --git a/minecraft/world/entity/Interaction.java b/minecraft/world/entity/Interaction.java
+index 7661a6f..9b5195d 100644
+--- a/minecraft/world/entity/Interaction.java
++++ b/minecraft/world/entity/Interaction.java
+@@ -1,5 +1,6 @@
+ package net.minecraft.world.entity;
+ 
++import com.mojang.datafixers.util.Pair;
+ import com.mojang.logging.LogUtils;
+ import com.mojang.serialization.Codec;
+ import com.mojang.serialization.DataResult;
+@@ -12,6 +13,7 @@ import net.minecraft.advancements.CriteriaTriggers;
+ import net.minecraft.core.UUIDUtil;
+ import net.minecraft.nbt.CompoundTag;
+ import net.minecraft.nbt.NbtOps;
++import net.minecraft.nbt.Tag;
+ import net.minecraft.network.syncher.EntityDataAccessor;
+ import net.minecraft.network.syncher.EntityDataSerializers;
+ import net.minecraft.network.syncher.SynchedEntityData;
+@@ -62,7 +64,7 @@ public class Interaction extends Entity implements Attackable, Targeting {
+             this.setHeight(compoundtag.getFloat("height"));
+         }
+ 
+-        DataResult dataresult;
++        DataResult<Pair<PlayerAction, Tag>> dataresult;
+         Logger logger;
+ 
+         if (compoundtag.contains("attack")) {

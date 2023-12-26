@@ -1,0 +1,13 @@
+diff --git a/minecraft/server/gui/MinecraftServerGui.java b/minecraft/server/gui/MinecraftServerGui.java
+index 890b0fa..cbab7ef 100644
+--- a/minecraft/server/gui/MinecraftServerGui.java
++++ b/minecraft/server/gui/MinecraftServerGui.java
+@@ -96,7 +96,7 @@ public class MinecraftServerGui extends JComponent {
+     private JComponent buildInfoPanel() {
+         JPanel jpanel = new JPanel(new BorderLayout());
+         StatsComponent statscomponent = new StatsComponent(this.server);
+-        Collection collection = this.finalizers;
++        Collection<Runnable> collection = this.finalizers;
+ 
+         Objects.requireNonNull(statscomponent);
+         collection.add(statscomponent::close);

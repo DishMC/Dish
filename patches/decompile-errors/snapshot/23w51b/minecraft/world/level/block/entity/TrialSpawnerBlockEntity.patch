@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/entity/TrialSpawnerBlockEntity.java b/minecraft/world/level/block/entity/TrialSpawnerBlockEntity.java
+index 3b99750..03e6b34 100644
+--- a/minecraft/world/level/block/entity/TrialSpawnerBlockEntity.java
++++ b/minecraft/world/level/block/entity/TrialSpawnerBlockEntity.java
+@@ -34,7 +34,7 @@ public class TrialSpawnerBlockEntity extends BlockEntity implements Spawner, Tri
+     @Override
+     public void load(CompoundTag compoundtag) {
+         super.load(compoundtag);
+-        DataResult dataresult = this.trialSpawner.codec().parse(NbtOps.INSTANCE, compoundtag);
++        DataResult<TrialSpawner> dataresult = this.trialSpawner.codec().parse(NbtOps.INSTANCE, compoundtag);
+         Logger logger = TrialSpawnerBlockEntity.LOGGER;
+ 
+         Objects.requireNonNull(logger);
