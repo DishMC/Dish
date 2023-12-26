@@ -1,5 +1,5 @@
 diff --git a/minecraft/util/datafix/fixes/MobEffectIdFix.java b/minecraft/util/datafix/fixes/MobEffectIdFix.java
-index 2119c53..6a80b48 100644
+index 8c5ca3e..cfdf12d 100644
 --- a/minecraft/util/datafix/fixes/MobEffectIdFix.java
 +++ b/minecraft/util/datafix/fixes/MobEffectIdFix.java
 @@ -64,7 +64,7 @@ public class MobEffectIdFix extends DataFix {

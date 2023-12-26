@@ -1,8 +1,8 @@
 diff --git a/minecraft/server/commands/FunctionCommand.java b/minecraft/server/commands/FunctionCommand.java
-index 7017ec8..2a89f8f 100644
+index 203bf89..fd55a0b 100644
 --- a/minecraft/server/commands/FunctionCommand.java
 +++ b/minecraft/server/commands/FunctionCommand.java
-@@ -189,12 +189,12 @@ public class FunctionCommand {
+@@ -187,12 +187,12 @@ public class FunctionCommand {
                      instantiateAndQueueFunctions(compoundtag, executioncontrol, commanddispatcher, t2, commandfunction1, resourcelocation1, commandresultcallback2, false);
                  }
              } else {
@@ -17,7 +17,7 @@ index 7017ec8..2a89f8f 100644
  }
  
                      public void add(int i) {
-@@ -203,9 +203,9 @@ public class FunctionCommand {
+@@ -201,9 +201,9 @@ public class FunctionCommand {
                      }
                  }
  
@@ -29,7 +29,7 @@ index 7017ec8..2a89f8f 100644
                  };
                  Iterator iterator1 = collection.iterator();
  
-@@ -218,8 +218,8 @@ public class FunctionCommand {
+@@ -216,8 +216,8 @@ public class FunctionCommand {
                  }
  
                  executioncontrol.queueNext((executioncontext, frame) -> {

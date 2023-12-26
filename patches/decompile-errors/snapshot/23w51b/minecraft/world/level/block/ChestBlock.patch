@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/block/ChestBlock.java b/minecraft/world/level/block/ChestBlock.java
-index 83acc90..ee6d94f 100644
+index 52d05dc..91cfb23 100644
 --- a/minecraft/world/level/block/ChestBlock.java
 +++ b/minecraft/world/level/block/ChestBlock.java
-@@ -278,17 +278,9 @@ public class ChestBlock extends AbstractChestBlock<ChestBlockEntity> implements
+@@ -277,17 +277,9 @@ public class ChestBlock extends AbstractChestBlock<ChestBlockEntity> implements
  
      @Override
      public DoubleBlockCombiner.NeighborCombineResult<? extends ChestBlockEntity> combine(BlockState blockstate, Level level, BlockPos blockpos, boolean flag) {

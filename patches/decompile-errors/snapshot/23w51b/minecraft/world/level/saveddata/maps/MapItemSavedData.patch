@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/saveddata/maps/MapItemSavedData.java b/minecraft/world/level/saveddata/maps/MapItemSavedData.java
-index 455311f..bf504c3 100644
+index ead11dd..a30c88c 100644
 --- a/minecraft/world/level/saveddata/maps/MapItemSavedData.java
 +++ b/minecraft/world/level/saveddata/maps/MapItemSavedData.java
-@@ -15,6 +15,7 @@ import net.minecraft.core.BlockPos;
+@@ -16,6 +16,7 @@ import net.minecraft.core.BlockPos;
  import net.minecraft.nbt.CompoundTag;
  import net.minecraft.nbt.ListTag;
  import net.minecraft.nbt.NbtOps;
@@ -10,7 +10,7 @@ index 455311f..bf504c3 100644
  import net.minecraft.network.chat.Component;
  import net.minecraft.network.protocol.Packet;
  import net.minecraft.network.protocol.game.ClientboundMapItemDataPacket;
-@@ -86,7 +87,7 @@ public class MapItemSavedData extends SavedData {
+@@ -88,7 +89,7 @@ public class MapItemSavedData extends SavedData {
      }
  
      public static MapItemSavedData load(CompoundTag compoundtag) {
@@ -19,7 +19,7 @@ index 455311f..bf504c3 100644
          Logger logger = MapItemSavedData.LOGGER;
  
          Objects.requireNonNull(logger);
-@@ -129,7 +130,7 @@ public class MapItemSavedData extends SavedData {
+@@ -131,7 +132,7 @@ public class MapItemSavedData extends SavedData {
  
      @Override
      public CompoundTag save(CompoundTag compoundtag) {

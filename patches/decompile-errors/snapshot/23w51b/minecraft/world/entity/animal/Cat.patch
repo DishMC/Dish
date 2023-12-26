@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/animal/Cat.java b/minecraft/world/entity/animal/Cat.java
-index 7128672..3a4680c 100644
+index 7ac0504..a9dc9da 100644
 --- a/minecraft/world/entity/animal/Cat.java
 +++ b/minecraft/world/entity/animal/Cat.java
-@@ -648,10 +648,7 @@ public class Cat extends TamableAnimal implements VariantHolder<CatVariant> {
+@@ -636,10 +636,7 @@ public class Cat extends TamableAnimal implements VariantHolder<CatVariant> {
          private final Cat cat;
  
          public CatAvoidEntityGoal(Cat cat, Class<T> oclass, float f, double d0, double d1) {

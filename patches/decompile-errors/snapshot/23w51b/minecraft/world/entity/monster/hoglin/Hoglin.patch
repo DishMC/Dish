@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/monster/hoglin/Hoglin.java b/minecraft/world/entity/monster/hoglin/Hoglin.java
-index dbb92c2..213ab06 100644
+index 5c505de..ecdf30a 100644
 --- a/minecraft/world/entity/monster/hoglin/Hoglin.java
 +++ b/minecraft/world/entity/monster/hoglin/Hoglin.java
-@@ -63,7 +63,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
+@@ -61,7 +61,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
      private int timeInOverworld;
      private boolean cannotBeHunted;
      protected static final ImmutableList<? extends SensorType<? extends Sensor<? super Hoglin>>> SENSOR_TYPES = ImmutableList.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ADULT, SensorType.HOGLIN_SPECIFIC_SENSOR);
@@ -11,7 +11,7 @@ index dbb92c2..213ab06 100644
  
      public Hoglin(EntityType<? extends Hoglin> entitytype, Level level) {
          super(entitytype, level);
-@@ -127,7 +127,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
+@@ -125,7 +125,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
  
      @Override
      public Brain<Hoglin> getBrain() {
@@ -20,7 +20,7 @@ index dbb92c2..213ab06 100644
      }
  
      @Override
-@@ -325,7 +325,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
+@@ -318,7 +318,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
  
      @Override
      protected SoundEvent getAmbientSound() {

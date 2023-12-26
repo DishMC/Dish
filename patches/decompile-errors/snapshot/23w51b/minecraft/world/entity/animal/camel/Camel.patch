@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/animal/camel/Camel.java b/minecraft/world/entity/animal/camel/Camel.java
-index 4a4ba0e..7144fe4 100644
+index 2d6ecca..7308669 100644
 --- a/minecraft/world/entity/animal/camel/Camel.java
 +++ b/minecraft/world/entity/animal/camel/Camel.java
-@@ -152,7 +152,7 @@ public class Camel extends AbstractHorse implements PlayerRideableJumping, Saddl
+@@ -145,7 +145,7 @@ public class Camel extends AbstractHorse implements PlayerRideableJumping, Saddl
          this.level().getProfiler().push("camelBrain");
          Brain<?> brain = this.getBrain();
  

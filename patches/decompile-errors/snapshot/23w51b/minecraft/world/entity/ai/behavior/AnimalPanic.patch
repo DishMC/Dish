@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/entity/ai/behavior/AnimalPanic.java b/minecraft/world/entity/ai/behavior/AnimalPanic.java
-index 1b398cc..f693db0 100644
+index 33b88b6..e40e0af 100644
 --- a/minecraft/world/entity/ai/behavior/AnimalPanic.java
 +++ b/minecraft/world/entity/ai/behavior/AnimalPanic.java
 @@ -49,7 +49,7 @@ public class AnimalPanic extends Behavior<PathfinderMob> {

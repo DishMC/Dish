@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/storage/LevelStorageSource.java b/minecraft/world/level/storage/LevelStorageSource.java
-index 1a3705e..daebc0a 100644
+index 36f4827..03c4c72 100644
 --- a/minecraft/world/level/storage/LevelStorageSource.java
 +++ b/minecraft/world/level/storage/LevelStorageSource.java
-@@ -151,7 +151,7 @@ public class LevelStorageSource {
+@@ -148,7 +148,7 @@ public class LevelStorageSource {
      }
  
      public static WorldDataConfiguration readDataConfig(Dynamic<?> dynamic) {
@@ -11,7 +11,7 @@ index 1a3705e..daebc0a 100644
          Logger logger = LevelStorageSource.LOGGER;
  
          Objects.requireNonNull(logger);
-@@ -193,7 +193,7 @@ public class LevelStorageSource {
+@@ -190,7 +190,7 @@ public class LevelStorageSource {
              throw new LevelStorageException(Component.translatable("selectWorld.load_folder_access"));
          } else {
              try {
@@ -20,7 +20,7 @@ index 1a3705e..daebc0a 100644
  
                  LevelStorageSource.LevelCandidates levelstoragesource_levelcandidates;
  
-@@ -531,7 +531,7 @@ public class LevelStorageSource {
+@@ -528,7 +528,7 @@ public class LevelStorageSource {
          }
  
          public Path getLevelPath(LevelResource levelresource) {

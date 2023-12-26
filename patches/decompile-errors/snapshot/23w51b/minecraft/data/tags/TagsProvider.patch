@@ -1,8 +1,8 @@
 diff --git a/minecraft/data/tags/TagsProvider.java b/minecraft/data/tags/TagsProvider.java
-index 03ee0c4..3c42dc1 100644
+index e72abb8..371405b 100644
 --- a/minecraft/data/tags/TagsProvider.java
 +++ b/minecraft/data/tags/TagsProvider.java
-@@ -61,23 +61,21 @@ public abstract class TagsProvider<T> implements DataProvider {
+@@ -62,23 +62,21 @@ public abstract class TagsProvider<T> implements DataProvider {
  
      @Override
      public CompletableFuture<?> run(CachedOutput cachedoutput) {
@@ -34,7 +34,7 @@ index 03ee0c4..3c42dc1 100644
              };
  
              return CompletableFuture.allOf((CompletableFuture[])this.builders.entrySet().stream().map((entry) -> {
-@@ -91,7 +89,7 @@ public abstract class TagsProvider<T> implements DataProvider {
+@@ -92,7 +90,7 @@ public abstract class TagsProvider<T> implements DataProvider {
                  if (!list1.isEmpty()) {
                      throw new IllegalArgumentException(String.format(Locale.ROOT, "Couldn't define tag %s as it is missing following references: %s", resourcelocation, list1.stream().map(Objects::toString).collect(Collectors.joining(","))));
                  } else {

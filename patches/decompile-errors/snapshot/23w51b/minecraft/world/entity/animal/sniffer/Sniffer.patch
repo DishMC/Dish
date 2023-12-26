@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/animal/sniffer/Sniffer.java b/minecraft/world/entity/animal/sniffer/Sniffer.java
-index add68c4..b6e22b5 100644
+index 584c1ec..be01feb 100644
 --- a/minecraft/world/entity/animal/sniffer/Sniffer.java
 +++ b/minecraft/world/entity/animal/sniffer/Sniffer.java
-@@ -306,7 +306,7 @@ public class Sniffer extends Animal {
+@@ -301,7 +301,7 @@ public class Sniffer extends Animal {
          List<GlobalPos> list = (List) this.getExploredPositions().limit(20L).collect(Collectors.toList());
  
          list.add(0, GlobalPos.of(this.level().dimension(), blockpos));
@@ -11,7 +11,7 @@ index add68c4..b6e22b5 100644
          return this;
      }
  
-@@ -458,7 +458,7 @@ public class Sniffer extends Animal {
+@@ -443,7 +443,7 @@ public class Sniffer extends Animal {
  
      @Override
      public Brain<Sniffer> getBrain() {

@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/item/HoneycombItem.java b/minecraft/world/item/HoneycombItem.java
-index 17b8902..c2c79f7 100644
+index 18ff171..7afef1f 100644
 --- a/minecraft/world/item/HoneycombItem.java
 +++ b/minecraft/world/item/HoneycombItem.java
-@@ -22,7 +22,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
+@@ -23,7 +23,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
  public class HoneycombItem extends Item implements SignApplicator {
  
      public static final Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> {

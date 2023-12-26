@@ -1,8 +1,8 @@
 diff --git a/minecraft/gametest/framework/GameTestHelper.java b/minecraft/gametest/framework/GameTestHelper.java
-index 1f0ee85..338d6a1 100644
+index e2d5318..cf81b45 100644
 --- a/minecraft/gametest/framework/GameTestHelper.java
 +++ b/minecraft/gametest/framework/GameTestHelper.java
-@@ -147,7 +147,7 @@ public class GameTestHelper {
+@@ -148,7 +148,7 @@ public class GameTestHelper {
      }
  
      public <E extends Mob> E spawnWithNoFreeWill(EntityType<E> entitytype, BlockPos blockpos) {
@@ -11,7 +11,7 @@ index 1f0ee85..338d6a1 100644
  
          e0.removeFreeWill();
          return e0;
-@@ -158,7 +158,7 @@ public class GameTestHelper {
+@@ -159,7 +159,7 @@ public class GameTestHelper {
      }
  
      public <E extends Mob> E spawnWithNoFreeWill(EntityType<E> entitytype, Vec3 vec3) {
@@ -20,7 +20,7 @@ index 1f0ee85..338d6a1 100644
  
          e0.removeFreeWill();
          return e0;
-@@ -652,7 +652,7 @@ public class GameTestHelper {
+@@ -655,7 +655,7 @@ public class GameTestHelper {
              Iterator iterator = list.iterator();
  
              while (iterator.hasNext()) {

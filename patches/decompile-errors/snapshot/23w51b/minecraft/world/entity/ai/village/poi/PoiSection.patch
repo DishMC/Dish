@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/entity/ai/village/poi/PoiSection.java b/minecraft/world/entity/ai/village/poi/PoiSection.java
-index c098ddc..541df11 100644
+index 98ed12c..5af538e 100644
 --- a/minecraft/world/entity/ai/village/poi/PoiSection.java
 +++ b/minecraft/world/entity/ai/village/poi/PoiSection.java
 @@ -33,7 +33,7 @@ public class PoiSection {

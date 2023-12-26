@@ -1,5 +1,5 @@
 diff --git a/minecraft/core/Registry.java b/minecraft/core/Registry.java
-index 0dc6808..6dd2b2e 100644
+index 9d64517..77aea37 100644
 --- a/minecraft/core/Registry.java
 +++ b/minecraft/core/Registry.java
 @@ -28,7 +28,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
@@ -24,8 +24,8 @@ index 0dc6808..6dd2b2e 100644
  
      default Codec<Holder<T>> holderByNameCodec() {
          Codec<Holder<T>> codec = ResourceLocation.CODEC.flatXmap((resourcelocation) -> {
--            return (DataResult) this.getHolder(ResourceKey.create(this.key(), resourcelocation)).map(DataResult::success).orElseGet(() -> {
-+            return this.getHolder(ResourceKey.create(this.key(), resourcelocation)).map(DataResult::success).orElseGet(() -> {
+-            return (DataResult) this.getHolder(resourcelocation).map(DataResult::success).orElseGet(() -> {
++            return this.getHolder(resourcelocation).map(DataResult::success).orElseGet(() -> {
                  return DataResult.error(() -> {
                      ResourceKey resourcekey = this.key();
  
@@ -38,7 +38,7 @@ index 0dc6808..6dd2b2e 100644
                  return DataResult.error(() -> {
                      ResourceKey resourcekey = this.key();
  
-@@ -203,7 +203,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
+@@ -205,7 +205,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
              @Nullable
              @Override
              public Holder<T> byId(int i) {
@@ -47,7 +47,7 @@ index 0dc6808..6dd2b2e 100644
              }
  
              @Override
-@@ -212,7 +212,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
+@@ -214,7 +214,7 @@ public interface Registry<T> extends Keyable, IdMap<T> {
              }
  
              public Iterator<Holder<T>> iterator() {

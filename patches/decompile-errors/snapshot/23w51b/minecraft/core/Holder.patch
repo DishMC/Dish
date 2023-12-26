@@ -1,8 +1,8 @@
 diff --git a/minecraft/core/Holder.java b/minecraft/core/Holder.java
-index 4c302f5..69a205b 100644
+index ce665f8..2b52b94 100644
 --- a/minecraft/core/Holder.java
 +++ b/minecraft/core/Holder.java
-@@ -114,7 +114,7 @@ public interface Holder<T> {
+@@ -129,7 +129,7 @@ public interface Holder<T> {
          }
  
          public static <T> Holder.Reference<T> createStandAlone(HolderOwner<T> holderowner, ResourceKey<T> resourcekey) {

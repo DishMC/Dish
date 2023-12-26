@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/Mob.java b/minecraft/world/entity/Mob.java
-index c49426a..f7a8618 100644
+index 615c1a4..4551b19 100644
 --- a/minecraft/world/entity/Mob.java
 +++ b/minecraft/world/entity/Mob.java
-@@ -1224,7 +1224,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
+@@ -1231,7 +1231,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
              if (itemstack.getItem() instanceof SpawnEggItem) {
                  if (this.level() instanceof ServerLevel) {
                      SpawnEggItem spawneggitem = (SpawnEggItem) itemstack.getItem();
@@ -11,7 +11,7 @@ index c49426a..f7a8618 100644
  
                      optional.ifPresent((mob) -> {
                          this.onOffspringSpawnedFromEgg(player, mob);
-@@ -1279,7 +1279,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
+@@ -1286,7 +1286,7 @@ public abstract class Mob extends LivingEntity implements Targeting {
          if (this.isRemoved()) {
              return null;
          } else {

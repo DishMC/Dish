@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/item/BoatItem.java b/minecraft/world/item/BoatItem.java
-index 12d7498..28f5518 100644
+index f82b4f9..40b3012 100644
 --- a/minecraft/world/item/BoatItem.java
 +++ b/minecraft/world/item/BoatItem.java
-@@ -86,7 +86,7 @@ public class BoatItem extends Item {
+@@ -87,7 +87,7 @@ public class BoatItem extends Item {
  
      private Boat getBoat(Level level, HitResult hitresult, ItemStack itemstack, Player player) {
          Vec3 vec3 = hitresult.getLocation();

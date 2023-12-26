@@ -1,17 +1,43 @@
 diff --git a/minecraft/server/players/PlayerList.java b/minecraft/server/players/PlayerList.java
-index edc4651..8e3eb65 100644
+index fc1a9e2..542934c 100644
 --- a/minecraft/server/players/PlayerList.java
 +++ b/minecraft/server/players/PlayerList.java
-@@ -162,7 +162,7 @@ public abstract class PlayerList {
-         ResourceKey resourcekey;
+@@ -147,20 +147,20 @@ public abstract class PlayerList {
+     public void placeNewPlayer(Connection connection, ServerPlayer serverplayer, CommonListenerCookie commonlistenercookie) {
+         GameProfile gameprofile = serverplayer.getGameProfile();
+         GameProfileCache gameprofilecache = this.server.getProfileCache();
+-        Optional optional;
++        Optional<CompoundTag> optional;
+         String s;
  
-         if (compoundtag != null) {
+         if (gameprofilecache != null) {
+-            optional = gameprofilecache.get(gameprofile.getId());
+-            s = (String) optional.map(GameProfile::getName).orElse(gameprofile.getName());
++            Optional<GameProfile> optional1 = gameprofilecache.get(gameprofile.getId());
++            s = (String) optional1.map(GameProfile::getName).orElse(gameprofile.getName());
+             gameprofilecache.add(gameprofile);
+         } else {
+             s = gameprofile.getName();
+         }
+ 
+         optional = this.load(serverplayer);
+-        ResourceKey<Level> resourcekey = (ResourceKey) optional.flatMap((compoundtag) -> {
 -            DataResult dataresult = DimensionType.parseLegacy(new Dynamic(NbtOps.INSTANCE, compoundtag.get("Dimension")));
-+            DataResult<ResourceKey<Level>> dataresult = DimensionType.parseLegacy(new Dynamic<>(NbtOps.INSTANCE, compoundtag.get("Dimension")));
++        ResourceKey<Level> resourcekey = optional.flatMap((compoundtag) -> {
++            DataResult<ResourceKey<Level>> dataresult = DimensionType.parseLegacy(new Dynamic(NbtOps.INSTANCE, compoundtag.get("Dimension")));
              Logger logger = PlayerList.LOGGER;
  
              Objects.requireNonNull(logger);
-@@ -665,7 +665,7 @@ public abstract class PlayerList {
+@@ -182,7 +182,7 @@ public abstract class PlayerList {
+         PlayerList.LOGGER.info("{}[{}] logged in with entity id {} at ({}, {}, {})", new Object[]{serverplayer.getName().getString(), s1, serverplayer.getId(), serverplayer.getX(), serverplayer.getY(), serverplayer.getZ()});
+         LevelData leveldata = serverlevel1.getLevelData();
+ 
+-        serverplayer.loadGameTypes((CompoundTag) optional.orElse((Object) null));
++        serverplayer.loadGameTypes((CompoundTag) optional.orElse(null));
+         ServerGamePacketListenerImpl servergamepacketlistenerimpl = new ServerGamePacketListenerImpl(this.server, connection, serverplayer, commonlistenercookie);
+         GameRules gamerules = serverlevel1.getGameRules();
+         boolean flag = gamerules.getBoolean(GameRules.RULE_DO_IMMEDIATE_RESPAWN);
+@@ -658,7 +658,7 @@ public abstract class PlayerList {
      }
  
      public void deop(GameProfile gameprofile) {

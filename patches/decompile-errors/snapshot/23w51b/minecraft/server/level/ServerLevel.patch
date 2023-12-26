@@ -1,5 +1,5 @@
 diff --git a/minecraft/server/level/ServerLevel.java b/minecraft/server/level/ServerLevel.java
-index e683ed0..9991467 100644
+index 5589347..aebfd5b 100644
 --- a/minecraft/server/level/ServerLevel.java
 +++ b/minecraft/server/level/ServerLevel.java
 @@ -203,11 +203,7 @@ public class ServerLevel extends Level implements WorldGenLevel {

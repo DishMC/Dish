@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/animal/Sheep.java b/minecraft/world/entity/animal/Sheep.java
-index 6c78f61..c73b701 100644
+index 23a9008..fa3c62e 100644
 --- a/minecraft/world/entity/animal/Sheep.java
 +++ b/minecraft/world/entity/animal/Sheep.java
-@@ -52,6 +52,7 @@ import net.minecraft.world.inventory.MenuType;
+@@ -50,6 +50,7 @@ import net.minecraft.world.inventory.MenuType;
  import net.minecraft.world.inventory.TransientCraftingContainer;
  import net.minecraft.world.item.DyeColor;
  import net.minecraft.world.item.DyeItem;
@@ -10,7 +10,7 @@ index 6c78f61..c73b701 100644
  import net.minecraft.world.item.ItemStack;
  import net.minecraft.world.item.Items;
  import net.minecraft.world.item.crafting.CraftingRecipe;
-@@ -379,7 +380,7 @@ public class Sheep extends Animal implements Shearable {
+@@ -376,7 +377,7 @@ public class Sheep extends Animal implements Shearable {
          DyeColor dyecolor = ((Sheep) animal).getColor();
          DyeColor dyecolor1 = ((Sheep) animal1).getColor();
          CraftingContainer craftingcontainer = makeContainer(dyecolor, dyecolor1);

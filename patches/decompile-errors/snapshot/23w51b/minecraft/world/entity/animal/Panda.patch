@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/animal/Panda.java b/minecraft/world/entity/animal/Panda.java
-index 8add363..eefee35 100644
+index a7aab79..935485f 100644
 --- a/minecraft/world/entity/animal/Panda.java
 +++ b/minecraft/world/entity/animal/Panda.java
-@@ -870,10 +870,7 @@ public class Panda extends Animal {
+@@ -873,10 +873,7 @@ public class Panda extends Animal {
          private final Panda panda;
  
          public PandaAvoidGoal(Panda panda, Class<T> oclass, float f, double d0, double d1) {

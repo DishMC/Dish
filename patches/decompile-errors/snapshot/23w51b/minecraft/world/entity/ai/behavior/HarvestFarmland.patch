@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/ai/behavior/HarvestFarmland.java b/minecraft/world/entity/ai/behavior/HarvestFarmland.java
-index 67af348..1fa8d52 100644
+index f6d3b11..91c5fe8 100644
 --- a/minecraft/world/entity/ai/behavior/HarvestFarmland.java
 +++ b/minecraft/world/entity/ai/behavior/HarvestFarmland.java
-@@ -81,8 +81,8 @@ public class HarvestFarmland extends Behavior<Villager> {
+@@ -82,8 +82,8 @@ public class HarvestFarmland extends Behavior<Villager> {
  
      protected void start(ServerLevel serverlevel, Villager villager, long i) {
          if (i > this.nextOkStartTime && this.aboveFarmlandPos != null) {
@@ -13,7 +13,7 @@ index 67af348..1fa8d52 100644
          }
  
      }
-@@ -141,8 +141,8 @@ public class HarvestFarmland extends Behavior<Villager> {
+@@ -142,8 +142,8 @@ public class HarvestFarmland extends Behavior<Villager> {
                      this.aboveFarmlandPos = this.getValidFarmland(serverlevel);
                      if (this.aboveFarmlandPos != null) {
                          this.nextOkStartTime = i + 20L;

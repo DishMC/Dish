@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/ai/sensing/MobSensor.java b/minecraft/world/entity/ai/sensing/MobSensor.java
+index 439084a..5d8ed1e 100644
+--- a/minecraft/world/entity/ai/sensing/MobSensor.java
++++ b/minecraft/world/entity/ai/sensing/MobSensor.java
+@@ -44,7 +44,7 @@ public class MobSensor<T extends LivingEntity> extends Sensor<T> {
+ 
+         if (!optional.isEmpty()) {
+             boolean flag = ((List) optional.get()).stream().anyMatch((livingentity) -> {
+-                return this.mobTest.test(t0, livingentity);
++                return this.mobTest.test(t0, (LivingEntity)livingentity);
+             });
+ 
+             if (flag) {

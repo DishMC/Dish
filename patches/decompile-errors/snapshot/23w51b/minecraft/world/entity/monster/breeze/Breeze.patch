@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/monster/breeze/Breeze.java b/minecraft/world/entity/monster/breeze/Breeze.java
-index b07dd0e..8fff15b 100644
+index 01d6ac3..b7459d1 100644
 --- a/minecraft/world/entity/monster/breeze/Breeze.java
 +++ b/minecraft/world/entity/monster/breeze/Breeze.java
-@@ -60,7 +60,7 @@ public class Breeze extends Monster {
+@@ -65,7 +65,7 @@ public class Breeze extends Monster {
  
      @Override
      public Brain<Breeze> getBrain() {

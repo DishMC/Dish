@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/monster/piglin/AbstractPiglin.java b/minecraft/world/entity/monster/piglin/AbstractPiglin.java
-index abcb784..543804c 100644
+index 206a4dd..c3d351a 100644
 --- a/minecraft/world/entity/monster/piglin/AbstractPiglin.java
 +++ b/minecraft/world/entity/monster/piglin/AbstractPiglin.java
-@@ -132,7 +132,7 @@ public abstract class AbstractPiglin extends Monster {
+@@ -112,7 +112,7 @@ public abstract class AbstractPiglin extends Monster {
      @Nullable
      @Override
      public LivingEntity getTarget() {

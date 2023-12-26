@@ -1,8 +1,8 @@
 diff --git a/minecraft/network/chat/numbers/NumberFormatTypes.java b/minecraft/network/chat/numbers/NumberFormatTypes.java
-index 6bc6b03..7382192 100644
+index 5ae4d51..9dcdb75 100644
 --- a/minecraft/network/chat/numbers/NumberFormatTypes.java
 +++ b/minecraft/network/chat/numbers/NumberFormatTypes.java
-@@ -25,7 +25,7 @@ public class NumberFormatTypes {
+@@ -23,7 +23,7 @@ public class NumberFormatTypes {
      }
  
      public static <T extends NumberFormat> void writeToStream(FriendlyByteBuf friendlybytebuf, T t0) {

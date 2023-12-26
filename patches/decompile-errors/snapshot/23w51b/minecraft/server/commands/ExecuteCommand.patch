@@ -1,5 +1,5 @@
 diff --git a/minecraft/server/commands/ExecuteCommand.java b/minecraft/server/commands/ExecuteCommand.java
-index 2972a06..de8c07f 100644
+index 72bf806..fae16b8 100644
 --- a/minecraft/server/commands/ExecuteCommand.java
 +++ b/minecraft/server/commands/ExecuteCommand.java
 @@ -558,7 +558,7 @@ public class ExecuteCommand {

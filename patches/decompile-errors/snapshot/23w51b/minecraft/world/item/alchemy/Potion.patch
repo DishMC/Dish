@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/item/alchemy/Potion.java b/minecraft/world/item/alchemy/Potion.java
+index 443667e..303ef30 100644
+--- a/minecraft/world/item/alchemy/Potion.java
++++ b/minecraft/world/item/alchemy/Potion.java
+@@ -20,7 +20,7 @@ public class Potion {
+     public static Holder<Potion> byName(String s) {
+         ResourceLocation resourcelocation = ResourceLocation.tryParse(s);
+ 
+-        return resourcelocation == null ? Potions.EMPTY : (Holder) BuiltInRegistries.POTION.getHolder(resourcelocation).map(Function.identity()).orElse(Potions.EMPTY);
++        return resourcelocation == null ? Potions.EMPTY : BuiltInRegistries.POTION.getHolder(resourcelocation).map(Function.identity()).orElse((Holder.Reference<Potion>)Potions.EMPTY);
+     }
+ 
+     public Potion(MobEffectInstance... amobeffectinstance) {

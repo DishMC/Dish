@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/entity/animal/armadillo/Armadillo.java b/minecraft/world/entity/animal/armadillo/Armadillo.java
+index 1cd2204..d782bc7 100644
+--- a/minecraft/world/entity/animal/armadillo/Armadillo.java
++++ b/minecraft/world/entity/animal/armadillo/Armadillo.java
+@@ -125,7 +125,7 @@ public class Armadillo extends Animal {
+     @Override
+     protected void customServerAiStep() {
+         this.level().getProfiler().push("armadilloBrain");
+-        this.brain.tick((ServerLevel) this.level(), this);
++        ((Brain<Armadillo>)this.brain).tick((ServerLevel) this.level(), this);
+         this.level().getProfiler().pop();
+         this.level().getProfiler().push("armadilloActivityUpdate");
+         ArmadilloAi.updateActivity(this);

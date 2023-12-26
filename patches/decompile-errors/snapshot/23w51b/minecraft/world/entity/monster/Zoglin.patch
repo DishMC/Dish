@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/monster/Zoglin.java b/minecraft/world/entity/monster/Zoglin.java
-index c2b3b4c..62476c0 100644
+index 975a767..60fa9f5 100644
 --- a/minecraft/world/entity/monster/Zoglin.java
 +++ b/minecraft/world/entity/monster/Zoglin.java
-@@ -189,14 +189,14 @@ public class Zoglin extends Monster implements Enemy, HoglinBase {
+@@ -182,14 +182,14 @@ public class Zoglin extends Monster implements Enemy, HoglinBase {
  
      @Override
      public Brain<Zoglin> getBrain() {

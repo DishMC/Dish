@@ -1,8 +1,8 @@
 diff --git a/minecraft/core/cauldron/CauldronInteraction.java b/minecraft/core/cauldron/CauldronInteraction.java
-index b04053b..983b7fb 100644
+index 4e1f47b..f5a5dc7 100644
 --- a/minecraft/core/cauldron/CauldronInteraction.java
 +++ b/minecraft/core/cauldron/CauldronInteraction.java
-@@ -36,17 +36,89 @@ import net.minecraft.world.level.gameevent.GameEvent;
+@@ -37,17 +37,89 @@ import net.minecraft.world.level.gameevent.GameEvent;
  public interface CauldronInteraction {
  
      Map<String, CauldronInteraction.InteractionMap> INTERACTIONS = new Object2ObjectArrayMap();
@@ -24,18 +24,18 @@ index b04053b..983b7fb 100644
 +    CauldronInteraction.InteractionMap POWDER_SNOW = newInteractionMap("powder_snow");
 +    CauldronInteraction FILL_WATER = (blockstate, level, blockpos, player, interactionhand, itemstack) -> {
 +        return emptyBucket(level, blockpos, player, interactionhand, itemstack, (BlockState) Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3), SoundEvents.BUCKET_EMPTY);
-+    };;
++    };
 +    CauldronInteraction FILL_LAVA = (blockstate, level, blockpos, player, interactionhand, itemstack) -> {
 +        return emptyBucket(level, blockpos, player, interactionhand, itemstack, Blocks.LAVA_CAULDRON.defaultBlockState(), SoundEvents.BUCKET_EMPTY_LAVA);
-+    };;
++    };
 +    CauldronInteraction FILL_POWDER_SNOW = (blockstate, level, blockpos, player, interactionhand, itemstack) -> {
 +        return emptyBucket(level, blockpos, player, interactionhand, itemstack, (BlockState) Blocks.POWDER_SNOW_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3), SoundEvents.BUCKET_EMPTY_POWDER_SNOW);
-+    };;
++    };
 +    CauldronInteraction SHULKER_BOX = (blockstate, level, blockpos, player, interactionhand, itemstack) -> {
 +        Block block = Block.byItem(itemstack.getItem());
 +
 +        if (!(block instanceof ShulkerBoxBlock)) {
-+            return InteractionResult.PASS;
++            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 +        } else {
 +            if (!level.isClientSide) {
 +                ItemStack itemstack1 = new ItemStack(Blocks.SHULKER_BOX);
@@ -49,12 +49,12 @@ index b04053b..983b7fb 100644
 +                LayeredCauldronBlock.lowerFillLevel(blockstate, level, blockpos);
 +            }
 +
-+            return InteractionResult.sidedSuccess(level.isClientSide);
++            return ItemInteractionResult.sidedSuccess(level.isClientSide);
 +        }
-+    };;
++    };
 +    CauldronInteraction BANNER = (blockstate, level, blockpos, player, interactionhand, itemstack) -> {
 +        if (BannerBlockEntity.getPatternCount(itemstack) <= 0) {
-+            return InteractionResult.PASS;
++            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 +        } else {
 +            if (!level.isClientSide) {
 +                ItemStack itemstack1 = itemstack.copyWithCount(1);
@@ -76,19 +76,19 @@ index b04053b..983b7fb 100644
 +                LayeredCauldronBlock.lowerFillLevel(blockstate, level, blockpos);
 +            }
 +
-+            return InteractionResult.sidedSuccess(level.isClientSide);
++            return ItemInteractionResult.sidedSuccess(level.isClientSide);
 +        }
-+    };;
++    };
 +    CauldronInteraction DYED_ITEM = (blockstate, level, blockpos, player, interactionhand, itemstack) -> {
 +        Item item = itemstack.getItem();
 +
 +        if (!(item instanceof DyeableLeatherItem)) {
-+            return InteractionResult.PASS;
++            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 +        } else {
 +            DyeableLeatherItem dyeableleatheritem = (DyeableLeatherItem) item;
 +
 +            if (!dyeableleatheritem.hasCustomColor(itemstack)) {
-+                return InteractionResult.PASS;
++                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 +            } else {
 +                if (!level.isClientSide) {
 +                    dyeableleatheritem.clearColor(itemstack);
@@ -96,15 +96,15 @@ index b04053b..983b7fb 100644
 +                    LayeredCauldronBlock.lowerFillLevel(blockstate, level, blockpos);
 +                }
 +
-+                return InteractionResult.sidedSuccess(level.isClientSide);
++                return ItemInteractionResult.sidedSuccess(level.isClientSide);
 +            }
 +        }
-+    };;
++    };
  
      static CauldronInteraction.InteractionMap newInteractionMap(String s) {
          Object2ObjectOpenHashMap<Item, CauldronInteraction> object2objectopenhashmap = new Object2ObjectOpenHashMap();
-@@ -217,96 +289,6 @@ public interface CauldronInteraction {
-         return InteractionResult.sidedSuccess(level.isClientSide);
+@@ -218,96 +290,6 @@ public interface CauldronInteraction {
+         return ItemInteractionResult.sidedSuccess(level.isClientSide);
      }
  
 -    static {
@@ -130,7 +130,7 @@ index b04053b..983b7fb 100644
 -            Block block = Block.byItem(itemstack.getItem());
 -
 -            if (!(block instanceof ShulkerBoxBlock)) {
--                return InteractionResult.PASS;
+-                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 -            } else {
 -                if (!level.isClientSide) {
 -                    ItemStack itemstack1 = new ItemStack(Blocks.SHULKER_BOX);
@@ -144,12 +144,12 @@ index b04053b..983b7fb 100644
 -                    LayeredCauldronBlock.lowerFillLevel(blockstate, level, blockpos);
 -                }
 -
--                return InteractionResult.sidedSuccess(level.isClientSide);
+-                return ItemInteractionResult.sidedSuccess(level.isClientSide);
 -            }
 -        };
 -        BANNER = (blockstate, level, blockpos, player, interactionhand, itemstack) -> {
 -            if (BannerBlockEntity.getPatternCount(itemstack) <= 0) {
--                return InteractionResult.PASS;
+-                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 -            } else {
 -                if (!level.isClientSide) {
 -                    ItemStack itemstack1 = itemstack.copyWithCount(1);
@@ -171,19 +171,19 @@ index b04053b..983b7fb 100644
 -                    LayeredCauldronBlock.lowerFillLevel(blockstate, level, blockpos);
 -                }
 -
--                return InteractionResult.sidedSuccess(level.isClientSide);
+-                return ItemInteractionResult.sidedSuccess(level.isClientSide);
 -            }
 -        };
 -        DYED_ITEM = (blockstate, level, blockpos, player, interactionhand, itemstack) -> {
 -            Item item = itemstack.getItem();
 -
 -            if (!(item instanceof DyeableLeatherItem)) {
--                return InteractionResult.PASS;
+-                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 -            } else {
 -                DyeableLeatherItem dyeableleatheritem = (DyeableLeatherItem) item;
 -
 -                if (!dyeableleatheritem.hasCustomColor(itemstack)) {
--                    return InteractionResult.PASS;
+-                    return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 -                } else {
 -                    if (!level.isClientSide) {
 -                        dyeableleatheritem.clearColor(itemstack);
@@ -191,7 +191,7 @@ index b04053b..983b7fb 100644
 -                        LayeredCauldronBlock.lowerFillLevel(blockstate, level, blockpos);
 -                    }
 -
--                    return InteractionResult.sidedSuccess(level.isClientSide);
+-                    return ItemInteractionResult.sidedSuccess(level.isClientSide);
 -                }
 -            }
 -        };

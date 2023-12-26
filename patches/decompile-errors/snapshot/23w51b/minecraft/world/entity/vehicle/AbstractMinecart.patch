@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/vehicle/AbstractMinecart.java b/minecraft/world/entity/vehicle/AbstractMinecart.java
-index 746fc87..7102fcf 100644
+index 14c2e1c..7d09e4d 100644
 --- a/minecraft/world/entity/vehicle/AbstractMinecart.java
 +++ b/minecraft/world/entity/vehicle/AbstractMinecart.java
-@@ -103,7 +103,7 @@ public abstract class AbstractMinecart extends VehicleEntity {
+@@ -101,7 +101,7 @@ public abstract class AbstractMinecart extends VehicleEntity {
      }
  
      public static AbstractMinecart createMinecart(ServerLevel serverlevel, double d0, double d1, double d2, AbstractMinecart.Type abstractminecart_type, ItemStack itemstack, @Nullable Player player) {
@@ -11,7 +11,7 @@ index 746fc87..7102fcf 100644
  
          switch (abstractminecart_type) {
              case CHEST:
-@@ -128,7 +128,7 @@ public abstract class AbstractMinecart extends VehicleEntity {
+@@ -126,7 +126,7 @@ public abstract class AbstractMinecart extends VehicleEntity {
                  object = new Minecart(serverlevel, d0, d1, d2);
          }
  

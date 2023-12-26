@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/level/block/RespawnAnchorBlock.java b/minecraft/world/level/block/RespawnAnchorBlock.java
-index a1c0beb..eabc0fa 100644
+index 95dd6b5..88a5f86 100644
 --- a/minecraft/world/level/block/RespawnAnchorBlock.java
 +++ b/minecraft/world/level/block/RespawnAnchorBlock.java
-@@ -127,7 +127,7 @@ public class RespawnAnchorBlock extends Block {
+@@ -132,7 +132,7 @@ public class RespawnAnchorBlock extends Block {
  
      private void explode(BlockState blockstate, Level level, final BlockPos blockpos) {
          level.removeBlock(blockpos, false);

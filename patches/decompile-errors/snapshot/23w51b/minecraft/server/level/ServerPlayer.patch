@@ -1,8 +1,8 @@
 diff --git a/minecraft/server/level/ServerPlayer.java b/minecraft/server/level/ServerPlayer.java
-index 0600312..7436496 100644
+index af9e8f1..ba3da8e 100644
 --- a/minecraft/server/level/ServerPlayer.java
 +++ b/minecraft/server/level/ServerPlayer.java
-@@ -337,7 +337,7 @@ public class ServerPlayer extends Player {
+@@ -343,7 +343,7 @@ public class ServerPlayer extends Player {
      public void readAdditionalSaveData(CompoundTag compoundtag) {
          super.readAdditionalSaveData(compoundtag);
          if (compoundtag.contains("warden_spawn_tracker", 10)) {
@@ -11,7 +11,7 @@ index 0600312..7436496 100644
              Logger logger = ServerPlayer.LOGGER;
  
              Objects.requireNonNull(logger);
-@@ -366,7 +366,7 @@ public class ServerPlayer extends Player {
+@@ -372,7 +372,7 @@ public class ServerPlayer extends Player {
              this.respawnForced = compoundtag.getBoolean("SpawnForced");
              this.respawnAngle = compoundtag.getFloat("SpawnAngle");
              if (compoundtag.contains("SpawnDimension")) {
@@ -20,7 +20,7 @@ index 0600312..7436496 100644
                  Logger logger1 = ServerPlayer.LOGGER;
  
                  Objects.requireNonNull(logger1);
-@@ -379,7 +379,7 @@ public class ServerPlayer extends Player {
+@@ -385,7 +385,7 @@ public class ServerPlayer extends Player {
      @Override
      public void addAdditionalSaveData(CompoundTag compoundtag) {
          super.addAdditionalSaveData(compoundtag);

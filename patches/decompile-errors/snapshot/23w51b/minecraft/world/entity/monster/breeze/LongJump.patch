@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/monster/breeze/LongJump.java b/minecraft/world/entity/monster/breeze/LongJump.java
-index bcab8fb..f7d5bf6 100644
+index 5c9d70f..6fd84d1 100644
 --- a/minecraft/world/entity/monster/breeze/LongJump.java
 +++ b/minecraft/world/entity/monster/breeze/LongJump.java
-@@ -50,7 +50,7 @@ public class LongJump extends Behavior<Breeze> {
+@@ -54,7 +54,7 @@ public class LongJump extends Behavior<Breeze> {
          } else if (breeze.getBrain().checkMemory(MemoryModuleType.BREEZE_JUMP_TARGET, MemoryStatus.VALUE_PRESENT)) {
              return true;
          } else {
@@ -11,8 +11,8 @@ index bcab8fb..f7d5bf6 100644
  
              if (livingentity == null) {
                  return false;
-@@ -69,7 +69,7 @@ public class LongJump extends Behavior<Breeze> {
-                 } else if (!hasLineOfSight(breeze, blockpos.getCenter()) && !hasLineOfSight(breeze, blockpos.above(4).getCenter())) {
+@@ -73,7 +73,7 @@ public class LongJump extends Behavior<Breeze> {
+                 } else if (!BreezeUtil.hasLineOfSight(breeze, blockpos.getCenter()) && !BreezeUtil.hasLineOfSight(breeze, blockpos.above(4).getCenter())) {
                      return false;
                  } else {
 -                    breeze.getBrain().setMemory(MemoryModuleType.BREEZE_JUMP_TARGET, (Object) blockpos);
@@ -20,8 +20,8 @@ index bcab8fb..f7d5bf6 100644
                      return true;
                  }
              }
-@@ -95,7 +95,7 @@ public class LongJump extends Behavior<Breeze> {
-         if (finishedInhaling(breeze)) {
+@@ -106,7 +106,7 @@ public class LongJump extends Behavior<Breeze> {
+         if (isFinishedInhaling(breeze)) {
              Vec3 vec3 = (Vec3) breeze.getBrain().getMemory(MemoryModuleType.BREEZE_JUMP_TARGET).flatMap((blockpos) -> {
                  return calculateOptimalJumpVector(breeze, breeze.getRandom(), Vec3.atBottomCenterOf(blockpos));
 -            }).orElse((Object) null);
@@ -29,3 +29,12 @@ index bcab8fb..f7d5bf6 100644
  
              if (vec3 == null) {
                  breeze.setPose(Pose.STANDING);
+@@ -114,7 +114,7 @@ public class LongJump extends Behavior<Breeze> {
+             }
+ 
+             if (flag) {
+-                breeze.getBrain().setMemory(MemoryModuleType.BREEZE_LEAVING_WATER, (Object) Unit.INSTANCE);
++                breeze.getBrain().setMemory(MemoryModuleType.BREEZE_LEAVING_WATER, Unit.INSTANCE);
+             }
+ 
+             breeze.playSound(SoundEvents.BREEZE_JUMP, 1.0F, 1.0F);

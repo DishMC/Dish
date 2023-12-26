@@ -1,5 +1,5 @@
 diff --git a/minecraft/world/level/Level.java b/minecraft/world/level/Level.java
-index 147f689..fe30915 100644
+index b3cf0aa..bb7355e 100644
 --- a/minecraft/world/level/Level.java
 +++ b/minecraft/world/level/Level.java
 @@ -680,7 +680,7 @@ public abstract class Level implements LevelAccessor, AutoCloseable {

@@ -1,8 +1,8 @@
 diff --git a/minecraft/world/entity/animal/horse/Horse.java b/minecraft/world/entity/animal/horse/Horse.java
-index 899369a..d0f75fc 100644
+index 2ef6568..aa1b4a1 100644
 --- a/minecraft/world/entity/animal/horse/Horse.java
 +++ b/minecraft/world/entity/animal/horse/Horse.java
-@@ -106,7 +106,7 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
+@@ -112,7 +112,7 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
      }
  
      private void setVariantAndMarkings(Variant variant, Markings markings) {
@@ -11,7 +11,7 @@ index 899369a..d0f75fc 100644
      }
  
      @Override
-@@ -115,7 +115,7 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
+@@ -121,7 +121,7 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
      }
  
      public void setVariant(Variant variant) {
@@ -20,7 +20,7 @@ index 899369a..d0f75fc 100644
      }
  
      public Markings getMarkings() {
-@@ -243,11 +243,11 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
+@@ -249,11 +249,11 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
                  Variant variant;
  
                  if (i < 4) {
@@ -35,7 +35,7 @@ index 899369a..d0f75fc 100644
                  }
  
                  int j = this.random.nextInt(5);
-@@ -261,7 +261,7 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
+@@ -267,7 +267,7 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
                      markings = (Markings) Util.getRandom((Object[]) Markings.values(), this.random);
                  }
  
@@ -44,7 +44,7 @@ index 899369a..d0f75fc 100644
                  this.setOffspringAttributes(ageablemob, horse1);
              }
  
-@@ -286,13 +286,13 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
+@@ -305,13 +305,13 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
          Variant variant;
  
          if (spawngroupdata instanceof Horse.HorseGroupData) {
@@ -62,7 +62,7 @@ index 899369a..d0f75fc 100644
          return super.finalizeSpawn(serverlevelaccessor, difficultyinstance, mobspawntype, (SpawnGroupData) spawngroupdata, compoundtag);
      }
  
-@@ -302,7 +302,7 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
+@@ -326,7 +326,7 @@ public class Horse extends AbstractHorse implements VariantHolder<Variant> {
  
          public HorseGroupData(Variant variant) {
              super(true);

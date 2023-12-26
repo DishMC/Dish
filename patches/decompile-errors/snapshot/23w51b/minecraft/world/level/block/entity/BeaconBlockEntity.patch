@@ -1,0 +1,13 @@
+diff --git a/minecraft/world/level/block/entity/BeaconBlockEntity.java b/minecraft/world/level/block/entity/BeaconBlockEntity.java
+index 82fec49..b251f78 100644
+--- a/minecraft/world/level/block/entity/BeaconBlockEntity.java
++++ b/minecraft/world/level/block/entity/BeaconBlockEntity.java
+@@ -313,7 +313,7 @@ public class BeaconBlockEntity extends BlockEntity implements MenuProvider, Name
+         if (compoundtag.contains(s, 8)) {
+             ResourceLocation resourcelocation = ResourceLocation.tryParse(compoundtag.getString(s));
+ 
+-            return resourcelocation == null ? null : (Holder) BuiltInRegistries.MOB_EFFECT.getHolder(resourcelocation).map(BeaconBlockEntity::filterEffect).orElse((Object) null);
++            return resourcelocation == null ? null : (Holder) BuiltInRegistries.MOB_EFFECT.getHolder(resourcelocation).map(BeaconBlockEntity::filterEffect).orElse(null);
+         } else {
+             return null;
+         }

@@ -1,5 +1,5 @@
 diff --git a/minecraft/advancements/critereon/ItemPredicate.java b/minecraft/advancements/critereon/ItemPredicate.java
-index fb5cc1f..4c5538c 100644
+index 86b5725..2e701e5 100644
 --- a/minecraft/advancements/critereon/ItemPredicate.java
 +++ b/minecraft/advancements/critereon/ItemPredicate.java
 @@ -103,7 +103,7 @@ public record ItemPredicate(Optional<TagKey<Item>> tag, Optional<HolderSet<Item>
