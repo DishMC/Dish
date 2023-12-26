@@ -1,6 +1,0 @@
-# DishConfig's TODO
-
-- Implement a way to clean cache.
-- Add a README.md file to document how this works
-- Add a CONTRIBUTING.md file so contributors will know what to do
-- Add tests (maybe JUnit?) to workspaces
