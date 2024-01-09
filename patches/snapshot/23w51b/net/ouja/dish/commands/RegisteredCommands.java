@@ -1,6 +1,9 @@
 package net.ouja.dish.commands;
 
+import com.mojang.brigadier.builder.ArgumentBuilder;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.ChatFormatting;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.ouja.api.commands.CommandListener;
@@ -26,23 +29,31 @@ public class RegisteredCommands {
         names.put(name, method);
         classes.put(name, commandClass);
 
+        LiteralArgumentBuilder<CommandSourceStack> command = Commands.literal(name);
         String finalName = name;
-        Commands.getDispatcher().register(Commands.literal(name).executes((cmd) -> {
-            DishPlayer player = new DishPlayer(cmd.getSource().getPlayer());
-            try {
-                return runCommand(finalName, player) ? 1 : 0;
-            } catch (Exception e) {
-                Component component = Component.literal("An error occurred when running this command").withStyle(ChatFormatting.RED);
-                player.sendMessage(DishComponent.fromComponent(component).setColor(String.valueOf(ChatFormatting.RED.getColor().intValue())));
-                return 0;
-            }
-        }));
+        Commands.getDispatcher().register(
+                command.executes((cmd) -> {
+                    DishPlayer player = new DishPlayer(cmd.getSource().getPlayer());
+                    try {
+                        return runCommand(finalName, player, commandListener) ? 1 : 0;
+                    } catch (Exception e) {
+                        Component component = Component.literal("An error occurred when running this command").withStyle(ChatFormatting.RED);
+                        player.sendMessage(DishComponent.fromComponent(component).setColor(String.valueOf(ChatFormatting.RED.getColor().intValue())));
+                        return 0;
+                    }
+                })
+        );
     }
 
-    public static boolean runCommand(String commandName, DishPlayer player) throws InstantiationException, IllegalAccessException, InvocationTargetException {
+    public static boolean runCommand(String commandName, DishPlayer player, CommandListener commandListener) throws InstantiationException, IllegalAccessException, InvocationTargetException {
         Method method = names.get(commandName);
         Class<?> clazz = classes.get(commandName);
         if (method == null || clazz == null) return false;
+
+        if (player.isConsole() && !commandListener.allowConsole()) {
+            System.out.println("Command can't be ran from the console.");
+            return false;
+        }
 
         method.setAccessible(true);
         return (boolean)method.invoke(clazz.newInstance(), player);
