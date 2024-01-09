@@ -1,6 +1,7 @@
 package net.ouja.dish.entity;
 
 import net.minecraft.core.GlobalPos;
+import net.minecraft.server.level.ClientInformation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -8,6 +9,7 @@ import net.ouja.api.entity.Player;
 import net.ouja.api.world.Level;
 import net.ouja.api.world.level.block.BlockPos;
 import net.ouja.dish.network.chat.DishComponent;
+import net.ouja.dish.server.level.DishClientInformation;
 import net.ouja.dish.world.DishLevel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +18,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class DishPlayer extends DishEntity implements Player {
-    private net.minecraft.world.entity.player.Player player;
+    private net.minecraft.server.level.ServerPlayer player;
     public static HashMap<UUID, DishPlayer> CACHED_PLAYERS = new HashMap<>();
 
     public DishPlayer(ServerPlayer player) {
@@ -83,5 +85,12 @@ public class DishPlayer extends DishEntity implements Player {
         if (scale >= 0) {
             this.player.getAttribute(Attributes.SCALE).setBaseValue(scale);
         }
+    }
+
+    @NotNull
+    @Override
+    public DishClientInformation getClientInformation() {
+        ClientInformation info = this.player.clientInformation();
+        return new DishClientInformation(info);
     }
 }

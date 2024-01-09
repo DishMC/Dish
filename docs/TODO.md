@@ -19,6 +19,5 @@
 - Look into a way for plugins to register structures
 - Add Item wrapper classes
 - Add Dish error handling
-- Send clientInformation to plugins, language, viewDistance, chatColours, modelCustomization, mainHand (ServerPlayer.java:updateOptions(), clientInformation())
 - Add logger for plugins
 - Add proper documentation
