@@ -41,8 +41,6 @@ let MINECRAFT_VERSION = "UNKNOWN";
     deleteDir('assets');
     deleteDir('data');
     warn('Copying net and com directories, this may take a while...');
-    // fs.mkdirSync('compiled/net', { recursive: true });
-    // fs.mkdirSync('compiled/com', { recursive: true });
     fs.mkdirSync('compiled', { recursive: true });
     copyDir('net', 'compiled');
     copyDir('com', 'compiled');
