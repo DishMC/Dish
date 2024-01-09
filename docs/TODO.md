@@ -7,7 +7,6 @@
   - StartSmelting, cancellable
   - OpenContainer, cancellable (Includes inventory? Or make seperate event listener, not sure yet) (ServerPlayer.java:openMenu() -- maybe this)
   - GenerateLoot, cancellable (Called when a player opens a chest) - half done
-  - SpawnerSpawn, cancellable, change mob, maybe ignore lighting
   - ChangeDimension, cancellable (Not sure if it should be cancelled) (ServerPlayer.java:changeDimension())
   - ChangeGameMode, cancellable (ServerPlayer.java:setGameMode())
   - WeatherChange, cancellable (ServerLevel.java:advanceWeatherCycle())
