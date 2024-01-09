@@ -1,6 +1,6 @@
 {
   "version": "23w51b",
-  "api_version": "R0.1-SNAPSHOT",
+  "api_version": "R0.2-SNAPSHOT",
   "libraries": [
     {
       "downloads": {
@@ -11,10 +11,10 @@
     },
     {
       "downloads": {
-        "url": "https://maven.ouja.net/net/ouja/api/23w51b-R0.1-SNAPSHOT/api-23w51b-R0.1-20231226.063558-1.jar",
-        "path": "net/ouja/api/23w51b/23w51b-R0.1-SNAPSHOT.jar"
+        "url": "https://maven.ouja.net/net/ouja/api/23w51b-R0.2-SNAPSHOT/api-23w51b-R0.2-20240109.112828-1.jar",
+        "path": "net/ouja/api/23w51b/23w51b-R0.2-SNAPSHOT.jar"
       },
-      "name": "net.ouja:api:23w51b-R0.1-SNAPSHOT"
+      "name": "net.ouja:api:23w51b-R0.2-SNAPSHOT"
     }
   ]
 }
