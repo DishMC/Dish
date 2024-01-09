@@ -54,7 +54,9 @@ Maven
 
 #### Contributing
 
-See [contributing](CONTRIBUTING.md)
+See [contributing](./docs/CONTRIBUTING.md)
+
+You can also look at our [TODO](./docs/TODO.md) list
 
 #### Compiling
 
