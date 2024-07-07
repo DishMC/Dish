@@ -11,13 +11,25 @@ const parseArg = require('./utils/parseArguments');
 const DECOMPILE_VERSION = parseArg('MC', DEFAULT_MINECRAFT_VERSION);
 const OLD_VERSION = parseArg('OLD_MC', null);
 
-let MINECRAFT_VERSION = "UNKNOWN";
+let MINECRAFT_VERSION = 'UNKNOWN';
 
 (async function () {
   try {
-    if (!checkMinecraftVersion(DECOMPILE_VERSION)) return error(`Using invalid Minecraft version '${DECOMPILE_VERSION}'`);
-    if (OLD_VERSION && !checkMinecraftVersion(OLD_VERSION)) return error(`Using invalid Minecraft version '${OLD_VERSION}'`);
-    if (!fs.existsSync('mache/gradlew')) return error('Run git submodule update --init --recursive');
+    if (!checkMinecraftVersion(DECOMPILE_VERSION)) {
+      error(`Using invalid Minecraft version '${DECOMPILE_VERSION}'`);
+      return process.exit(1);
+    }
+
+    if (OLD_VERSION && !checkMinecraftVersion(OLD_VERSION)) {
+      error(`Using invalid Minecraft version '${OLD_VERSION}'`);
+      return process.exit(1);
+    }
+
+    if (!fs.existsSync('mache/gradlew')) {
+      error('Run git submodule update --init --recursive');
+      return process.exit(1);
+    }
+
     MINECRAFT_VERSION = DECOMPILE_VERSION.split('/').pop();
 
     if (process.platform !== 'win32') {
