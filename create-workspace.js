@@ -39,8 +39,8 @@ function parseLibraries(libraries) {
   fs.mkdirSync(`workspaces/${MC_VER}/src/main/java/net/minecraft`, { recursive: true });
   fs.mkdirSync(`workspaces/${MC_VER}/src/main/java/com/mojang`, { recursive: true });
   // copy source folders
-  copyDir('decompiled/minecraft', `workspaces/${MC_VER}/src/main/java/net/minecraft`);
-  copyDir('decompiled/mojang', `workspaces/${MC_VER}/src/main/java/com/mojang`);
+  copyDir('decompiled/src/main/java/net/minecraft', `workspaces/${MC_VER}/src/main/java/net/minecraft`);
+  copyDir('decompiled/src/main/java/com/mojang', `workspaces/${MC_VER}/src/main/java/com/mojang`);
   // copy assets and data folders
   fs.mkdirSync(`workspaces/${MC_VER}/src/main/resources/assets`, { recursive: true });
   fs.mkdirSync(`workspaces/${MC_VER}/src/main/resources/data`, { recursive: true });

@@ -1,0 +1,24 @@
+diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
+index b958c90..0e23552 100644
+--- a/src/main/java/net/minecraft/commands/Commands.java
++++ b/src/main/java/net/minecraft/commands/Commands.java
+@@ -144,7 +144,7 @@ public class Commands {
+     public static final int LEVEL_GAMEMASTERS = 2;
+     public static final int LEVEL_ADMINS = 3;
+     public static final int LEVEL_OWNERS = 4;
+-    private final CommandDispatcher<CommandSourceStack> dispatcher = new CommandDispatcher<>();
++    private static final CommandDispatcher<CommandSourceStack> dispatcher = new CommandDispatcher(); // dish -- make this static
+ 
+     public Commands(Commands.CommandSelection selection, CommandBuildContext context) {
+         AdvancementCommands.register(this.dispatcher);
+@@ -418,8 +418,8 @@ public class Commands {
+         };
+     }
+ 
+-    public CommandDispatcher<CommandSourceStack> getDispatcher() {
+-        return this.dispatcher;
++    public static CommandDispatcher<CommandSourceStack> getDispatcher() { // dish -- make this static so that plugins can use commands
++        return dispatcher;
+     }
+ 
+     public static <S> void validateParseResults(ParseResults<S> parseResults) throws CommandSyntaxException {

@@ -4,3 +4,6 @@
 [submodule "Dish-API"]
 	path = Dish-API
 	url = https://github.com/DishMC/Dish-API.git
+[submodule "mache"]
+	path = mache
+	url = https://github.com/PaperMC/mache.git

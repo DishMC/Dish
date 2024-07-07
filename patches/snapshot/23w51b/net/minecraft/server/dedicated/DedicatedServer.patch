@@ -1,0 +1,20 @@
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+index 99c087f..b515f39 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
+@@ -69,6 +69,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+     private MinecraftServerGui gui;
+     @Nullable
+     private final TextFilterClient textFilterClient;
++    private final net.ouja.dish.Dish dishServer = new net.ouja.dish.Dish(this);; // dish
+ 
+     public DedicatedServer(Thread thread, LevelStorageSource.LevelStorageAccess levelstoragesource_levelstorageaccess, PackRepository packrepository, WorldStem worldstem, DedicatedServerSettings dedicatedserversettings, DataFixer datafixer, Services services, ChunkProgressListenerFactory chunkprogresslistenerfactory) {
+         super(thread, levelstoragesource_levelstorageaccess, packrepository, worldstem, Proxy.NO_PROXY, datafixer, services, chunkprogresslistenerfactory);
+@@ -106,6 +107,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+ 
+         DedicatedServer.LOGGER.info("Loading properties");
+         DedicatedServerProperties dedicatedserverproperties = this.settings.getProperties();
++        dishServer.initializePlugins(); // dish
+ 
+         if (this.isSingleplayer()) {
+             this.setLocalIp("127.0.0.1");

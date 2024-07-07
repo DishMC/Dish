@@ -1,0 +1,11 @@
+diff --git a/src/main/java/net/minecraft/world/damagesource/DamageSource.java b/src/main/java/net/minecraft/world/damagesource/DamageSource.java
+index 7719d4c..1db0a76 100644
+--- a/src/main/java/net/minecraft/world/damagesource/DamageSource.java
++++ b/src/main/java/net/minecraft/world/damagesource/DamageSource.java
+@@ -159,4 +159,6 @@ public class DamageSource {
+     public Holder<DamageType> typeHolder() {
+         return this.type;
+     }
++
++    public net.ouja.dish.world.DishDamageSource toDish() { return new net.ouja.dish.world.DishDamageSource(this); } // dish
+ }

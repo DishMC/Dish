@@ -1,0 +1,12 @@
+diff --git a/src/main/java/net/minecraft/CrashReport.java b/src/main/java/net/minecraft/CrashReport.java
+index d00eb27..979cd78 100644
+--- a/src/main/java/net/minecraft/CrashReport.java
++++ b/src/main/java/net/minecraft/CrashReport.java
+@@ -36,6 +36,7 @@ public class CrashReport {
+     public CrashReport(String s, Throwable throwable) {
+         this.title = s;
+         this.exception = throwable;
++        this.systemReport.setDetail("DishServer", new net.ouja.dish.DishCrashReport());
+     }
+ 
+     public String getTitle() {

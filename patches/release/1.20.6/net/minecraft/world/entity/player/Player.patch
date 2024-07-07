@@ -1,0 +1,25 @@
+diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
+index fa0457d..dfe1301 100644
+--- a/src/main/java/net/minecraft/world/entity/player/Player.java
++++ b/src/main/java/net/minecraft/world/entity/player/Player.java
+@@ -677,6 +677,11 @@ public abstract class Player extends LivingEntity {
+ 
+     @Nullable
+     public ItemEntity drop(ItemStack droppedItem, boolean dropAround, boolean includeThrowerName) {
++        // dish
++        net.ouja.api.event.player.PlayDropItemEvent event = new net.ouja.api.event.player.PlayDropItemEvent(new net.ouja.dish.entity.DishPlayer((ServerPlayer)this), droppedItem.toDish());
++        net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++        if (event.isCancelled()) return null;
++        // dish end
+         if (droppedItem.isEmpty()) {
+             return null;
+         } else {
+@@ -686,7 +691,7 @@ public abstract class Player extends LivingEntity {
+ 
+             double d = this.getEyeY() - 0.3F;
+             ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), d, this.getZ(), droppedItem);
+-            itemEntity.setPickUpDelay(40);
++            itemEntity.setPickUpDelay(event.getPickUpDelay()); // dish -- allow plugins to modify pick up delay. Default is 40
+             if (includeThrowerName) {
+                 itemEntity.setThrower(this);
+             }

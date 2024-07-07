@@ -1,0 +1,27 @@
+diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
+index 6021c1b..772f82a 100644
+--- a/src/main/java/net/minecraft/server/players/PlayerList.java
++++ b/src/main/java/net/minecraft/server/players/PlayerList.java
+@@ -214,7 +214,13 @@ public abstract class PlayerList {
+             mutableComponent = Component.translatable("multiplayer.player.joined.renamed", player.getDisplayName(), string);
+         }
+ 
+-        this.broadcastSystemMessage(mutableComponent.withStyle(ChatFormatting.YELLOW), false);
++        // dish start -- add event listener for players joining
++        net.ouja.api.event.player.PlayerJoinEvent event = new net.ouja.api.event.player.PlayerJoinEvent(new net.ouja.dish.entity.DishPlayer(player), net.ouja.dish.network.chat.DishComponent.fromComponent(mutableComponent));
++        net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++        if (event.getJoinMessage() != null) {
++            mutableComponent = net.ouja.dish.network.chat.DishComponent.toComponent(event.getJoinMessage());
++        }
++        // dish end
+         serverGamePacketListenerImpl.teleport(player.getX(), player.getY(), player.getZ(), player.getYRot(), player.getXRot());
+         ServerStatus status = this.server.getStatus();
+         if (status != null && !cookie.transferred()) {
+@@ -224,6 +230,7 @@ public abstract class PlayerList {
+         player.connection.send(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(this.players));
+         this.players.add(player);
+         this.playersByUUID.put(player.getUUID(), player);
++        this.broadcastSystemMessage(mutableComponent, false); // dish -- remove ".withStyle()" and move this here so that when players join, they can see their own join message.
+         this.broadcastAll(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(player)));
+         this.sendLevelInfo(player, serverLevel);
+         serverLevel.addNewPlayer(player);

@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-  compileOnly("net.ouja:api:1.20.4-R0.2-SNAPSHOT")
+  compileOnly("net.ouja:api:1.20.6-R0.1-SNAPSHOT")
   implementation 'it.unimi.dsi:fastutil:8.5.12'
 }
 ```
@@ -41,7 +41,7 @@ Maven
 <dependency>
   <groupId>net.ouja</groupId>
   <artifactId>api</artifactId>
-  <version>1.20.4-R0.2-SNAPSHOT</version>
+  <version>1.20.6-R0.1-SNAPSHOT</version>
   <scope>provided</scope>
 </dependency>
 <dependency>
@@ -54,7 +54,9 @@ Maven
 
 #### Contributing
 
-See [contributing](CONTRIBUTING.md)
+See [contributing](./docs/CONTRIBUTING.md)
+
+You can also look at our [TODO](./docs/TODO.md) list
 
 #### Compiling
 

@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const colors = require('./libs/colors');
 
-const DEFAULT_MINECRAFT_VERSION = "release/1.20.4";
+const DEFAULT_MINECRAFT_VERSION = "snapshot/23w51b";
 
 function log(msg) {
   console.log(`[Info]${colors.reset} ${msg}`);
@@ -59,13 +59,6 @@ function deleteFile(path, options) {
  */
 function copyDir(dir1, dir2, options) {
   return fs.cpSync(dir1, dir2, { ...options, recursive: true });
-  // const isWindows = process.platform === 'win32';
-  // if (isWindows) return execSync(`xcopy ${dir1.replace(/\//g, '\\')} ${dir2.replace(/\//g, '\\')} /s /e /h`, options);
-  // // What is this?
-  // // dir2 = dir2.split('/');
-  // // dir2 = dir2.slice(0, dir2.length - 1);
-  // // dir2 = dir2.join('/');
-  // return execSync(`cp -r ${dir1} ${dir2}`, options);
 }
 
 /**

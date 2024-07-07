@@ -38,7 +38,7 @@ function parseLibraries(libraries) {
     warn(`Workspace for version '${DECOMPILE_VERSION.split('/')[1]}' wasn't found. Running init.js in 5 seconds...`);
     setTimeout(() => {
       try {
-        execSync(`node init.js --MC="${DECOMPILE_VERSION}" --OLD_MC="${args[1] || ''}" --IGNORE-CACHE="${args[2] ? 'true' : ' false'}"`, { stdio });
+        execSync(`node init.js --MC="${DECOMPILE_VERSION}" --OLD_MC="${args[1] || ''}" --IGNORE-CACHE="${args[2] ? 'true' : 'false'}"`, { stdio });
         execSync(`node dish/index.js ${DECOMPILE_VERSION}${args[1] ? ' ' + args[1] : ''}`, { stdio });
       } catch (e) {
         error(e);
@@ -78,8 +78,8 @@ function parseLibraries(libraries) {
   log('Copied workspace');
   warn('Initilizing git repo, this may take a while...');
   execSync('cd dish/workspace && git init');
-  execSync('cd dish/workspace && git add .', { stdio });
-  execSync('cd dish/workspace && git commit -m "Initial Commit"', { stdio });
+  execSync('cd dish/workspace && git add .');
+  execSync('cd dish/workspace && git commit -m "Initial Commit"');
   log(`Created workspace for the version '${DECOMPILE_VERSION}'`);
   warn('Creating hashes, this may take a while...');
   generateHashes('dish/workspace/src/main/java');

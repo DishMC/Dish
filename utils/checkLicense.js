@@ -6,7 +6,7 @@
 const fs = require('fs');
 const { error, log } = require('../config');
 
-const LICENSE_HEADER = fs.readFileSync('LICENSE-header.txt').toString();
+const LICENSE_HEADER = fs.readFileSync('utils/LICENSE-header.txt').toString();
 const MISSING_LICENSE = [];
 const IGNORED_PATHS = ['node_modules', 'Dish-API', 'Dish-Bundler', 'cache', 'decompiled', 'compiled', 'workspaces', 'dish/workspace', '.git'];
 

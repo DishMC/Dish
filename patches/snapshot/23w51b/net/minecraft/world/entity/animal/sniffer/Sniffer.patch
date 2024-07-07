@@ -1,0 +1,13 @@
+diff --git a/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java b/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
+index be01feb..bbf7b55 100644
+--- a/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
++++ b/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
+@@ -136,7 +136,7 @@ public class Sniffer extends Animal {
+         return this.position().add(this.getForward().scale(2.25D));
+     }
+ 
+-    private Sniffer.State getState() {
++    public Sniffer.State getState() { // dish -- make this public
+         return (Sniffer.State) this.entityData.get(Sniffer.DATA_STATE);
+     }
+ 
