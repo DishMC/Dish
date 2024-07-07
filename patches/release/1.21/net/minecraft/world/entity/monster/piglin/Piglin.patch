@@ -1,0 +1,19 @@
+diff --git a/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java b/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
+index 2340212..d4d441e 100644
+--- a/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
++++ b/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
+@@ -290,12 +290,12 @@ public class Piglin extends AbstractPiglin implements CrossbowAttackMob, Invento
+         return this.getEntityData().get(DATA_BABY_ID);
+     }
+ 
+-    private void setCannotHunt(boolean cannotHunt) {
++    public void setCannotHunt(boolean cannotHunt) { // dish -- make this public
+         this.cannotHunt = cannotHunt;
+     }
+ 
+     @Override
+-    protected boolean canHunt() {
++    public boolean canHunt() { // dish -- make this public
+         return !this.cannotHunt;
+     }
+ 

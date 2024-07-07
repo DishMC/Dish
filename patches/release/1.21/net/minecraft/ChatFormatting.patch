@@ -1,0 +1,13 @@
+diff --git a/src/main/java/net/minecraft/ChatFormatting.java b/src/main/java/net/minecraft/ChatFormatting.java
+index cd1fc70..d8eba59 100644
+--- a/src/main/java/net/minecraft/ChatFormatting.java
++++ b/src/main/java/net/minecraft/ChatFormatting.java
+@@ -37,7 +37,7 @@ public enum ChatFormatting implements StringRepresentable {
+     RESET("RESET", 'r', -1, null);
+ 
+     public static final Codec<ChatFormatting> CODEC = StringRepresentable.fromEnum(ChatFormatting::values);
+-    public static final char PREFIX_CODE = '§';
++    public static final char PREFIX_CODE = '\u00a7'; // decompiler error
+     private static final Map<String, ChatFormatting> FORMATTING_BY_NAME = Arrays.stream(values())
+         .collect(Collectors.toMap(formatting -> cleanName(formatting.name), chatFormatter -> (ChatFormatting)chatFormatter));
+     private static final Pattern STRIP_FORMATTING_PATTERN = Pattern.compile("(?i)§[0-9A-FK-OR]");

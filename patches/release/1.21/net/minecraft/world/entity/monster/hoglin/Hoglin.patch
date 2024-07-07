@@ -1,0 +1,13 @@
+diff --git a/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java b/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
+index f65d7f3..1aeb79a 100644
+--- a/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
++++ b/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
+@@ -302,7 +302,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {
+         this.getEntityData().set(DATA_IMMUNE_TO_ZOMBIFICATION, immuneToZombification);
+     }
+ 
+-    private boolean isImmuneToZombification() {
++    public boolean isImmuneToZombification() { // dish -- make this public
+         return this.getEntityData().get(DATA_IMMUNE_TO_ZOMBIFICATION);
+     }
+ 

@@ -1,0 +1,45 @@
+diff --git a/src/main/java/net/minecraft/world/level/ChunkPos.java b/src/main/java/net/minecraft/world/level/ChunkPos.java
+index 2981f3d..b874386 100644
+--- a/src/main/java/net/minecraft/world/level/ChunkPos.java
++++ b/src/main/java/net/minecraft/world/level/ChunkPos.java
+@@ -20,6 +20,7 @@ public class ChunkPos {
+     public static final int REGION_MAX_INDEX = 31;
+     public final int x;
+     public final int z;
++    public final long toLongKey; // dish
+     private static final int HASH_A = 1664525;
+     private static final int HASH_C = 1013904223;
+     private static final int HASH_Z_XOR = -559038737;
+@@ -27,16 +28,19 @@ public class ChunkPos {
+     public ChunkPos(int x, int y) {
+         this.x = x;
+         this.z = y;
++        this.toLongKey = asLong(this.x, this.z); // dish
+     }
+ 
+     public ChunkPos(BlockPos pos) {
+         this.x = SectionPos.blockToSectionCoord(pos.getX());
+         this.z = SectionPos.blockToSectionCoord(pos.getZ());
++        this.toLongKey = asLong(this.x, this.z); // dish
+     }
+ 
+     public ChunkPos(long packedPos) {
+         this.x = (int)packedPos;
+         this.z = (int)(packedPos >> 32);
++        this.toLongKey = asLong(this.x, this.z); // dish
+     }
+ 
+     public static ChunkPos minFromRegion(int chunkX, int chunkZ) {
+@@ -48,10 +52,10 @@ public class ChunkPos {
+     }
+ 
+     public long toLong() {
+-        return asLong(this.x, this.z);
++        return this.toLongKey; // dish
+     }
+ 
+-    public static long asLong(int x, int z) {
++    public static long asLong(int x, int z) { // dish -- this should not change
+         return x & 4294967295L | (z & 4294967295L) << 32;
+     }
+ 

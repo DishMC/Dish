@@ -1,0 +1,13 @@
+diff --git a/src/main/java/net/minecraft/world/level/block/SignBlock.java b/src/main/java/net/minecraft/world/level/block/SignBlock.java
+index 4e9d2ec..e086271 100644
+--- a/src/main/java/net/minecraft/world/level/block/SignBlock.java
++++ b/src/main/java/net/minecraft/world/level/block/SignBlock.java
+@@ -150,7 +150,7 @@ public abstract class SignBlock extends BaseEntityBlock implements SimpleWaterlo
+     }
+ 
+     @Override
+-    protected FluidState getFluidState(BlockState state) {
++    public FluidState getFluidState(BlockState state) { // dish -- make this public
+         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+     }
+ 
