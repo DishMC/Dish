@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java b/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
-index 2340212..d4d441e 100644
+index 3b5f7f0..757b7ae 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/piglin/Piglin.java
 @@ -290,12 +290,12 @@ public class Piglin extends AbstractPiglin implements CrossbowAttackMob, Invento

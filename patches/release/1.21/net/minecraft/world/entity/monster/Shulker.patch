@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/world/entity/monster/Shulker.java b/src/main/java/net/minecraft/world/entity/monster/Shulker.java
-index c25ce1d..7ebb66b 100644
+index f7e3554..52d550f 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/Shulker.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/Shulker.java
 @@ -437,7 +437,7 @@ public class Shulker extends AbstractGolem implements VariantHolder<Optional<Dye

@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
-index 30ed4b8..26bd788 100644
+index 3cde004..a5b4913 100644
 --- a/src/main/java/net/minecraft/server/Main.java
 +++ b/src/main/java/net/minecraft/server/Main.java
 @@ -114,6 +114,12 @@ public class Main {

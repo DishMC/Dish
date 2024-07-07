@@ -1,20 +1,20 @@
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index 5468ab1..cfbd047 100644
+index a517582..e5021fa 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -77,6 +77,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
-     private RemoteSampleLogger tickTimeLogger;
+@@ -80,6 +80,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
      @Nullable
      private DebugSampleSubscriptionTracker debugSampleSubscriptionTracker;
+     private final ServerLinks serverLinks;
 +    private final net.ouja.dish.Dish dishServer = new net.ouja.dish.Dish(this); // dish
  
      public DedicatedServer(
          Thread serverThread,
-@@ -121,6 +122,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -125,6 +126,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
  
          LOGGER.info("Loading properties");
          DedicatedServerProperties properties = this.settings.getProperties();
-+        dishServer.initializePlugins(); // dish
++        this.dishServer.initializePlugins(); // dish
          if (this.isSingleplayer()) {
              this.setLocalIp("127.0.0.1");
          } else {

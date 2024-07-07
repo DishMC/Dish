@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index fa0457d..dfe1301 100644
+index 09b5ed3..248d3a9 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
-@@ -677,6 +677,11 @@ public abstract class Player extends LivingEntity {
+@@ -687,6 +687,11 @@ public abstract class Player extends LivingEntity {
  
      @Nullable
      public ItemEntity drop(ItemStack droppedItem, boolean dropAround, boolean includeThrowerName) {
@@ -14,7 +14,7 @@ index fa0457d..dfe1301 100644
          if (droppedItem.isEmpty()) {
              return null;
          } else {
-@@ -686,7 +691,7 @@ public abstract class Player extends LivingEntity {
+@@ -696,7 +701,7 @@ public abstract class Player extends LivingEntity {
  
              double d = this.getEyeY() - 0.3F;
              ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), d, this.getZ(), droppedItem);

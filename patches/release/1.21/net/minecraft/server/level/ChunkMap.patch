@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/server/level/ChunkMap.java b/src/main/java/net/minecraft/server/level/ChunkMap.java
-index 6577e7f..a770844 100644
+index 7a8c9cd..4ff7796 100644
 --- a/src/main/java/net/minecraft/server/level/ChunkMap.java
 +++ b/src/main/java/net/minecraft/server/level/ChunkMap.java
-@@ -295,7 +295,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
+@@ -283,7 +283,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
              }
  
              FullChunkStatus fullStatus = visibleChunkIfPresent.getFullStatus();
@@ -11,7 +11,7 @@ index 6577e7f..a770844 100644
              return string + "§r";
          }
      }
-@@ -1305,7 +1305,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
+@@ -1225,7 +1225,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
          private final Set<ServerPlayerConnection> seenBy = Sets.newIdentityHashSet();
  
          public TrackedEntity(final Entity entity, final int range, final int updateInterval, final boolean trackDelta) {

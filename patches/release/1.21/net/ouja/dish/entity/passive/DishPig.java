@@ -25,6 +25,6 @@ public class DishPig extends DishEntity implements net.ouja.api.entity.passive.P
 
     @Override
     public void equipSaddle() {
-        this.pig.equipSaddle(SoundSource.BLOCKS);
+        this.pig.equipSaddle(null, SoundSource.BLOCKS);
     }
 }

@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/entity/monster/Vindicator.java b/src/main/java/net/minecraft/world/entity/monster/Vindicator.java
-index 1be2e62..b91e478 100644
+index 1c19b5b..c1094be 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/Vindicator.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/Vindicator.java
-@@ -176,6 +176,8 @@ public class Vindicator extends AbstractIllager {
+@@ -179,6 +179,8 @@ public class Vindicator extends AbstractIllager {
          this.setItemSlot(EquipmentSlot.MAINHAND, itemStack);
      }
  

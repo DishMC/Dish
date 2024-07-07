@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/world/level/ChunkPos.java b/src/main/java/net/minecraft/world/level/ChunkPos.java
-index 2981f3d..b874386 100644
+index d768381..55351af 100644
 --- a/src/main/java/net/minecraft/world/level/ChunkPos.java
 +++ b/src/main/java/net/minecraft/world/level/ChunkPos.java
 @@ -20,6 +20,7 @@ public class ChunkPos {

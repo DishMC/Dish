@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/damagesource/DamageSource.java b/src/main/java/net/minecraft/world/damagesource/DamageSource.java
-index 7fd78c4..b0be3cf 100644
+index f70a6e9..709f53e 100644
 --- a/src/main/java/net/minecraft/world/damagesource/DamageSource.java
 +++ b/src/main/java/net/minecraft/world/damagesource/DamageSource.java
-@@ -133,4 +133,6 @@ public class DamageSource {
+@@ -138,4 +138,6 @@ public class DamageSource {
      public Holder<DamageType> typeHolder() {
          return this.type;
      }

@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index 06d6491..941ab69 100644
+index 2ba62c5..818a136 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
-@@ -985,4 +985,6 @@ public final class ItemStack implements DataComponentHolder {
+@@ -1019,4 +1019,6 @@ public final class ItemStack implements DataComponentHolder {
      public boolean canBeHurtBy(DamageSource damageSource) {
          return !this.has(DataComponents.FIRE_RESISTANT) || !damageSource.is(DamageTypeTags.IS_FIRE);
      }

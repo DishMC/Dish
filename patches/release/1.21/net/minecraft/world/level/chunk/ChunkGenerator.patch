@@ -1,14 +1,14 @@
 diff --git a/src/main/java/net/minecraft/world/level/chunk/ChunkGenerator.java b/src/main/java/net/minecraft/world/level/chunk/ChunkGenerator.java
-index 0fd3773..5802b9d 100644
+index d9f1aaf..0c9da6d 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/ChunkGenerator.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/ChunkGenerator.java
-@@ -472,11 +472,16 @@ public abstract class ChunkGenerator {
+@@ -469,11 +469,16 @@ public abstract class ChunkGenerator {
          ChunkGeneratorStructureState structureState,
          StructureManager structureManager,
          ChunkAccess chunk,
 -        StructureTemplateManager structureTemplateManager
 +        StructureTemplateManager structureTemplateManager,
-+        ServerLevel serverlevel // dish -- add serverlevel to parameters
++        ServerLevel serverlevel // dish -- add serverlevel to parameters for plugins to cancel structure generation todo: remove this maybe
      ) {
          ChunkPos pos = chunk.getPos();
          SectionPos sectionPos = SectionPos.bottomOf(chunk);
@@ -20,7 +20,7 @@ index 0fd3773..5802b9d 100644
          structureState.possibleStructureSets()
              .forEach(
                  structureSet -> {
-@@ -492,6 +497,12 @@ public abstract class ChunkGenerator {
+@@ -489,6 +494,12 @@ public abstract class ChunkGenerator {
  
                      if (structurePlacement.isStructureChunk(structureState, pos.x, pos.z)) {
                          if (list.size() == 1) {
@@ -33,7 +33,7 @@ index 0fd3773..5802b9d 100644
                              this.tryGenerateStructure(
                                  list.get(0),
                                  structureManager,
-@@ -528,6 +539,17 @@ public abstract class ChunkGenerator {
+@@ -525,6 +536,17 @@ public abstract class ChunkGenerator {
                                  }
  
                                  StructureSet.StructureSelectionEntry structureSelectionEntry3 = list1.get(i1);

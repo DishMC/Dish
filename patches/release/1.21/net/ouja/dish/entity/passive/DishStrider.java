@@ -25,6 +25,6 @@ public class DishStrider extends DishEntity implements net.ouja.api.entity.passi
 
     @Override
     public void equipSaddle() {
-        this.strider.equipSaddle(SoundSource.BLOCKS);
+        this.strider.equipSaddle(null, SoundSource.BLOCKS);
     }
 }

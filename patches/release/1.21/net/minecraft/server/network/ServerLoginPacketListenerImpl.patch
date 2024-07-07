@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index 1638819..19ffca9 100644
+index 4efac29..7c51e09 100644
 --- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-@@ -136,6 +136,13 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
+@@ -138,6 +138,13 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,
      private void verifyLoginAndFinishConnectionSetup(GameProfile profile) {
          PlayerList playerList = this.server.getPlayerList();
          Component component = playerList.canPlayerLogin(this.connection.getRemoteAddress(), profile);

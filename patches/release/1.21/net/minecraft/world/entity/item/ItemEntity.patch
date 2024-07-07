@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
-index 8cadd05..9bb4f42 100644
+index d3286a1..db9022b 100644
 --- a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
-@@ -341,6 +341,20 @@ public class ItemEntity extends Entity implements TraceableEntity {
+@@ -342,6 +342,20 @@ public class ItemEntity extends Entity implements TraceableEntity {
              ItemStack item = this.getItem();
              Item item1 = item.getItem();
              int count = item.getCount();

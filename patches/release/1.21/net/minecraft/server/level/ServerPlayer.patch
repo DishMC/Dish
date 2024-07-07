@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index de86986..5efcffb 100644
+index 1a5123c..fa5d35d 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -650,10 +650,25 @@ public class ServerPlayer extends Player {
+@@ -655,10 +655,25 @@ public class ServerPlayer extends Player {
  
      @Override
      public void die(DamageSource cause) {
@@ -29,7 +29,7 @@ index de86986..5efcffb 100644
              this.connection
                  .send(
                      new ClientboundPlayerCombatKillPacket(this.getId(), deathMessage),
-@@ -916,6 +931,11 @@ public class ServerPlayer extends Player {
+@@ -945,6 +960,11 @@ public class ServerPlayer extends Player {
          } else if (this.bedBlocked(at, direction)) {
              return Either.left(Player.BedSleepingProblem.OBSTRUCTED);
          } else {
@@ -41,7 +41,7 @@ index de86986..5efcffb 100644
              this.setRespawnPosition(this.level().dimension(), at, this.getYRot(), false, true);
              if (this.level().isDay()) {
                  return Either.left(Player.BedSleepingProblem.NOT_POSSIBLE_NOW);
-@@ -930,7 +950,7 @@ public class ServerPlayer extends Player {
+@@ -959,7 +979,7 @@ public class ServerPlayer extends Player {
                              new AABB(vec3.x() - 8.0, vec3.y() - 5.0, vec3.z() - 8.0, vec3.x() + 8.0, vec3.y() + 5.0, vec3.z() + 8.0),
                              monster -> monster.isPreventingPlayerRest(this)
                          );
@@ -50,7 +50,7 @@ index de86986..5efcffb 100644
                          return Either.left(Player.BedSleepingProblem.NOT_SAFE);
                      }
                  }
-@@ -1599,6 +1619,11 @@ public class ServerPlayer extends Player {
+@@ -1641,6 +1661,11 @@ public class ServerPlayer extends Player {
          if (this.gameMode.getGameModeForPlayer() == GameType.SPECTATOR) {
              this.setCamera(targetEntity);
          } else {

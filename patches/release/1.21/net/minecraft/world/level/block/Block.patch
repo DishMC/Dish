@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/level/block/Block.java b/src/main/java/net/minecraft/world/level/block/Block.java
-index 94f94cd..300009d 100644
+index 7e705ef..87c40cb 100644
 --- a/src/main/java/net/minecraft/world/level/block/Block.java
 +++ b/src/main/java/net/minecraft/world/level/block/Block.java
-@@ -492,6 +492,8 @@ public class Block extends BlockBehaviour implements ItemLike {
+@@ -489,6 +489,8 @@ public class Block extends BlockBehaviour implements ItemLike {
          }
      }
  

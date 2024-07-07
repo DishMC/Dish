@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java b/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
-index f65d7f3..1aeb79a 100644
+index 34d2b62..9ce5659 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/hoglin/Hoglin.java
 @@ -302,7 +302,7 @@ public class Hoglin extends Animal implements Enemy, HoglinBase {

@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/entity/animal/Squid.java b/src/main/java/net/minecraft/world/entity/animal/Squid.java
-index 8fc9ae8..2a287b6 100644
+index 120889e..e22c9fc 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/Squid.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/Squid.java
-@@ -177,7 +177,7 @@ public class Squid extends WaterAnimal {
+@@ -176,7 +176,7 @@ public class Squid extends WaterAnimal {
          return vec3.yRot(-this.yBodyRotO * (float) (Math.PI / 180.0));
      }
  

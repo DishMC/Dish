@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index ec2aed1..fff8085 100644
+index 45fca81..9550e4d 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -400,6 +400,23 @@ public class ServerGamePacketListenerImpl
+@@ -401,6 +401,23 @@ public class ServerGamePacketListenerImpl
                  double d2 = clampHorizontal(packet.getZ());
                  float f = Mth.wrapDegrees(packet.getYRot());
                  float f1 = Mth.wrapDegrees(packet.getXRot());
