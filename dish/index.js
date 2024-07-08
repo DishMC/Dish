@@ -47,16 +47,7 @@ function parseLibraries(libraries) {
     // If workspace does not exist, try to create it.
     // If it fails, error out
     warn(`Workspace for version '${DECOMPILE_VERSION.split('/')[1]}' wasn't found. Running init.js in 5 seconds...`);
-    setTimeout(() => {
-      try {
-        execSync(`node init.js --MC="${DECOMPILE_VERSION}" --OLD_MC="${args[1] || ''}" --IGNORE-CACHE="${args[2] ? 'true' : 'false'}"`, { stdio });
-        execSync(`node dish/index.js ${DECOMPILE_VERSION}${args[1] ? ' ' + args[1] : ''}`, { stdio });
-      } catch (e) {
-        error(e);
-        return process.exit(1);
-      }
-    }, 1000 * 5);
-    return;
+    await generateWorkspace();
   }
 
   if (!fs.existsSync(`dish/libraries/${DECOMPILE_VERSION.split('/')[1]}.json`)) {
@@ -95,6 +86,14 @@ function parseLibraries(libraries) {
   execSync('cd dish/workspace && git commit -m "applied patches"', { stdio });
   process.exit(0);
 })();
+
+async function generateWorkspace() {
+  return new Promise((res, rej) => {
+    execSync(`node init.js --MC="${DECOMPILE_VERSION}" --OLD_MC="${args[1] || ''}" --IGNORE-CACHE="${args[2] ? 'true' : 'false'}"`, { stdio });
+    execSync(`node dish/index.js ${DECOMPILE_VERSION}${args[1] ? ' ' + args[1] : ''}`, { stdio });
+    res();
+  });
+}
 
 async function cacheServer(version = DECOMPILE_VERSION.split('/')[1]) {
   const manifestReq = await fetch('https://launchermeta.mojang.com/mc/game/version_manifest_v2.json');

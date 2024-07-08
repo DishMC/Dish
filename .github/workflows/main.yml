@@ -32,12 +32,5 @@ jobs:
         git submodule update --init --recursive
     - name: Create dish workspace & patch
       run: node ./dish/index.js
-    - name: "Clone Bundler"
-      uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.PAT }}
-        repository: KaiAF/Dish-Bundler
-        path: Dish-Bundler
-        ref: main
     - name: Compile dish
       run: node ./dish/compile.js
