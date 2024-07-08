@@ -30,8 +30,6 @@ jobs:
         git config --global user.email "60985521+KaiAF@users.noreply.github.com"
         git config --global user.name "iris"
         git submodule update --init --recursive
-    - name: Run Init
-      run: node init.js
     - name: Create dish workspace & patch
       run: node ./dish/index.js
     - name: "Clone Bundler"
