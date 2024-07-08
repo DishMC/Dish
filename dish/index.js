@@ -46,7 +46,7 @@ function parseLibraries(libraries) {
   if (!fs.existsSync(`workspaces/${DECOMPILE_VERSION.split('/')[1]}`)) {
     // If workspace does not exist, try to create it.
     // If it fails, error out
-    warn(`Workspace for version '${DECOMPILE_VERSION.split('/')[1]}' wasn't found. Running init.js in 5 seconds...`);
+    warn(`Workspace for version '${DECOMPILE_VERSION.split('/')[1]}' wasn't found. Running init.js`);
     await generateWorkspace();
   }
 
@@ -130,5 +130,6 @@ async function downloadServerJar(url, file) {
   return new Promise((res, rej) => {
     const request = https.get(url, (res) => res.pipe(file));
     request.on('error', (e) => rej(e));
+    request.on('close', () => res());
   });
 }
