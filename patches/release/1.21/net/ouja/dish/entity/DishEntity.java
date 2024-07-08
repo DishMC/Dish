@@ -2,6 +2,7 @@ package net.ouja.dish.entity;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.ouja.api.entity.Entity;
 import net.ouja.api.entity.EntityTypes;
 import net.ouja.dish.entity.monster.*;
@@ -12,9 +13,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 public class DishEntity implements Entity {
-    private net.minecraft.world.entity.LivingEntity entity;
+    private final LivingEntity entity;
 
-    public DishEntity(net.minecraft.world.entity.LivingEntity entity) {
+    public DishEntity(LivingEntity entity) {
         this.entity = entity;
     }
 
@@ -23,6 +24,7 @@ public class DishEntity implements Entity {
         return entity.getId();
     }
 
+    @Nullable
     @Override
     // todo: finish adding other entity types i.e. ChestBoat, Llama_spit, etc...
     public Entity getEntity() {
@@ -173,6 +175,9 @@ public class DishEntity implements Entity {
         // Monster mobs
         else if (entityType == EntityType.BLAZE) {
             return new DishBlaze(this.entity);
+        }
+        else if (entityType == EntityType.BOGGED) {
+            return new DishBogged(this.entity);
         }
         else if (entityType == EntityType.CREEPER) {
             return new DishCreeper(this.entity);
