@@ -37,12 +37,12 @@ public class DishLevel implements Level {
 
     @Override
     public boolean isDay() {
-        return this.level.isDay();
+        return this.level.dimensionType().hasSkyLight() && !this.level.isDarkOutside();
     }
 
     @Override
     public boolean isNight() {
-        return this.level.isNight();
+        return this.level.dimensionType().hasSkyLight() && this.level.isDarkOutside();
     }
 
     @Override

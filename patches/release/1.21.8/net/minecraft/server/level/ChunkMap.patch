@@ -1,22 +1,13 @@
 diff --git a/src/main/java/net/minecraft/server/level/ChunkMap.java b/src/main/java/net/minecraft/server/level/ChunkMap.java
-index 7a8c9cd..4ff7796 100644
+index 6943072..4309d8b 100644
 --- a/src/main/java/net/minecraft/server/level/ChunkMap.java
 +++ b/src/main/java/net/minecraft/server/level/ChunkMap.java
-@@ -283,7 +283,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
-             }
- 
-             FullChunkStatus fullStatus = visibleChunkIfPresent.getFullStatus();
--            string = string + '§' + fullStatus.ordinal() + fullStatus;
-+            string = string + '\u00a7' + fullStatus.ordinal() + fullStatus; // decompiler error
-             return string + "§r";
-         }
-     }
-@@ -1225,7 +1225,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
+@@ -1281,7 +1281,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
          private final Set<ServerPlayerConnection> seenBy = Sets.newIdentityHashSet();
  
          public TrackedEntity(final Entity entity, final int range, final int updateInterval, final boolean trackDelta) {
--            this.serverEntity = new ServerEntity(ChunkMap.this.level, entity, updateInterval, trackDelta, this::broadcast);
-+            this.serverEntity = new ServerEntity(ChunkMap.this.level, entity, updateInterval, trackDelta, this::broadcast, this.seenBy); // dish -- pass the seenBy field into ServerEntity
+-            this.serverEntity = new ServerEntity(ChunkMap.this.level, entity, updateInterval, trackDelta, this::broadcast, this::broadcastIgnorePlayers);
++            this.serverEntity = new ServerEntity(ChunkMap.this.level, entity, updateInterval, trackDelta, this::broadcast, this::broadcastIgnorePlayers, this.seenBy); // dish -- pass the seenBy field into ServerEntity
              this.entity = entity;
              this.range = range;
              this.lastSectionPos = SectionPos.of(entity);

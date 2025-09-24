@@ -1,6 +1,6 @@
 {
   "version": "1.21.8",
-  "api_version": "R0.1-SNAPSHOT",
+  "api_version": "R0.2-SNAPSHOT",
   "libraries": [
     {
       "downloads": {
@@ -11,10 +11,10 @@
     },
     {
       "downloads": {
-        "url": "https://maven.ouja.net/net/ouja/api/1.21.8-R0.1-SNAPSHOT/api-1.21.8-R0.1-20250924.003335-1.jar",
-        "path": "net/ouja/api/1.21.8/1.21.8-R0.1-SNAPSHOT.jar"
+        "url": "https://maven.ouja.net/net/ouja/api/1.21.8-R0.2-SNAPSHOT/api-1.21.8-R0.2-20250924.021552-2.jar",
+        "path": "net/ouja/api/1.21.8/1.21.8-R0.2-SNAPSHOT.jar"
       },
-      "name": "net.ouja:api:1.21.8-R0.1-SNAPSHOT"
+      "name": "net.ouja:api:1.21.8-R0.2-SNAPSHOT"
     }
   ]
 }

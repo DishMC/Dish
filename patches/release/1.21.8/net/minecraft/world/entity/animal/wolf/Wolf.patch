@@ -1,0 +1,12 @@
+diff --git a/src/main/java/net/minecraft/world/entity/animal/wolf/Wolf.java b/src/main/java/net/minecraft/world/entity/animal/wolf/Wolf.java
+index 840b0a8..29d8a43 100644
+--- a/src/main/java/net/minecraft/world/entity/animal/wolf/Wolf.java
++++ b/src/main/java/net/minecraft/world/entity/animal/wolf/Wolf.java
+@@ -113,6 +113,7 @@ public class Wolf extends TamableAnimal implements NeutralMob {
+     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
+     @Nullable
+     private UUID persistentAngerTarget;
++    public boolean isWet() { return this.isWet; } // dish -- add a public method to grab the private variable
+ 
+     public Wolf(EntityType<? extends Wolf> entityType, Level level) {
+         super(entityType, level);

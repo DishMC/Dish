@@ -1,9 +1,9 @@
 diff --git a/src/main/java/net/minecraft/world/item/BlockItem.java b/src/main/java/net/minecraft/world/item/BlockItem.java
-index 42bcd47..5a0411c 100644
+index 7e979a9..faefa31 100644
 --- a/src/main/java/net/minecraft/world/item/BlockItem.java
 +++ b/src/main/java/net/minecraft/world/item/BlockItem.java
-@@ -31,6 +31,14 @@ import net.minecraft.world.level.block.state.BlockState;
- import net.minecraft.world.level.gameevent.GameEvent;
+@@ -29,6 +29,14 @@ import net.minecraft.world.level.gameevent.GameEvent;
+ import net.minecraft.world.level.storage.TagValueOutput;
  import net.minecraft.world.phys.shapes.CollisionContext;
  
 +// dish
@@ -17,7 +17,7 @@ index 42bcd47..5a0411c 100644
  public class BlockItem extends Item {
      @Deprecated
      private final Block block;
-@@ -58,6 +66,15 @@ public class BlockItem extends Item {
+@@ -53,6 +61,15 @@ public class BlockItem extends Item {
              return InteractionResult.FAIL;
          } else {
              BlockPlaceContext blockPlaceContext = this.updatePlacementContext(context);

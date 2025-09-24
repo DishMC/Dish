@@ -1,15 +1,15 @@
 diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
-index 26d9a03..c65e60d 100644
+index ad5c861..7e6d215 100644
 --- a/src/main/java/net/minecraft/server/level/ServerEntity.java
 +++ b/src/main/java/net/minecraft/server/level/ServerEntity.java
-@@ -56,25 +56,27 @@ public class ServerEntity {
-     private final boolean trackDelta;
+@@ -63,13 +63,14 @@ public class ServerEntity {
      private final Consumer<Packet<?>> broadcast;
+     private final BiConsumer<Packet<?>, List<UUID>> broadcastWithIgnore;
      private final VecDeltaCodec positionCodec = new VecDeltaCodec();
 +    private final Set<net.minecraft.server.network.ServerPlayerConnection> seenBy; // dish
-     private int lastSentYRot;
-     private int lastSentXRot;
-     private int lastSentYHeadRot;
+     private byte lastSentYRot;
+     private byte lastSentXRot;
+     private byte lastSentYHeadRot;
      private Vec3 lastSentMovement;
      private int tickCount;
      private int teleportDelay;
@@ -18,21 +18,23 @@ index 26d9a03..c65e60d 100644
      private boolean wasRiding;
      private boolean wasOnGround;
      @Nullable
-     private List<SynchedEntityData.DataValue<?>> trackedDataValues;
- 
--    public ServerEntity(ServerLevel level, Entity entity, int updateInterval, boolean trackDelta, Consumer<Packet<?>> broadcast) {
-+    public ServerEntity(ServerLevel level, Entity entity, int updateInterval, boolean trackDelta, Consumer<Packet<?>> broadcast, Set<net.minecraft.server.network.ServerPlayerConnection> seenBy) { // dish
+@@ -82,6 +83,7 @@ public class ServerEntity {
+         boolean trackDelta,
+         Consumer<Packet<?>> broadcast,
+         BiConsumer<Packet<?>, List<UUID>> broadcastWithIgnore
++        , Set<net.minecraft.server.network.ServerPlayerConnection> seenBy // dish
+     ) {
          this.level = level;
          this.broadcast = broadcast;
-         this.entity = entity;
-         this.updateInterval = updateInterval;
-         this.trackDelta = trackDelta;
-         this.positionCodec.setBase(entity.trackingPosition());
+@@ -96,6 +98,7 @@ public class ServerEntity {
+         this.lastSentYHeadRot = Mth.packDegrees(entity.getYHeadRot());
+         this.wasOnGround = entity.onGround();
+         this.trackedDataValues = entity.getEntityData().getNonDefaultValues();
 +        this.seenBy = seenBy; // dish
-         this.lastSentMovement = entity.getDeltaMovement();
-         this.lastSentYRot = Mth.floor(entity.getYRot() * 256.0F / 360.0F);
-         this.lastSentXRot = Mth.floor(entity.getXRot() * 256.0F / 360.0F);
-@@ -99,7 +101,7 @@ public class ServerEntity {
+     }
+ 
+     public void sendChanges() {
+@@ -106,7 +109,7 @@ public class ServerEntity {
              this.lastPassengers = passengers;
          }
  

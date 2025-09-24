@@ -1,9 +1,9 @@
 diff --git a/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java b/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
-index 834f3ae..95691f3 100644
+index 72a8e2e..8d98066 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/sniffer/Sniffer.java
-@@ -141,7 +141,7 @@ public class Sniffer extends Animal {
-         return this.position().add(this.getForward().scale(2.25));
+@@ -149,7 +149,7 @@ public class Sniffer extends Animal {
+         return Leashable.createQuadLeashOffsets(this, -0.01, 0.63, 0.38, 1.15);
      }
  
 -    private Sniffer.State getState() {

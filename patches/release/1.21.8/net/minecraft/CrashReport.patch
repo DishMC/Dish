@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/CrashReport.java b/src/main/java/net/minecraft/CrashReport.java
-index 706b64e..1bdfec4 100644
+index b5180b2..647b8ce 100644
 --- a/src/main/java/net/minecraft/CrashReport.java
 +++ b/src/main/java/net/minecraft/CrashReport.java
 @@ -34,6 +34,7 @@ public class CrashReport {

@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/level/storage/loot/LootTable.java b/src/main/java/net/minecraft/world/level/storage/loot/LootTable.java
-index b806cc8..83157b6 100644
+index bef910c..bfde7b2 100644
 --- a/src/main/java/net/minecraft/world/level/storage/loot/LootTable.java
 +++ b/src/main/java/net/minecraft/world/level/storage/loot/LootTable.java
-@@ -146,6 +146,12 @@ public class LootTable {
+@@ -151,6 +151,12 @@ public class LootTable {
          RandomSource random = lootContext.getRandom();
          List<Integer> availableSlots = this.getAvailableSlots(container, random);
          this.shuffleAndSplitItems(randomItems, availableSlots.size(), random);

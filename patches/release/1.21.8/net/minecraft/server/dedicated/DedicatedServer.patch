@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-index a517582..e5021fa 100644
+index ff74f31..27fd3b5 100644
 --- a/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
 +++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServer.java
-@@ -80,6 +80,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -79,6 +79,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
      @Nullable
      private DebugSampleSubscriptionTracker debugSampleSubscriptionTracker;
      private final ServerLinks serverLinks;
@@ -10,7 +10,7 @@ index a517582..e5021fa 100644
  
      public DedicatedServer(
          Thread serverThread,
-@@ -125,6 +126,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
+@@ -124,6 +125,7 @@ public class DedicatedServer extends MinecraftServer implements ServerInterface
  
          LOGGER.info("Loading properties");
          DedicatedServerProperties properties = this.settings.getProperties();

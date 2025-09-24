@@ -1,11 +1,11 @@
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 45fca81..9550e4d 100644
+index 595e517..62c1059 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -401,6 +401,23 @@ public class ServerGamePacketListenerImpl
-                 double d2 = clampHorizontal(packet.getZ());
-                 float f = Mth.wrapDegrees(packet.getYRot());
-                 float f1 = Mth.wrapDegrees(packet.getXRot());
+@@ -424,6 +424,23 @@ public class ServerGamePacketListenerImpl
+                 double d2 = clampHorizontal(packet.position().z());
+                 float f = Mth.wrapDegrees(packet.yRot());
+                 float f1 = Mth.wrapDegrees(packet.xRot());
 +                // dish
 +                // Not sure if converting the passangers to a stream, then filtering out non players then converting it back to an ArrayList is good for performance.
 +                java.util.ArrayList<net.ouja.api.entity.Player> players = rootVehicle.getPassengers().stream().map((e) -> {
@@ -18,8 +18,8 @@ index 45fca81..9550e4d 100644
 +                net.ouja.api.event.vehicle.VehicleMoveEvent event = new net.ouja.api.event.vehicle.VehicleMoveEvent(players, d, d1, d2, xOld, yOld, zOld);
 +                net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
 +                if (event.isCancelled()) {
-+                    rootVehicle.absMoveTo(xOld, yOld, zOld, f, f1);
-+                    this.send(new ClientboundMoveVehiclePacket(rootVehicle));
++                    rootVehicle.absSnapTo(xOld, yOld, zOld, f, f1);
++                    this.send(ClientboundMoveVehiclePacket.fromEntity(rootVehicle));
 +                    return;
 +                }
 +                // dish end

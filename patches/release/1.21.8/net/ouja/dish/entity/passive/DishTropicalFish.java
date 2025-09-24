@@ -14,6 +14,6 @@ public class DishTropicalFish extends DishEntity implements net.ouja.api.entity.
 
     @Override
     public net.ouja.api.entity.passive.TropicalFish.Variants getVariant() {
-        return net.ouja.api.entity.passive.TropicalFish.Variants.valueOf(this.tropicalFish.getVariant().name());
+        return net.ouja.api.entity.passive.TropicalFish.Variants.valueOf(this.tropicalFish.getPattern().name());
     }
 }

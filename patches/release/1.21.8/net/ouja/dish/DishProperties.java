@@ -28,16 +28,6 @@ public class DishProperties implements ServerProperties {
     }
 
     @Override
-    public boolean canSpawnAnimals() {
-        return this.properties.spawnAnimals;
-    }
-
-    @Override
-    public boolean canSpawnNpcs() {
-        return this.properties.spawnNpcs;
-    }
-
-    @Override
     public boolean isPvPEnabled() {
         return this.properties.pvp;
     }

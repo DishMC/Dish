@@ -1,8 +1,11 @@
 package net.ouja.dish.entity.passive;
 
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Strider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.ouja.dish.entity.DishEntity;
 
 public class DishStrider extends DishEntity implements net.ouja.api.entity.passive.Strider {
@@ -15,7 +18,7 @@ public class DishStrider extends DishEntity implements net.ouja.api.entity.passi
 
     @Override
     public boolean canSaddle() {
-        return this.strider.isSaddleable();
+        return true;
     }
 
     @Override
@@ -25,6 +28,6 @@ public class DishStrider extends DishEntity implements net.ouja.api.entity.passi
 
     @Override
     public void equipSaddle() {
-        this.strider.equipSaddle(null, SoundSource.BLOCKS);
+        this.strider.setItemSlot(EquipmentSlot.SADDLE, new ItemStack(Items.SADDLE));
     }
 }

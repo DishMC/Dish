@@ -1,8 +1,8 @@
 diff --git a/src/main/java/net/minecraft/world/level/block/StairBlock.java b/src/main/java/net/minecraft/world/level/block/StairBlock.java
-index 105d694..beaa90a 100644
+index fe15eb5..b43e8ac 100644
 --- a/src/main/java/net/minecraft/world/level/block/StairBlock.java
 +++ b/src/main/java/net/minecraft/world/level/block/StairBlock.java
-@@ -232,7 +232,7 @@ public class StairBlock extends Block implements SimpleWaterloggedBlock {
+@@ -224,7 +224,7 @@ public class StairBlock extends Block implements SimpleWaterloggedBlock {
      }
  
      @Override

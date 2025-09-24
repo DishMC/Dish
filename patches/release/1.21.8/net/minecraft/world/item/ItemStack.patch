@@ -1,11 +1,10 @@
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index 2ba62c5..818a136 100644
+index 00e47b3..eba3dea 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
-@@ -1019,4 +1019,6 @@ public final class ItemStack implements DataComponentHolder {
-     public boolean canBeHurtBy(DamageSource damageSource) {
-         return !this.has(DataComponents.FIRE_RESISTANT) || !damageSource.is(DamageTypeTags.IS_FIRE);
+@@ -1078,4 +1078,5 @@ public final class ItemStack implements DataComponentHolder {
+     public boolean canDestroyBlock(BlockState state, Level level, BlockPos pos, Player player) {
+         return this.getItem().canDestroyBlock(this, state, level, pos, player);
      }
-+
 +    public net.ouja.dish.world.item.DishItemStack toDish() { return new net.ouja.dish.world.item.DishItemStack(this); } // dish
  }

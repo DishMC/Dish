@@ -1,14 +1,12 @@
 diff --git a/src/main/java/net/minecraft/world/level/chunk/status/ChunkStatusTasks.java b/src/main/java/net/minecraft/world/level/chunk/status/ChunkStatusTasks.java
-index a76abac..c688efb 100644
+index 4c211fc..11ac01b 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/status/ChunkStatusTasks.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/status/ChunkStatusTasks.java
-@@ -43,7 +43,8 @@ public class ChunkStatusTasks {
-                     serverLevel.getChunkSource().getGeneratorState(),
-                     serverLevel.structureManager(),
-                     chunkAccess,
--                    worldGenContext.structureManager()
-+                    worldGenContext.structureManager(),
-+                    serverLevel // dish -- add serverLevel
+@@ -49,6 +49,7 @@ public class ChunkStatusTasks {
+                     chunk,
+                     worldGenContext.structureManager(),
+                     serverLevel.dimension()
++                    , serverLevel // dish
                  );
          }
  

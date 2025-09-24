@@ -1,5 +1,5 @@
 diff --git a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
-index 4efac29..7c51e09 100644
+index 8e05b79..98944fb 100644
 --- a/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerLoginPacketListenerImpl.java
 @@ -138,6 +138,13 @@ public class ServerLoginPacketListenerImpl implements ServerLoginPacketListener,

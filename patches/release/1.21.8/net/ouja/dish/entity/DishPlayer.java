@@ -42,7 +42,7 @@ public class DishPlayer extends DishEntity implements Player {
     @Override
     public Level getLevel() {
         if (isConsole()) return null;
-        return new DishLevel(player.getServer().getLevel(player.getCommandSenderWorld().dimension()));
+        return new DishLevel(player.getServer().getLevel(player.level().dimension()));
     }
 
     @Override

@@ -1,8 +1,11 @@
 package net.ouja.dish.entity.passive;
 
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.ouja.dish.entity.DishEntity;
 
 public class DishPig extends DishEntity implements net.ouja.api.entity.passive.Pig {
@@ -15,7 +18,7 @@ public class DishPig extends DishEntity implements net.ouja.api.entity.passive.P
 
     @Override
     public boolean canSaddle() {
-        return this.pig.isSaddleable();
+        return true;
     }
 
     @Override
@@ -25,6 +28,6 @@ public class DishPig extends DishEntity implements net.ouja.api.entity.passive.P
 
     @Override
     public void equipSaddle() {
-        this.pig.equipSaddle(null, SoundSource.BLOCKS);
+        this.pig.setItemSlot(EquipmentSlot.SADDLE, new ItemStack(Items.SADDLE));
     }
 }
