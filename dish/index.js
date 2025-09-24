@@ -9,6 +9,7 @@ const calculateFileHash = require('../utils/checkFileHash');
 const https = require('https');
 const { error, DEFAULT_MINECRAFT_VERSION, log, warn } = require('../config');
 const { execSync } = require('child_process');
+const init = require('../utils/init');
 
 const stdio = [process.stdin, process.stdout, process.stderr];
 const DECOMPILE_VERSION = args[0] ?? DEFAULT_MINECRAFT_VERSION;
@@ -31,7 +32,7 @@ function parseLibraries(libraries) {
 }
 
 (async function () {
-  if (!fs.existsSync('init.js')) return error('Run this file in the parent directory');
+  if (!fs.existsSync('./utils/init.js')) return error('Run this file in the parent directory');
   if (!fs.existsSync(`cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`)) {
     warn(`Could not find file: cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list, installing...`);
     await cacheServer();
@@ -88,8 +89,8 @@ function parseLibraries(libraries) {
 })();
 
 async function generateWorkspace() {
-  return new Promise((res, rej) => {
-    execSync(`node init.js --MC="${DECOMPILE_VERSION}" --OLD_MC="${args[1] || ''}" --IGNORE-CACHE="${args[2] ? 'true' : 'false'}"`, { stdio });
+  return new Promise(async (res, rej) => {
+    await init(DECOMPILE_VERSION, args[1] || null);
     execSync(`node dish/index.js ${DECOMPILE_VERSION}${args[1] ? ' ' + args[1] : ''}`, { stdio });
     res();
   });

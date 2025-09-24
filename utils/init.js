@@ -5,13 +5,50 @@
 
 const fs = require('fs');
 const { execSync } = require('child_process');
+const { error, warn, copyDir, checkMinecraftVersion, DEFAULT_MINECRAFT_VERSION, stdio } = require('../config');
 
-const { log, DEFAULT_MINECRAFT_VERSION, error, warn, copyDir } = require("./config");
-const args = process.argv.slice(2);
+async function init(DECOMPILE_VERSION = DEFAULT_MINECRAFT_VERSION, OLD_VERSION = null) {
+  let MINECRAFT_VERSION = 'UNKNOWN';
 
-const stdio = [process.stdin, process.stdout, process.stderr];
-const DECOMPILE_VERSION = args[0] ?? DEFAULT_MINECRAFT_VERSION;
+  try {
+    if (!checkMinecraftVersion(DECOMPILE_VERSION)) {
+      error(`Using invalid Minecraft version '${DECOMPILE_VERSION}'`);
+      return false;
+    }
 
+    if (OLD_VERSION && !checkMinecraftVersion(OLD_VERSION)) {
+      error(`Using invalid Minecraft version '${OLD_VERSION}'`);
+      return false;
+    }
+
+    if (!fs.existsSync('mache/gradlew')) {
+      error('Run git submodule update --init --recursive');
+      return false;
+    }
+
+    MINECRAFT_VERSION = DECOMPILE_VERSION.split('/').pop();
+
+    if (process.platform !== 'win32') {
+      execSync(`cd mache && chmod +x gradlew`, { stdio }); // for linux, you will need to make gradlew executable
+      execSync(`cd mache && ./gradlew :versions:v${MINECRAFT_VERSION.replace(/\./g, '_')}:setup`, { stdio });
+    } else {
+      execSync(`cd mache && gradlew :versions:v${MINECRAFT_VERSION.replace(/\./g, '_')}:setup`, { stdio });
+    }
+
+    fs.cpSync(`mache/versions/${MINECRAFT_VERSION}/src/main/resources/assets`, `cache/${MINECRAFT_VERSION}/assets`, { recursive: true });
+    fs.cpSync(`mache/versions/${MINECRAFT_VERSION}/src/main/resources/data`, `cache/${MINECRAFT_VERSION}/data`, { recursive: true });
+    fs.cpSync(`mache/versions/${MINECRAFT_VERSION}/src`, 'decompiled/src', { recursive: true, force: true });
+    await createWorkspace(DECOMPILE_VERSION); // automatically create a workspace
+    // delete decompiled source as it's taking space
+    fs.rmSync('decompiled', { recursive: true });
+    return true;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+}
+
+// create-workspace
 function parseLibraries(libraries) {
   libraries = libraries.split('\n');
   libraries = libraries.map(l => l.split('	')[1]);
@@ -20,7 +57,7 @@ function parseLibraries(libraries) {
   return libraries;
 }
 
-(async function () {
+async function createWorkspace(DECOMPILE_VERSION = DEFAULT_MINECRAFT_VERSION) {
   if (!DECOMPILE_VERSION || !DECOMPILE_VERSION.includes('/')) return error(`Using invalid Minecraft version '${DECOMPILE_VERSION}'`);
   const MC_VER = DECOMPILE_VERSION.split('/')[1];
   if (!fs.existsSync(`cache/${MC_VER}`)) return error(`Could not find cache version '${MC_VER}'!`);
@@ -53,5 +90,6 @@ function parseLibraries(libraries) {
   } else {
     execSync(`cd workspaces/${MC_VER} && gradlew build`, { stdio }); // build to make sure it works. Will error if there are decompile errors
   }
-  process.exit(0);
-})();
+}
+
+module.exports = init;
