@@ -86,4 +86,14 @@ public class DishProperties implements ServerProperties {
     public boolean acceptsServerTransfers() {
         return this.properties.acceptsTransfers;
     }
+
+    @Override
+    public String getBugReportLink() {
+        return this.properties.bugReportLink;
+    }
+
+    @Override
+    public int getPauseWhenEmpty() {
+        return this.properties.pauseWhenEmptySeconds;
+    }
 }

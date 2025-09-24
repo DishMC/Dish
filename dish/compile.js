@@ -17,7 +17,7 @@ const stdio = [process.stdin, process.stdout, process.stderr];
     return process.exit(1);
   }
 
-  const version = fs.readFileSync('dish/workspace/src/main/java/net/minecraft/DetectedVersion.java').toString().split('this.name = "')[1].split('"')[0];
+  const version = fs.readFileSync('dish/workspace/src/main/java/net/minecraft/SharedConstants.java').toString().split('VERSION_STRING = "')[1].split('"')[0];
   log(`Found version '${version}'`);
   if (!fs.existsSync(`cache/${version}`)) {
     error(`Missing cache for version '${version}'`);
@@ -70,7 +70,7 @@ const stdio = [process.stdin, process.stdout, process.stderr];
   createClassPath(version);
   fs.writeFileSync('Dish-Bundler/libs/META-INF/main-class', 'net.minecraft.server.Main');
   log('Getting version.json');
-  execSync(`cd cache/${version} && jar xf server-${version}.jar version.json`, { stdio });
+  execSync(`cd cache/${version} && jar xf server.jar version.json`, { stdio });
   const VERSION = JSON.parse(fs.readFileSync(`cache/${version}/version.json`).toString());
   VERSION.build_time = new Date();
   VERSION.dishVersion = dishVersion;
@@ -91,12 +91,12 @@ const stdio = [process.stdin, process.stdout, process.stderr];
 
 function remapServer(version) {
   let mappings = fs.readFileSync(`cache/${version}/mappings.txt`).toString();
-  mappings = mappings.replace('net.minecraft.Util$10 -> ac$2:', 'net.minecraft.Util$2 -> ac$2:');
-  mappings = mappings.replace('net.minecraft.Util$11 -> ac$3:', 'net.minecraft.Util$3 -> ac$3:');
-  mappings = mappings.replace('net.minecraft.Util$2 -> ac$4:', 'net.minecraft.Util$4 -> ac$4:');
+  mappings = mappings.replace('net.minecraft.Util$10 -> ag$2:', 'net.minecraft.Util$2 -> ag$2:');
+  mappings = mappings.replace('net.minecraft.Util$11 -> ag$3:', 'net.minecraft.Util$3 -> ag$3:');
+  mappings = mappings.replace('net.minecraft.Util$2 -> ag$4:', 'net.minecraft.Util$4 -> ag$4:');
   fs.writeFileSync(`cache/${version}/mappings.txt`, mappings);
   log('Remapped mappings');
-  const jarName = fs.readdirSync('dish/workspace/build/libs').filter(f => f.startsWith('DishMC-' + version) && f.endsWith('.jar'))[0];
+  const jarName = fs.readdirSync('dish/workspace/build/libs').filter(f => f.toLowerCase() === 'dishmc-' + version + '.jar')[0];
   if (!jarName) return error(`Could not find jar '${jarName}'`);
   execSync(`java -jar libs/specialsource.jar -i dish/workspace/build/libs/${jarName} -o server-${version}-dirty.jar -m cache/${version}/mappings.txt --reverse`, { stdio });
 }
@@ -104,8 +104,8 @@ function remapServer(version) {
 function readLibraries(version) {
   log('Reading libraries');
   let libraries_list = '';
-  if (!fs.existsSync(`cache/${version}.json`)) return error('Could not find dependencies json file!');
-  const version_meta = JSON.parse(fs.readFileSync(`cache/${version}.json`).toString());
+  if (!fs.existsSync(`cache/${version}/${version}.json`)) return error('Could not find dependencies json file!');
+  const version_meta = JSON.parse(fs.readFileSync(`cache/${version}/${version}.json`).toString());
   const dish_meta = JSON.parse(fs.readFileSync(`dish/libraries/${version}.json`).toString());
   /**
    * Minecraft Libraries
@@ -146,7 +146,7 @@ function readVersions(version) {
 
 function createClassPath(version) {
   log('Creating classpath-joined');
-  const version_meta = JSON.parse(fs.readFileSync(`cache/${version}.json`).toString());
+  const version_meta = JSON.parse(fs.readFileSync(`cache/${version}/${version}.json`).toString());
   const libraries = version_meta.libraries.map(v => 'libraries/' + v.downloads.artifact.path);
   libraries.push(`versions/${version}/server-${version}.jar`);
   fs.writeFileSync('Dish-Bundler/libs/META-INF/classpath-joined', libraries.join(';'));
