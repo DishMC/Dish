@@ -1,0 +1,12 @@
+diff --git a/src/main/java/net/minecraft/world/level/block/Block.java b/src/main/java/net/minecraft/world/level/block/Block.java
+index 2066d7b..a56c70d 100644
+--- a/src/main/java/net/minecraft/world/level/block/Block.java
++++ b/src/main/java/net/minecraft/world/level/block/Block.java
+@@ -111,6 +111,7 @@ public class Block extends BlockBehaviour implements ItemLike {
+         map.defaultReturnValue((byte)127);
+         return map;
+     });
++    public net.ouja.api.world.level.block.Block toDish(BlockPos blockPos, Level level) { return new net.ouja.dish.world.block.DishBlockInfo(this, blockPos, level).getBlock(); } // dish
+ 
+     @Override
+     protected MapCodec<? extends Block> codec() {

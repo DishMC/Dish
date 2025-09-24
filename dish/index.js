@@ -5,9 +5,11 @@
 
 const args = process.argv.slice(2);
 const fs = require('fs');
+const calculateFileHash = require('../utils/checkFileHash');
+const https = require('https');
 const { error, DEFAULT_MINECRAFT_VERSION, log, warn } = require('../config');
 const { execSync } = require('child_process');
-const calculateFileHash = require('../utils/checkFileHash');
+const init = require('../utils/init');
 
 const stdio = [process.stdin, process.stdout, process.stderr];
 const DECOMPILE_VERSION = args[0] ?? DEFAULT_MINECRAFT_VERSION;
@@ -30,31 +32,27 @@ function parseLibraries(libraries) {
 }
 
 (async function () {
-  if (!fs.existsSync('init.js')) return error('Run this file in the parent directory');
+  if (!fs.existsSync('./utils/init.js')) return error('Run this file in the parent directory');
+  if (!fs.existsSync(`cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`)) {
+    warn(`Could not find file: cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list, installing...`);
+    await cacheServer();
+    // final check
+    if (!fs.existsSync(`cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`)) {
+      error(`Could not find file: cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`);
+      return process.exit(1);
+    }
+  }
+
   log(`Creating workspace for version '${DECOMPILE_VERSION}'`);
   if (!fs.existsSync(`workspaces/${DECOMPILE_VERSION.split('/')[1]}`)) {
     // If workspace does not exist, try to create it.
     // If it fails, error out
-    warn(`Workspace for version '${DECOMPILE_VERSION.split('/')[1]}' wasn't found. Running init.js in 5 seconds...`);
-    setTimeout(() => {
-      try {
-        execSync(`node init.js --MC="${DECOMPILE_VERSION}" --OLD_MC="${args[1] || ''}" --IGNORE-CACHE="${args[2] ? 'true' : 'false'}"`, { stdio });
-        execSync(`node dish/index.js ${DECOMPILE_VERSION}${args[1] ? ' ' + args[1] : ''}`, { stdio });
-      } catch (e) {
-        error(e);
-        return process.exit(1);
-      }
-    }, 1000 * 5);
-    return;
+    warn(`Workspace for version '${DECOMPILE_VERSION.split('/')[1]}' wasn't found. Running init.js`);
+    await generateWorkspace();
   }
 
   if (!fs.existsSync(`dish/libraries/${DECOMPILE_VERSION.split('/')[1]}.json`)) {
     error(`Could not find file: dish/libraries/${DECOMPILE_VERSION.split('/')[1]}.json`);
-    return process.exit(1);
-  }
-
-  if (!fs.existsSync(`cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`)) {
-    error(`Could not find file: cache/${DECOMPILE_VERSION.split('/')[1]}/META-INF/libraries.list`);
     return process.exit(1);
   }
 
@@ -89,3 +87,50 @@ function parseLibraries(libraries) {
   execSync('cd dish/workspace && git commit -m "applied patches"', { stdio });
   process.exit(0);
 })();
+
+async function generateWorkspace() {
+  return new Promise(async (res, rej) => {
+    await init(DECOMPILE_VERSION, args[1] || null);
+    execSync(`node dish/index.js ${DECOMPILE_VERSION}${args[1] ? ' ' + args[1] : ''}`, { stdio });
+    res();
+  });
+}
+
+async function cacheServer(version = DECOMPILE_VERSION.split('/')[1]) {
+  const manifestReq = await fetch('https://launchermeta.mojang.com/mc/game/version_manifest_v2.json');
+  if (manifestReq.status !== 200) {
+    error('https://launchermeta.mojang.com/mc/game/version_manifest_v2.json returned ' + manifestReq.status);
+    return process.exit(1);
+  }
+
+  const manifest = await manifestReq.json();
+  const versionJson = manifest.versions.filter(v => v.id === version)[0];
+  if (!versionJson) {
+    error(`Could not find version '${version}'`);
+    return process.exit(1);
+  }
+
+  const packageReq = await fetch(versionJson.url);
+  if (manifestReq.status !== 200) {
+    error(versionJson.url + ' returned ' + packageReq.status);
+    return process.exit(1);
+  }
+
+  const package = await packageReq.json();
+  await fs.promises.mkdir(`cache/${version}`, { recursive: true });
+  await fs.promises.writeFile(`cache/${version}/${version}.json`, JSON.stringify(package));
+
+  log('Downloading server jar...');
+  const file = fs.createWriteStream(`cache/${version}/server.jar`);
+  await downloadServerJar(package.downloads.server.url, file);
+  log('Server jar finished downloading');
+  execSync(`cd cache/${version} && jar xf server.jar META-INF`, { stdio });
+}
+
+async function downloadServerJar(url, file) {
+  return new Promise((res, rej) => {
+    const request = https.get(url, (res) => res.pipe(file));
+    request.on('error', (e) => rej(e));
+    request.on('close', () => res());
+  });
+}

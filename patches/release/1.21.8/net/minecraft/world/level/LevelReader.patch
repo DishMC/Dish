@@ -1,0 +1,18 @@
+diff --git a/src/main/java/net/minecraft/world/level/LevelReader.java b/src/main/java/net/minecraft/world/level/LevelReader.java
+index 27df9fa..f780ed0 100644
+--- a/src/main/java/net/minecraft/world/level/LevelReader.java
++++ b/src/main/java/net/minecraft/world/level/LevelReader.java
+@@ -43,6 +43,13 @@ public interface LevelReader extends BlockAndTintGetter, CollisionGetter, Signal
+         return this.getBiomeManager().getBiome(pos);
+     }
+ 
++    // dish
++    public default BlockState getBlockStateIfLoaded(BlockPos blockpos) {
++        ChunkAccess chunk = this.getChunk(blockpos.getX() >> 4, blockpos.getZ() >> 4, ChunkStatus.FULL, false);
++        return chunk == null ? null : chunk.getBlockState(blockpos);
++    }
++    // dish end
++
+     default Stream<BlockState> getBlockStatesIfLoaded(AABB aabb) {
+         int floor = Mth.floor(aabb.minX);
+         int floor1 = Mth.floor(aabb.maxX);

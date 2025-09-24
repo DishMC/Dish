@@ -11,7 +11,7 @@ const crypto = require('crypto');
  * @returns a sha1 hex hash of the file
  */
 function calculateFileHash(pathToFile) {
-  return crypto.createHash('sha1').update(fs.readFileSync(pathToFile)).digest("hex");
+  return crypto.createHash('sha1').update(fs.readFileSync(pathToFile).toString().replace(/\n/g, '')).digest("hex");
 }
 
 module.exports = calculateFileHash;

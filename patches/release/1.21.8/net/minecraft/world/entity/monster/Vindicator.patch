@@ -1,0 +1,13 @@
+diff --git a/src/main/java/net/minecraft/world/entity/monster/Vindicator.java b/src/main/java/net/minecraft/world/entity/monster/Vindicator.java
+index 142b83b..8be5805 100644
+--- a/src/main/java/net/minecraft/world/entity/monster/Vindicator.java
++++ b/src/main/java/net/minecraft/world/entity/monster/Vindicator.java
+@@ -181,6 +181,8 @@ public class Vindicator extends AbstractIllager {
+         this.setItemSlot(EquipmentSlot.MAINHAND, itemStack);
+     }
+ 
++    public boolean isJohnny() { return isJohnny; } // dish -- make isJohny a method
++
+     static class VindicatorBreakDoorGoal extends BreakDoorGoal {
+         public VindicatorBreakDoorGoal(Mob mob) {
+             super(mob, 6, Vindicator.DOOR_BREAKING_PREDICATE);

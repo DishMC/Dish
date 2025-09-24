@@ -1,0 +1,24 @@
+diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
+index e8fc7a2..e6eea96 100644
+--- a/src/main/java/net/minecraft/commands/Commands.java
++++ b/src/main/java/net/minecraft/commands/Commands.java
+@@ -173,7 +173,7 @@ public class Commands {
+             return node.getRequirement() instanceof PermissionCheck<?> permissionCheck && permissionCheck.requiredLevel() > 0;
+         }
+     };
+-    private final CommandDispatcher<CommandSourceStack> dispatcher = new CommandDispatcher<>();
++    private static final CommandDispatcher<CommandSourceStack> dispatcher = new CommandDispatcher<>(); // dish -- make this static
+ 
+     public Commands(Commands.CommandSelection selection, CommandBuildContext context) {
+         AdvancementCommands.register(this.dispatcher);
+@@ -436,8 +436,8 @@ public class Commands {
+         };
+     }
+ 
+-    public CommandDispatcher<CommandSourceStack> getDispatcher() {
+-        return this.dispatcher;
++    public static CommandDispatcher<CommandSourceStack> getDispatcher() { // dish -- make this static so that plugins can use commands
++        return dispatcher;
+     }
+ 
+     public static <S> void validateParseResults(ParseResults<S> parseResults) throws CommandSyntaxException {

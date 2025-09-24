@@ -1,0 +1,25 @@
+diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
+index 043f44a..97eb976 100644
+--- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
++++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
+@@ -242,6 +242,20 @@ public class ServerPlayerGameMode {
+         } else {
+             BlockEntity blockEntity = this.level.getBlockEntity(pos);
+             Block block = blockState.getBlock();
++            // dish
++            try {
++                net.ouja.dish.world.block.DishBlockInfo dishBlockInfo = new net.ouja.dish.world.block.DishBlockInfo(block, pos, this.level);
++                if (dishBlockInfo.getBlock() != null) {
++                    net.ouja.dish.entity.DishPlayer dishPlayer = new net.ouja.dish.entity.DishPlayer(this.player);
++                    net.ouja.api.event.player.PlayerBreakBlockEvent event = new net.ouja.api.event.player.PlayerBreakBlockEvent(dishPlayer, dishBlockInfo.getBlock());
++                    net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++                    if (event.isCancelled()) return false;
++                }
++            } catch (Exception e) {
++                // TODO: 10/31/2023 make proper error logging
++                e.printStackTrace();
++            }
++            // dish end
+             if (block instanceof GameMasterBlock && !this.player.canUseGameMasterBlocks()) {
+                 this.level.sendBlockUpdated(pos, blockState, blockState, 3);
+                 return false;

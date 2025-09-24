@@ -1,0 +1,20 @@
+diff --git a/src/main/java/net/minecraft/world/level/BaseSpawner.java b/src/main/java/net/minecraft/world/level/BaseSpawner.java
+index 8791dfe..08e53aa 100644
+--- a/src/main/java/net/minecraft/world/level/BaseSpawner.java
++++ b/src/main/java/net/minecraft/world/level/BaseSpawner.java
+@@ -137,6 +137,15 @@ public abstract class BaseSpawner {
+                                 return;
+                             }
+ 
++                            // dish
++                            net.ouja.dish.entity.DishEntity dishEntity = new net.ouja.dish.entity.DishEntity((net.minecraft.world.entity.LivingEntity)entity);
++                            net.ouja.api.event.world.level.SpawnerSpawnEvent event = new net.ouja.api.event.world.level.SpawnerSpawnEvent(dishEntity);
++                            net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++                            if (event.isCancelled()) {
++                                this.delay(serverLevel, pos);
++                                return;
++                            }
++                            // dish end
+                             int size = serverLevel.getEntities(
+                                     EntityTypeTest.forExactClass(entity.getClass()),
+                                     new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1).inflate(this.spawnRange),

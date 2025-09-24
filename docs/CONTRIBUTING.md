@@ -12,7 +12,7 @@ What you will need to contribute:
 
 Now that you have the required stuff installed, what you will need to do is clone Dish and run the following command `npm install`. Once the npm packages are installed, run the command `git submodule update --init --recursive`.
 
-Once everything is ready, run the command `node init.js`. Then, hopefully, no patches get rejected, then you can run the command `node dish`. After everything is set up, you can go to the directory `~/dish/workspace` and modify the Minecraft or Dish code.
+Once everything is ready, run the command `node dish`. After everything is set up, you can go to the directory `~/dish/workspace` and modify the Minecraft or Dish code.
 
 ### Patches
 
@@ -26,7 +26,7 @@ When you are finished making the changes, run the command in the home directory 
 
 #### Updating to a new version
 
-If you wish to update Dish to a new version that has been recently released, run the command `node dish/index.js <new_build_type>/<new_version> <old_build_type>/<old_version> <(true | false) -- If true, it will ignore the cache>`. This will very likely cause an error, which means you will need to fix the rejected patches or new files that have new decompile errors. This can be done by going to the workspaces directory and the new version's sub directory. Opening it in the IDE of your choice, then, fix the errors and run `node patches/generatePatches <build_type>/<version>`.
+If you wish to update Dish to a new version that has been recently released, run the command `node dish <new_build_type>/<new_version> <old_build_type>/<old_version> <(true | false) -- If true, it will ignore the cache>`. This will very likely cause an error, which means you will need to fix the rejected patches or new files that have new decompile errors. This can be done by going to the workspaces directory and the new version's sub directory. Opening it in the IDE of your choice, then, fix the errors and run `node patches/generatePatches <build_type>/<version>`.
 
 ##### Publishing
 

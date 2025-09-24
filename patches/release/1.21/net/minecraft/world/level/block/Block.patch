@@ -1,0 +1,13 @@
+diff --git a/src/main/java/net/minecraft/world/level/block/Block.java b/src/main/java/net/minecraft/world/level/block/Block.java
+index 7e705ef..87c40cb 100644
+--- a/src/main/java/net/minecraft/world/level/block/Block.java
++++ b/src/main/java/net/minecraft/world/level/block/Block.java
+@@ -489,6 +489,8 @@ public class Block extends BlockBehaviour implements ItemLike {
+         }
+     }
+ 
++    public net.ouja.api.world.level.block.Block toDish(BlockPos blockPos, Level level) { return new net.ouja.dish.world.block.DishBlockInfo(this, blockPos, level).getBlock(); } // dish
++
+     public static final class BlockStatePairKey {
+         private final BlockState first;
+         private final BlockState second;

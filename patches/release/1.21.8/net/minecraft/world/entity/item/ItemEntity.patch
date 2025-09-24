@@ -1,0 +1,27 @@
+diff --git a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
+index a5a7d14..e68a4df 100644
+--- a/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
++++ b/src/main/java/net/minecraft/world/entity/item/ItemEntity.java
+@@ -334,6 +334,22 @@ public class ItemEntity extends Entity implements TraceableEntity {
+             ItemStack item = this.getItem();
+             Item item1 = item.getItem();
+             int count = item.getCount();
++            // dish
++            // TODO: 12/11/2023 Check performance
++            if (this.thrower != null) {
++                net.ouja.dish.entity.DishEntity cachedThrower = new net.ouja.dish.entity.DishEntity((net.minecraft.world.entity.LivingEntity)this.getOwner());
++                net.ouja.api.entity.ItemEntity itemEntity = new net.ouja.api.entity.ItemEntity(
++                    item.toDish(),
++                    this.pickupDelay,
++                    this.age,
++                    cachedThrower,
++                    this.thrower.getUUID()
++                );
++                net.ouja.api.event.player.PlayerAttemptPickUpItem event = new net.ouja.api.event.player.PlayerAttemptPickUpItem(new net.ouja.dish.entity.DishPlayer((net.minecraft.server.level.ServerPlayer)entity), itemEntity);
++                net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++            }
++            // dish end
++
+             if (this.pickupDelay == 0 && (this.target == null || this.target.equals(entity.getUUID())) && entity.getInventory().add(item)) {
+                 entity.take(this, count);
+                 if (item.isEmpty()) {

@@ -1,0 +1,13 @@
+diff --git a/src/main/java/net/minecraft/world/level/block/StairBlock.java b/src/main/java/net/minecraft/world/level/block/StairBlock.java
+index fe15eb5..b43e8ac 100644
+--- a/src/main/java/net/minecraft/world/level/block/StairBlock.java
++++ b/src/main/java/net/minecraft/world/level/block/StairBlock.java
+@@ -224,7 +224,7 @@ public class StairBlock extends Block implements SimpleWaterloggedBlock {
+     }
+ 
+     @Override
+-    protected FluidState getFluidState(BlockState state) {
++    public FluidState getFluidState(BlockState state) { // dish -- make this public
+         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+     }
+ 

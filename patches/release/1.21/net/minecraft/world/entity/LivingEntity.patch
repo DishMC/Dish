@@ -1,0 +1,35 @@
+diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
+index 3667e1d..667b504 100644
+--- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
++++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
+@@ -1196,6 +1196,10 @@ public abstract class LivingEntity extends Entity implements Attackable {
+             }
+ 
+             if (this.isDeadOrDying()) {
++                if (!(this instanceof Player)) { // dish -- make sure the entity that died is not a player, then call the EntityDeathEvent.
++                    net.ouja.api.event.entity.EntityDeathEvent event = new net.ouja.api.event.entity.EntityDeathEvent(this.toDish(), new net.ouja.api.world.level.block.BlockPos(this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ(), new net.ouja.dish.world.DishLevel((ServerLevel)this.level())), source.toDish(), net.ouja.dish.network.chat.DishComponent.fromComponent(this.getCombatTracker().getDeathMessage()));
++                    net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++                } // dish end
+                 if (!this.checkTotemDeathProtection(source)) {
+                     if (flag1) {
+                         this.makeSound(this.getDeathSound());
+@@ -2890,6 +2894,11 @@ public abstract class LivingEntity extends Entity implements Attackable {
+     public void onItemPickup(ItemEntity itemEntity) {
+         Entity owner = itemEntity.getOwner();
+         if (owner instanceof ServerPlayer) {
++            // dish
++            net.ouja.api.event.player.PlayerPickUpItemEvent event = new net.ouja.api.event.player.PlayerPickUpItemEvent(new net.ouja.dish.entity.DishPlayer((ServerPlayer)this), itemEntity.getItem().toDish());
++            net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++            if (event.isCancelled()) return;
++            // dish end
+             CriteriaTriggers.THROWN_ITEM_PICKED_UP_BY_ENTITY.trigger((ServerPlayer)owner, itemEntity.getItem(), this);
+         }
+     }
+@@ -3554,6 +3563,7 @@ public abstract class LivingEntity extends Entity implements Attackable {
+         }
+     }
+ 
++    public net.ouja.dish.entity.DishEntity toDish() { return new net.ouja.dish.entity.DishEntity(this); } // dish
+     public static record Fallsounds(SoundEvent small, SoundEvent big) {
+     }
+ }

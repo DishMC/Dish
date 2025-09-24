@@ -1,0 +1,53 @@
+diff --git a/src/main/java/net/minecraft/world/level/chunk/ChunkGenerator.java b/src/main/java/net/minecraft/world/level/chunk/ChunkGenerator.java
+index d9f1aaf..0c9da6d 100644
+--- a/src/main/java/net/minecraft/world/level/chunk/ChunkGenerator.java
++++ b/src/main/java/net/minecraft/world/level/chunk/ChunkGenerator.java
+@@ -469,11 +469,16 @@ public abstract class ChunkGenerator {
+         ChunkGeneratorStructureState structureState,
+         StructureManager structureManager,
+         ChunkAccess chunk,
+-        StructureTemplateManager structureTemplateManager
++        StructureTemplateManager structureTemplateManager,
++        ServerLevel serverlevel // dish -- add serverlevel to parameters for plugins to cancel structure generation todo: remove this maybe
+     ) {
+         ChunkPos pos = chunk.getPos();
+         SectionPos sectionPos = SectionPos.bottomOf(chunk);
+         RandomState randomState = structureState.randomState();
++        // dish
++        net.ouja.dish.world.DishLevel dishLevel = new net.ouja.dish.world.DishLevel(serverlevel);
++        net.ouja.api.world.level.chunk.ChunkPos dishChunkPos = new net.ouja.api.world.level.chunk.ChunkPos(pos.x, pos.z, dishLevel);
++        // dish end
+         structureState.possibleStructureSets()
+             .forEach(
+                 structureSet -> {
+@@ -489,6 +494,12 @@ public abstract class ChunkGenerator {
+ 
+                     if (structurePlacement.isStructureChunk(structureState, pos.x, pos.z)) {
+                         if (list.size() == 1) {
++                            // dish
++                            net.ouja.dish.world.level.chunk.DishStructure dishStructure = new net.ouja.dish.world.level.chunk.DishStructure(list.get(0).structure().value());
++                            net.ouja.api.event.world.level.chunk.StructureGenerateEvent event = new net.ouja.api.event.world.level.chunk.StructureGenerateEvent(dishStructure, dishChunkPos);
++                            net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++                            if (event.isCancelled()) return;
++                            // dish end
+                             this.tryGenerateStructure(
+                                 list.get(0),
+                                 structureManager,
+@@ -525,6 +536,17 @@ public abstract class ChunkGenerator {
+                                 }
+ 
+                                 StructureSet.StructureSelectionEntry structureSelectionEntry3 = list1.get(i1);
++                                // dish
++                                net.ouja.dish.world.level.chunk.DishStructure dishStructure = new net.ouja.dish.world.level.chunk.DishStructure(structureSelectionEntry3.structure().value());
++                                net.ouja.api.event.world.level.chunk.StructureGenerateEvent event = new net.ouja.api.event.world.level.chunk.StructureGenerateEvent(dishStructure, dishChunkPos);
++                                net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++                                if (event.isCancelled()) {
++                                    list1.remove(i1);
++                                    i -= structureSelectionEntry3.weight();
++                                    break;
++                                }
++                                // dish end
++
+                                 if (this.tryGenerateStructure(
+                                     structureSelectionEntry3,
+                                     structureManager,

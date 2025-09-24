@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const colors = require('./libs/colors');
 
-const DEFAULT_MINECRAFT_VERSION = "snapshot/23w51b";
+const DEFAULT_MINECRAFT_VERSION = 'release/1.21.8';
 
 function log(msg) {
   console.log(`[Info]${colors.reset} ${msg}`);
@@ -79,7 +79,7 @@ function cacheExpired(pathToFile, MAX_CACHE_TIME_DAYS = 1) {
  * @returns {Boolean} true if matches
  */
 function checkMinecraftVersion(version) {
-  return /(^release\/([0-9]\.[1-3][0-9]\.[0-9]))$|(^snapshot\/([1-3][0-9]w[0-9][0-9][a-z])$)|(^pre\/([0-9]\.[1-3][0-9]\.[0-9]\-pre[0-9])$)/g.test(version);
+  return /(^release\/([0-9]\.[1-3][0-9](?:\.[0-9])|[0-9]\.[1-3][0-9]))$|(^snapshot\/([1-3][0-9]w[0-9][0-9][a-z])$)|(^pre\/((?:[0-9]\.[1-3][0-9]\.[0-9])|(?:[0-9]\.[1-3][0-9]))\-pre[0-9]$)/g.test(version);
 }
 
 module.exports = {

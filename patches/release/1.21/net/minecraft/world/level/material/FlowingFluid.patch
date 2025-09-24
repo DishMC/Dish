@@ -1,0 +1,91 @@
+diff --git a/src/main/java/net/minecraft/world/level/material/FlowingFluid.java b/src/main/java/net/minecraft/world/level/material/FlowingFluid.java
+index 03bc74e..14c9081 100644
+--- a/src/main/java/net/minecraft/world/level/material/FlowingFluid.java
++++ b/src/main/java/net/minecraft/world/level/material/FlowingFluid.java
+@@ -30,6 +30,10 @@ import net.minecraft.world.phys.Vec3;
+ import net.minecraft.world.phys.shapes.Shapes;
+ import net.minecraft.world.phys.shapes.VoxelShape;
+ 
++/**
++ * Modifications:
++ *  - Prevent chunk loading by flowing liquids
++ */
+ public abstract class FlowingFluid extends Fluid {
+     public static final BooleanProperty FALLING = BlockStateProperties.FALLING;
+     public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL_FLOWING;
+@@ -113,7 +117,8 @@ public abstract class FlowingFluid extends Fluid {
+         if (!state.isEmpty()) {
+             BlockState blockState = level.getBlockState(pos);
+             BlockPos blockPos = pos.below();
+-            BlockState blockState1 = level.getBlockState(blockPos);
++            BlockState blockState1 = level.getBlockStateIfLoaded(blockPos); // dish
++            if (blockState1 == null) return; // dish
+             FluidState newLiquid = this.getNewLiquid(level, blockPos, blockState1);
+             if (this.canSpreadTo(level, pos, blockState, Direction.DOWN, blockPos, blockState1, level.getFluidState(blockPos), newLiquid.getType())) {
+                 this.spreadTo(level, blockPos, blockState1, Direction.DOWN, newLiquid);
+@@ -139,7 +144,8 @@ public abstract class FlowingFluid extends Fluid {
+                 Direction direction = entry.getKey();
+                 FluidState fluidState1 = entry.getValue();
+                 BlockPos blockPos = pos.relative(direction);
+-                BlockState blockState1 = level.getBlockState(blockPos);
++                BlockState blockState1 = level.getBlockStateIfLoaded(blockPos); // dish
++                if (blockState1 == null) continue; // dish
+                 if (this.canSpreadTo(level, pos, blockState, direction, blockPos, blockState1, level.getFluidState(blockPos), fluidState1.getType())) {
+                     this.spreadTo(level, blockPos, blockState1, direction, fluidState1);
+                 }
+@@ -153,7 +159,8 @@ public abstract class FlowingFluid extends Fluid {
+ 
+         for (Direction direction : Direction.Plane.HORIZONTAL) {
+             BlockPos blockPos = pos.relative(direction);
+-            BlockState blockState1 = level.getBlockState(blockPos);
++            BlockState blockState1 = level.getBlockStateIfLoaded(blockPos); // dish
++            if (blockState1 == null) continue;
+             FluidState fluidState = blockState1.getFluidState();
+             if (fluidState.getType().isSame(this) && this.canPassThroughWall(direction, level, pos, blockState, blockPos, blockState1)) {
+                 if (fluidState.isSource()) {
+@@ -268,10 +275,22 @@ public abstract class FlowingFluid extends Fluid {
+             if (direction1 != direction) {
+                 BlockPos blockPos = spreadPos.relative(direction1);
+                 short cacheKey = getCacheKey(sourcePos, blockPos);
++                /*
+                 Pair<BlockState, FluidState> pair = stateCache.computeIfAbsent(cacheKey, key -> {
+                     BlockState blockState1 = level.getBlockState(blockPos);
+                     return Pair.of(blockState1, blockState1.getFluidState());
+                 });
++                */
++                // dish
++                Pair<BlockState, FluidState> pair = stateCache.get(cacheKey);
++                if (pair == null) {
++                    BlockState blockStateD = level.getBlockStateIfLoaded(blockPos);
++                    if (blockStateD == null) continue;
++
++                    pair = Pair.of(blockStateD, blockStateD.getFluidState());
++                    stateCache.put(cacheKey, pair);
++                }
++                // dish end
+                 BlockState blockState = pair.getFirst();
+                 FluidState fluidState = pair.getSecond();
+                 if (this.canPassThrough(level, this.getFlowing(), spreadPos, currentSpreadState, direction1, blockPos, blockState, fluidState)) {
+@@ -341,10 +360,22 @@ public abstract class FlowingFluid extends Fluid {
+         for (Direction direction : Direction.Plane.HORIZONTAL) {
+             BlockPos blockPos = pos.relative(direction);
+             short cacheKey = getCacheKey(pos, blockPos);
++            /*
+             Pair<BlockState, FluidState> pair = map1.computeIfAbsent(cacheKey, key -> {
+                 BlockState blockState1 = level.getBlockState(blockPos);
+                 return Pair.of(blockState1, blockState1.getFluidState());
+             });
++            */
++            // dish
++            Pair<BlockState, FluidState> pair = map1.get(cacheKey);
++            if (pair == null) {
++                BlockState blockStateD = level.getBlockStateIfLoaded(blockPos);
++                if (blockStateD == null) continue;
++
++                pair = Pair.of(blockStateD, blockStateD.getFluidState());
++                map1.put(cacheKey, pair);
++            }
++            // dish end
+             BlockState blockState = pair.getFirst();
+             FluidState fluidState = pair.getSecond();
+             FluidState newLiquid = this.getNewLiquid(level, blockPos, blockState);

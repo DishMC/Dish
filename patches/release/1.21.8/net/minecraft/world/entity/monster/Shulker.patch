@@ -1,0 +1,13 @@
+diff --git a/src/main/java/net/minecraft/world/entity/monster/Shulker.java b/src/main/java/net/minecraft/world/entity/monster/Shulker.java
+index 60fc596..16b05e4 100644
+--- a/src/main/java/net/minecraft/world/entity/monster/Shulker.java
++++ b/src/main/java/net/minecraft/world/entity/monster/Shulker.java
+@@ -440,7 +440,7 @@ public class Shulker extends AbstractGolem implements Enemy {
+         }
+     }
+ 
+-    private boolean isClosed() {
++    public boolean isClosed() { // dish -- make this public
+         return this.getRawPeekAmount() == 0;
+     }
+ 

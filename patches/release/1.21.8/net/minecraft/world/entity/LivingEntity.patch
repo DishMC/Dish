@@ -1,0 +1,71 @@
+diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
+index 8d183b8..0740f7a 100644
+--- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
++++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
+@@ -758,13 +758,18 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+ 
+     @Nullable
+     public ItemEntity drop(ItemStack stack, boolean randomizeMotion, boolean includeThrower) {
++        // dish
++        net.ouja.api.event.player.PlayDropItemEvent event = new net.ouja.api.event.player.PlayDropItemEvent(new net.ouja.dish.entity.DishPlayer((ServerPlayer)this), stack.toDish());
++        net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++        if (event.isCancelled()) return null;
++        // dish end
+         if (stack.isEmpty()) {
+             return null;
+         } else if (this.level().isClientSide) {
+             this.swing(InteractionHand.MAIN_HAND);
+             return null;
+         } else {
+-            ItemEntity itemEntity = this.createItemStackToDrop(stack, randomizeMotion, includeThrower);
++            ItemEntity itemEntity = this.createItemStackToDrop(stack, randomizeMotion, includeThrower, event.getPickUpDelay()); // dish -- add pickupDelay
+             if (itemEntity != null) {
+                 this.level().addFreshEntity(itemEntity);
+             }
+@@ -1228,6 +1233,10 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+             }
+ 
+             if (this.isDeadOrDying()) {
++                if (!(this instanceof Player)) { // dish -- make sure the entity that died is not a player, then call the EntityDeathEvent.
++                    net.ouja.api.event.entity.EntityDeathEvent event = new net.ouja.api.event.entity.EntityDeathEvent(this.toDish(), new net.ouja.api.world.level.block.BlockPos(this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ(), new net.ouja.dish.world.DishLevel((ServerLevel)this.level())), damageSource.toDish(), net.ouja.dish.network.chat.DishComponent.fromComponent(this.getCombatTracker().getDeathMessage()));
++                    net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++                } // dish end
+                 if (!this.checkTotemDeathProtection(damageSource)) {
+                     if (flag1) {
+                         this.makeSound(this.getDeathSound());
+@@ -3018,6 +3027,11 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+     public void onItemPickup(ItemEntity itemEntity) {
+         Entity owner = itemEntity.getOwner();
+         if (owner instanceof ServerPlayer) {
++            // dish
++            net.ouja.api.event.player.PlayerPickUpItemEvent event = new net.ouja.api.event.player.PlayerPickUpItemEvent(new net.ouja.dish.entity.DishPlayer((ServerPlayer)this), itemEntity.getItem().toDish());
++            net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++            if (event.isCancelled()) return;
++            // dish end
+             CriteriaTriggers.THROWN_ITEM_PICKED_UP_BY_ENTITY.trigger((ServerPlayer)owner, itemEntity.getItem(), this);
+         }
+     }
+@@ -3136,13 +3150,13 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+     }
+ 
+     @Nullable
+-    private ItemEntity createItemStackToDrop(ItemStack stack, boolean randomizeMotion, boolean includeThrower) {
++    private ItemEntity createItemStackToDrop(ItemStack stack, boolean randomizeMotion, boolean includeThrower, int pickupDelay) { // dish
+         if (stack.isEmpty()) {
+             return null;
+         } else {
+             double d = this.getEyeY() - 0.3F;
+             ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), d, this.getZ(), stack);
+-            itemEntity.setPickUpDelay(40);
++            itemEntity.setPickUpDelay(pickupDelay); // dish
+             if (includeThrower) {
+                 itemEntity.setThrower(this);
+             }
+@@ -3738,6 +3752,7 @@ public abstract class LivingEntity extends Entity implements Attackable, Waypoin
+         return this.locatorBarIcon;
+     }
+ 
++    public net.ouja.dish.entity.DishEntity toDish() { return new net.ouja.dish.entity.DishEntity(this); } // dish
+     public record Fallsounds(SoundEvent small, SoundEvent big) {
+     }
+ }

@@ -1,0 +1,13 @@
+diff --git a/src/main/java/net/minecraft/server/level/ChunkMap.java b/src/main/java/net/minecraft/server/level/ChunkMap.java
+index 6943072..4309d8b 100644
+--- a/src/main/java/net/minecraft/server/level/ChunkMap.java
++++ b/src/main/java/net/minecraft/server/level/ChunkMap.java
+@@ -1281,7 +1281,7 @@ public class ChunkMap extends ChunkStorage implements ChunkHolder.PlayerProvider
+         private final Set<ServerPlayerConnection> seenBy = Sets.newIdentityHashSet();
+ 
+         public TrackedEntity(final Entity entity, final int range, final int updateInterval, final boolean trackDelta) {
+-            this.serverEntity = new ServerEntity(ChunkMap.this.level, entity, updateInterval, trackDelta, this::broadcast, this::broadcastIgnorePlayers);
++            this.serverEntity = new ServerEntity(ChunkMap.this.level, entity, updateInterval, trackDelta, this::broadcast, this::broadcastIgnorePlayers, this.seenBy); // dish -- pass the seenBy field into ServerEntity
+             this.entity = entity;
+             this.range = range;
+             this.lastSectionPos = SectionPos.of(entity);

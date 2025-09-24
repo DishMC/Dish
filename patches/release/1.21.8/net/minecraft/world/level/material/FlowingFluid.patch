@@ -1,0 +1,36 @@
+diff --git a/src/main/java/net/minecraft/world/level/material/FlowingFluid.java b/src/main/java/net/minecraft/world/level/material/FlowingFluid.java
+index 1020544..5847aec 100644
+--- a/src/main/java/net/minecraft/world/level/material/FlowingFluid.java
++++ b/src/main/java/net/minecraft/world/level/material/FlowingFluid.java
+@@ -30,6 +30,10 @@ import net.minecraft.world.phys.Vec3;
+ import net.minecraft.world.phys.shapes.Shapes;
+ import net.minecraft.world.phys.shapes.VoxelShape;
+ 
++/**
++ * Modifications:
++ *  - Prevent chunk loading by flowing liquids
++ */
+ public abstract class FlowingFluid extends Fluid {
+     public static final BooleanProperty FALLING = BlockStateProperties.FALLING;
+     public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL_FLOWING;
+@@ -112,7 +116,8 @@ public abstract class FlowingFluid extends Fluid {
+     protected void spread(ServerLevel level, BlockPos pos, BlockState blockState, FluidState fluidState) {
+         if (!fluidState.isEmpty()) {
+             BlockPos blockPos = pos.below();
+-            BlockState blockState1 = level.getBlockState(blockPos);
++            BlockState blockState1 = level.getBlockStateIfLoaded(blockPos); // dish
++            if (blockState1 == null) return; // dish
+             FluidState fluidState1 = blockState1.getFluidState();
+             if (this.canMaybePassThrough(level, pos, blockState, Direction.DOWN, blockPos, blockState1, fluidState1)) {
+                 FluidState newLiquid = this.getNewLiquid(level, blockPos, blockState1);
+@@ -146,7 +151,9 @@ public abstract class FlowingFluid extends Fluid {
+                 Direction direction = entry.getKey();
+                 FluidState fluidState1 = entry.getValue();
+                 BlockPos blockPos = pos.relative(direction);
+-                this.spreadTo(level, blockPos, level.getBlockState(blockPos), direction, fluidState1);
++                BlockState blockState1 = level.getBlockStateIfLoaded(blockPos); // dish
++                if (blockState1 == null) continue; // dish
++                this.spreadTo(level, blockPos, blockState1, direction, fluidState1);
+             }
+         }
+     }
