@@ -1,0 +1,43 @@
+diff --git a/src/main/java/net/minecraft/server/level/ServerEntity.java b/src/main/java/net/minecraft/server/level/ServerEntity.java
+index 26d9a03..c65e60d 100644
+--- a/src/main/java/net/minecraft/server/level/ServerEntity.java
++++ b/src/main/java/net/minecraft/server/level/ServerEntity.java
+@@ -56,25 +56,27 @@ public class ServerEntity {
+     private final boolean trackDelta;
+     private final Consumer<Packet<?>> broadcast;
+     private final VecDeltaCodec positionCodec = new VecDeltaCodec();
++    private final Set<net.minecraft.server.network.ServerPlayerConnection> seenBy; // dish
+     private int lastSentYRot;
+     private int lastSentXRot;
+     private int lastSentYHeadRot;
+     private Vec3 lastSentMovement;
+     private int tickCount;
+     private int teleportDelay;
+-    private List<Entity> lastPassengers = Collections.emptyList();
++    private List<Entity> lastPassengers = com.google.common.collect.ImmutableList.of(); // dish -- use ImmutableList
+     private boolean wasRiding;
+     private boolean wasOnGround;
+     @Nullable
+     private List<SynchedEntityData.DataValue<?>> trackedDataValues;
+ 
+-    public ServerEntity(ServerLevel level, Entity entity, int updateInterval, boolean trackDelta, Consumer<Packet<?>> broadcast) {
++    public ServerEntity(ServerLevel level, Entity entity, int updateInterval, boolean trackDelta, Consumer<Packet<?>> broadcast, Set<net.minecraft.server.network.ServerPlayerConnection> seenBy) { // dish
+         this.level = level;
+         this.broadcast = broadcast;
+         this.entity = entity;
+         this.updateInterval = updateInterval;
+         this.trackDelta = trackDelta;
+         this.positionCodec.setBase(entity.trackingPosition());
++        this.seenBy = seenBy; // dish
+         this.lastSentMovement = entity.getDeltaMovement();
+         this.lastSentYRot = Mth.floor(entity.getYRot() * 256.0F / 360.0F);
+         this.lastSentXRot = Mth.floor(entity.getXRot() * 256.0F / 360.0F);
+@@ -99,7 +101,7 @@ public class ServerEntity {
+             this.lastPassengers = passengers;
+         }
+ 
+-        if (this.entity instanceof ItemFrame itemFrame && this.tickCount % 10 == 0) {
++        if (!this.seenBy.isEmpty() && this.entity instanceof ItemFrame itemFrame && this.tickCount % 10 == 0) { // dish -- only update item frames if players can see them
+             ItemStack item = itemFrame.getItem();
+             if (item.getItem() instanceof MapItem) {
+                 MapId mapId = item.get(DataComponents.MAP_ID);

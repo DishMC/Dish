@@ -1,0 +1,17 @@
+diff --git a/src/main/java/net/minecraft/world/level/storage/loot/LootTable.java b/src/main/java/net/minecraft/world/level/storage/loot/LootTable.java
+index b806cc8..83157b6 100644
+--- a/src/main/java/net/minecraft/world/level/storage/loot/LootTable.java
++++ b/src/main/java/net/minecraft/world/level/storage/loot/LootTable.java
+@@ -146,6 +146,12 @@ public class LootTable {
+         RandomSource random = lootContext.getRandom();
+         List<Integer> availableSlots = this.getAvailableSlots(container, random);
+         this.shuffleAndSplitItems(randomItems, availableSlots.size(), random);
++        // dish
++        // TODO: 11/15/2023 Make container class and allow the plugin to modify the items in the container
++        net.ouja.api.event.world.level.LootGenerateEvent event = new net.ouja.api.event.world.level.LootGenerateEvent(net.ouja.dish.world.item.DishItemStack.convertFromVanilla(randomItems));
++        net.ouja.dish.plugins.RegisteredEvents.callEvent(event);
++        if (event.isCancelled()) return;
++        // dish end
+ 
+         for (ItemStack itemStack : randomItems) {
+             if (availableSlots.isEmpty()) {
